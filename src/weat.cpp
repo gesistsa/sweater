@@ -1,0 +1,58 @@
+#include <Rcpp.h>
+using namespace Rcpp;
+
+double raw_cosine(const NumericVector& x1, const NumericVector& x2) {
+    unsigned int v_len = x1.size();
+    double dot = 0.0, deno_a = 0.0, deno_b = 0.0;
+    for(unsigned int i = 0; i < v_len; i++) {
+	dot += x1[i] * x2[i];
+	deno_a += x1[i] * x1[i];
+	deno_b += x2[i] * x2[i];
+    }
+    return dot / (sqrt(deno_a) * sqrt(deno_b));
+}
+
+
+NumericVector cpp_take(NumericMatrix& glove_mat, const String& word, CharacterVector& rn) {
+    int cur_index = 0;
+    for (CharacterVector::iterator i = rn.begin(); i != rn.end(); ++i) {
+	if (word == *i) {
+	    return glove_mat(cur_index, _);
+	}
+	cur_index += 1;
+    }
+    return NumericVector::create(NA_REAL);
+}
+
+double cosine(const String& word, NumericVector& v1, NumericMatrix& glove_mat, CharacterVector& rn) {
+    return raw_cosine(cpp_take(glove_mat, word, rn), v1);
+}
+
+double cos_diff(const String& c, CharacterVector& A, NumericMatrix& glove_mat,  CharacterVector& rn) {
+    NumericVector v1 = cpp_take(glove_mat, c, rn);
+    double total_cosine = 0.0;
+    for (CharacterVector::iterator i = A.begin(); i != A.end(); ++i) {
+	//	std::cout << *i << std::endl;
+	total_cosine += cosine(*i, v1, glove_mat, rn);
+    }
+    return total_cosine / A.size();
+}
+
+// [[Rcpp::export]]
+double cpp_g(const String& c, CharacterVector& A, CharacterVector& B, NumericMatrix& glove_mat) {
+    CharacterVector rn = rownames(glove_mat);
+    return cos_diff(c, A, glove_mat, rn) - cos_diff(c, B, glove_mat, rn);
+}
+
+// [[Rcpp::export]]
+NumericVector cpp_bweat(CharacterVector& C, CharacterVector& A, CharacterVector& B, NumericMatrix& glove_mat, bool debug = false) {
+    int n_C = C.size();
+    NumericVector res(n_C);
+    for (int i = 0; i < n_C; ++i) {
+	if (debug) {
+	    std::cout << C[i] << std::endl;
+	}
+	res[i] = cpp_g(C[i], A, B, glove_mat);
+    }
+    return res;
+}

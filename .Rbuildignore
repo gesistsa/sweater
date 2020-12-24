@@ -1,0 +1,4 @@
+^LICENSE\.md$
+^README\.Rmd$
+^wc\.R$
+data/wiki_emb\.rda

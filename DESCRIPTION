@@ -1,0 +1,24 @@
+Package: sweater
+Title: Simple Word Embedding Association TEst with R
+Version: 0.0.2
+Authors@R: 
+    person(given = "Chung-hong",
+           family = "Chan",
+           role = c("aut", "cre"),
+           email = "chainsawtiney@gmail.com",
+           comment = c(ORCID = "0000-0002-6232-7530"))
+Description: Conduct Word Embedding Association Test (WEAT), a standard technique for bias evaluation of word embeddings by Caliskan et al. (2007) <doi:10.1126/science.aal4230>.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+LinkingTo: 
+    Rcpp
+Imports: 
+    Rcpp
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 3.5)
