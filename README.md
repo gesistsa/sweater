@@ -32,8 +32,17 @@ S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "n
 T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
 A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
 B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sweater(glove_math, S, T, A, B)
+sw <- sweater(glove_math, S, T, A, B)
+sweater_es(sw)
 #> [1] 1.055015
+```
+
+The exact test described in Caliskan et al. (2017) is also available.
+But it takes a long time to calculate.
+
+``` r
+## Don't do it. It takes a long time and is almost always significant.
+exact_test(sw)
 ```
 
 ## References

@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include <algorithm>
 using namespace Rcpp;
 
 double raw_cosine(const NumericVector& x1, const NumericVector& x2) {
@@ -55,4 +56,31 @@ NumericVector cpp_bweat(CharacterVector& C, CharacterVector& A, CharacterVector&
 	res[i] = cpp_g(C[i], A, B, glove_mat);
     }
     return res;
+}
+
+// [[Rcpp::export]]
+double cpp_exact(NumericVector union_diff, double test_stat, int s_length) {
+    long long int iter = 0;
+    long long int pos = 0;
+    int union_length = union_diff.size();
+    NumericVector union_here = clone(union_diff);
+    std::sort(union_here.begin(), union_here.end());
+    double a;
+    double b;
+    double c;
+    do {
+	iter += 1;
+	for (int j = 0; j < s_length; j ++) {
+	    a += union_here[j];
+	}
+	for (int k = s_length; k < union_length; k++) {
+	    b += union_here[k];
+	}
+	c = (a / s_length) - (b / (union_length - s_length));
+	if (c > test_stat) {
+	    pos += 1;
+	}
+    } while (std::next_permutation(union_here.begin(), union_here.end()));
+    double ans = pos / (iter * 1.0);
+    return ans;
 }

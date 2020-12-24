@@ -4,7 +4,7 @@
 \alias{sweater}
 \title{Simple Word Embedding Association Test}
 \usage{
-sweater(w, S, T, A, B, standardize = TRUE)
+sweater(w, S, T, A, B)
 }
 \arguments{
 \item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
@@ -16,11 +16,9 @@ sweater(w, S, T, A, B, standardize = TRUE)
 \item{A}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
 
 \item{B}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
-
-\item{standardize}{a boolean to denote division of the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.}
 }
 \value{
-WEAT results
+a sweater object
 }
 \description{
 This functions test the potential bias in a set of word embeddings using the method by Caliskan et al (2017).
@@ -32,7 +30,8 @@ S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "n
 T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
 A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
 B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sweater(glove_math, S, T, A, B)
+sw <- sweater(glove_math, S, T, A, B)
+sweater_es
 }
 \references{
 Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.

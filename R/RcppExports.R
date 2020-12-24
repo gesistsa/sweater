@@ -9,3 +9,7 @@ cpp_bweat <- function(C, A, B, glove_mat, debug = FALSE) {
     .Call(`_sweater_cpp_bweat`, C, A, B, glove_mat, debug)
 }
 
+cpp_exact <- function(union_diff, test_stat, s_length) {
+    .Call(`_sweater_cpp_exact`, union_diff, test_stat, s_length)
+}
+
