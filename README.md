@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# sweater
+# sweater <img src="man/figures/sweater_logo.png" align="right" height="200" />
 
 <!-- badges: start -->
 
@@ -57,9 +57,9 @@ sweater_resampling(sw)
 #> 
 #>  Resampling approximation of the exact test in Caliskan et al. (2017)
 #> 
-#> data:  bias
-#> bias = 0.024865, mean null bias = 7.2454e-05, p-value = 0.0171
-#> alternative hypothesis: true mean null bias is greater than 7.245425e-05
+#> data:  sw
+#> bias = 0.024865, p-value = 0.0171
+#> alternative hypothesis: true bias is greater than 7.245425e-05
 #> sample estimates:
 #>       bias 
 #> 0.02486533

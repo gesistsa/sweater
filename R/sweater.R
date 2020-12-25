@@ -74,8 +74,8 @@ sweater_resampling <- function(sweater_obj, n_resampling = 9999) {
     null_value <- mean(st_diff)
     attr(null_value, "names") <- "bias"
     para <- null_value
-    attr(null_value, "names") <- "mean null bias"
-    res <- list(null.value = null_value, alternative = "greater", method = "Resampling approximation of the exact test in Caliskan et al. (2017)", estimate = test_stat, data.name = "bias", statistic = test_stat, parameters = null_value, p.value = p)
+    attr(null_value, "names") <- "bias"
+    res <- list(null.value = null_value, alternative = "greater", method = "Resampling approximation of the exact test in Caliskan et al. (2017)", estimate = test_stat, data.name = deparse(substitute(sweater_obj)), statistic = test_stat, p.value = p)
     class(res) <- "htest"
     return(res)
 }
