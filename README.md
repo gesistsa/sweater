@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# sweater <img src="man/figures/sweater_logo.png" align="right" height="200" />
+# sweater <img src="man/figures/sweater_logo.svg" align="right" height="200" />
 
 <!-- badges: start -->
 
