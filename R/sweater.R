@@ -1,4 +1,4 @@
-#' Simple Word Embedding Association Test
+#' Speedy Word Embedding Association Test
 #'
 #' This functions test the potential bias in a set of word embeddings using the method by Caliskan et al (2017).
 #' @param w a numeric matrix of word embeddings (e.g. from rsparse::GloVe)
@@ -46,16 +46,39 @@ sweater_es <- function(sweater_obj, standardize = TRUE) {
 }
 
 #' @export
-exact_test <- function(sweater_obj) {
+sweater_exact <- function(sweater_obj) {
     S_diff <- sweater_obj$S_diff
     T_diff <- sweater_obj$T_diff
     if (length(c(S_diff, T_diff)) > 10) {
-        warning("Exact test would take a long time. Improve the speed by setting exact = FALSE.")
+        warning("Exact test would take a long time. Use sweater_resampling or sweater_boot (to be implemented) instead.")
     }
     p_value <- .exact_test(S_diff, T_diff)
     return(p_value)
 }
 
+#' @export
+sweater_resampling <- function(sweater_obj, n_resampling = 9999) {
+    S_diff <- sweater_obj$S_diff
+    T_diff <- sweater_obj$T_diff
+    union_diff <- c(S_diff, T_diff)
+    labels <- c(rep(TRUE, length(S_diff)), rep(FALSE, length(T_diff)))
+    st_diff <- rep(NA, n_resampling)
+    test_stat <- (mean(S_diff) - mean(T_diff))
+    attr(test_stat, "names") <- "bias"
+    for (i in seq_len(n_resampling)) {
+        z <- sample(labels)
+        st_diff[i] <- (mean(union_diff[z]) - mean(union_diff[!z]))
+    }
+    n_alter <- sum(st_diff > test_stat)
+    p <- n_alter / n_resampling
+    null_value <- mean(st_diff)
+    attr(null_value, "names") <- "bias"
+    para <- null_value
+    attr(null_value, "names") <- "mean null bias"
+    res <- list(null.value = null_value, alternative = "greater", method = "Resampling approximation of the exact test in Caliskan et al. (2017)", estimate = test_stat, data.name = "bias", statistic = test_stat, parameters = null_value, p.value = p)
+    class(res) <- "htest"
+    return(res)
+}
 
 #' A subset of the pretrained GLoVE word vectors
 #'

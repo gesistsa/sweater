@@ -2,7 +2,7 @@
 % Please edit documentation in R/sweater.R
 \name{sweater}
 \alias{sweater}
-\title{Simple Word Embedding Association Test}
+\title{Speedy Word Embedding Association Test}
 \usage{
 sweater(w, S, T, A, B)
 }

@@ -7,8 +7,12 @@
 
 <!-- badges: end -->
 
-The goal of sweater (Simple Word Embedding Association TEst using R) is
+The goal of sweater (Speedy Word Embedding Association TEst using R) is
 to test for biases in word embeddings.
+
+The package provides functions that are speedy. They are either
+implemented in C++, or are speedy but accurate approximation of the
+original implementation proposed by Caliskan et al (2017).
 
 ## Installation
 
@@ -42,7 +46,23 @@ But it takes a long time to calculate.
 
 ``` r
 ## Don't do it. It takes a long time and is almost always significant.
-exact_test(sw)
+sweater_exact(sw)
+```
+
+Instead, please use the resampling approximaton of the exact test. The
+p-value is very close to the reported 0.018.
+
+``` r
+sweater_resampling(sw)
+#> 
+#>  Resampling approximation of the exact test in Caliskan et al. (2017)
+#> 
+#> data:  bias
+#> bias = 0.024865, mean null bias = 7.2454e-05, p-value = 0.0171
+#> alternative hypothesis: true mean null bias is greater than 7.245425e-05
+#> sample estimates:
+#>       bias 
+#> 0.02486533
 ```
 
 ## References

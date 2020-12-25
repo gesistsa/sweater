@@ -10,7 +10,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%"
-)
+  )
+set.seed(46709394)
 ```
 
 # sweater
@@ -18,7 +19,9 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of sweater (Simple Word Embedding Association TEst using R) is to test for biases in word embeddings.
+The goal of sweater (Speedy Word Embedding Association TEst using R) is to test for biases in word embeddings.
+
+The package provides functions that are speedy. They are either implemented in C++, or are speedy but accurate approximation of the original implementation proposed by Caliskan et al (2017).
 
 ## Installation
 
@@ -48,7 +51,13 @@ The exact test described in Caliskan et al. (2017) is also available. But it tak
 
 ```r
 ## Don't do it. It takes a long time and is almost always significant.
-exact_test(sw)
+sweater_exact(sw)
+```
+
+Instead, please use the resampling approximaton of the exact test. The p-value is very close to the reported 0.018.
+
+```{r}
+sweater_resampling(sw)
 ```
 
 ## References
