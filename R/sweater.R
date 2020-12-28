@@ -15,7 +15,7 @@
 #' A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
 #' B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
 #' sw <- sweater(glove_math, S, T, A, B)
-#' sweater_es
+#' sweater_es(sw)
 #' @author Chung-hong Chan
 #' @references
 #' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
@@ -29,19 +29,31 @@ sweater <- function(w, S, T, A, B) {
 }
 
 #' Calculation of effect size
-#' 
-#' @param standardize a boolean to denote division of the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.
+#'
+#' This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r).
+#' @param standardize a boolean to denote whether to correct the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.
+#' @param r a boolean to denote whether convert the effect size to Pearson's correlation coefficient.
 #' @export
-sweater_es <- function(sweater_obj, standardize = TRUE) {
+sweater_es <- function(sweater_obj, standardize = TRUE, r = FALSE) {
     S_diff <- sweater_obj$S_diff
     T_diff <- sweater_obj$T_diff
-    if (standardize) {
-        union_diff <- c(S_diff, T_diff)
-        weat_base <- sd(union_diff)
-    } else {
-        weat_base <- 1
+    n1 <- length(S_diff)
+    n2 <- length(T_diff)
+    total <- n1 + n2
+    if (!standardize) {
+        return(mean(S_diff) - mean(T_diff))
     }
-    es <- ((mean(S_diff) - mean(T_diff)) / weat_base)
+    if (n1 == n2) {
+        pooled_sd <- sd(c(S_diff, T_diff))
+    } else {
+        S_var <- var(S_diff)
+        T_var <- var(T_diff)
+        pooled_sd <- sqrt(((n1 -1) * S_var) + ((n2 - 1) * T_var)/(n1 + n2 + 2))
+    }
+    es <- ((mean(S_diff) - mean(T_diff)) / pooled_sd)
+    if (r) {
+        es <- es / sqrt(es^2 + ((total^2 - 2 * total)/ (n1 * n2)))
+    }
     return(es)
 }
 

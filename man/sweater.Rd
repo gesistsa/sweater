@@ -31,7 +31,7 @@ T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sc
 A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
 B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
 sw <- sweater(glove_math, S, T, A, B)
-sweater_es
+sweater_es(sw)
 }
 \references{
 Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
