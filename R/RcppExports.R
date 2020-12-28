@@ -5,8 +5,8 @@ cpp_g <- function(c, A, B, glove_mat) {
     .Call(`_sweater_cpp_g`, c, A, B, glove_mat)
 }
 
-cpp_bweat <- function(C, A, B, glove_mat, debug = FALSE) {
-    .Call(`_sweater_cpp_bweat`, C, A, B, glove_mat, debug)
+cpp_bweat <- function(C, A, B, glove_mat) {
+    .Call(`_sweater_cpp_bweat`, C, A, B, glove_mat)
 }
 
 cpp_exact <- function(union_diff, test_stat, s_length) {

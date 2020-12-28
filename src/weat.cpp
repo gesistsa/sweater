@@ -46,13 +46,11 @@ double cpp_g(const String& c, CharacterVector& A, CharacterVector& B, NumericMat
 }
 
 // [[Rcpp::export]]
-NumericVector cpp_bweat(CharacterVector& C, CharacterVector& A, CharacterVector& B, NumericMatrix& glove_mat, bool debug = false) {
+NumericVector cpp_bweat(CharacterVector& C, CharacterVector& A, CharacterVector& B, NumericMatrix& glove_mat) {
     int n_C = C.size();
     NumericVector res(n_C);
     for (int i = 0; i < n_C; ++i) {
-	if (debug) {
-	    std::cout << C[i] << std::endl;
-	}
+	Rcpp::checkUserInterrupt();
 	res[i] = cpp_g(C[i], A, B, glove_mat);
     }
     return res;
@@ -69,6 +67,7 @@ double cpp_exact(NumericVector union_diff, double test_stat, int s_length) {
     double b;
     double c;
     do {
+	Rcpp::checkUserInterrupt();
 	iter += 1;
 	for (int j = 0; j < s_length; j ++) {
 	    a += union_here[j];

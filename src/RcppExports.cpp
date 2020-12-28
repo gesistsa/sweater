@@ -20,8 +20,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_bweat
-NumericVector cpp_bweat(CharacterVector& C, CharacterVector& A, CharacterVector& B, NumericMatrix& glove_mat, bool debug);
-RcppExport SEXP _sweater_cpp_bweat(SEXP CSEXP, SEXP ASEXP, SEXP BSEXP, SEXP glove_matSEXP, SEXP debugSEXP) {
+NumericVector cpp_bweat(CharacterVector& C, CharacterVector& A, CharacterVector& B, NumericMatrix& glove_mat);
+RcppExport SEXP _sweater_cpp_bweat(SEXP CSEXP, SEXP ASEXP, SEXP BSEXP, SEXP glove_matSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -29,8 +29,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< CharacterVector& >::type A(ASEXP);
     Rcpp::traits::input_parameter< CharacterVector& >::type B(BSEXP);
     Rcpp::traits::input_parameter< NumericMatrix& >::type glove_mat(glove_matSEXP);
-    Rcpp::traits::input_parameter< bool >::type debug(debugSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_bweat(C, A, B, glove_mat, debug));
+    rcpp_result_gen = Rcpp::wrap(cpp_bweat(C, A, B, glove_mat));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -50,7 +49,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_sweater_cpp_g", (DL_FUNC) &_sweater_cpp_g, 4},
-    {"_sweater_cpp_bweat", (DL_FUNC) &_sweater_cpp_bweat, 5},
+    {"_sweater_cpp_bweat", (DL_FUNC) &_sweater_cpp_bweat, 4},
     {"_sweater_cpp_exact", (DL_FUNC) &_sweater_cpp_exact, 3},
     {NULL, NULL, 0}
 };
