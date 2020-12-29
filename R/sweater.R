@@ -20,7 +20,7 @@
 #' @references
 #' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
 #' @export 
-sweater <- function(w, S, T, A, B) {
+weat <- function(w, S, T, A, B) {
     S_diff <- cpp_bweat(S, A, B, w)
     T_diff <- cpp_bweat(T, A, B, w)
     res <- list(S_diff = S_diff, T_diff = T_diff, S = S, T = T, A = A, B = B)
@@ -34,7 +34,7 @@ sweater <- function(w, S, T, A, B) {
 #' @param standardize a boolean to denote whether to correct the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.
 #' @param r a boolean to denote whether convert the effect size to Pearson's correlation coefficient.
 #' @export
-sweater_es <- function(sweater_obj, standardize = TRUE, r = FALSE) {
+weat_es <- function(sweater_obj, standardize = TRUE, r = FALSE) {
     S_diff <- sweater_obj$S_diff
     T_diff <- sweater_obj$T_diff
     n1 <- length(S_diff)
@@ -58,7 +58,7 @@ sweater_es <- function(sweater_obj, standardize = TRUE, r = FALSE) {
 }
 
 #' @export
-sweater_exact <- function(sweater_obj) {
+weat_exact <- function(sweater_obj) {
     S_diff <- sweater_obj$S_diff
     T_diff <- sweater_obj$T_diff
     if (length(c(S_diff, T_diff)) > 10) {
@@ -69,7 +69,7 @@ sweater_exact <- function(sweater_obj) {
 }
 
 #' @export
-sweater_resampling <- function(sweater_obj, n_resampling = 9999) {
+weat_resampling <- function(sweater_obj, n_resampling = 9999) {
     S_diff <- sweater_obj$S_diff
     T_diff <- sweater_obj$T_diff
     union_diff <- c(S_diff, T_diff)

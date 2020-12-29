@@ -27,7 +27,7 @@ You can install the Github version of sweater with:
 devtools::install_github("chainsawriot/sweater")
 ```
 
-## Example
+## Example: WEAT
 
 This example reproduces the detection of “Math. vs Arts” gender bias in
 Caliskan et al (2017).
@@ -41,27 +41,27 @@ S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "n
 T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
 A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
 B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sw <- sweater(glove_math, S, T, A, B)
-sweater_es(sw)
+sw <- weat(glove_math, S, T, A, B)
+weat_es(sw)
 #> [1] 1.055015
 ```
 
-# A note about the effect size
+## A note about the effect size
 
 By default, the effect size from the function `sweater_es` is adjusted
 by the pooled standard deviaion (see Page 2 of Caliskan et al. 2007).
 The standardized effect size can be interpreted the way as Cohen’s d
-(Cohen, 1977).
+(Cohen, 1988).
 
 One can also get the unstandardized version (aka. test statistic in the
 original paper):
 
 ``` r
-sweater_es(sw, standardize = FALSE)
+weat_es(sw, standardize = FALSE)
 #> [1] 0.02486533
 ```
 
-Also, the original implementation assumes equal size of S and T. This
+The original implementation assumes equal size of S and T. This
 assumption can be relaxed by pooling the standard deviaion with sample
 size adjustment. The function `sweater_es` does it when S and T are of
 different length.
@@ -70,7 +70,7 @@ Also, the effect size can be converted to point-biserial correlation
 (mathematically equivalent to the Pearson’s product moment correlation).
 
 ``` r
-sweater_es(sw, r = TRUE)
+weat_es(sw, r = TRUE)
 #> [1] 0.4912066
 ```
 
@@ -81,14 +81,14 @@ But it takes a long time to calculate.
 
 ``` r
 ## Don't do it. It takes a long time and is almost always significant.
-sweater_exact(sw)
+weat_exact(sw)
 ```
 
 Instead, please use the resampling approximaton of the exact test. The
 p-value is very close to the reported 0.018.
 
 ``` r
-sweater_resampling(sw)
+weat_resampling(sw)
 #> 
 #>  Resampling approximation of the exact test in Caliskan et al. (2017)
 #> 
