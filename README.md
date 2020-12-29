@@ -42,16 +42,18 @@ T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sc
 A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
 B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
 sw <- weat(glove_math, S, T, A, B)
+
+# extraction of effect size
 weat_es(sw)
 #> [1] 1.055015
 ```
 
 ## A note about the effect size
 
-By default, the effect size from the function `sweater_es` is adjusted
-by the pooled standard deviaion (see Page 2 of Caliskan et al. 2007).
-The standardized effect size can be interpreted the way as Cohen’s d
-(Cohen, 1988).
+By default, the effect size from the function `weat_es` is adjusted by
+the pooled standard deviaion (see Page 2 of Caliskan et al. 2007). The
+standardized effect size can be interpreted the way as Cohen’s d (Cohen,
+1988).
 
 One can also get the unstandardized version (aka. test statistic in the
 original paper):
@@ -63,7 +65,7 @@ weat_es(sw, standardize = FALSE)
 
 The original implementation assumes equal size of S and T. This
 assumption can be relaxed by pooling the standard deviaion with sample
-size adjustment. The function `sweater_es` does it when S and T are of
+size adjustment. The function `weat_es` does it when S and T are of
 different length.
 
 Also, the effect size can be converted to point-biserial correlation
