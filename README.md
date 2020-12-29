@@ -7,8 +7,8 @@
 
 <!-- badges: end -->
 
-The goal of sweater (Speedy Word Embedding Association TEst using R) is
-to test for biases in word embeddings.
+The goal of sweater (Speedy Word Embedding Association Test & Extras
+using R) is to test for biases in word embeddings.
 
 The package provides functions that are speedy. They are either
 implemented in C++, or are speedy but accurate approximation of the
@@ -18,6 +18,7 @@ If your goal is to reproduce the analysis in Caliskan et al (2017),
 please consider using the [original Java
 program](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DX4VWP&version=2.0)
 or the R package [cbn](https://github.com/conjugateprior/cbn) by Lowe.
+This package provides extras (e.g. RNSB).
 
 ## Installation
 
@@ -27,7 +28,7 @@ You can install the Github version of sweater with:
 devtools::install_github("chainsawriot/sweater")
 ```
 
-## Example: WEAT
+## Example: Word Embedding Association Test
 
 This example reproduces the detection of “Math. vs Arts” gender bias in
 Caliskan et al (2017).
@@ -102,6 +103,43 @@ weat_resampling(sw)
 #> 0.02486533
 ```
 
+## Example: Relative Negative Sentiment Bias
+
+This analysis attempts to reproduce the analysis in Sweeney & Najafian
+(2019).
+
+``` r
+S <- c("swedish", "irish", "mexican", "chinese", "filipino",
+       "german", "english", "french", "norwegian", "american",
+       "indian", "dutch", "russian", "scottish", "italian")
+sn <- rnsb(glove_sweeney, S, bing_pos, bing_neg)
+```
+
+The analysis shows that `mexican`, `american`, `chinese` and `irish` are
+more likely to be associated with negative sentiment. (Please note that
+the numbers are different from the original paper; pending confirmation
+with the original authors)
+
+``` r
+sort(sn$P)
+#>      swedish        dutch      english       indian     scottish      russian 
+#> 4.386836e-05 1.359952e-03 2.321847e-03 4.896528e-03 4.911510e-03 1.088144e-02 
+#>      italian    norwegian       german     filipino       french     american 
+#> 1.569090e-02 1.644982e-02 1.724904e-02 1.984069e-02 2.043743e-02 1.334806e-01 
+#>        irish      chinese      mexican 
+#> 1.533780e-01 2.017766e-01 3.972818e-01
+```
+
+The effect size from the analysis is the Kullback–Leibler divergence of
+P with the uniform distribution. (It is also substantially larger than
+the number reported in the original paper; pending confirmation with the
+original authors)
+
+``` r
+rnsb_es(sn)
+#> [1] 0.9770686
+```
+
 ## References
 
 1.  Caliskan, Aylin, Joanna J. Bryson, and Arvind Narayanan. “Semantics
@@ -113,3 +151,7 @@ weat_resampling(sw)
     the case of r and d. Psychological methods, 11(4), 386.
 4.  Rosenthal, R. (1991), Meta-Analytic Procedures for Social Research.
     Newbury Park: Sage
+5.  Sweeney, C., & Najafian, M. (2019, July). A transparent framework
+    for evaluating unintended demographic bias in word embeddings. In
+    Proceedings of the 57th Annual Meeting of the Association for
+    Computational Linguistics (pp. 1662-1667).
