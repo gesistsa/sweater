@@ -1,9 +1,4 @@
 ^LICENSE\.md$
 ^README\.Rmd$
-^wc\.R$
-data/wiki_emb\.rda
-^glove\.R$
-^glove.840B.300d\.txt$
-^glove_mat\.RDS$
 ^raw_data/
 
