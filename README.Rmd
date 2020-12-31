@@ -123,7 +123,7 @@ B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
 
-garg_f1 <- rnd(googlenews_garg, S, A, B)
+garg_f1 <- rnd(googlenews, S, A, B)
 ```
 
 Words such as "nurse", "midwife" and "librarian" are more associated with female, as indicated by the positive relative norm distance.
@@ -132,7 +132,7 @@ Words such as "nurse", "midwife" and "librarian" are more associated with female
 sort(garg_f1$P, decreasing = TRUE)
 ```
 
-The effect size is simply the sum of all relative norm distance (Equation 3 in Garg et al. 2018). The more positive value indicates that words in S are more associated with `B`. As the effect size is negative, it indicates that the concept of occupation is more associated with `A`, i.e. male.
+The effect size is simply the sum of all relative norm distance values (Equation 3 in Garg et al. 2018). The more positive value indicates that words in S are more associated with `B`. As the effect size is negative, it indicates that the concept of occupation is more associated with `A`, i.e. male.
 
 ```{r}
 rnd_es(garg_f1)
@@ -161,6 +161,38 @@ The effect size from the analysis is the Kullback–Leibler divergence of P from
 rnsb_es(sn)
 ```
 
+## Support for Quanteda Dictionary
+
+`rnsb` supports quanteda dictionary as `S`. `rnd` and `weat` will support it later.
+
+For example, `newsmap_europe` is an abridged dictionary from the package newsmap (Watanabe, 2018). The dictionary contains keywords of European countries and has two levels: regional level (e.g. Eastern Europe) and country level (e.g. Germany).
+
+```{r}
+require(quanteda)
+newsmap_europe
+```
+
+Country-level analysis
+
+```{r}
+country_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 2)
+sort(country_level$P)
+```
+
+Region-level analysis
+
+```{r}
+region_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 1)
+sort(region_level$P)
+```
+
+Comparison of the two effect sizes. Please note the much smaller effect size from region-level analysis. It reflects the evener distribution of P acorss regions than across countries.
+
+```{r}
+rnsb_es(country_level)
+rnsb_es(region_level)
+```
+
 ## References
 
 1. Badilla, P., Bravo-Marquez, F., & Pérez, J. (2020). WEFE: The word embeddings fairness evaluation framework. In Proceedings of the 29 th Intern. Joint Conf. Artificial Intelligence.
@@ -171,3 +203,4 @@ rnsb_es(sn)
 6. McGrath, R. E., & Meyer, G. J. (2006). When effect sizes disagree: the case of r and d. Psychological methods, 11(4), 386.
 7. Rosenthal, R. (1991), Meta-Analytic Procedures for Social Research. Newbury Park: Sage
 8. Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
+9. Watanabe, K. (2018). Newsmap: A semi-supervised approach to geographical news classification. Digital Journalism, 6(3), 294-309.

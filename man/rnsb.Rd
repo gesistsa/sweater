@@ -4,7 +4,16 @@
 \alias{rnsb}
 \title{Relative Negative Sentiment Bias}
 \usage{
-rnsb(w, S, A, B)
+rnsb(w, S, A, B, levels = 1)
+}
+\arguments{
+\item{w}{a numeric matrix representing the word vectors.}
+
+\item{S}{either a vector or a dictionary of target words}
+
+\item{A}{a vector of attribute words}
+
+\item{B}{a vector of attribute words}
 }
 \description{
 This function estimate the Relative Negative Sentiment Bias (RNSB) of word embeddings.

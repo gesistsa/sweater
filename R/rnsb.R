@@ -1,39 +1,37 @@
-## require(ggplot2)
-
-## load("glove_sweeney.rda")
-## load("bing_pos.rda")
-## load("bing_neg.rda")
-
-## w <- glove_sweeney
-## A <- bing_pos
-## B <- bing_neg
-
 #' Relative Negative Sentiment Bias
 #'
 #' This function estimate the Relative Negative Sentiment Bias (RNSB) of word embeddings.
-#' @param w
-#' @param S
-#' @param A
-#' @param B
+#' @param w a numeric matrix representing the word vectors.
+#' @param S either a vector or a dictionary of target words
+#' @param A a vector of attribute words
+#' @param B a vector of attribute words
 #' @export
-rnsb <- function(w, S, A, B) {
-    feature_matrix <- w[rownames(w) %in% c(A, B),]
+rnsb <- function(w, S, A, B, levels = 1) {
+    feature_matrix <- w[rownames(w) %in% c(A, B),,drop = FALSE]
     colnames(feature_matrix) <- paste("f", seq_len(ncol(feature_matrix)), sep = "")
     label <- as.numeric(rownames(feature_matrix) %in% B)
     features <- as.data.frame(cbind(label, feature_matrix))
     classifier <- glm(label~., data = features, family = "binomial")
-    newdata <- w[S, ]
-    colnames(newdata) <- paste("f", seq_len(ncol(newdata)), sep = "")
-    f_star <- predict(classifier, as.data.frame(newdata), type = "response")
-    P <- f_star / sum(f_star)
-    res <- list(classifier = classifier, A = A, B = B, features = features, S = S, P = P)
+    if ("dictionary2" %in% class(S)) {
+        flist <- quanteda::as.list(S, levels = levels, flatten = TRUE)
+        flist_regex <- purrr::map_chr(flist, .convert_globs)
+        flist_words <- purrr::map(flist_regex, .find_words, input_words = rownames(w))
+        flist_probs <- purrr::map(flist_words, .words_pred, w = w, classifier = classifier)
+        f_star <- purrr::map_dbl(flist_probs, mean)
+    } else {
+        newdata <- w[S,,drop = FALSE]
+        colnames(newdata) <- paste("f", seq_len(ncol(newdata)), sep = "")
+        f_star <- predict(classifier, as.data.frame(newdata), type = "response")
+    }
+    P <- f_star / sum(f_star, na.rm = TRUE)
+    res <- list(classifier = classifier, A = A, B = B, S = S, P = P)
     class(res) <- append(class(res), "rnsb")
     return(res)
 }
 
 #' @export
 rnsb_es <- function(rnsb) {
-    PP <- rnsb$P
+    PP <- stats::na.omit(rnsb$P)
     PQ <- 1 / length(PP)
     kl <- sum(PP * log(PP/PQ))
     return(kl)

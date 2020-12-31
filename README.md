@@ -165,7 +165,7 @@ B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
 
-garg_f1 <- rnd(googlenews_garg, S, A, B)
+garg_f1 <- rnd(googlenews, S, A, B)
 ```
 
 Words such as “nurse”, “midwife” and “librarian” are more associated
@@ -207,7 +207,7 @@ sort(garg_f1$P, decreasing = TRUE)
 #>  -0.335183253
 ```
 
-The effect size is simply the sum of all relative norm distance
+The effect size is simply the sum of all relative norm distance values
 (Equation 3 in Garg et al. 2018). The more positive value indicates that
 words in S are more associated with `B`. As the effect size is negative,
 it indicates that the concept of occupation is more associated with `A`,
@@ -255,6 +255,126 @@ rnsb_es(sn)
 #> [1] 0.9770686
 ```
 
+## Support for Quanteda Dictionary
+
+`rnsb` supports quanteda dictionary as `S`. `rnd` and `weat` will
+support it later.
+
+For example, `newsmap_europe` is an abridged dictionary from the package
+newsmap (Watanabe, 2018). The dictionary contains keywords of European
+countries and has two levels: regional level (e.g. Eastern Europe) and
+country level (e.g. Germany).
+
+``` r
+require(quanteda)
+#> Loading required package: quanteda
+#> Package version: 2.1.2
+#> Parallel computing: 2 of 8 threads used.
+#> See https://quanteda.io for tutorials and examples.
+#> 
+#> Attaching package: 'quanteda'
+#> The following object is masked from 'package:utils':
+#> 
+#>     View
+newsmap_europe
+#> Dictionary object with 4 primary key entries and 2 nested levels.
+#> - [EAST]:
+#>   - [BG]:
+#>     - bulgaria, bulgarian*, sofia
+#>   - [BY]:
+#>     - belarus, belarusian*, minsk
+#>   - [CZ]:
+#>     - czech republic, czech*, prague
+#>   - [HU]:
+#>     - hungary, hungarian*, budapest
+#>   - [MD]:
+#>     - moldova, moldovan*, chisinau
+#>   - [PL]:
+#>     - poland, polish, pole*, warsaw
+#>   [ reached max_nkey ... 4 more keys ]
+#> - [NORTH]:
+#>   - [AX]:
+#>     - aland islands, aland island*, alandish, mariehamn
+#>   - [DK]:
+#>     - denmark, danish, dane*, copenhagen
+#>   - [EE]:
+#>     - estonia, estonian*, tallinn
+#>   - [FI]:
+#>     - finland, finnish, finn*, helsinki
+#>   - [FO]:
+#>     - faeroe islands, faeroe island*, faroese*, torshavn
+#>   - [GB]:
+#>     - uk, united kingdom, britain, british, briton*, brit*, london
+#>   [ reached max_nkey ... 10 more keys ]
+#> - [SOUTH]:
+#>   - [AD]:
+#>     - andorra, andorran*
+#>   - [AL]:
+#>     - albania, albanian*, tirana
+#>   - [BA]:
+#>     - bosnia, bosnian*, bosnia and herzegovina, herzegovina, sarajevo
+#>   - [ES]:
+#>     - spain, spanish, spaniard*, madrid, barcelona
+#>   - [GI]:
+#>     - gibraltar, gibraltarian*, llanitos
+#>   - [GR]:
+#>     - greece, greek*, athens
+#>   [ reached max_nkey ... 11 more keys ]
+#> - [WEST]:
+#>   - [AT]:
+#>     - austria, austrian*, vienna
+#>   - [BE]:
+#>     - belgium, belgian*, brussels
+#>   - [CH]:
+#>     - switzerland, swiss*, zurich, bern
+#>   - [DE]:
+#>     - germany, german*, berlin, frankfurt
+#>   - [FR]:
+#>     - france, french*, paris
+#>   - [LI]:
+#>     - liechtenstein, liechtenstein*, vaduz
+#>   [ reached max_nkey ... 3 more keys ]
+```
+
+Country-level analysis
+
+``` r
+country_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 2)
+sort(country_level$P)
+#>          BG          MK          IE          MT          CZ          IT 
+#> 0.000293109 0.003940446 0.007921838 0.008554944 0.015129220 0.017233242 
+#>          CH          MC          PL          BE          DK          FI 
+#> 0.019032255 0.020527466 0.023290182 0.023401689 0.025344299 0.025761723 
+#>          NL          FR          DE          PT          GB          HR 
+#> 0.025880724 0.026011013 0.029939778 0.031181122 0.032115847 0.033061855 
+#>          AT          ES          HU          IM          GR          SE 
+#> 0.034576032 0.035174769 0.035411547 0.035499104 0.036411256 0.037650934 
+#>          NO          RO          RU          UA          RS          IS 
+#> 0.039679650 0.041623544 0.044771865 0.045177623 0.046182354 0.046687336 
+#>          KV          GG          VA 
+#> 0.049193874 0.051592835 0.051746524
+```
+
+Region-level analysis
+
+``` r
+region_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 1)
+sort(region_level$P)
+#>      EAST      WEST     NORTH     SOUTH 
+#> 0.2204043 0.2313447 0.2720478 0.2762032
+```
+
+Comparison of the two effect sizes. Please note the much smaller effect
+size from region-level analysis. It reflects the evener distribution of
+P acorss regions than across countries.
+
+``` r
+rnsb_es(country_level)
+#> [1] 0.1222485
+rnsb_es(region_level)
+#> [1] 0.004811814
+```
+
 ## References
 
 1.  Badilla, P., Bravo-Marquez, F., & Pérez, J. (2020). WEFE: The word
@@ -280,3 +400,5 @@ rnsb_es(sn)
     for evaluating unintended demographic bias in word embeddings. In
     Proceedings of the 57th Annual Meeting of the Association for
     Computational Linguistics (pp. 1662-1667).
+9.  Watanabe, K. (2018). Newsmap: A semi-supervised approach to
+    geographical news classification. Digital Journalism, 6(3), 294-309.
