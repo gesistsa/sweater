@@ -237,12 +237,12 @@ with the original authors)
 
 ``` r
 sort(sn$P)
-#>      swedish        dutch      english       indian     scottish      russian 
-#> 4.386836e-05 1.359952e-03 2.321847e-03 4.896528e-03 4.911510e-03 1.088144e-02 
-#>      italian    norwegian       german     filipino       french     american 
-#> 1.569090e-02 1.644982e-02 1.724904e-02 1.984069e-02 2.043743e-02 1.334806e-01 
-#>        irish      chinese      mexican 
-#> 1.533780e-01 2.017766e-01 3.972818e-01
+#>      italian      chinese     scottish      swedish       german      english 
+#> 0.0009938015 0.0041993575 0.0078757397 0.0080757645 0.0100438739 0.0168817276 
+#>    norwegian       french     filipino        irish     american        dutch 
+#> 0.0216968621 0.0228774634 0.0248072178 0.0452778029 0.0708273160 0.0908136658 
+#>      russian      mexican       indian 
+#> 0.1367697777 0.2090193217 0.3298403079
 ```
 
 The effect size from the analysis is the Kullback–Leibler divergence of
@@ -252,7 +252,7 @@ original authors)
 
 ``` r
 rnsb_es(sn)
-#> [1] 0.9770686
+#> [1] 0.7141534
 ```
 
 ## Support for Quanteda Dictionary

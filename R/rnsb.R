@@ -29,6 +29,7 @@ rnsb <- function(w, S, A, B, levels = 1) {
     return(res)
 }
 
+#' Calculation the 
 #' @export
 rnsb_es <- function(rnsb) {
     PP <- stats::na.omit(rnsb$P)
@@ -36,6 +37,18 @@ rnsb_es <- function(rnsb) {
     kl <- sum(PP * log(PP/PQ))
     return(kl)
 }
+
+plot_rnsbs <- function(rnsb1, rnsb2, rnsb1_label = "rnsb1", rnsb2_label = "rnsb2") {
+    groupnames <- c(names(rnsb1$P), names(rnsb2$P)) 
+    values <- c(rnsb1$P, rnsb2$P)
+    labels <- c(rep(rnsb1_label, length(rnsb1$P)), rep(rnsb2_label, length(rnsb2$P)))
+    diff <- values - c(rnsb1$P, rnsb1$P)
+    equality <- 1.0 / length(stats::na.omit(rnsb1$P))
+    data_to_plot <- data.frame(labels, groupnames, values, diff)
+    data_to_plot <- data_to_plot[!is.na(data_to_plot$values)]
+    ggplot2::ggplot(data_to_plot, ggplot2::aes(x = forcats::fct_reorder(groupnames, diff), y = values, fill = labels)) + ggplot2::geom_bar(stat = "identity", position=ggplot2::position_dodge()) + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust=1)) + ggplot2::xlab("S") + ggplot2::ylab("P") + ggplot2::geom_hline(yintercept = equality, lty = 2, color = "darkgray") + ggplot2::coord_flip()
+}
+
 
 ## table(label, predict(classifer) > 0.5)
 
