@@ -149,13 +149,13 @@ S <- c("swedish", "irish", "mexican", "chinese", "filipino",
 sn <- rnsb(glove_sweeney, S, bing_pos, bing_neg)
 ```
 
-The analysis shows that `mexican`, `american`, `chinese` and `irish` are more likely to be associated with negative sentiment. (Please note that the numbers are different from the original paper; pending confirmation with the original authors)
+The analysis shows that `indian`, `mexican`, and `russian` are more likely to be associated with negative sentiment.
 
 ```{r}
 sort(sn$P)
 ```
 
-The effect size from the analysis is the Kullback–Leibler divergence of P from the uniform distribution. (It is also substantially larger than the number reported in the original paper; pending confirmation with the original authors)
+The effect size from the analysis is the Kullback–Leibler divergence of P from the uniform distribution. It is extremely close to the value reported in the original paper (0.6225).
 
 ```{r}
 rnsb_es(sn)

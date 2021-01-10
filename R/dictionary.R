@@ -12,7 +12,7 @@
         return(NA)
     }
     newdata <- w[words, ,drop = FALSE]
-    colnames(newdata) <- paste("f", seq_len(ncol(newdata)), sep = "")
-    f_star <- predict(classifier, as.data.frame(newdata), type = "response")
+    f_star <- predict(classifier, newdata, proba = TRUE)$probabilities[,2]
+    names(f_star) <- words
     return(f_star)
 }

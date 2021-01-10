@@ -10,8 +10,7 @@ rnsb <- function(w, S, A, B, levels = 1) {
     feature_matrix <- w[rownames(w) %in% c(A, B),,drop = FALSE]
     colnames(feature_matrix) <- paste("f", seq_len(ncol(feature_matrix)), sep = "")
     label <- as.numeric(rownames(feature_matrix) %in% B)
-    features <- as.data.frame(cbind(label, feature_matrix))
-    classifier <- glm(label~., data = features, family = "binomial")
+    classifier <- LiblineaR::LiblineaR(data = feature_matrix, target = label, type = 0, epsilon = 1e-4)
     if ("dictionary2" %in% class(S)) {
         flist <- quanteda::as.list(S, levels = levels, flatten = TRUE)
         flist_regex <- purrr::map_chr(flist, .convert_globs)
@@ -21,7 +20,8 @@ rnsb <- function(w, S, A, B, levels = 1) {
     } else {
         newdata <- w[S,,drop = FALSE]
         colnames(newdata) <- paste("f", seq_len(ncol(newdata)), sep = "")
-        f_star <- predict(classifier, as.data.frame(newdata), type = "response")
+        f_star <- predict(classifier, newdata, proba = TRUE)$probabilities[,2]
+        names(f_star) <- S
     }
     P <- f_star / sum(f_star, na.rm = TRUE)
     res <- list(classifier = classifier, A = A, B = B, S = S, P = P)
@@ -52,8 +52,27 @@ plot_rnsbs <- function(rnsb1, rnsb2, rnsb1_label = "rnsb1", rnsb2_label = "rnsb2
 
 ## table(label, predict(classifer) > 0.5)
 
+## w <- glove_sweeney
 
-## group_names <- c("swedish", "irish", "mexican", "chinese", "filipino", "german", "english", "french", "norwegian", "american", "indian", "dutch", "russian", "scottish", "italian")
+## S <- c("swedish", "irish", "mexican", "chinese", "filipino", "german", "english", "french", "norwegian", "american", "indian", "dutch", "russian", "scottish", "italian")
+
+## A <- bing_pos
+## B <- bing_neg
+## feature_matrix <- w[rownames(w) %in% c(A, B),,drop = FALSE]
+## colnames(feature_matrix) <- paste("f", seq_len(ncol(feature_matrix)), sep = "")
+## label <- as.numeric(rownames(feature_matrix) %in% B)
+
+## require(LiblineaR)
+## classifier <- LiblineaR::LiblineaR(data = feature_matrix, target = label, type = 0, epsilon = 1e-4)
+
+## newdata <- w[S,,drop = FALSE]
+## colnames(newdata) <- paste("f", seq_len(ncol(newdata)), sep = "")
+
+## prob <- predict(classifier, newdata, proba = TRUE)$probabilities[,2]
+## PP <- prob / sum(prob)
+## PQ <- 1 / length(PP)
+## kl <- sum(PP * log(PP/PQ))
+## kl
 
 ## newdata <- w[group_names, ]
 ## colnames(newdata) <- paste("f", seq_len(ncol(newdata)), sep = "")

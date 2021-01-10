@@ -230,29 +230,26 @@ S <- c("swedish", "irish", "mexican", "chinese", "filipino",
 sn <- rnsb(glove_sweeney, S, bing_pos, bing_neg)
 ```
 
-The analysis shows that `mexican`, `american`, `chinese` and `irish` are
-more likely to be associated with negative sentiment. (Please note that
-the numbers are different from the original paper; pending confirmation
-with the original authors)
+The analysis shows that `indian`, `mexican`, and `russian` are more
+likely to be associated with negative sentiment.
 
 ``` r
 sort(sn$P)
-#>      italian      chinese     scottish      swedish       german      english 
-#> 0.0009938015 0.0041993575 0.0078757397 0.0080757645 0.0100438739 0.0168817276 
-#>    norwegian       french     filipino        irish     american        dutch 
-#> 0.0216968621 0.0228774634 0.0248072178 0.0452778029 0.0708273160 0.0908136658 
-#>      russian      mexican       indian 
-#> 0.1367697777 0.2090193217 0.3298403079
+#>     italian     chinese    scottish     swedish      german     english 
+#> 0.002163469 0.006698797 0.009301426 0.011642360 0.013898265 0.019882906 
+#>      french    filipino   norwegian       irish       dutch    american 
+#> 0.024725367 0.025962431 0.034289040 0.044816897 0.075287071 0.079399144 
+#>     russian     mexican      indian 
+#> 0.162676050 0.183219913 0.306036864
 ```
 
 The effect size from the analysis is the Kullback–Leibler divergence of
-P from the uniform distribution. (It is also substantially larger than
-the number reported in the original paper; pending confirmation with the
-original authors)
+P from the uniform distribution. It is extremely close to the value
+reported in the original paper (0.6225).
 
 ``` r
 rnsb_es(sn)
-#> [1] 0.7141534
+#> [1] 0.6228853
 ```
 
 ## Support for Quanteda Dictionary
@@ -341,18 +338,18 @@ Country-level analysis
 ``` r
 country_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 2)
 sort(country_level$P)
-#>          BG          MK          IE          MT          CZ          IT 
-#> 0.000293109 0.003940446 0.007921838 0.008554944 0.015129220 0.017233242 
-#>          CH          MC          PL          BE          DK          FI 
-#> 0.019032255 0.020527466 0.023290182 0.023401689 0.025344299 0.025761723 
-#>          NL          FR          DE          PT          GB          HR 
-#> 0.025880724 0.026011013 0.029939778 0.031181122 0.032115847 0.033061855 
-#>          AT          ES          HU          IM          GR          SE 
-#> 0.034576032 0.035174769 0.035411547 0.035499104 0.036411256 0.037650934 
-#>          NO          RO          RU          UA          RS          IS 
-#> 0.039679650 0.041623544 0.044771865 0.045177623 0.046182354 0.046687336 
-#>          KV          GG          VA 
-#> 0.049193874 0.051592835 0.051746524
+#>          BG          MK          CZ          IT          MT          IE 
+#> 0.002248234 0.007470925 0.015791441 0.018481878 0.018832778 0.019442566 
+#>          CH          MC          BE          PL          NL          DK 
+#> 0.019738765 0.022555035 0.023311660 0.025335479 0.025859272 0.026233796 
+#>          HR          FR          FI          DE          AT          PT 
+#> 0.026402266 0.027030773 0.027697211 0.029432447 0.030188771 0.030826512 
+#>          GB          HU          ES          GR          SE          RO 
+#> 0.032297790 0.034165818 0.034680507 0.035495595 0.036759853 0.037769967 
+#>          IM          NO          RS          UA          IS          KV 
+#> 0.038207508 0.038836451 0.039334988 0.041028276 0.041936095 0.044210328 
+#>          RU          GG          VA 
+#> 0.045759833 0.051020466 0.051616715
 ```
 
 Region-level analysis
@@ -360,8 +357,8 @@ Region-level analysis
 ``` r
 region_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 1)
 sort(region_level$P)
-#>      EAST      WEST     NORTH     SOUTH 
-#> 0.2204043 0.2313447 0.2720478 0.2762032
+#>      WEST      EAST     SOUTH     NORTH 
+#> 0.2291813 0.2306245 0.2661583 0.2740359
 ```
 
 Comparison of the two effect sizes. Please note the much smaller effect
@@ -370,9 +367,9 @@ P acorss regions than across countries.
 
 ``` r
 rnsb_es(country_level)
-#> [1] 0.1222485
+#> [1] 0.0796689
 rnsb_es(region_level)
-#> [1] 0.004811814
+#> [1] 0.00329434
 ```
 
 ## References
