@@ -1,10 +1,26 @@
 #' Relative Negative Sentiment Bias
 #'
-#' This function estimate the Relative Negative Sentiment Bias (RNSB) of word embeddings.
-#' @param w a numeric matrix representing the word vectors.
-#' @param S either a vector or a dictionary of target words
-#' @param A a vector of attribute words
-#' @param B a vector of attribute words
+#' This function estimate the Relative Negative Sentiment Bias (RNSB) of word embeddings (Sweeney & Najafian, 2019).
+#' @param w a numeric matrix of word embeddings (e.g. from rsparse::GloVe)
+#' @param S a character vector of a set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists.
+#' @param A a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.
+#' @param B a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.
+#' @param levels an integer vector: if S is a quanteda dictionary, this value indicates the levels of analysis.
+#' @return A list with class \code{"rnsb"} containing the following components:
+#' \describe{
+#' \item{\code{$classifer}}{ a logistic regression model with L2 regularization trained with LiblineaR}
+#' \item{\code{$A}}{the input A}
+#' \item{\code{$B}}{the input B}
+#' \item{\code{$S}}{the input S}
+#' \item{\code{$P}}{the predicted negative sentiment probabilities}
+#' }
+#' \code{\link{rnsb_es}} can be used to obtain the effect size of the test.
+#' @examples
+#' S <- c("swedish", "irish", "mexican", "chinese", "filipino", "german", "english", "french", "norwegian", "american", "indian", "dutch", "russian", "scottish", "italian")
+#' sn <- rnsb(w = glove_sweeney, S = S, A = bing_pos, B = bing_neg)
+#' sort(sn$P)
+#' @references
+#' Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 #' @export
 rnsb <- function(w, S, A, B, levels = 1) {
     feature_matrix <- w[rownames(w) %in% c(A, B),,drop = FALSE]
@@ -29,7 +45,13 @@ rnsb <- function(w, S, A, B, levels = 1) {
     return(res)
 }
 
-#' Calculation the 
+#' Calculation the Kullback-Leibler divergence
+#'
+#' This function calculates the Kullback-Leibler divergence of the predicted negative probabilities, P, from the uniform distribution.
+#' @param rnsb an rnsb object from the \link{rnsb} function.
+#' @return the Kullback-Leibler divergence.
+#' @references
+#' Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 #' @export
 rnsb_es <- function(rnsb) {
     PP <- stats::na.omit(rnsb$P)
@@ -49,40 +71,3 @@ plot_rnsbs <- function(rnsb1, rnsb2, rnsb1_label = "rnsb1", rnsb2_label = "rnsb2
     ggplot2::ggplot(data_to_plot, ggplot2::aes(x = forcats::fct_reorder(groupnames, diff), y = values, fill = labels)) + ggplot2::geom_bar(stat = "identity", position=ggplot2::position_dodge()) + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust=1)) + ggplot2::xlab("S") + ggplot2::ylab("P") + ggplot2::geom_hline(yintercept = equality, lty = 2, color = "darkgray") + ggplot2::coord_flip()
 }
 
-
-## table(label, predict(classifer) > 0.5)
-
-## w <- glove_sweeney
-
-## S <- c("swedish", "irish", "mexican", "chinese", "filipino", "german", "english", "french", "norwegian", "american", "indian", "dutch", "russian", "scottish", "italian")
-
-## A <- bing_pos
-## B <- bing_neg
-## feature_matrix <- w[rownames(w) %in% c(A, B),,drop = FALSE]
-## colnames(feature_matrix) <- paste("f", seq_len(ncol(feature_matrix)), sep = "")
-## label <- as.numeric(rownames(feature_matrix) %in% B)
-
-## require(LiblineaR)
-## classifier <- LiblineaR::LiblineaR(data = feature_matrix, target = label, type = 0, epsilon = 1e-4)
-
-## newdata <- w[S,,drop = FALSE]
-## colnames(newdata) <- paste("f", seq_len(ncol(newdata)), sep = "")
-
-## prob <- predict(classifier, newdata, proba = TRUE)$probabilities[,2]
-## PP <- prob / sum(prob)
-## PQ <- 1 / length(PP)
-## kl <- sum(PP * log(PP/PQ))
-## kl
-
-## newdata <- w[group_names, ]
-## colnames(newdata) <- paste("f", seq_len(ncol(newdata)), sep = "")
-
-
-## f_star <- predict(classifer, as.data.frame(newdata), type = "response")
-## options("scipen"=-100, "digits"=4)
-## P <- f_star / sum(f_star)
-
-## ## Not the same as in Figure 3!
-## P
-
-## ggplot(data.frame(group_name = names(P), P = P), aes(x = group_name, y = P)) + geom_point()

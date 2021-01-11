@@ -1,6 +1,6 @@
 Package: sweater
 Title: Speedy Word Embedding Association Test and Extras Using R
-Version: 0.0.7
+Version: 0.0.8
 Authors@R: 
     person(given = "Chung-hong",
            family = "Chan",

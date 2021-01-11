@@ -18,10 +18,19 @@ weat(w, S, T, A, B)
 \item{B}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 }
 \value{
-a sweater object
+A list with class \code{"weat"} containing the following components:
+\describe{
+\item{\code{$S_diff}}{for each of words in S, mean of the mean differences in cosine similarity between words in A and words in B}
+\item{\code{$T_diff}}{for each of words in T, mean of the mean differences in cosine similarity between words in A and words in B}
+\item{\code{$S}}{the input S}
+\item{\code{$T}}{the input T}
+\item{\code{$A}}{the input A}
+\item{\code{$B}}{the input B}
+}
+\code{\link{weat_es}} can be used to obtain the effect size of the test; \code{\link{weat_resampling}} for a test of significance.
 }
 \description{
-This functions test the potential bias in a set of word embeddings using the method by Caliskan et al (2017).
+This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017).
 }
 \examples{
 # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
@@ -30,8 +39,8 @@ S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "n
 T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
 A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
 B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sw <- sweater(glove_math, S, T, A, B)
-sweater_es(sw)
+sw <- weat(glove_math, S, T, A, B)
+weat_es(sw)
 }
 \references{
 Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.

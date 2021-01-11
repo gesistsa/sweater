@@ -1,12 +1,21 @@
 #' Speedy Word Embedding Association Test
 #'
-#' This functions test the potential bias in a set of word embeddings using the method by Caliskan et al (2017).
+#' This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017).
 #' @param w a numeric matrix of word embeddings (e.g. from rsparse::GloVe)
 #' @param S a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...
 #' @param T a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...
 #' @param A a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.
 #' @param B a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.
-#' @return a sweater object
+#' @return A list with class \code{"weat"} containing the following components:
+#' \describe{
+#' \item{\code{$S_diff}}{for each of words in S, mean of the mean differences in cosine similarity between words in A and words in B}
+#' \item{\code{$T_diff}}{for each of words in T, mean of the mean differences in cosine similarity between words in A and words in B}
+#' \item{\code{$S}}{the input S}
+#' \item{\code{$T}}{the input T}
+#' \item{\code{$A}}{the input A}
+#' \item{\code{$B}}{the input B}
+#' }
+#' \code{\link{weat_es}} can be used to obtain the effect size of the test; \code{\link{weat_resampling}} for a test of significance.
 #' @examples
 #' # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 #' data(glove_math)
@@ -14,8 +23,8 @@
 #' T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
 #' A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
 #' B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-#' sw <- sweater(glove_math, S, T, A, B)
-#' sweater_es(sw)
+#' sw <- weat(glove_math, S, T, A, B)
+#' weat_es(sw)
 #' @author Chung-hong Chan
 #' @references
 #' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
@@ -24,19 +33,32 @@ weat <- function(w, S, T, A, B) {
     S_diff <- cpp_bweat(S, A, B, w)
     T_diff <- cpp_bweat(T, A, B, w)
     res <- list(S_diff = S_diff, T_diff = T_diff, S = S, T = T, A = A, B = B)
-    class(res) <- "sweater"
+    class(res) <- "weat"
     return(res)
 }
 
-#' Calculation of effect size
+#' Calculation of WEAT effect size
 #'
 #' This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r).
+#' @param weat an object from the \link{weat} function.
 #' @param standardize a boolean to denote whether to correct the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.
-#' @param r a boolean to denote whether convert the effect size to Pearson's correlation coefficient.
+#' @param r a boolean to denote whether convert the effect size to biserial correlation coefficient.
+#' @author Chung-hong Chan
+#' @references
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+#' @examples
+#' # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
+#' data(glove_math)
+#' S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
+#' T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+#' A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+#' B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+#' sw <- weat(glove_math, S, T, A, B)
+#' weat_es(sw)
 #' @export
-weat_es <- function(sweater_obj, standardize = TRUE, r = FALSE) {
-    S_diff <- sweater_obj$S_diff
-    T_diff <- sweater_obj$T_diff
+weat_es <- function(weat, standardize = TRUE, r = FALSE) {
+    S_diff <- weat$S_diff
+    T_diff <- weat$T_diff
     n1 <- length(S_diff)
     n2 <- length(T_diff)
     total <- n1 + n2
@@ -57,10 +79,11 @@ weat_es <- function(sweater_obj, standardize = TRUE, r = FALSE) {
     return(es)
 }
 
+#' @rdname weat_resampling
 #' @export
-weat_exact <- function(sweater_obj) {
-    S_diff <- sweater_obj$S_diff
-    T_diff <- sweater_obj$T_diff
+weat_exact <- function(weat) {
+    S_diff <- weat$S_diff
+    T_diff <- weat$T_diff
     if (length(c(S_diff, T_diff)) > 10) {
         warning("Exact test would take a long time. Use sweater_resampling or sweater_boot (to be implemented) instead.")
     }
@@ -68,10 +91,28 @@ weat_exact <- function(sweater_obj) {
     return(p_value)
 }
 
+#' Test of significance for WEAT
+#'
+#' This function conducts the test of significance for WEAT as described in Caliskan et al. (2017). The exact test (proposed in Caliskan et al.) takes an unreasonably long time, if the total number of words in S and T is larger than 10. The resampling test is an approximation of the exact test.
+#' @param weat an object from the \link{weat} function.
+#' @param n_resampling an integer specifying the number of replicates used to estimate the exact test
+#' @return A list with class \code{"htest"}
+#' @author Chung-hong Chan
+#' @references
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+#' @examples
+#' # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
+#' data(glove_math)
+#' S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
+#' T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+#' A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+#' B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+#' sw <- weat(glove_math, S, T, A, B)
+#' weat_resampling(sw)
 #' @export
-weat_resampling <- function(sweater_obj, n_resampling = 9999) {
-    S_diff <- sweater_obj$S_diff
-    T_diff <- sweater_obj$T_diff
+weat_resampling <- function(weat, n_resampling = 9999) {
+    S_diff <- weat$S_diff
+    T_diff <- weat$T_diff
     union_diff <- c(S_diff, T_diff)
     labels <- c(rep(TRUE, length(S_diff)), rep(FALSE, length(T_diff)))
     st_diff <- rep(NA, n_resampling)

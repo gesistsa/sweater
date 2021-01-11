@@ -2,10 +2,19 @@
 % Please edit documentation in R/rnsb.R
 \name{rnsb_es}
 \alias{rnsb_es}
-\title{Calculation the}
+\title{Calculation the Kullback-Leibler divergence}
 \usage{
 rnsb_es(rnsb)
 }
+\arguments{
+\item{rnsb}{an rnsb object from the \link{rnsb} function.}
+}
+\value{
+the Kullback-Leibler divergence.
+}
 \description{
-Calculation the
+This function calculates the Kullback-Leibler divergence of the predicted negative probabilities, P, from the uniform distribution.
+}
+\references{
+Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 }
