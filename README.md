@@ -129,7 +129,7 @@ weat_resampling(sw)
 #> 
 #>  Resampling approximation of the exact test in Caliskan et al. (2017)
 #> 
-#> data:  sw
+#> data:  sweater_obj
 #> bias = 0.024865, p-value = 0.0171
 #> alternative hypothesis: true bias is greater than 7.245425e-05
 #> sample estimates:

@@ -20,6 +20,13 @@
 #' \item{\code{$B}}{the input B}
 #' }
 #' \code{\link{rnd_es}} can be used to obtain the effect size of the test.
+#' @examples
+#' data(googlenews)
+#' S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", "photographer", "geologist", "shoemaker", "athlete", "cashier", "dancer", "housekeeper", "accountant", "physicist", "gardener", "dentist", "weaver", "blacksmith", "psychologist", "supervisor", "mathematician", "surveyor", "tailor", "designer", "economist", "mechanic", "laborer", "postmaster", "broker", "chemist", "librarian", "attendant", "clerical", "musician", "porter", "scientist", "carpenter", "sailor", "instructor", "sheriff", "pilot", "inspector", "mason", "baker", "administrator", "architect", "collector", "operator", "surgeon", "driver", "painter", "conductor", "nurse", "cook", "engineer", "retired", "sales", "lawyer", "clergy", "physician", "farmer", "clerk", "manager", "guard", "artist", "smith", "official", "police", "doctor", "professor", "student", "judge", "teacher", "author", "secretary", "soldier")
+#' A <- c("he", "son", "his", "him", "father", "man", "boy", "himself", "male", "brother", "sons", "fathers", "men", "boys", "males", "brothers", "uncle", "uncles", "nephew", "nephews")
+#' B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",  "herself", "female", "sister", "daughters", "mothers", "women", "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces")
+#' garg_f1 <- rnd(googlenews, S, A, B)
+#' sort(garg_f1$P)
 #' @export
 rnd <- function(w, S, A, B) {
     v1 <- purrr::map_dbl(purrr::array_branch(w[A,], 2), mean)

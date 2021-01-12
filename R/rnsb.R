@@ -16,9 +16,8 @@
 #' }
 #' \code{\link{rnsb_es}} can be used to obtain the effect size of the test.
 #' @examples
-#' S <- c("swedish", "irish", "mexican", "chinese", "filipino", "german", "english", "french", "norwegian", "american", "indian", "dutch", "russian", "scottish", "italian")
-#' sn <- rnsb(w = glove_sweeney, S = S, A = bing_pos, B = bing_neg)
-#' sort(sn$P)
+#' country_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 2)
+#' sort(country_level$P)
 #' @references
 #' Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 #' @export
