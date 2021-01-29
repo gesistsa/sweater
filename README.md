@@ -15,6 +15,9 @@ The package provides functions that are speedy. They are either
 implemented in C++, or are speedy but accurate approximation of the
 original implementation proposed by Caliskan et al (2017).
 
+This package provides extra methods such as Relative Norm Distance and
+Relative Negative Sentiment Bias.
+
 If your goal is to reproduce the analysis in Caliskan et al (2017),
 please consider using the [original Java
 program](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DX4VWP&version=2.0)
@@ -22,8 +25,6 @@ or the R package [cbn](https://github.com/conjugateprior/cbn) by Lowe.
 To reproduce the analysis in Garg et al (2018), please consider using
 the [original Python
 program](https://github.com/nikhgarg/EmbeddingDynamicStereotypes).
-
-This package provides extras.
 
 ## Installation
 
@@ -57,7 +58,6 @@ to the bias that one is studying. For example, Caliskan et al. (2017)
 used gender-related words such as “male”, “man”, “boy”, “brother”, “he”,
 “him”, “his”, “son” to study gender bias. These words qualify as
 attribute words because we know they are related to a certain gender.
-`A` and `B` are always required.
 
 All functions follow the same template: `test(w, S, T, A, B)`. One can
 then extract the effect size of the test using `test_es`.
