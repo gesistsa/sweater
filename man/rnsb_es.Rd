@@ -4,10 +4,10 @@
 \alias{rnsb_es}
 \title{Calculation the Kullback-Leibler divergence}
 \usage{
-rnsb_es(rnsb)
+rnsb_es(x)
 }
 \arguments{
-\item{rnsb}{an rnsb object from the \link{rnsb} function.}
+\item{x}{an rnsb object from the \link{rnsb} function.}
 }
 \value{
 the Kullback-Leibler divergence.

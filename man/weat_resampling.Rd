@@ -5,12 +5,12 @@
 \alias{weat_resampling}
 \title{Test of significance for WEAT}
 \usage{
-weat_exact(weat)
+weat_exact(x)
 
-weat_resampling(weat, n_resampling = 9999)
+weat_resampling(x, n_resampling = 9999)
 }
 \arguments{
-\item{weat}{an object from the \link{weat} function.}
+\item{x}{an object from the \link{weat} function.}
 
 \item{n_resampling}{an integer specifying the number of replicates used to estimate the exact test}
 }

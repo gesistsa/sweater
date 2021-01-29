@@ -25,7 +25,7 @@ The package provides functions that are speedy. They are either implemented in C
 
 This package provides extra methods such as Relative Norm Distance and Relative Negative Sentiment Bias.
 
-If your goal is to reproduce the analysis in Caliskan et al (2017), please consider using the [original Java program](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DX4VWP&version=2.0) or the R package [cbn](https://github.com/conjugateprior/cbn) by Lowe. To reproduce the analysis in Garg et al (2018), please consider using the [original Python program](https://github.com/nikhgarg/EmbeddingDynamicStereotypes).
+If your goal is to reproduce the analysis in Caliskan et al (2017), please consider using the [original Java program](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DX4VWP&version=2.0) or the R package [cbn](https://github.com/conjugateprior/cbn) by Lowe. To reproduce the analysis in Garg et al (2018), please consider using the [original Python program](https://github.com/nikhgarg/EmbeddingDynamicStereotypes). To reproduce the analysis in Mazini et al (2019), please consider using the [original Python program](https://github.com/TManzini/DebiasMulticlassWordEmbedding/).
 
 ## Installation
 
@@ -45,55 +45,28 @@ The second type, namely `A` and `B`, is *attribute words* (or *group words* in G
 
 All functions follow the same template: `test(w, S, T, A, B)`. One can then extract the effect size of the test using `test_es`.
 
-## Example: Word Embedding Association Test
+## Available methods
 
-This example reproduces the detection of "Math. vs Arts" gender bias in Caliskan et al (2017).
+| Target words  | Attribution words | Method                              | functions                                          |
+| ------------- | -------------     | ----------------------              | ----                                               |
+| S             | A                 | Mean Average Cosine Similarity (Mazini et al. 2019)      | mac(), mac_es()                                    |
+| S             | A, B              | Relative Norm Distance (Garg et al. 2018)              | rnd(), rnd_es()                                    |
+| S             | A, B              | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019)    | rnsb(), rnsb_es()                                  |
+| S, T           | A, B              | Word Embedding Association Test (Caliskan et al. 2017)     | weat(), weat_es(), weat_resampling(), weat_exact() |
+| S, T           | A, B              | Word Embeddings Fairness Evaluation (Badilla et al. 2020) | To be implemented                                  |
 
-```{r maths}
+## Example: Mean Average Cosine Similarity
+
+The simplest form of bias detection is Meab Average Cosine Similarity (Mazini et al. 2019). The same method is used also in Kroon et al. (2020).
+
+```{r mac_neg}
 require(sweater)
-data(glove_math) # a subset of the original GLoVE word vectors
 
-S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sw <- weat(glove_math, S, T, A, B)
-
-# extraction of effect size
-weat_es(sw)
-```
-
-## A note about the effect size
-
-By default, the effect size from the function `weat_es` is adjusted by the pooled standard deviaion (see Page 2 of Caliskan et al. 2007). The standardized effect size can be interpreted the way as Cohen's d (Cohen, 1988).
-
-One can also get the unstandardized version (aka. test statistic in the original paper):
-
-```{r}
-weat_es(sw, standardize = FALSE)
-```
-
-The original implementation assumes equal size of `S` and `T`. This assumption can be relaxed by pooling the standard deviaion with sample size adjustment. The function `weat_es` does it when `S` and `T` are of different length.
-
-Also, the effect size can be converted to point-biserial correlation (mathematically equivalent to the Pearson's product moment correlation).
-
-```{r}
-weat_es(sw, r = TRUE)
-```
-
-## Exact test
-
-The exact test described in Caliskan et al. (2017) is also available. But it takes a long time to calculate.
-
-```r
-## Don't do it. It takes a long time and is almost always significant.
-weat_exact(sw)
-```
-
-Instead, please use the resampling approximaton of the exact test. The p-value is very close to the reported 0.018.
-
-```{r}
-weat_resampling(sw)
+S <- c("swedish", "irish", "mexican", "chinese", "filipino",
+       "german", "english", "french", "norwegian", "american",
+       "indian", "dutch", "russian", "scottish", "italian")
+mac_neg <- mac(glove_sweeney, S, A = bing_neg)
+sort(mac_neg$P)
 ```
 
 ## Example: Relative Norm Distance
@@ -193,6 +166,57 @@ rnsb_es(country_level)
 rnsb_es(region_level)
 ```
 
+## Example: Word Embedding Association Test
+
+This example reproduces the detection of "Math. vs Arts" gender bias in Caliskan et al (2017).
+
+```{r maths}
+data(glove_math) # a subset of the original GLoVE word vectors
+
+S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
+T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+sw <- weat(glove_math, S, T, A, B)
+
+# extraction of effect size
+weat_es(sw)
+```
+
+## A note about the effect size
+
+By default, the effect size from the function `weat_es` is adjusted by the pooled standard deviaion (see Page 2 of Caliskan et al. 2007). The standardized effect size can be interpreted the way as Cohen's d (Cohen, 1988).
+
+One can also get the unstandardized version (aka. test statistic in the original paper):
+
+```{r}
+weat_es(sw, standardize = FALSE)
+```
+
+The original implementation assumes equal size of `S` and `T`. This assumption can be relaxed by pooling the standard deviaion with sample size adjustment. The function `weat_es` does it when `S` and `T` are of different length.
+
+Also, the effect size can be converted to point-biserial correlation (mathematically equivalent to the Pearson's product moment correlation).
+
+```{r}
+weat_es(sw, r = TRUE)
+```
+
+## Exact test
+
+The exact test described in Caliskan et al. (2017) is also available. But it takes a long time to calculate.
+
+```r
+## Don't do it. It takes a long time and is almost always significant.
+weat_exact(sw)
+```
+
+Instead, please use the resampling approximaton of the exact test. The p-value is very close to the reported 0.018.
+
+```{r}
+weat_resampling(sw)
+```
+
+
 ## References
 
 1. Badilla, P., Bravo-Marquez, F., & Pérez, J. (2020). WEFE: The word embeddings fairness evaluation framework. In Proceedings of the 29 th Intern. Joint Conf. Artificial Intelligence.
@@ -200,7 +224,8 @@ rnsb_es(region_level)
 3. Caliskan, Aylin, Joanna J. Bryson, and Arvind Narayanan. "Semantics derived automatically from language corpora contain human-like biases." Science 356.6334 (2017): 183-186.
 4. Cohen, J. (1988), Statistical Power Analysis for the Behavioral Sciences, 2nd Edition. Hillsdale: Lawrence Erlbaum.
 5. Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644.
-6. McGrath, R. E., & Meyer, G. J. (2006). When effect sizes disagree: the case of r and d. Psychological methods, 11(4), 386.
-7. Rosenthal, R. (1991), Meta-Analytic Procedures for Social Research. Newbury Park: Sage
-8. Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
-9. Watanabe, K. (2018). Newsmap: A semi-supervised approach to geographical news classification. Digital Journalism, 6(3), 294-309.
+6. Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). Black is to criminal as caucasian is to police: Detecting and removing multiclass bias in word embeddings. arXiv preprint arXiv:1904.04047.
+7. McGrath, R. E., & Meyer, G. J. (2006). When effect sizes disagree: the case of r and d. Psychological methods, 11(4), 386.
+8. Rosenthal, R. (1991), Meta-Analytic Procedures for Social Research. Newbury Park: Sage
+9. Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
+10. Watanabe, K. (2018). Newsmap: A semi-supervised approach to geographical news classification. Digital Journalism, 6(3), 294-309.

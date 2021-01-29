@@ -4,10 +4,10 @@
 \alias{rnd_es}
 \title{Calculation of sum of all relative norm distances}
 \usage{
-rnd_es(rnd)
+rnd_es(x)
 }
 \arguments{
-\item{rnd}{an object from the function \link{rnd}}
+\item{x}{an object from the function \link{rnd}}
 }
 \value{
 Sum of all relative norm distances

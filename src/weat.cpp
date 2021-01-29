@@ -57,6 +57,18 @@ NumericVector cpp_bweat(CharacterVector& C, CharacterVector& A, CharacterVector&
 }
 
 // [[Rcpp::export]]
+NumericVector cpp_mac(CharacterVector& C, CharacterVector& A, NumericMatrix& glove_mat) {
+    int n_C = C.size();
+    NumericVector res(n_C);
+    CharacterVector rn = rownames(glove_mat);
+    for (int i = 0; i < n_C; ++i) {
+	Rcpp::checkUserInterrupt();
+	res[i] = cos_diff(C[i], A, glove_mat, rn);
+    }
+    return res;
+}
+
+// [[Rcpp::export]]
 double cpp_exact(NumericVector union_diff, double test_stat, int s_length) {
     long long int iter = 0;
     long long int pos = 0;

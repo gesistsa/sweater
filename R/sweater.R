@@ -40,7 +40,7 @@ weat <- function(w, S, T, A, B) {
 #' Calculation of WEAT effect size
 #'
 #' This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r).
-#' @param weat an object from the \link{weat} function.
+#' @param x an object from the \link{weat} function.
 #' @param standardize a boolean to denote whether to correct the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.
 #' @param r a boolean to denote whether convert the effect size to biserial correlation coefficient.
 #' @author Chung-hong Chan
@@ -56,9 +56,12 @@ weat <- function(w, S, T, A, B) {
 #' sw <- weat(glove_math, S, T, A, B)
 #' weat_es(sw)
 #' @export
-weat_es <- function(weat, standardize = TRUE, r = FALSE) {
-    S_diff <- weat$S_diff
-    T_diff <- weat$T_diff
+weat_es <- function(x, standardize = TRUE, r = FALSE) {
+    if (!"weat" %in% class(x)) {
+        stop("x is not created with weat().", call. = FALSE)
+    }
+    S_diff <- x$S_diff
+    T_diff <- x$T_diff
     n1 <- length(S_diff)
     n2 <- length(T_diff)
     total <- n1 + n2
@@ -81,9 +84,9 @@ weat_es <- function(weat, standardize = TRUE, r = FALSE) {
 
 #' @rdname weat_resampling
 #' @export
-weat_exact <- function(weat) {
-    S_diff <- weat$S_diff
-    T_diff <- weat$T_diff
+weat_exact <- function(x) {
+    S_diff <- x$S_diff
+    T_diff <- x$T_diff
     if (length(c(S_diff, T_diff)) > 10) {
         warning("Exact test would take a long time. Use sweater_resampling or sweater_boot (to be implemented) instead.")
     }
@@ -94,7 +97,7 @@ weat_exact <- function(weat) {
 #' Test of significance for WEAT
 #'
 #' This function conducts the test of significance for WEAT as described in Caliskan et al. (2017). The exact test (proposed in Caliskan et al.) takes an unreasonably long time, if the total number of words in S and T is larger than 10. The resampling test is an approximation of the exact test.
-#' @param weat an object from the \link{weat} function.
+#' @param x an object from the \link{weat} function.
 #' @param n_resampling an integer specifying the number of replicates used to estimate the exact test
 #' @return A list with class \code{"htest"}
 #' @author Chung-hong Chan
@@ -110,9 +113,12 @@ weat_exact <- function(weat) {
 #' sw <- weat(glove_math, S, T, A, B)
 #' weat_resampling(sw)
 #' @export
-weat_resampling <- function(weat, n_resampling = 9999) {
-    S_diff <- weat$S_diff
-    T_diff <- weat$T_diff
+weat_resampling <- function(x, n_resampling = 9999) {
+    if (!"weat" %in% class(x)) {
+        stop("x is not created with weat().", call. = FALSE)
+    }
+    S_diff <- x$S_diff
+    T_diff <- x$T_diff
     union_diff <- c(S_diff, T_diff)
     labels <- c(rep(TRUE, length(S_diff)), rep(FALSE, length(T_diff)))
     st_diff <- rep(NA, n_resampling)

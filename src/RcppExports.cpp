@@ -33,6 +33,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_mac
+NumericVector cpp_mac(CharacterVector& C, CharacterVector& A, NumericMatrix& glove_mat);
+RcppExport SEXP _sweater_cpp_mac(SEXP CSEXP, SEXP ASEXP, SEXP glove_matSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector& >::type C(CSEXP);
+    Rcpp::traits::input_parameter< CharacterVector& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type glove_mat(glove_matSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_mac(C, A, glove_mat));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_exact
 double cpp_exact(NumericVector union_diff, double test_stat, int s_length);
 RcppExport SEXP _sweater_cpp_exact(SEXP union_diffSEXP, SEXP test_statSEXP, SEXP s_lengthSEXP) {
@@ -50,6 +63,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_sweater_cpp_g", (DL_FUNC) &_sweater_cpp_g, 4},
     {"_sweater_cpp_bweat", (DL_FUNC) &_sweater_cpp_bweat, 4},
+    {"_sweater_cpp_mac", (DL_FUNC) &_sweater_cpp_mac, 3},
     {"_sweater_cpp_exact", (DL_FUNC) &_sweater_cpp_exact, 3},
     {NULL, NULL, 0}
 };

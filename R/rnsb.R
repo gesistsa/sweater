@@ -47,13 +47,16 @@ rnsb <- function(w, S, A, B, levels = 1) {
 #' Calculation the Kullback-Leibler divergence
 #'
 #' This function calculates the Kullback-Leibler divergence of the predicted negative probabilities, P, from the uniform distribution.
-#' @param rnsb an rnsb object from the \link{rnsb} function.
+#' @param x an rnsb object from the \link{rnsb} function.
 #' @return the Kullback-Leibler divergence.
 #' @references
 #' Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 #' @export
-rnsb_es <- function(rnsb) {
-    PP <- stats::na.omit(rnsb$P)
+rnsb_es <- function(x) {
+    if (!"rnsb" %in% class(x)) {
+        stop("x is not created with rnsb().", call. = FALSE)
+    }
+    PP <- stats::na.omit(x$P)
     PQ <- 1 / length(PP)
     kl <- sum(PP * log(PP/PQ))
     return(kl)

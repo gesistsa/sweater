@@ -4,10 +4,10 @@
 \alias{weat_es}
 \title{Calculation of WEAT effect size}
 \usage{
-weat_es(weat, standardize = TRUE, r = FALSE)
+weat_es(x, standardize = TRUE, r = FALSE)
 }
 \arguments{
-\item{weat}{an object from the \link{weat} function.}
+\item{x}{an object from the \link{weat} function.}
 
 \item{standardize}{a boolean to denote whether to correct the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.}
 
