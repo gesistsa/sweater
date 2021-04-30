@@ -2,6 +2,7 @@
 #include <algorithm>
 using namespace Rcpp;
 
+// [[Rcpp::export]]
 double raw_cosine(const NumericVector& x1, const NumericVector& x2) {
     unsigned int v_len = x1.size();
     double dot = 0.0, deno_a = 0.0, deno_b = 0.0;

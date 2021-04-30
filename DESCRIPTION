@@ -1,13 +1,13 @@
 Package: sweater
 Title: Speedy Word Embedding Association Test and Extras Using R
-Version: 0.0.9
+Version: 0.0.10
 Authors@R: 
     person(given = "Chung-hong",
            family = "Chan",
            role = c("aut", "cre"),
            email = "chainsawtiney@gmail.com",
            comment = c(ORCID = "0000-0002-6232-7530"))
-Description: Conduct Word Embedding Association Test (WEAT), a technique for evaluating bias in word embeddings (Caliskan et al. 2007) <doi:10.1126/science.aal4230>.
+Description: Conduct Word Embedding Association Test (WEAT), a technique for evaluating bias in word embeddings (Caliskan et al. 2007) and many more. <doi:10.1126/science.aal4230>.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -19,7 +19,8 @@ Imports:
     Rcpp,
     purrr,
     quanteda,
-    LiblineaR
+    LiblineaR,
+    text2vec
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

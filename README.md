@@ -15,8 +15,8 @@ The package provides functions that are speedy. They are either
 implemented in C++, or are speedy but accurate approximation of the
 original implementation proposed by Caliskan et al (2017).
 
-This package provides extra methods such as Relative Norm Distance and
-Relative Negative Sentiment Bias.
+This package provides extra methods such as Relative Norm Distance,
+SemAxis and Relative Negative Sentiment Bias.
 
 If your goal is to reproduce the analysis in Caliskan et al (2017),
 please consider using the [original Java
@@ -72,6 +72,7 @@ then extract the effect size of the test using `test_es`.
 | S            | A                 | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac\_es()                                      |
 | S            | A, B              | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd\_es()                                      |
 | S            | A, B              | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb\_es()                                    |
+| S            | A, B              | SemAxis (An et al. 2018)                                    | semaxis()                                             |
 | S, T         | A, B              | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat\_es(), weat\_resampling(), weat\_exact() |
 | S, T         | A, B              | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                     |
 
@@ -179,6 +180,24 @@ rnd_es(garg_f1)
 #> [1] -6.341598
 ```
 
+## Example: SemAxis
+
+This analysis attempts to reproduce the analysis in An et al. (2018).
+Please note that `T` is not required.
+
+You may obtain the word2vec word vectors trained with Trump supporters
+Reddit from [here](https://github.com/ghdi6758/SemAxis).
+
+``` r
+S <- c("mexicans", "asians", "whites", "blacks", "latinos")
+A <- c("respect")
+B <- c("disrespect")
+res <- semaxis(reddit, S, A, B, l = 1)
+res$P
+#>    mexicans      asians      whites      blacks     latinos 
+#> -0.16402445 -0.10867685 -0.10599096 -0.07974000 -0.04583781
+```
+
 ## Example: Relative Negative Sentiment Bias
 
 This analysis attempts to reproduce the analysis in Sweeney & Najafian
@@ -226,14 +245,11 @@ country level (e.g. Germany).
 ``` r
 require(quanteda)
 #> Loading required package: quanteda
-#> Package version: 2.1.2
-#> Parallel computing: 2 of 8 threads used.
+#> Package version: 3.0.0
+#> Unicode version: 13.0
+#> ICU version: 66.1
+#> Parallel computing: 8 of 8 threads used.
 #> See https://quanteda.io for tutorials and examples.
-#> 
-#> Attaching package: 'quanteda'
-#> The following object is masked from 'package:utils':
-#> 
-#>     View
 newsmap_europe
 #> Dictionary object with 4 primary key entries and 2 nested levels.
 #> - [EAST]:
@@ -408,31 +424,34 @@ weat_resampling(sw)
 
 ## References
 
-1.  Badilla, P., Bravo-Marquez, F., & Pérez, J. (2020). WEFE: The word
+1.  An, J., Kwak, H., & Ahn, Y. Y. (2018). SemAxis: A lightweight
+    framework to characterize domain-specific word semantics beyond
+    sentiment. arXiv preprint arXiv:1806.05521.
+2.  Badilla, P., Bravo-Marquez, F., & Pérez, J. (2020). WEFE: The word
     embeddings fairness evaluation framework. In Proceedings of the 29
     th Intern. Joint Conf. Artificial Intelligence.
-2.  Brunet, M. E., Alkalay-Houlihan, C., Anderson, A., & Zemel, R.
+3.  Brunet, M. E., Alkalay-Houlihan, C., Anderson, A., & Zemel, R.
     (2019, May). Understanding the origins of bias in word embeddings.
     In International Conference on Machine Learning (pp. 803-811). PMLR.
-3.  Caliskan, Aylin, Joanna J. Bryson, and Arvind Narayanan. “Semantics
+4.  Caliskan, Aylin, Joanna J. Bryson, and Arvind Narayanan. “Semantics
     derived automatically from language corpora contain human-like
     biases.” Science 356.6334 (2017): 183-186.
-4.  Cohen, J. (1988), Statistical Power Analysis for the Behavioral
+5.  Cohen, J. (1988), Statistical Power Analysis for the Behavioral
     Sciences, 2nd Edition. Hillsdale: Lawrence Erlbaum.
-5.  Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word
+6.  Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word
     embeddings quantify 100 years of gender and ethnic stereotypes.
     Proceedings of the National Academy of Sciences, 115(16),
     E3635-E3644.
-6.  Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). Black
+7.  Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). Black
     is to criminal as caucasian is to police: Detecting and removing
     multiclass bias in word embeddings. arXiv preprint arXiv:1904.04047.
-7.  McGrath, R. E., & Meyer, G. J. (2006). When effect sizes disagree:
+8.  McGrath, R. E., & Meyer, G. J. (2006). When effect sizes disagree:
     the case of r and d. Psychological methods, 11(4), 386.
-8.  Rosenthal, R. (1991), Meta-Analytic Procedures for Social Research.
+9.  Rosenthal, R. (1991), Meta-Analytic Procedures for Social Research.
     Newbury Park: Sage
-9.  Sweeney, C., & Najafian, M. (2019, July). A transparent framework
+10. Sweeney, C., & Najafian, M. (2019, July). A transparent framework
     for evaluating unintended demographic bias in word embeddings. In
     Proceedings of the 57th Annual Meeting of the Association for
     Computational Linguistics (pp. 1662-1667).
-10. Watanabe, K. (2018). Newsmap: A semi-supervised approach to
+11. Watanabe, K. (2018). Newsmap: A semi-supervised approach to
     geographical news classification. Digital Journalism, 6(3), 294-309.

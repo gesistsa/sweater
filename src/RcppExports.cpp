@@ -5,6 +5,18 @@
 
 using namespace Rcpp;
 
+// raw_cosine
+double raw_cosine(const NumericVector& x1, const NumericVector& x2);
+RcppExport SEXP _sweater_raw_cosine(SEXP x1SEXP, SEXP x2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector& >::type x1(x1SEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type x2(x2SEXP);
+    rcpp_result_gen = Rcpp::wrap(raw_cosine(x1, x2));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_g
 double cpp_g(const String& c, CharacterVector& A, CharacterVector& B, NumericMatrix& glove_mat);
 RcppExport SEXP _sweater_cpp_g(SEXP cSEXP, SEXP ASEXP, SEXP BSEXP, SEXP glove_matSEXP) {
@@ -61,6 +73,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_sweater_raw_cosine", (DL_FUNC) &_sweater_raw_cosine, 2},
     {"_sweater_cpp_g", (DL_FUNC) &_sweater_cpp_g, 4},
     {"_sweater_cpp_bweat", (DL_FUNC) &_sweater_cpp_bweat, 4},
     {"_sweater_cpp_mac", (DL_FUNC) &_sweater_cpp_mac, 3},
