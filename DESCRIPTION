@@ -20,7 +20,8 @@ Imports:
     purrr,
     quanteda,
     LiblineaR,
-    text2vec
+    text2vec,
+    data.table
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

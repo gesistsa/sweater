@@ -2,6 +2,7 @@
 
 export(mac)
 export(mac_es)
+export(read_word2vec)
 export(rnd)
 export(rnd_es)
 export(rnsb)
