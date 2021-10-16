@@ -1,9 +1,8 @@
 #' Mean average cosine similarity
 #'
 #' This function calculates the mean average cosine similarity (MAC) score proposed in Manzini et al (2019).
-#' @param w a numeric matrix of word embeddings (e.g. from rsparse::GloVe)
-#' @param S a character vector of a set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists.
-#' @param A a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.
+#'
+#' @inheritParams weat
 #' @return A list with class \code{"rnd"} containing the following components:
 #' \describe{
 #' \item{\code{$P}}{a vector of cosine similarity values for every word in S}
@@ -18,10 +17,11 @@
 #' x <- mac(googlenews, S, A)
 #' x$P
 #' @export
-mac <- function(w, S, A) {
-    available_terms <- rownames(w)
-    S <- intersect(S, available_terms)
-    A <- intersect(A, available_terms)
+mac <- function(w, S, A, verbose = FALSE) {
+    ## Cleaning
+    w_lab <- rownames(w)
+    A <- .clean(A, w_lab, verbose = verbose)
+    S <- .clean(S, w_lab, verbose = verbose)
     mac_dist <- cpp_mac(S, A, w)
     names(mac_dist) <- S
     res <- list(P = mac_dist, S = S, A = A)

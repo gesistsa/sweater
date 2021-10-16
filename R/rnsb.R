@@ -1,11 +1,8 @@
 #' Relative Negative Sentiment Bias
 #'
 #' This function estimate the Relative Negative Sentiment Bias (RNSB) of word embeddings (Sweeney & Najafian, 2019).
-#' @param w a numeric matrix of word embeddings (e.g. from rsparse::GloVe)
-#' @param S a character vector of a set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists.
-#' @param A a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.
-#' @param B a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.
-#' @param levels an integer vector: if S is a quanteda dictionary, this value indicates the levels of analysis.
+#'
+#' @inheritParams weat
 #' @return A list with class \code{"rnsb"} containing the following components:
 #' \describe{
 #' \item{\code{$classifer}}{ a logistic regression model with L2 regularization trained with LiblineaR}
@@ -21,8 +18,12 @@
 #' @references
 #' Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 #' @export
-rnsb <- function(w, S, A, B, levels = 1) {
-    feature_matrix <- w[rownames(w) %in% c(A, B),,drop = FALSE]
+rnsb <- function(w, S, A, B, levels = 1, verbose = FALSE) {
+    ## Cleaning
+    w_lab <- rownames(w)
+    A <- .clean(A, w_lab, verbose = verbose)
+    B <- .clean(B, w_lab, verbose = verbose)
+    feature_matrix <- w[w_lab %in% c(A, B),,drop = FALSE]
     colnames(feature_matrix) <- paste("f", seq_len(ncol(feature_matrix)), sep = "")
     label <- as.numeric(rownames(feature_matrix) %in% B)
     classifier <- LiblineaR::LiblineaR(data = feature_matrix, target = label, type = 0, epsilon = 1e-4)
@@ -33,6 +34,8 @@ rnsb <- function(w, S, A, B, levels = 1) {
         flist_probs <- purrr::map(flist_words, .words_pred, w = w, classifier = classifier)
         f_star <- purrr::map_dbl(flist_probs, mean)
     } else {
+        ## Cleaning
+        S <- .clean(S, w_lab, verbose = verbose)
         newdata <- w[S,,drop = FALSE]
         colnames(newdata) <- paste("f", seq_len(ncol(newdata)), sep = "")
         f_star <- predict(classifier, newdata, proba = TRUE)$probabilities[,2]

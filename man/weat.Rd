@@ -4,7 +4,7 @@
 \alias{weat}
 \title{Speedy Word Embedding Association Test}
 \usage{
-weat(w, S, T, A, B)
+weat(w, S, T, A, B, verbose = FALSE)
 }
 \arguments{
 \item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
@@ -16,6 +16,8 @@ weat(w, S, T, A, B)
 \item{A}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
 
 \item{B}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
+
+\item{verbose}{logical, whether to display information}
 }
 \value{
 A list with class \code{"weat"} containing the following components:

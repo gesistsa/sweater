@@ -15,6 +15,8 @@ double raw_cosine(const NumericVector& x1, const NumericVector& x2) {
 }
 
 
+
+
 NumericVector cpp_take(NumericMatrix& glove_mat, const String& word, CharacterVector& rn) {
     int cur_index = 0;
     for (CharacterVector::iterator i = rn.begin(); i != rn.end(); ++i) {

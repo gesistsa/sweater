@@ -4,14 +4,16 @@
 \alias{mac}
 \title{Mean average cosine similarity}
 \usage{
-mac(w, S, A)
+mac(w, S, A, verbose = FALSE)
 }
 \arguments{
 \item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
 
-\item{S}{a character vector of a set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists.}
+\item{S}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
 \item{A}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
+
+\item{verbose}{logical, whether to display information}
 }
 \value{
 A list with class \code{"rnd"} containing the following components:

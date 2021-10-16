@@ -6,6 +6,7 @@
 #' @param T a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...
 #' @param A a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.
 #' @param B a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.
+#' @param verbose logical, whether to display information
 #' @return A list with class \code{"weat"} containing the following components:
 #' \describe{
 #' \item{\code{$S_diff}}{for each of words in S, mean of the mean differences in cosine similarity between words in A and words in B}
@@ -29,7 +30,12 @@
 #' @references
 #' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
 #' @export 
-weat <- function(w, S, T, A, B) {
+weat <- function(w, S, T, A, B, verbose = FALSE) {
+    w_lab <- rownames(w)
+    A <- .clean(A, w_lab, verbose = verbose)
+    B <- .clean(B, w_lab, verbose = verbose)
+    S <- .clean(S, w_lab, verbose = verbose)
+    T <- .clean(T, w_lab, verbose = verbose)
     S_diff <- cpp_bweat(S, A, B, w)
     T_diff <- cpp_bweat(T, A, B, w)
     res <- list(S_diff = S_diff, T_diff = T_diff, S = S, T = T, A = A, B = B)
