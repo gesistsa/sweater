@@ -36,7 +36,6 @@ mac <- function(w, S, A, verbose = FALSE) {
 #' @param x an object from the function \link{mac}
 #' @return Mean of all cosine similarity values
 #' @export
-#' @export
 mac_es <- function(x) {
     if (!"mac" %in% class(x)) {
         stop("x is not created with mac().", call. = FALSE)

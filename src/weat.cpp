@@ -14,9 +14,6 @@ double raw_cosine(const NumericVector& x1, const NumericVector& x2) {
     return dot / (sqrt(deno_a) * sqrt(deno_b));
 }
 
-
-
-
 NumericVector cpp_take(NumericMatrix& glove_mat, const String& word, CharacterVector& rn) {
     int cur_index = 0;
     for (CharacterVector::iterator i = rn.begin(); i != rn.end(); ++i) {
@@ -70,6 +67,22 @@ NumericVector cpp_mac(CharacterVector& C, CharacterVector& A, NumericMatrix& glo
     }
     return res;
 }
+
+// [[Rcpp::export]]
+NumericVector cpp_nas(String& c, CharacterVector& A, NumericMatrix& glove_mat) {
+    CharacterVector rn = rownames(glove_mat);
+    int n_A = A.size();
+    NumericVector res(n_A);
+    NumericVector vc = cpp_take(glove_mat, c, rn);
+    for (int i = 0; i < n_A; ++i) {
+	Rcpp::checkUserInterrupt();
+	NumericVector va = cpp_take(glove_mat, A[i], rn);
+	res[i] = raw_cosine(vc, va);
+    }
+    return res;
+}
+
+// Statistical test
 
 // [[Rcpp::export]]
 double cpp_exact(NumericVector union_diff, double test_stat, int s_length) {

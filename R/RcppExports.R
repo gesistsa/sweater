@@ -17,6 +17,10 @@ cpp_mac <- function(C, A, glove_mat) {
     .Call(`_sweater_cpp_mac`, C, A, glove_mat)
 }
 
+cpp_nas <- function(c, A, glove_mat) {
+    .Call(`_sweater_cpp_nas`, c, A, glove_mat)
+}
+
 cpp_exact <- function(union_diff, test_stat, s_length) {
     .Call(`_sweater_cpp_exact`, union_diff, test_stat, s_length)
 }

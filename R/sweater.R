@@ -35,8 +35,8 @@ weat <- function(w, S, T, A, B, verbose = FALSE) {
     A <- .clean(A, w_lab, verbose = verbose)
     B <- .clean(B, w_lab, verbose = verbose)
     S <- .clean(S, w_lab, verbose = verbose)
-    T <- .clean(T, w_lab, verbose = verbose)
     S_diff <- cpp_bweat(S, A, B, w)
+    T <- .clean(T, w_lab, verbose = verbose)
     T_diff <- cpp_bweat(T, A, B, w)
     res <- list(S_diff = S_diff, T_diff = T_diff, S = S, T = T, A = A, B = B)
     class(res) <- "weat"
