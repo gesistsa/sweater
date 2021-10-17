@@ -47,14 +47,15 @@ All functions follow the same template: `test(w, S, T, A, B)`. One can then extr
 
 ## Available methods
 
-| Target words  | Attribution words | Method                                                      | functions                                          |
-| ------------- | -------------     | ----------------------                                      | ----                                               |
-| S             | A                 | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac_es()                                    |
-| S             | A, B              | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd_es()                                    |
-| S             | A, B              | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb_es()                                  |
-| S             | A, B              | SemAxis (An et al. 2018)                                    | semaxis()                                          |
-| S, T          | A, B              | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat_es(), weat_resampling(), weat_exact() |
-| S, T          | A, B              | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                  |
+| Target words | Attribution words | Method                                                      | functions                                          |
+|--------------|-------------------|-------------------------------------------------------------|----------------------------------------------------|
+| S            | A                 | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac_es()                                    |
+| S            | A, B              | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd_es()                                    |
+| S            | A, B              | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb_es()                                  |
+| S            | A, B              | SemAxis (An et al. 2018)                                    | semaxis()                                          |
+| S            | A, B              | Normalized Association Score (Caliskan et al. 2017)         | nas()                                              |
+| S, T         | A, B              | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat_es(), weat_resampling(), weat_exact() |
+| S, T         | A, B              | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                  |
 
 ## Example: Mean Average Cosine Similarity
 
@@ -183,6 +184,43 @@ Comparison of the two effect sizes. Please note the much smaller effect size fro
 ```{r}
 rnsb_es(country_level)
 rnsb_es(region_level)
+```
+
+## Example: Normalized Association Score
+
+Normalized Association Score (Caliskan et al., 2017) is similar to Relative Norm Distance above. Please note that `T` is not required.
+
+```{r}
+S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
+"photographer", "geologist", "shoemaker", "athlete", "cashier", 
+"dancer", "housekeeper", "accountant", "physicist", "gardener", 
+"dentist", "weaver", "blacksmith", "psychologist", "supervisor", 
+"mathematician", "surveyor", "tailor", "designer", "economist", 
+"mechanic", "laborer", "postmaster", "broker", "chemist", "librarian", 
+"attendant", "clerical", "musician", "porter", "scientist", "carpenter", 
+"sailor", "instructor", "sheriff", "pilot", "inspector", "mason", 
+"baker", "administrator", "architect", "collector", "operator", 
+"surgeon", "driver", "painter", "conductor", "nurse", "cook", 
+"engineer", "retired", "sales", "lawyer", "clergy", "physician", 
+"farmer", "clerk", "manager", "guard", "artist", "smith", "official", 
+"police", "doctor", "professor", "student", "judge", "teacher", 
+"author", "secretary", "soldier")
+A <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
+"male", "brother", "sons", "fathers", "men", "boys", "males", 
+"brothers", "uncle", "uncles", "nephew", "nephews")
+B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
+"herself", "female", "sister", "daughters", "mothers", "women", 
+"girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
+)
+
+nas_f1 <- nas(googlenews, S, A, B)
+sort(nas_f1$P, decreasing = TRUE)
+```
+
+There is a very strong correlation between NAS and RND.
+
+```{r}
+cor.test(nas_f1$P, garg_f1$P)
 ```
 
 ## Example: Word Embedding Association Test

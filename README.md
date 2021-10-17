@@ -73,6 +73,7 @@ then extract the effect size of the test using `test_es`.
 | S            | A, B              | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd\_es()                                      |
 | S            | A, B              | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb\_es()                                    |
 | S            | A, B              | SemAxis (An et al. 2018)                                    | semaxis()                                             |
+| S            | A, B              | Normalized Association Score (Caliskan et al. 2017)         | nas()                                                 |
 | S, T         | A, B              | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat\_es(), weat\_resampling(), weat\_exact() |
 | S, T         | A, B              | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                     |
 
@@ -347,6 +348,87 @@ rnsb_es(country_level)
 #> [1] 0.0796689
 rnsb_es(region_level)
 #> [1] 0.00329434
+```
+
+## Example: Normalized Association Score
+
+Normalized Association Score (Caliskan et al., 2017) is similar to
+Relative Norm Distance above. Please note that `T` is not required.
+
+``` r
+S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
+"photographer", "geologist", "shoemaker", "athlete", "cashier", 
+"dancer", "housekeeper", "accountant", "physicist", "gardener", 
+"dentist", "weaver", "blacksmith", "psychologist", "supervisor", 
+"mathematician", "surveyor", "tailor", "designer", "economist", 
+"mechanic", "laborer", "postmaster", "broker", "chemist", "librarian", 
+"attendant", "clerical", "musician", "porter", "scientist", "carpenter", 
+"sailor", "instructor", "sheriff", "pilot", "inspector", "mason", 
+"baker", "administrator", "architect", "collector", "operator", 
+"surgeon", "driver", "painter", "conductor", "nurse", "cook", 
+"engineer", "retired", "sales", "lawyer", "clergy", "physician", 
+"farmer", "clerk", "manager", "guard", "artist", "smith", "official", 
+"police", "doctor", "professor", "student", "judge", "teacher", 
+"author", "secretary", "soldier")
+A <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
+"male", "brother", "sons", "fathers", "men", "boys", "males", 
+"brothers", "uncle", "uncles", "nephew", "nephews")
+B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
+"herself", "female", "sister", "daughters", "mothers", "women", 
+"girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
+)
+
+nas_f1 <- nas(googlenews, S, A, B)
+sort(nas_f1$P, decreasing = TRUE)
+#>         mason     architect       retired mathematician      surveyor 
+#>    1.07579562    1.01206370    1.00572417    0.98438026    0.95325853 
+#>    blacksmith     shoemaker      mechanic         smith     conductor 
+#>    0.91630187    0.90366514    0.88680644    0.88099376    0.85345116 
+#>     carpenter     geologist      engineer        tailor     physicist 
+#>    0.84153190    0.82318999    0.82171774    0.81195470    0.74437241 
+#>  statistician         guard      official        porter        farmer 
+#>    0.68991374    0.67680894    0.63995423    0.56355842    0.55474034 
+#>       janitor       laborer     economist       manager    auctioneer 
+#>    0.51324194    0.45460508    0.43066882    0.41971919    0.41387769 
+#>        police       surgeon     inspector      musician        broker 
+#>    0.41324119    0.38046905    0.37464524    0.35390781    0.34055697 
+#>        lawyer        driver     physician       soldier         pilot 
+#>    0.30518165    0.27875866    0.27724080    0.27300836    0.25997898 
+#>       bailiff     scientist     collector       chemist       sheriff 
+#>    0.23181239    0.22787972    0.19750891    0.17141743    0.16736877 
+#>       painter     professor  photographer    accountant    instructor 
+#>    0.15124995    0.13212399    0.13028928    0.09967502    0.04591339 
+#>       athlete        sailor       dentist        doctor     secretary 
+#>   -0.02820138   -0.05349238   -0.06831649   -0.08324161   -0.12628053 
+#>    postmaster      operator         baker        clergy    supervisor 
+#>   -0.18428205   -0.20717905   -0.22646700   -0.23258044   -0.23926638 
+#>  psychologist      gardener administrator     attendant         judge 
+#>   -0.28770724   -0.31714297   -0.38083233   -0.40678610   -0.53375933 
+#>        artist        author         clerk        weaver       teacher 
+#>   -0.53867482   -0.70554612   -0.72822217   -0.75591781   -0.76006888 
+#>          cook       student         sales       cashier      clerical 
+#>   -0.79237946   -0.80742343   -0.90967364   -0.93558743   -0.97799032 
+#>   housekeeper      designer        dancer       midwife         nurse 
+#>   -1.02531989   -1.08607901   -1.12085670   -1.42429922   -1.48794583 
+#>     librarian 
+#>   -1.50069929
+```
+
+There is a very strong correlation between NAS and RND.
+
+``` r
+cor.test(nas_f1$P, garg_f1$P)
+#> 
+#>  Pearson's product-moment correlation
+#> 
+#> data:  nas_f1$P and garg_f1$P
+#> t = -24.93, df = 74, p-value < 2.2e-16
+#> alternative hypothesis: true correlation is not equal to 0
+#> 95 percent confidence interval:
+#>  -0.9650781 -0.9148179
+#> sample estimates:
+#>        cor 
+#> -0.9453038
 ```
 
 ## Example: Word Embedding Association Test
