@@ -3,6 +3,13 @@
 #' @importFrom graphics dotchart
 NULL
 
+#' A subset of the pretrained word2vec word vectors
+#'
+#' This is a subset of the original pretrained word2vec word vectors trained on Google News. The same word vectors were used in Garg et al. (2018) to study biases.
+#' @references
+#' Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644.
+"googlenews"
+
 #' A helper function for reading word2vec format
 #'
 #' This function reads word2vec text format and return a dense matrix that can be used by this package.

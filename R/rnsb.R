@@ -14,8 +14,28 @@
 #' }
 #' \code{\link{rnsb_es}} can be used to obtain the effect size of the test.
 #' @examples
-#' country_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 2)
-#' sort(country_level$P)
+#' data(googlenews)
+#' S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
+#' "photographer", "geologist", "shoemaker", "athlete", "cashier", "dancer",
+#' "housekeeper", "accountant", "physicist", "gardener", "dentist", "weaver",
+#' "blacksmith", "psychologist", "supervisor", "mathematician", "surveyor",
+#' "tailor", "designer", "economist", "mechanic", "laborer", "postmaster",
+#' "broker", "chemist", "librarian", "attendant", "clerical", "musician",
+#' "porter", "scientist", "carpenter", "sailor", "instructor", "sheriff",
+#' "pilot", "inspector", "mason", "baker", "administrator", "architect",
+#' "collector", "operator", "surgeon", "driver", "painter", "conductor",
+#' "nurse", "cook", "engineer", "retired", "sales", "lawyer", "clergy",
+#' "physician", "farmer", "clerk", "manager", "guard", "artist", "smith",
+#' "official", "police", "doctor", "professor", "student", "judge",
+#' "teacher", "author", "secretary", "soldier")
+#' A <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
+#' "male", "brother", "sons", "fathers", "men", "boys", "males", "brothers",
+#' "uncle", "uncles", "nephew", "nephews")
+#' B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
+#' "herself", "female", "sister", "daughters", "mothers", "women", "girls",
+#' "females", "sisters", "aunt", "aunts", "niece", "nieces")
+#' garg_f1 <- rnsb(googlenews, S, A, B)
+#' plot_bias(garg_f1)
 #' @references
 #' Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 #' @export
