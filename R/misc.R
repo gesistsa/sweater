@@ -1,3 +1,8 @@
+#' @importFrom stats dist predict sd var
+#' @importFrom utils glob2rx head
+#' @importFrom graphics dotchart
+NULL
+
 #' A helper function for reading word2vec format
 #'
 #' This function reads word2vec text format and return a dense matrix that can be used by this package.
@@ -35,4 +40,18 @@ read_word2vec <- function(x) {
         print("Some word(s) are not available in w.")
     }
     return(new_x)
+}
+
+#' Visualize the bias of words in S
+#'
+#' This function plots the bias of words in `S` as a Cleveland Dot Plot.
+#' @param x an S3 object returned from mac, rnd, semaxis, nas or rnsb
+#' @return a plot
+#' @export
+plot_bias <- function(x) {
+    if (is.null(x$P)) {
+        stop("No P slot in the input object x.")
+    }
+    sortedx <- sort(x$P)
+    graphics::dotchart(sortedx, labels = names(sortedx))
 }

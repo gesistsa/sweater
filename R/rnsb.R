@@ -3,6 +3,7 @@
 #' This function estimate the Relative Negative Sentiment Bias (RNSB) of word embeddings (Sweeney & Najafian, 2019).
 #'
 #' @inheritParams weat
+#' @param levels levels of entries in a hierarchical dictionary that will be applied (see quanteda::dfm_lookup)
 #' @return A list with class \code{"rnsb"} containing the following components:
 #' \describe{
 #' \item{\code{$classifer}}{ a logistic regression model with L2 regularization trained with LiblineaR}
@@ -65,14 +66,14 @@ rnsb_es <- function(x) {
     return(kl)
 }
 
-plot_rnsbs <- function(rnsb1, rnsb2, rnsb1_label = "rnsb1", rnsb2_label = "rnsb2") {
-    groupnames <- c(names(rnsb1$P), names(rnsb2$P)) 
-    values <- c(rnsb1$P, rnsb2$P)
-    labels <- c(rep(rnsb1_label, length(rnsb1$P)), rep(rnsb2_label, length(rnsb2$P)))
-    diff <- values - c(rnsb1$P, rnsb1$P)
-    equality <- 1.0 / length(stats::na.omit(rnsb1$P))
-    data_to_plot <- data.frame(labels, groupnames, values, diff)
-    data_to_plot <- data_to_plot[!is.na(data_to_plot$values)]
-    ggplot2::ggplot(data_to_plot, ggplot2::aes(x = forcats::fct_reorder(groupnames, diff), y = values, fill = labels)) + ggplot2::geom_bar(stat = "identity", position=ggplot2::position_dodge()) + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust=1)) + ggplot2::xlab("S") + ggplot2::ylab("P") + ggplot2::geom_hline(yintercept = equality, lty = 2, color = "darkgray") + ggplot2::coord_flip()
-}
+## plot_rnsbs <- function(rnsb1, rnsb2, rnsb1_label = "rnsb1", rnsb2_label = "rnsb2") {
+##     groupnames <- c(names(rnsb1$P), names(rnsb2$P)) 
+##     values <- c(rnsb1$P, rnsb2$P)
+##     labels <- c(rep(rnsb1_label, length(rnsb1$P)), rep(rnsb2_label, length(rnsb2$P)))
+##     diff <- values - c(rnsb1$P, rnsb1$P)
+##     equality <- 1.0 / length(stats::na.omit(rnsb1$P))
+##     data_to_plot <- data.frame(labels, groupnames, values, diff)
+##     data_to_plot <- data_to_plot[!is.na(data_to_plot$values)]
+##     ggplot2::ggplot(data_to_plot, ggplot2::aes(x = forcats::fct_reorder(groupnames, diff), y = values, fill = labels)) + ggplot2::geom_bar(stat = "identity", position=ggplot2::position_dodge()) + ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust=1)) + ggplot2::xlab("S") + ggplot2::ylab("P") + ggplot2::geom_hline(yintercept = equality, lty = 2, color = "darkgray") + ggplot2::coord_flip()
+## }
 

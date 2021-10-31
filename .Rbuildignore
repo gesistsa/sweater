@@ -1,4 +1,5 @@
 ^LICENSE\.md$
 ^README\.Rmd$
+^README\.html$
 ^raw_data/
-
+^paper/

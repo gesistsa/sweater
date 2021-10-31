@@ -15,6 +15,8 @@ rnsb(w, S, A, B, levels = 1, verbose = FALSE)
 
 \item{B}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 
+\item{levels}{levels of entries in a hierarchical dictionary that will be applied (see quanteda::dfm_lookup)}
+
 \item{verbose}{logical, whether to display information}
 }
 \value{
