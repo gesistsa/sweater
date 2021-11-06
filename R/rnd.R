@@ -54,7 +54,7 @@ rnd <- function(w, S, A, B, verbose = FALSE) {
     norm_diff <- norm_a - norm_b
     names(norm_diff) <- S
     res <- list(P = norm_diff, S = S, A = A, B = B)
-    class(res) <- append(class(res), "rnd")
+    class(res) <- append(class(res), c("sweater", "rnd"))
     return(res)
 }
 

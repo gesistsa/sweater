@@ -39,7 +39,7 @@ mac <- function(w, S, A, verbose = FALSE) {
     mac_dist <- cpp_mac(S, A, w)
     names(mac_dist) <- S
     res <- list(P = mac_dist, S = S, A = A)
-    class(res) <- "mac"
+    class(res) <- append(class(res), c("sweater", "mac"))
     return(res)
 }
 

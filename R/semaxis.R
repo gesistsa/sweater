@@ -42,6 +42,6 @@ semaxis <- function(w, S, A, B, l = 0, verbose = FALSE) {
     score <- purrr::map_dbl(S, ~ raw_cosine(w[.,,drop = FALSE], axis))
     names(score) <- S
     res <- list(P = score, S = S, A = A, B = B, V = axis)
-    class(res) <- "semaxis"
+    class(res) <- append(class(res), c("semaxis", "sweater"))
     return(res)
 }

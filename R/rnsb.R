@@ -64,7 +64,7 @@ rnsb <- function(w, S, A, B, levels = 1, verbose = FALSE) {
     }
     P <- f_star / sum(f_star, na.rm = TRUE)
     res <- list(classifier = classifier, A = A, B = B, S = S, P = P)
-    class(res) <- append(class(res), "rnsb")
+    class(res) <- append(class(res), c("sweater", "rnsb"))
     return(res)
 }
 

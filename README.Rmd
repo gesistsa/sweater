@@ -12,11 +12,11 @@ knitr::opts_chunk$set(
   out.width = "100%"
   )
 set.seed(46709394)
-load("raw_data/bing_neg.rda")
-load("raw_data/bing_pos.rda")
-load("raw_data/glove_sweeney.rda")
-load("raw_data/newsmap_europe.rda")
-load("raw_data/googlenews.rda")
+load("tests/testdata/bing_neg.rda")
+load("tests/testdata/bing_pos.rda")
+load("tests/testdata/glove_sweeney.rda")
+load("tests/testdata/newsmap_europe.rda")
+load("tests/testdata/googlenews.rda")
 ```
 
 # sweater <img src="man/figures/sweater_logo.svg" align="right" height="200" />
