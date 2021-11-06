@@ -3,3 +3,5 @@
 ^README\.html$
 ^raw_data/
 ^paper/
+^\.github$
+^codecov\.yml$
