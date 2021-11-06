@@ -16,6 +16,7 @@
 #'
 #' This functions quantifies the bias in a set of word embeddings by Caliskan et al (2017). In comparison to WEAT introduced in the same paper, this method is more suitable for continuous ground truth data. See Figure 1 and Figure 2 of the original paper.
 #' @inheritParams weat
+#' @author Chung-hong Chan
 #' @return A list with class \code{"nas"} containing the following components:
 #' \describe{
 #' \item{\code{$P}}{a vector of normalized association score for every word in S}

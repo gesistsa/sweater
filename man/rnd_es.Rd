@@ -15,3 +15,6 @@ Sum of all relative norm distances
 \description{
 This function calculates the sum of all relative norm distances from the relative norm distance test.
 }
+\author{
+Chung-hong Chan
+}

@@ -10,6 +10,7 @@
 #' \item{\code{$A}}{the input A}
 #' }
 #' \code{\link{mac_es}} can be used to obtain the effect size of the test.
+#' @author Chung-hong Chan
 #' @examples
 #' data(googlenews)
 #' S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
@@ -49,6 +50,7 @@ mac <- function(w, S, A, verbose = FALSE) {
 #' 
 #' @param x an object from the function \link{mac}
 #' @return Mean of all cosine similarity values
+#' @author Chung-hong Chan
 #' @export
 mac_es <- function(x) {
     if (!"mac" %in% class(x)) {

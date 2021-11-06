@@ -54,3 +54,6 @@ B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 garg_f1 <- rnd(googlenews, S, A, B)
 plot_bias(garg_f1)
 }
+\author{
+Chung-hong Chan
+}

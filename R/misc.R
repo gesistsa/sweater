@@ -16,6 +16,7 @@ NULL
 #' The file can have or have not the "verification line", i.e. the first line contains the dimensionality of the matrix. If the verification line exists, the function will check the returned matrix for correctness.
 #' @param x path to your text file
 #' @return a dense matrix
+#' @author Chung-hong Chan
 #' @export
 read_word2vec <- function(x) {
     first_line <- strsplit(readLines(x, n = 1), " ")[[1]]
@@ -54,6 +55,7 @@ read_word2vec <- function(x) {
 #' This function plots the bias of words in `S` as a Cleveland Dot Plot.
 #' @param x an S3 object returned from mac, rnd, semaxis, nas or rnsb
 #' @return a plot
+#' @author Chung-hong Chan
 #' @export
 plot_bias <- function(x) {
     if (is.null(x$P)) {

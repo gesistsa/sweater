@@ -48,3 +48,6 @@ A <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 x <- mac(googlenews, S, A)
 x$P
 }
+\author{
+Chung-hong Chan
+}

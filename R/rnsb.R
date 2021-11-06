@@ -36,6 +36,7 @@
 #' "females", "sisters", "aunt", "aunts", "niece", "nieces")
 #' garg_f1 <- rnsb(googlenews, S, A, B)
 #' plot_bias(garg_f1)
+#' @author Chung-hong Chan
 #' @references
 #' Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 #' @export
@@ -73,6 +74,7 @@ rnsb <- function(w, S, A, B, levels = 1, verbose = FALSE) {
 #' This function calculates the Kullback-Leibler divergence of the predicted negative probabilities, P, from the uniform distribution.
 #' @param x an rnsb object from the \link{rnsb} function.
 #' @return the Kullback-Leibler divergence.
+#' @author Chung-hong Chan
 #' @references
 #' Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 #' @export

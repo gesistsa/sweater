@@ -17,6 +17,7 @@
 #' \item{\code{$B}}{the input B}
 #' }
 #' \code{\link{rnd_es}} can be used to obtain the effect size of the test.
+#' @author Chung-hong Chan
 #' @examples
 #' data(googlenews)
 #' S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
@@ -63,6 +64,7 @@ rnd <- function(w, S, A, B, verbose = FALSE) {
 #' This function calculates the sum of all relative norm distances from the relative norm distance test.
 #' @param x an object from the function \link{rnd}
 #' @return Sum of all relative norm distances
+#' @author Chung-hong Chan
 #' @export
 rnd_es <- function(x) {
     if (!"rnd" %in% class(x)) {

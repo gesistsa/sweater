@@ -15,3 +15,6 @@ Mean of all cosine similarity values
 \description{
 This function calculates the mean of cosine distance values
 }
+\author{
+Chung-hong Chan
+}

@@ -15,3 +15,6 @@ a plot
 \description{
 This function plots the bias of words in \code{S} as a Cleveland Dot Plot.
 }
+\author{
+Chung-hong Chan
+}
