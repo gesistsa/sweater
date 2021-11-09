@@ -19,7 +19,12 @@ NULL
 #' @author Chung-hong Chan
 #' @export
 read_word2vec <- function(x) {
-    first_line <- strsplit(readLines(x, n = 1), " ")[[1]]
+    init_lines <- strsplit(readLines(x, n = 2), " ")
+    first_line <- init_lines[[1]]
+    second_line <- init_lines[[2]]
+    if (length(second_line) == 2) {
+        stop("Input file x has only two columns. It is probably not suitable for analysis.")
+    }
     if (length(first_line) == 2) {
         ## it has the dimensionality written
         skip_line <- 1
