@@ -31,6 +31,7 @@
 #' @inheritParams weat
 #' @return a sweater S3 object
 #' @seealso [weat()], [mac()], [nas()], [semaxis()], [rnsb()], [rnd()], [nas()]
+#' @author Chung-hong Chan
 #' @examples
 #' data(googlenews)
 #' S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
