@@ -50,7 +50,7 @@ All tests depend on two types of words. The first type, namely, `S` and `T`, is 
 
 The second type, namely `A` and `B`, is *attribute words* (or *group words* in Garg et al). These are words with known properties in relation to the bias that one is studying. For example, Caliskan et al. (2017) used gender-related words such as "male", "man", "boy", "brother", "he", "him", "his", "son" to study gender bias. These words qualify as attribute words because we know they are related to a certain gender.
 
-All functions follow the same template: `test(w, S, T, A, B)`. One can then extract the effect size of the test using `test_es`.
+It is recommended to use the function `query()` to make a query and `calculate_es()` to calculate the effect size. You can also use the inidividual functions below.
 
 ## Available methods
 
@@ -66,7 +66,7 @@ All functions follow the same template: `test(w, S, T, A, B)`. One can then extr
 
 ## Example: Mean Average Cosine Similarity
 
-The simplest form of bias detection is Meab Average Cosine Similarity (Mazini et al. 2019). The same method is used also in Kroon et al. (2020).
+The simplest form of bias detection is Mean Average Cosine Similarity (Mazini et al. 2019). The same method is used also in Kroon et al. (2020).
 
 ```{r mac_neg}
 require(sweater)
@@ -74,7 +74,9 @@ require(sweater)
 S <- c("swedish", "irish", "mexican", "chinese", "filipino",
        "german", "english", "french", "norwegian", "american",
        "indian", "dutch", "russian", "scottish", "italian")
-mac_neg <- mac(glove_sweeney, S, A = bing_neg)
+## The same
+## mac_neg <- mac(glove_sweeney, S, A = bing_neg)
+mac_neg <- query(glove_sweeney, S = S, A = bing_neg)
 sort(mac_neg$P)
 ```
 
@@ -105,19 +107,21 @@ B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
 
-garg_f1 <- rnd(googlenews, S, A, B)
+## The same
+## garg_f1 <- rnd(googlenews, S, A, B)
+garg_f1 <- query(googlenews, S = S, A = A, B = B)
 ```
 
-Words such as "nurse", "midwife" and "librarian" are more associated with female, as indicated by the positive relative norm distance.
+The function `plot_bias` can be used to plot the bias of each word in S. Words such as "nurse", "midwife" and "librarian" are more associated with female, as indicated by the positive relative norm distance.
 
-```{r}
-sort(garg_f1$P, decreasing = TRUE)
+```{r rndplot, fig.height = 12}
+plot_bias(garg_f1)
 ```
 
 The effect size is simply the sum of all relative norm distance values (Equation 3 in Garg et al. 2018). The more positive value indicates that words in S are more associated with `B`. As the effect size is negative, it indicates that the concept of occupation is more associated with `A`, i.e. male.
 
 ```{r}
-rnd_es(garg_f1)
+calculate_es(garg_f1)
 ```
 
 ## Example: SemAxis
@@ -134,7 +138,7 @@ reddit <- readRDS("./raw_data/reddit.RDS")
 S <- c("mexicans", "asians", "whites", "blacks", "latinos")
 A <- c("respect")
 B <- c("disrespect")
-res <- semaxis(reddit, S, A, B, l = 1)
+res <- query(reddit, S = S, A = A, B = B, method = "semaxis", l = 1)
 res$P
 ```
 
@@ -146,13 +150,13 @@ This analysis attempts to reproduce the analysis in Sweeney & Najafian (2019). P
 S <- c("swedish", "irish", "mexican", "chinese", "filipino",
        "german", "english", "french", "norwegian", "american",
        "indian", "dutch", "russian", "scottish", "italian")
-sn <- rnsb(glove_sweeney, S, bing_pos, bing_neg)
+sn <- query(glove_sweeney, S = S, A = bing_pos, B = bing_neg, method = "rnsb")
 ```
 
 The analysis shows that `indian`, `mexican`, and `russian` are more likely to be associated with negative sentiment.
 
-```{r}
-sort(sn$P)
+```{r rnsbplot}
+plot_bias(sn)
 ```
 
 The effect size from the analysis is the Kullback–Leibler divergence of P from the uniform distribution. It is extremely close to the value reported in the original paper (0.6225).
@@ -174,30 +178,30 @@ newsmap_europe
 
 Country-level analysis
 
-```{r}
+```{r rnsb2, fig.height = 10}
 country_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 2)
-sort(country_level$P)
+plot_bias(country_level)
 ```
 
 Region-level analysis
 
-```{r}
+```{r rnsb3}
 region_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 1)
-sort(region_level$P)
+plot_bias(region_level)
 ```
 
 Comparison of the two effect sizes. Please note the much smaller effect size from region-level analysis. It reflects the evener distribution of P acorss regions than across countries.
 
 ```{r}
-rnsb_es(country_level)
-rnsb_es(region_level)
+calculate_es(country_level)
+calculate_es(region_level)
 ```
 
 ## Example: Normalized Association Score
 
 Normalized Association Score (Caliskan et al., 2017) is similar to Relative Norm Distance above. Please note that `T` is not required.
 
-```{r}
+```{r nasplot, fig.height = 12}
 S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
 "photographer", "geologist", "shoemaker", "athlete", "cashier", 
 "dancer", "housekeeper", "accountant", "physicist", "gardener", 
@@ -220,8 +224,8 @@ B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
 
-nas_f1 <- nas(googlenews, S, A, B)
-sort(nas_f1$P, decreasing = TRUE)
+nas_f1 <- query(googlenews, S = S, A = A, B = B, method = "nas")
+plot_bias(nas_f1)
 ```
 
 There is a very strong correlation between NAS and RND.
@@ -241,10 +245,10 @@ S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "n
 T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
 A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
 B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sw <- weat(glove_math, S, T, A, B)
+sw <- query(glove_math, S, T, A, B)
 
 # extraction of effect size
-weat_es(sw)
+calculate_es(sw)
 ```
 
 ## A note about the effect size
@@ -254,7 +258,8 @@ By default, the effect size from the function `weat_es` is adjusted by the poole
 One can also get the unstandardized version (aka. test statistic in the original paper):
 
 ```{r}
-weat_es(sw, standardize = FALSE)
+## weat_es
+calculate_es(sw, standardize = FALSE)
 ```
 
 The original implementation assumes equal size of `S` and `T`. This assumption can be relaxed by pooling the standard deviaion with sample size adjustment. The function `weat_es` does it when `S` and `T` are of different length.
