@@ -56,3 +56,6 @@ plot_bias(garg_f1)
 \seealso{
 \code{\link[=weat]{weat()}}, \code{\link[=mac]{mac()}}, \code{\link[=nas]{nas()}}, \code{\link[=semaxis]{semaxis()}}, \code{\link[=rnsb]{rnsb()}}, \code{\link[=rnd]{rnd()}}
 }
+\author{
+Chung-hong Chan
+}

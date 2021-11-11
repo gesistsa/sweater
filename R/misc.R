@@ -69,3 +69,29 @@ plot_bias <- function(x) {
     sortedx <- sort(x$P)
     graphics::dotchart(sortedx, labels = names(sortedx))
 }
+
+.purify_class <- function(x) {
+    setdiff(class(x), c("list", "sweater"))[1]
+}
+
+#' Calculate the effect size of a query
+#'
+#' This function calculates the effect of a query.
+#' @param x an S3 object return from a query, either by the function [query()] or underlying functions such as [mac()]
+#' @param ... additional parameters for the effect size functions
+#' @return the effect size
+#' @author Chung-hong Chan
+#' @seealso [weat_es()], [mac_es()], [rnd_es()], [rnsb_es()] 
+#' @export
+calculate_es <- function(x, ...) {
+    if (!"sweater" %in% class(x)) {
+        stop("The input object x must be a sweater S3 object.")
+    }
+    class_x <- .purify_class(x)
+    switch(class_x,
+           "weat" = weat_es(x, ...),
+           "mac" = mac_es(x),
+           "rnd" = rnd_es(x),
+           "rnsb" = rnsb_es(x),
+           stop("No effect size can be calculated for this query."))
+}
