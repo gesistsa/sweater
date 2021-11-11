@@ -27,7 +27,7 @@
 #'
 #' This function makes a query based on the supplied parameters.
 #' @param ... additional parameters for the underlying function
-#' @param guess string, the method to be used to make the query. Available options are: `weat`, `mac`, `nas`, `semaxis`, `rnsb`, `rnd`, and `guess`. If `guess`, the function selects the best option for you. 
+#' @param method string, the method to be used to make the query. Available options are: `weat`, `mac`, `nas`, `semaxis`, `rnsb`, `rnd`, and `guess`. If `guess`, the function selects the best option for you. 
 #' @inheritParams weat
 #' @return a sweater S3 object
 #' @seealso [weat()], [mac()], [nas()], [semaxis()], [rnsb()], [rnd()]
