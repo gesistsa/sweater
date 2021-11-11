@@ -17,7 +17,7 @@ query(w, S, T, A, B, method = "guess", verbose = FALSE, ...)
 
 \item{B}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 
-\item{method}{string, the method to be used to make the query. Available options are: \code{weat}, \code{mac}, \code{nas}, \code{semaxis}, \code{rnsb}, \code{rnd}, and \code{guess}. If \code{guess}, the function selects the best option for you.}
+\item{method}{string, the method to be used to make the query. Available options are: \code{weat}, \code{mac}, \code{nas}, \code{semaxis}, \code{rnsb}, \code{rnd}, \code{nas} and \code{guess}. If \code{guess}, the function selects the best option for you.}
 
 \item{verbose}{logical, whether to display information}
 
@@ -54,5 +54,5 @@ garg_f1 <- query(googlenews, S = S, A = A, B = B)
 plot_bias(garg_f1)
 }
 \seealso{
-\code{\link[=weat]{weat()}}, \code{\link[=mac]{mac()}}, \code{\link[=nas]{nas()}}, \code{\link[=semaxis]{semaxis()}}, \code{\link[=rnsb]{rnsb()}}, \code{\link[=rnd]{rnd()}}
+\code{\link[=weat]{weat()}}, \code{\link[=mac]{mac()}}, \code{\link[=nas]{nas()}}, \code{\link[=semaxis]{semaxis()}}, \code{\link[=rnsb]{rnsb()}}, \code{\link[=rnd]{rnd()}}, \code{\link[=nas]{nas()}}
 }

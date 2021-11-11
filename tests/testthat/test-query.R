@@ -35,6 +35,7 @@ test_that("guessing and integration with query", {
     expect_equal("weat", .guess(w = googlenews, S = S, T = T, A = A, B = B, method = "weat"))
     expect_equal("rnd", .guess(w = googlenews, S = S, T = T, A = A, B = B, method = "rnd"))
     expect_equal("rnsb", .guess(w = googlenews, S = S, T = T, A = A, B = B, method = "rnsb"))
+    expect_equal("nas", .guess(w = googlenews, S = S, T = T, A = A, B = B, method = "nas"))
     expect_true("mac" %in% class(query(w = googlenews, S = S, A = A)))
     expect_true("mac" %in% class(query(w = googlenews, S = S, A = A, method = "mac")))
     expect_true("rnd" %in% class(query(w = googlenews, S = S, A = A, B = B)))
@@ -45,4 +46,5 @@ test_that("guessing and integration with query", {
     expect_true("weat" %in% class(query(w = googlenews, S = S, T = T, A = A, B = B, method = "weat")))
     expect_true("rnd" %in% class(query(w = googlenews, S = S, T = T, A = A, B = B, method = "rnd")))
     expect_true("rnsb" %in% class(query(w = googlenews, S = S, T = T, A = A, B = B, method = "rnsb")))
+    expect_true("nas" %in% class(query(w = googlenews, S = S, T = T, A = A, B = B, method = "nas")))
 })
