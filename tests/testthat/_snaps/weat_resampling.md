@@ -30,3 +30,16 @@
       0.02486533 
       
 
+# exact
+
+    Code
+      weat_exact(sw2)
+    Output
+      
+      	The exact test in Caliskan et al. (2017)
+      
+      data:  sw2
+      p-value < 2.2e-16
+      alternative hypothesis: greater
+      
+

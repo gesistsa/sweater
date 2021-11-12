@@ -97,7 +97,9 @@ weat_exact <- function(x) {
         warning("Exact test would take a long time. Use sweater_resampling or sweater_boot (to be implemented) instead.")
     }
     p_value <- .exact_test(S_diff, T_diff)
-    return(p_value)
+    res <- list(null.value = NULL, alternative = "greater", method = "The exact test in Caliskan et al. (2017)", estimate = NULL, data.name = deparse(substitute(x)), statistic = NULL, p.value = p_value)
+    class(res) <- "htest"
+    return(res)
 }
 
 #' Test of significance for WEAT
