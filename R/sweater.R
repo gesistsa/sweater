@@ -140,7 +140,7 @@ weat_resampling <- function(x, n_resampling = 9999) {
     attr(null_value, "names") <- "bias"
     para <- null_value
     attr(null_value, "names") <- "bias"
-    res <- list(null.value = null_value, alternative = "greater", method = "Resampling approximation of the exact test in Caliskan et al. (2017)", estimate = test_stat, data.name = deparse(substitute(sweater_obj)), statistic = test_stat, p.value = p)
+    res <- list(null.value = null_value, alternative = "greater", method = "Resampling approximation of the exact test in Caliskan et al. (2017)", estimate = test_stat, data.name = deparse(substitute(x)), statistic = test_stat, p.value = p)
     class(res) <- "htest"
     return(res)
 }

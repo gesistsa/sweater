@@ -15,3 +15,9 @@ test_that("resampling", {
     exp <- 0.018 #from Caliskan paper
     expect_true(abs(res$p.value - exp) < tol)
 })
+
+test_that("Display mistake", {
+    expect_snapshot(weat_resampling(sw))
+    whatever <- sw
+    expect_snapshot(weat_resampling(whatever))
+})
