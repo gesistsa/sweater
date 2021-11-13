@@ -128,18 +128,14 @@ calculate_es(garg_f1)
 
 This analysis attempts to reproduce the analysis in An et al. (2018). Please note that `T` is not required.
 
-You may obtain the word2vec word vectors trained with Trump supporters Reddit from [here](https://github.com/ghdi6758/SemAxis).
+You may obtain the word2vec word vectors trained with Trump supporters Reddit from [here](https://github.com/ghdi6758/SemAxis). This package provides a tiny version of the data `small_reddit` for reproducing the analysis.
 
-```{r, include = FALSE}
-reddit <- readRDS("./raw_data/reddit.RDS")
-```
-
-```{r}
+```{r semxaxisplot}
 S <- c("mexicans", "asians", "whites", "blacks", "latinos")
 A <- c("respect")
 B <- c("disrespect")
-res <- query(reddit, S = S, A = A, B = B, method = "semaxis", l = 1)
-res$P
+res <- query(small_reddit, S = S, A = A, B = B, method = "semaxis", l = 1)
+plot_bias(res)
 ```
 
 ## Example: Relative Negative Sentiment Bias

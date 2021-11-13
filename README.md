@@ -171,17 +171,19 @@ This analysis attempts to reproduce the analysis in An et al. (2018).
 Please note that `T` is not required.
 
 You may obtain the word2vec word vectors trained with Trump supporters
-Reddit from [here](https://github.com/ghdi6758/SemAxis).
+Reddit from [here](https://github.com/ghdi6758/SemAxis). This package
+provides a tiny version of the data `small_reddit` for reproducing the
+analysis.
 
 ``` r
 S <- c("mexicans", "asians", "whites", "blacks", "latinos")
 A <- c("respect")
 B <- c("disrespect")
-res <- query(reddit, S = S, A = A, B = B, method = "semaxis", l = 1)
-res$P
-#>    mexicans      asians      whites      blacks     latinos 
-#> -0.16402445 -0.10867685 -0.10599096 -0.07974000 -0.04583781
+res <- query(small_reddit, S = S, A = A, B = B, method = "semaxis", l = 1)
+plot_bias(res)
 ```
+
+<img src="man/figures/README-semxaxisplot-1.png" width="100%" />
 
 ## Example: Relative Negative Sentiment Bias
 
@@ -437,7 +439,7 @@ weat_resampling(sw)
 #> 
 #>  Resampling approximation of the exact test in Caliskan et al. (2017)
 #> 
-#> data:  sweater_obj
+#> data:  sw
 #> bias = 0.024865, p-value = 0.0171
 #> alternative hypothesis: true bias is greater than 7.245425e-05
 #> sample estimates:

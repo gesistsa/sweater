@@ -1,9 +1,12 @@
-.soften <- function(word, w, l = 3) {
+.soften <- function(word, w, l = 3, return_k = FALSE) {
     if (l == 0) {
         return(w[word, , drop = TRUE])
     } 
     sim_res <- text2vec::sim2(x = w, y = w[word, , drop = FALSE], method = "cosine", norm = "l2")
     goodk <- head(sort(sim_res[,1], decreasing = TRUE), l + 1)
+    if (return_k) {
+        return(goodk)
+    }
     apply(w[names(goodk), ], 2, mean, na.rm = TRUE)
 }
 
@@ -45,3 +48,12 @@ semaxis <- function(w, S, A, B, l = 0, verbose = FALSE) {
     class(res) <- append(class(res), c("semaxis", "sweater"))
     return(res)
 }
+
+
+#' A subset of the pretrained word2vec word vectors on Reddit
+#'
+#' This is a subset of the pretrained word2vec word vectors on Reddit provided by An et al. (2018). With this dataset, you can try with the "l" parameter of [semaxis()] up to 10.
+#' 
+#' @references
+#' An, J., Kwak, H., & Ahn, Y. Y. (2018). SemAxis: A lightweight framework to characterize domain-specific word semantics beyond sentiment. arXiv preprint arXiv:1806.05521.
+"small_reddit"
