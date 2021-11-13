@@ -90,33 +90,7 @@ al. (2020).
 ``` r
 require(sweater)
 #> Loading required package: sweater
-#> 
-#> Attaching package: 'sweater'
-#> The following object is masked _by_ '.GlobalEnv':
-#> 
-#>     googlenews
 
-S <- c("swedish", "irish", "mexican", "chinese", "filipino",
-       "german", "english", "french", "norwegian", "american",
-       "indian", "dutch", "russian", "scottish", "italian")
-## The same
-## mac_neg <- mac(glove_sweeney, S, A = bing_neg)
-mac_neg <- query(glove_sweeney, S = S, A = bing_neg)
-sort(mac_neg$P)
-#>    scottish   norwegian       dutch     swedish       irish      indian 
-#> -0.05503365 -0.04837842 -0.04686386 -0.04520747 -0.04347593 -0.04325103 
-#>     english     italian    american      german      french    filipino 
-#> -0.04187256 -0.04145709 -0.04112830 -0.04045438 -0.03885260 -0.03559971 
-#>     mexican     chinese     russian 
-#> -0.03193020 -0.02910324 -0.02581414
-```
-
-## Example: Relative Norm Distance
-
-This analysis reproduces the analysis in Garg et al (2018), namely
-Figure 1. Please note that `T` is not required.
-
-``` r
 S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
 "photographer", "geologist", "shoemaker", "athlete", "cashier", 
 "dancer", "housekeeper", "accountant", "physicist", "gardener", 
@@ -131,9 +105,55 @@ S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
 "farmer", "clerk", "manager", "guard", "artist", "smith", "official", 
 "police", "doctor", "professor", "student", "judge", "teacher", 
 "author", "secretary", "soldier")
+
 A <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
 "male", "brother", "sons", "fathers", "men", "boys", "males", 
 "brothers", "uncle", "uncles", "nephew", "nephews")
+
+## The same
+## mac_neg <- mac(glove_sweeney, S, A = bing_neg)
+mac_neg <- query(googlenews, S = S, A = A)
+sort(mac_neg$P)
+#>         sales      designer     economist       manager      clerical 
+#>  -0.002892495   0.039197285   0.046155954   0.047322071   0.048912403 
+#>      operator administrator        author    auctioneer        tailor 
+#>   0.050275206   0.050319552   0.051470909   0.065440629   0.074771460 
+#>     secretary     librarian     scientist  statistician         pilot 
+#>   0.077506781   0.079040760   0.082535536   0.088000351   0.088337791 
+#>     geologist      official     architect        broker     professor 
+#>   0.088567238   0.090706054   0.091598653   0.098761198   0.101847166 
+#>      engineer     collector         smith       chemist      surveyor 
+#>   0.103448025   0.104596505   0.104956871   0.110798023   0.112098241 
+#>     inspector        weaver     physicist       midwife    supervisor 
+#>   0.112383017   0.113221694   0.114302092   0.115791724   0.118784135 
+#>     physician        artist     conductor        clergy         guard 
+#>   0.118990813   0.119571390   0.120602413   0.123313906   0.128804364 
+#>    accountant    instructor         judge    postmaster         nurse 
+#>   0.131700192   0.133135210   0.135238197   0.138497652   0.143781092 
+#>          cook     attendant       sheriff        dancer  photographer 
+#>   0.145019382   0.149134946   0.149992633   0.150637430   0.151388282 
+#>  psychologist       cashier       surgeon mathematician       retired 
+#>   0.151908676   0.153591372   0.158348402   0.158969004   0.165010593 
+#>         clerk       student        porter      gardener       dentist 
+#>   0.165903226   0.167006052   0.172551327   0.173346664   0.174776368 
+#>       teacher       athlete       bailiff       painter        driver 
+#>   0.175027901   0.176353551   0.176440157   0.176625091   0.181269327 
+#>         baker     shoemaker        lawyer    blacksmith        farmer 
+#>   0.183320490   0.183548112   0.189963886   0.198764788   0.199243319 
+#>         mason        police   housekeeper        sailor      musician 
+#>   0.203577329   0.206264491   0.208280255   0.208689761   0.219184802 
+#>       janitor      mechanic        doctor       soldier       laborer 
+#>   0.220953800   0.224008333   0.226657160   0.238053858   0.251032714 
+#>     carpenter 
+#>   0.259775292
+```
+
+## Example: Relative Norm Distance
+
+This analysis reproduces the analysis in Garg et al (2018), namely
+Figure 1. Please note that `T` is not required.
+
+``` r
 B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
 "herself", "female", "sister", "daughters", "mothers", "women", 
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
@@ -190,7 +210,16 @@ plot_bias(res)
 This analysis attempts to reproduce the analysis in Sweeney & Najafian
 (2019). Please note that `T` is not required.
 
+Please note that the datasets `glove_sweeney`, `bing_pos` and `bing_neg`
+are not included in the package. If you are interested in reproducing
+the analysis, the 3 datasets are available from
+[here](https://github.com/chainsawriot/sweater/tree/master/tests/testdata).
+
 ``` r
+load("tests/testdata/bing_neg.rda")
+load("tests/testdata/bing_pos.rda")
+load("tests/testdata/glove_sweeney.rda")
+
 S <- c("swedish", "irish", "mexican", "chinese", "filipino",
        "german", "english", "french", "norwegian", "american",
        "indian", "dutch", "russian", "scottish", "italian")
@@ -220,12 +249,18 @@ rnsb_es(sn)
 `rnsb` supports quanteda dictionary as `S`. `rnd` and `weat` will
 support it later.
 
+This analysis uses the data from
+[here](https://github.com/chainsawriot/sweater/tree/master/tests/testdata).
+
 For example, `newsmap_europe` is an abridged dictionary from the package
 newsmap (Watanabe, 2018). The dictionary contains keywords of European
 countries and has two levels: regional level (e.g. Eastern Europe) and
 country level (e.g. Germany).
 
 ``` r
+load("tests/testdata/newsmap_europe.rda")
+load("tests/testdata/dictionary_demo.rda")
+
 require(quanteda)
 #> Loading required package: quanteda
 #> Package version: 3.1.0
@@ -296,7 +331,7 @@ newsmap_europe
 Country-level analysis
 
 ``` r
-country_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 2)
+country_level <- rnsb(dictionary_demo, newsmap_europe, bing_pos, bing_neg, levels = 2)
 plot_bias(country_level)
 ```
 
@@ -305,7 +340,7 @@ plot_bias(country_level)
 Region-level analysis
 
 ``` r
-region_level <- rnsb(googlenews, newsmap_europe, bing_pos, bing_neg, levels = 1)
+region_level <- rnsb(dictionary_demo, newsmap_europe, bing_pos, bing_neg, levels = 1)
 plot_bias(region_level)
 ```
 
