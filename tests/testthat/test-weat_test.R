@@ -34,3 +34,8 @@ sw2 <- weat(glove_math, S, T, A, B)
 test_that("exact", {
     expect_snapshot(weat_exact(sw2))
 })
+
+test_that("exact., reverse", {
+    sw3 <- weat(glove_math, T, S, A, B)
+    expect_snapshot(weat_exact(sw3))
+})

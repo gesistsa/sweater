@@ -43,3 +43,16 @@
       alternative hypothesis: greater
       
 
+# exact., reverse
+
+    Code
+      weat_exact(sw3)
+    Output
+      
+      	The exact test in Caliskan et al. (2017)
+      
+      data:  sw3
+      p-value = 0.001389
+      alternative hypothesis: greater
+      
+
