@@ -5,3 +5,5 @@
 ^paper/
 ^\.github$
 ^codecov\.yml$
+tests/testdata/dictionary_demo\.rda$
+tests/testdata/glove_sweeney\.rda$

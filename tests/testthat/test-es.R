@@ -45,6 +45,7 @@ test_that("RND ES calc, garg", {
 
 test_that("RNSB ES Calc", {
     skip_on_cran()
+    skip_if_not(file.exists("../testdata/glove_sweeney.rda"))
     load("../testdata/glove_sweeney.rda")
     load("../testdata/bing_pos.rda")
     load("../testdata/bing_neg.rda")

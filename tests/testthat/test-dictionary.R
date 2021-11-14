@@ -2,6 +2,7 @@
 
 test_that("RNSB Dict demo", {
     skip_on_cran()
+    skip_if_not(file.exists("../testdata/dictionary_demo.rda"))
     load("../testdata/newsmap_europe.rda")
     load("../testdata/dictionary_demo.rda")
     load("../testdata/bing_pos.rda")
