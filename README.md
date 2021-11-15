@@ -50,7 +50,7 @@ All tests depend on two types of words. The first type, namely, `S` and
 `T`, is *target words* (or *neutral words* in Garg et al). These are
 words that **should** have no bias. For instance, the words such as
 “nurse” and “professor” can be used as target words to study the
-gender bias in word embeddings. One can also seperate these words into
+gender bias in word embeddings. One can also separate these words into
 two sets, `S` and `T`, to group words by their perceived bias. For
 example, Caliskan et al. (2017) grouped target words into two groups:
 mathematics (“math”, “algebra”, “geometry”, “calculus”, “equations”,
@@ -67,7 +67,7 @@ attribute words because we know they are related to a certain gender.
 
 It is recommended to use the function `query()` to make a query and
 `calculate_es()` to calculate the effect size. You can also use the
-inidividual functions below.
+functions listed below.
 
 ## Available methods
 
@@ -348,7 +348,7 @@ plot_bias(region_level)
 
 Comparison of the two effect sizes. Please note the much smaller effect
 size from region-level analysis. It reflects the evener distribution of
-P acorss regions than across countries.
+P across regions than across countries.
 
 ``` r
 calculate_es(country_level)
@@ -466,7 +466,7 @@ But it takes a long time to calculate.
 weat_exact(sw)
 ```
 
-Instead, please use the resampling approximaton of the exact test. The
+Instead, please use the resampling approximation of the exact test. The
 p-value is very close to the reported 0.018.
 
 ``` r
