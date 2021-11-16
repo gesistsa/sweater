@@ -8,3 +8,5 @@
 tests/testdata/dictionary_demo\.rda$
 tests/testdata/glove_sweeney\.rda$
 ^CODE_OF_CONDUCT\.md$
+^CRAN-RELEASE$
+^cran-comments\.md$

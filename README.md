@@ -7,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/chainsawriot/sweater/workflows/R-CMD-check/badge.svg)](https://github.com/chainsawriot/sweater/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/chainsawriot/sweater/branch/master/graph/badge.svg)](https://codecov.io/gh/chainsawriot/sweater?branch=master)
+coverage](https://codecov.io/gh/chainsawriot/sweater/branch/master/graph/badge.svg)](https://app.codecov.io/gh/chainsawriot/sweater?branch=master)
 <!-- badges: end -->
 
 The goal of sweater (**S**peedy **W**ord **E**mbedding **A**ssociation
