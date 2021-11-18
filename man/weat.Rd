@@ -4,30 +4,30 @@
 \alias{weat}
 \title{Speedy Word Embedding Association Test}
 \usage{
-weat(w, S, T, A, B, verbose = FALSE)
+weat(w, S_words, T_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
 \item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
 
-\item{S}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
+\item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
-\item{T}{a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...}
+\item{T_words}{a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...}
 
-\item{A}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
+\item{A_words}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
 
-\item{B}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
+\item{B_words}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 
 \item{verbose}{logical, whether to display information}
 }
 \value{
 A list with class \code{"weat"} containing the following components:
 \describe{
-\item{\code{$S_diff}}{for each of words in S, mean of the mean differences in cosine similarity between words in A and words in B}
-\item{\code{$T_diff}}{for each of words in T, mean of the mean differences in cosine similarity between words in A and words in B}
-\item{\code{$S}}{the input S}
-\item{\code{$T}}{the input T}
-\item{\code{$A}}{the input A}
-\item{\code{$B}}{the input B}
+\item{\code{$S_diff}}{for each of words in S_words, mean of the mean differences in cosine similarity between words in A_words and words in B_words}
+\item{\code{$T_diff}}{for each of words in T_words, mean of the mean differences in cosine similarity between words in A_words and words in B_words}
+\item{\code{$S_words}}{the input S_words}
+\item{\code{$T_words}}{the input T_words}
+\item{\code{$A_words}}{the input A_words}
+\item{\code{$B_words}}{the input B_words}
 }
 \code{\link{weat_es}} can be used to obtain the effect size of the test; \code{\link{weat_resampling}} for a test of significance.
 }
@@ -37,11 +37,12 @@ This functions test the bias in a set of word embeddings using the method by Cal
 \examples{
 # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 data(glove_math)
-S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sw <- weat(glove_math, S, T, A, B)
+S1 <- c("math", "algebra", "geometry", "calculus", "equations",
+"computation", "numbers", "addition")
+T1 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+sw <- weat(glove_math, S1, T1, A1, B1)
 weat_es(sw)
 }
 \references{

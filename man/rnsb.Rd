@@ -4,16 +4,16 @@
 \alias{rnsb}
 \title{Relative Negative Sentiment Bias}
 \usage{
-rnsb(w, S, A, B, levels = 1, verbose = FALSE)
+rnsb(w, S_words, A_words, B_words, levels = 1, verbose = FALSE)
 }
 \arguments{
 \item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
 
-\item{S}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
+\item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
-\item{A}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
+\item{A_words}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
 
-\item{B}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
+\item{B_words}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 
 \item{levels}{levels of entries in a hierarchical dictionary that will be applied (see quanteda::dfm_lookup)}
 
@@ -23,10 +23,10 @@ rnsb(w, S, A, B, levels = 1, verbose = FALSE)
 A list with class \code{"rnsb"} containing the following components:
 \describe{
 \item{\code{$classifer}}{ a logistic regression model with L2 regularization trained with LiblineaR}
-\item{\code{$A}}{the input A}
-\item{\code{$B}}{the input B}
-\item{\code{$S}}{the input S}
-\item{\code{$P}}{the predicted negative sentiment probabilities}
+\item{\code{$A_words}}{the input A_words}
+\item{\code{$B_words}}{the input B_words}
+\item{\code{$S_words}}{the input S_words}
+\item{\code{$P_words}}{the predicted negative sentiment probabilities}
 }
 \code{\link{rnsb_es}} can be used to obtain the effect size of the test.
 }
@@ -35,7 +35,7 @@ This function estimate the Relative Negative Sentiment Bias (RNSB) of word embed
 }
 \examples{
 data(googlenews)
-S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
+S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
 "photographer", "geologist", "shoemaker", "athlete", "cashier", "dancer",
 "housekeeper", "accountant", "physicist", "gardener", "dentist", "weaver",
 "blacksmith", "psychologist", "supervisor", "mathematician", "surveyor",
@@ -48,13 +48,13 @@ S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
 "physician", "farmer", "clerk", "manager", "guard", "artist", "smith",
 "official", "police", "doctor", "professor", "student", "judge",
 "teacher", "author", "secretary", "soldier")
-A <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
+A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 "male", "brother", "sons", "fathers", "men", "boys", "males", "brothers",
 "uncle", "uncles", "nephew", "nephews")
-B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
+B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 "herself", "female", "sister", "daughters", "mothers", "women", "girls",
 "females", "sisters", "aunt", "aunts", "niece", "nieces")
-garg_f1 <- rnsb(googlenews, S, A, B)
+garg_f1 <- rnsb(googlenews, S1, A1, B1)
 plot_bias(garg_f1)
 }
 \references{

@@ -4,16 +4,16 @@
 \alias{nas}
 \title{Calculate Normalized Association Score}
 \usage{
-nas(w, S, A, B, verbose = FALSE)
+nas(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
 \item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
 
-\item{S}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
+\item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
-\item{A}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
+\item{A_words}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
 
-\item{B}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
+\item{B_words}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 
 \item{verbose}{logical, whether to display information}
 }
@@ -22,9 +22,9 @@ A list with class \code{"nas"} containing the following components:
 \describe{
 \item{\code{$P}}{a vector of normalized association score for every word in S}
 \item{\code{$raw}}{a list of raw results used for calculating normalized association scores}
-\item{\code{$S}}{the input S}
-\item{\code{$A}}{the input A}
-\item{\code{$B}}{the input B}
+\item{\code{$S_words}}{the input S_words}
+\item{\code{$A_words}}{the input A_words}
+\item{\code{$B_words}}{the input B_words}
 }
 }
 \description{

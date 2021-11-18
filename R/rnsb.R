@@ -7,15 +7,15 @@
 #' @return A list with class \code{"rnsb"} containing the following components:
 #' \describe{
 #' \item{\code{$classifer}}{ a logistic regression model with L2 regularization trained with LiblineaR}
-#' \item{\code{$A}}{the input A}
-#' \item{\code{$B}}{the input B}
-#' \item{\code{$S}}{the input S}
-#' \item{\code{$P}}{the predicted negative sentiment probabilities}
+#' \item{\code{$A_words}}{the input A_words}
+#' \item{\code{$B_words}}{the input B_words}
+#' \item{\code{$S_words}}{the input S_words}
+#' \item{\code{$P_words}}{the predicted negative sentiment probabilities}
 #' }
 #' \code{\link{rnsb_es}} can be used to obtain the effect size of the test.
 #' @examples
 #' data(googlenews)
-#' S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
+#' S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
 #' "photographer", "geologist", "shoemaker", "athlete", "cashier", "dancer",
 #' "housekeeper", "accountant", "physicist", "gardener", "dentist", "weaver",
 #' "blacksmith", "psychologist", "supervisor", "mathematician", "surveyor",
@@ -28,43 +28,44 @@
 #' "physician", "farmer", "clerk", "manager", "guard", "artist", "smith",
 #' "official", "police", "doctor", "professor", "student", "judge",
 #' "teacher", "author", "secretary", "soldier")
-#' A <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
+#' A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 #' "male", "brother", "sons", "fathers", "men", "boys", "males", "brothers",
 #' "uncle", "uncles", "nephew", "nephews")
-#' B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
+#' B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 #' "herself", "female", "sister", "daughters", "mothers", "women", "girls",
 #' "females", "sisters", "aunt", "aunts", "niece", "nieces")
-#' garg_f1 <- rnsb(googlenews, S, A, B)
+#' garg_f1 <- rnsb(googlenews, S1, A1, B1)
 #' plot_bias(garg_f1)
 #' @author Chung-hong Chan
 #' @references
 #' Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 #' @export
-rnsb <- function(w, S, A, B, levels = 1, verbose = FALSE) {
+rnsb <- function(w, S_words, A_words, B_words, levels = 1, verbose = FALSE) {
     ## Cleaning
     w_lab <- rownames(w)
-    A <- .clean(A, w_lab, verbose = verbose)
-    B <- .clean(B, w_lab, verbose = verbose)
-    feature_matrix <- w[w_lab %in% c(A, B),,drop = FALSE]
+    A_cleaned <- .clean(A_words, w_lab, verbose = verbose)
+    B_cleaned <- .clean(B_words, w_lab, verbose = verbose)
+    feature_matrix <- w[w_lab %in% c(A_cleaned, B_cleaned),,drop = FALSE]
     colnames(feature_matrix) <- paste("f", seq_len(ncol(feature_matrix)), sep = "")
-    label <- as.numeric(rownames(feature_matrix) %in% B)
+    label <- as.numeric(rownames(feature_matrix) %in% B_cleaned)
     classifier <- LiblineaR::LiblineaR(data = feature_matrix, target = label, type = 0, epsilon = 1e-4)
-    if ("dictionary2" %in% class(S)) {
-        flist <- quanteda::as.list(S, levels = levels, flatten = TRUE)
+    if ("dictionary2" %in% class(S_words)) {
+        flist <- quanteda::as.list(S_words, levels = levels, flatten = TRUE)
         flist_regex <- purrr::map_chr(flist, .convert_globs)
         flist_words <- purrr::map(flist_regex, .find_words, input_words = rownames(w))
         flist_probs <- purrr::map(flist_words, .words_pred, w = w, classifier = classifier)
         f_star <- purrr::map_dbl(flist_probs, mean)
+        S_cleaned <- S_words
     } else {
         ## Cleaning
-        S <- .clean(S, w_lab, verbose = verbose)
-        newdata <- w[S,,drop = FALSE]
+        S_cleaned <- .clean(S_words, w_lab, verbose = verbose)
+        newdata <- w[S_cleaned,,drop = FALSE]
         colnames(newdata) <- paste("f", seq_len(ncol(newdata)), sep = "")
         f_star <- predict(classifier, newdata, proba = TRUE)$probabilities[,2]
-        names(f_star) <- S
+        names(f_star) <- S_cleaned
     }
     P <- f_star / sum(f_star, na.rm = TRUE)
-    res <- list(classifier = classifier, A = A, B = B, S = S, P = P)
+    res <- list(classifier = classifier, A_words = A_cleaned, B = B_cleaned, S = S_cleaned, P = P)
     class(res) <- append(class(res), c("sweater", "rnsb"))
     return(res)
 }

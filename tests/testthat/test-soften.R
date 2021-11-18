@@ -15,11 +15,11 @@ test_that(".soften", {
 
 ## integration
 test_that("integration", {
-    S <- c("mexicans", "asians", "whites", "blacks", "latinos")
-    A <- c("respect")
-    B <- c("disrespect")
-    x1 <- query(small_reddit, S = S, A = A, B = B, method = "semaxis", l = 0)
-    x2 <- query(small_reddit, S = S, A = A, B = B, method = "semaxis", l = 1)
+    S1 <- c("mexicans", "asians", "whites", "blacks", "latinos")
+    A1 <- c("respect")
+    B1 <- c("disrespect")
+    x1 <- query(small_reddit, S_words = S1, A_words = A1, B_words = B1, method = "semaxis", l = 0)
+    x2 <- query(small_reddit, S_words = S1, A_words = A1, B_words = B1, method = "semaxis", l = 1)
     expect_true(all(x1$P != x2$P))
     tol <- 0.0001
     mex_p <- x2$P["mexicans"]

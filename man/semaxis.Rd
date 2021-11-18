@@ -4,16 +4,16 @@
 \alias{semaxis}
 \title{Characterise word semantics using the SemAxis framework}
 \usage{
-semaxis(w, S, A, B, l = 0, verbose = FALSE)
+semaxis(w, S_words, A_words, B_words, l = 0, verbose = FALSE)
 }
 \arguments{
 \item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
 
-\item{S}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
+\item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
-\item{A}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
+\item{A_words}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
 
-\item{B}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
+\item{B_words}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 
 \item{l}{an integer indicates the number of words to augment each word in A and B based on cosine , see An et al (2018). Default to 0 (no augmentation).}
 
@@ -24,9 +24,9 @@ A list with class \code{"semaxis"} containing the following components:
 \describe{
 \item{\code{$P}}{for each of words in S, the score according to SemAxis}
 \item{\code{$V}}{the semantic axis vector}
-\item{\code{$S}}{the input S}
-\item{\code{$A}}{the input A}
-\item{\code{$B}}{the input B}
+\item{\code{$S_words}}{the input S_words}
+\item{\code{$A_words}}{the input A_words}
+\item{\code{$B_words}}{the input B_words}
 }
 }
 \description{
@@ -34,10 +34,11 @@ This function calculates the axis and the score using the SemAxis framework prop
 }
 \examples{
 data(glove_math)
-S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-semaxis(glove_math, S, A, B, l = 0)$P
+S1 <- c("math", "algebra", "geometry", "calculus", "equations",
+"computation", "numbers", "addition")
+A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+semaxis(glove_math, S1, A1, B1, l = 0)$P
 }
 \references{
 An, J., Kwak, H., & Ahn, Y. Y. (2018). SemAxis: A lightweight framework to characterize domain-specific word semantics beyond sentiment. arXiv preprint arXiv:1806.05521.

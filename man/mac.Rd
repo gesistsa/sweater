@@ -4,23 +4,23 @@
 \alias{mac}
 \title{Mean average cosine similarity}
 \usage{
-mac(w, S, A, verbose = FALSE)
+mac(w, S_words, A_words, verbose = FALSE)
 }
 \arguments{
 \item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
 
-\item{S}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
+\item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
-\item{A}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
+\item{A_words}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
 
 \item{verbose}{logical, whether to display information}
 }
 \value{
 A list with class \code{"rnd"} containing the following components:
 \describe{
-\item{\code{$P}}{a vector of cosine similarity values for every word in S}
-\item{\code{$S}}{the input S}
-\item{\code{$A}}{the input A}
+\item{\code{$P}}{a vector of cosine similarity values for every word in S_words}
+\item{\code{$S_words}}{the input S_words}
+\item{\code{$A_words}}{the input A_words}
 }
 \code{\link{mac_es}} can be used to obtain the effect size of the test.
 }
@@ -29,7 +29,7 @@ This function calculates the mean average cosine similarity (MAC) score proposed
 }
 \examples{
 data(googlenews)
-S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
+S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
 "photographer", "geologist", "shoemaker", "athlete", "cashier", "dancer",
 "housekeeper", "accountant", "physicist", "gardener", "dentist", "weaver",
 "blacksmith", "psychologist", "supervisor", "mathematician", "surveyor",
@@ -42,10 +42,10 @@ S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
 "physician", "farmer", "clerk", "manager", "guard", "artist", "smith",
 "official", "police", "doctor", "professor", "student", "judge", "teacher",
 "author", "secretary", "soldier")
-A <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
+A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 "male", "brother", "sons", "fathers", "men", "boys", "males", "brothers",
 "uncle", "uncles", "nephew", "nephews")
-x <- mac(googlenews, S, A)
+x <- mac(googlenews, S1, A1)
 x$P
 }
 \author{

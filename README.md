@@ -44,26 +44,28 @@ devtools::install_github("chainsawriot/sweater")
 
 All tests in this package use the concept of queries (see Badilla et
 al., 2020) to study the biases in the input word embeddings `w`. This
-package uses the “STAB” notation from Brunet et al (2019).
+package uses the “STAB” notation from Brunet et al (2019). \[1\]
 
-All tests depend on two types of words. The first type, namely, `S` and
-`T`, is *target words* (or *neutral words* in Garg et al). These are
-words that **should** have no bias. For instance, the words such as
-“nurse” and “professor” can be used as target words to study the
-gender bias in word embeddings. One can also separate these words into
-two sets, `S` and `T`, to group words by their perceived bias. For
-example, Caliskan et al. (2017) grouped target words into two groups:
-mathematics (“math”, “algebra”, “geometry”, “calculus”, “equations”,
-“computation”, “numbers”, “addition”) and arts (“poetry”, “art”,
-“dance”, “literature”, “novel”, “symphony”, “drama”, “sculpture”).
-Please note that also `T` is not always required.
+All tests depend on two types of words. The first type, namely,
+`S_words` and `T_words`, is *target words* (or *neutral words* in Garg
+et al). These are words that **should** have no bias. For instance, the
+words such as “nurse” and “professor” can be used as target words to
+study the gender bias in word embeddings. One can also separate these
+words into two sets, `S_words` and `T_words`, to group words by their
+perceived bias. For example, Caliskan et al. (2017) grouped target words
+into two groups: mathematics (“math”, “algebra”, “geometry”, “calculus”,
+“equations”, “computation”, “numbers”, “addition”) and arts (“poetry”,
+“art”, “dance”, “literature”, “novel”, “symphony”, “drama”,
+“sculpture”). Please note that also `T_words` is not always
+required.
 
-The second type, namely `A` and `B`, is *attribute words* (or *group
-words* in Garg et al). These are words with known properties in relation
-to the bias that one is studying. For example, Caliskan et al. (2017)
-used gender-related words such as “male”, “man”, “boy”, “brother”, “he”,
-“him”, “his”, “son” to study gender bias. These words qualify as
-attribute words because we know they are related to a certain gender.
+The second type, namely `A_words` and `B_words`, is *attribute words*
+(or *group words* in Garg et al). These are words with known properties
+in relation to the bias that one is studying. For example, Caliskan et
+al. (2017) used gender-related words such as “male”, “man”, “boy”,
+“brother”, “he”, “him”, “his”, “son” to study gender bias. These words
+qualify as attribute words because we know they are related to a certain
+gender.
 
 It is recommended to use the function `query()` to make a query and
 `calculate_es()` to calculate the effect size. You can also use the
@@ -71,15 +73,15 @@ functions listed below.
 
 ## Available methods
 
-| Target words | Attribution words | Method                                                      | functions                                             |
-| ------------ | ----------------- | ----------------------------------------------------------- | ----------------------------------------------------- |
-| S            | A                 | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac\_es()                                      |
-| S            | A, B              | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd\_es()                                      |
-| S            | A, B              | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb\_es()                                    |
-| S            | A, B              | SemAxis (An et al. 2018)                                    | semaxis()                                             |
-| S            | A, B              | Normalized Association Score (Caliskan et al. 2017)         | nas()                                                 |
-| S, T         | A, B              | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat\_es(), weat\_resampling(), weat\_exact() |
-| S, T         | A, B              | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                     |
+| Target words       | Attribution words  | Method                                                      | functions                                             |
+| ------------------ | ------------------ | ----------------------------------------------------------- | ----------------------------------------------------- |
+| S\_words           | A\_words           | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac\_es()                                      |
+| S\_words           | A\_words, B\_words | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd\_es()                                      |
+| S\_words           | A\_words, B\_words | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb\_es()                                    |
+| S\_words           | A\_words, B\_words | SemAxis (An et al. 2018)                                    | semaxis()                                             |
+| S\_words           | A\_words, B\_words | Normalized Association Score (Caliskan et al. 2017)         | nas()                                                 |
+| S\_words, T\_words | A\_words, B\_words | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat\_es(), weat\_resampling(), weat\_exact() |
+| S\_words, T\_words | A\_words, B\_words | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                     |
 
 ## Example: Mean Average Cosine Similarity
 
@@ -91,7 +93,7 @@ al. (2020).
 require(sweater)
 #> Loading required package: sweater
 
-S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
+S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
 "photographer", "geologist", "shoemaker", "athlete", "cashier", 
 "dancer", "housekeeper", "accountant", "physicist", "gardener", 
 "dentist", "weaver", "blacksmith", "psychologist", "supervisor", 
@@ -106,13 +108,11 @@ S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
 "police", "doctor", "professor", "student", "judge", "teacher", 
 "author", "secretary", "soldier")
 
-A <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
+A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
 "male", "brother", "sons", "fathers", "men", "boys", "males", 
 "brothers", "uncle", "uncles", "nephew", "nephews")
 
-## The same
-## mac_neg <- mac(glove_sweeney, S, A = bing_neg)
-mac_neg <- query(googlenews, S = S, A = A)
+mac_neg <- query(googlenews, S_words = S1, A_words = A1)
 sort(mac_neg$P)
 #>         sales      designer     economist       manager      clerical 
 #>  -0.002892495   0.039197285   0.046155954   0.047322071   0.048912403 
@@ -154,14 +154,12 @@ This analysis reproduces the analysis in Garg et al (2018), namely
 Figure 1. Please note that `T` is not required.
 
 ``` r
-B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
+B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
 "herself", "female", "sister", "daughters", "mothers", "women", 
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
 
-## The same
-## garg_f1 <- rnd(googlenews, S, A, B)
-garg_f1 <- query(googlenews, S = S, A = A, B = B)
+garg_f1 <- query(googlenews, S_words = S1, A_words = A1, B_words = B1)
 ```
 
 The function `plot_bias` can be used to plot the bias of each word in S.
@@ -196,10 +194,10 @@ provides a tiny version of the data `small_reddit` for reproducing the
 analysis.
 
 ``` r
-S <- c("mexicans", "asians", "whites", "blacks", "latinos")
-A <- c("respect")
-B <- c("disrespect")
-res <- query(small_reddit, S = S, A = A, B = B, method = "semaxis", l = 1)
+S2 <- c("mexicans", "asians", "whites", "blacks", "latinos")
+A2 <- c("respect")
+B2 <- c("disrespect")
+res <- query(small_reddit, S_words = S2, A_words = A2, B_words = B2, method = "semaxis", l = 1)
 plot_bias(res)
 ```
 
@@ -220,10 +218,10 @@ load("tests/testdata/bing_neg.rda")
 load("tests/testdata/bing_pos.rda")
 load("tests/testdata/glove_sweeney.rda")
 
-S <- c("swedish", "irish", "mexican", "chinese", "filipino",
-       "german", "english", "french", "norwegian", "american",
-       "indian", "dutch", "russian", "scottish", "italian")
-sn <- query(glove_sweeney, S = S, A = bing_pos, B = bing_neg, method = "rnsb")
+S3 <- c("swedish", "irish", "mexican", "chinese", "filipino",
+        "german", "english", "french", "norwegian", "american",
+        "indian", "dutch", "russian", "scottish", "italian")
+sn <- query(glove_sweeney, S_words = S3, A_words = bing_pos, B_words = bing_neg, method = "rnsb")
 ```
 
 The analysis shows that `indian`, `mexican`, and `russian` are more
@@ -331,7 +329,7 @@ newsmap_europe
 Country-level analysis
 
 ``` r
-country_level <- rnsb(dictionary_demo, newsmap_europe, bing_pos, bing_neg, levels = 2)
+country_level <- rnsb(w = dictionary_demo, S_words = newsmap_europe, A_words = bing_pos, B_words = bing_neg, levels = 2)
 plot_bias(country_level)
 ```
 
@@ -340,7 +338,7 @@ plot_bias(country_level)
 Region-level analysis
 
 ``` r
-region_level <- rnsb(dictionary_demo, newsmap_europe, bing_pos, bing_neg, levels = 1)
+region_level <- rnsb(w = dictionary_demo, S_words = newsmap_europe, A_words = bing_pos, B_words = bing_neg, levels = 1)
 plot_bias(region_level)
 ```
 
@@ -363,7 +361,7 @@ Normalized Association Score (Caliskan et al., 2017) is similar to
 Relative Norm Distance above. Please note that `T` is not required.
 
 ``` r
-S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
+S3 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
 "photographer", "geologist", "shoemaker", "athlete", "cashier", 
 "dancer", "housekeeper", "accountant", "physicist", "gardener", 
 "dentist", "weaver", "blacksmith", "psychologist", "supervisor", 
@@ -377,15 +375,15 @@ S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
 "farmer", "clerk", "manager", "guard", "artist", "smith", "official", 
 "police", "doctor", "professor", "student", "judge", "teacher", 
 "author", "secretary", "soldier")
-A <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
+A3 <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
 "male", "brother", "sons", "fathers", "men", "boys", "males", 
 "brothers", "uncle", "uncles", "nephew", "nephews")
-B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
+B3 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
 "herself", "female", "sister", "daughters", "mothers", "women", 
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
 
-nas_f1 <- query(googlenews, S = S, A = A, B = B, method = "nas")
+nas_f1 <- query(googlenews, S_words= S3, A_words = A3, B_words = B3, method = "nas")
 plot_bias(nas_f1)
 ```
 
@@ -416,11 +414,11 @@ Caliskan et al (2017).
 ``` r
 data(glove_math) # a subset of the original GLoVE word vectors
 
-S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sw <- query(glove_math, S, T, A, B)
+S4 <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
+T4 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+A4 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+B4 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+sw <- query(glove_math, S4, T4, A4, B4)
 
 # extraction of effect size
 calculate_es(sw)
@@ -535,3 +533,16 @@ By contributing to this project, you agree to abide by its terms.
     Computational Linguistics (pp. 1662-1667).
 11. Watanabe, K. (2018). Newsmap: A semi-supervised approach to
     geographical news classification. Digital Journalism, 6(3), 294-309.
+
+-----
+
+1.  In the pre 0.1.0 version of this package, the package used `S`, `T`,
+    `A`, and `B` as the main parameters. It was later rejected because
+    the symbol `T` is hardlinked to the logical value `TRUE` [as a
+    global
+    variable](https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html);
+    and it is considered to be a [bad
+    style](https://style.tidyverse.org/syntax.html) to use the symbol
+    `T`. Accordingly, they were renamed to `S_words`, `T_words`,
+    `A_words`, and `B_words` respectively. But in general, please stop
+    using the symbol `T` to represent `TRUE`\!

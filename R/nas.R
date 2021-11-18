@@ -21,20 +21,20 @@
 #' \describe{
 #' \item{\code{$P}}{a vector of normalized association score for every word in S}
 #' \item{\code{$raw}}{a list of raw results used for calculating normalized association scores}
-#' \item{\code{$S}}{the input S}
-#' \item{\code{$A}}{the input A}
-#' \item{\code{$B}}{the input B}
+#' \item{\code{$S_words}}{the input S_words}
+#' \item{\code{$A_words}}{the input A_words}
+#' \item{\code{$B_words}}{the input B_words}
 #' }
 #' @export
-nas <- function(w, S, A, B, verbose = FALSE) {
+nas <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     w_lab <- rownames(w)
-    A <- .clean(A, w_lab, verbose = verbose)
-    B <- .clean(B, w_lab, verbose = verbose)
-    S <- .clean(S, w_lab, verbose = verbose)
-    res <- purrr::map(S, .cal_nas, w = w, A = A, B = B)
+    A_cleaned <- .clean(A_words, w_lab, verbose = verbose)
+    B_cleaned <- .clean(B_words, w_lab, verbose = verbose)
+    S_cleaned <- .clean(S_words, w_lab, verbose = verbose)
+    res <- purrr::map(S_cleaned, .cal_nas, w = w, A = A_cleaned, B = B_cleaned)
     P <- purrr::map_dbl(res, .cal_nas_p)
-    names(P) <- S
-    res <- list(P = P, raw = res, S = S, A = A, B = B)
+    names(P) <- S_cleaned
+    res <- list(P = P, raw = res, S_words = S_cleaned, A_words = A_cleaned, B_words = B_cleaned)
     class(res) <- append(class(res), c("sweater", "nas"))
     return(res)
 }

@@ -2,43 +2,44 @@
 #'
 #' This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017).
 #' @param w a numeric matrix of word embeddings (e.g. from rsparse::GloVe)
-#' @param S a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...
-#' @param T a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...
-#' @param A a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.
-#' @param B a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.
+#' @param S_words a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...
+#' @param T_words a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...
+#' @param A_words a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.
+#' @param B_words a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.
 #' @param verbose logical, whether to display information
 #' @return A list with class \code{"weat"} containing the following components:
 #' \describe{
-#' \item{\code{$S_diff}}{for each of words in S, mean of the mean differences in cosine similarity between words in A and words in B}
-#' \item{\code{$T_diff}}{for each of words in T, mean of the mean differences in cosine similarity between words in A and words in B}
-#' \item{\code{$S}}{the input S}
-#' \item{\code{$T}}{the input T}
-#' \item{\code{$A}}{the input A}
-#' \item{\code{$B}}{the input B}
+#' \item{\code{$S_diff}}{for each of words in S_words, mean of the mean differences in cosine similarity between words in A_words and words in B_words}
+#' \item{\code{$T_diff}}{for each of words in T_words, mean of the mean differences in cosine similarity between words in A_words and words in B_words}
+#' \item{\code{$S_words}}{the input S_words}
+#' \item{\code{$T_words}}{the input T_words}
+#' \item{\code{$A_words}}{the input A_words}
+#' \item{\code{$B_words}}{the input B_words}
 #' }
 #' \code{\link{weat_es}} can be used to obtain the effect size of the test; \code{\link{weat_resampling}} for a test of significance.
 #' @examples
 #' # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 #' data(glove_math)
-#' S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-#' T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-#' A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-#' B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-#' sw <- weat(glove_math, S, T, A, B)
+#' S1 <- c("math", "algebra", "geometry", "calculus", "equations",
+#' "computation", "numbers", "addition")
+#' T1 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+#' A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+#' B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+#' sw <- weat(glove_math, S1, T1, A1, B1)
 #' weat_es(sw)
 #' @author Chung-hong Chan
 #' @references
 #' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
 #' @export 
-weat <- function(w, S, T, A, B, verbose = FALSE) {
+weat <- function(w, S_words, T_words, A_words, B_words, verbose = FALSE) {
     w_lab <- rownames(w)
-    A <- .clean(A, w_lab, verbose = verbose)
-    B <- .clean(B, w_lab, verbose = verbose)
-    S <- .clean(S, w_lab, verbose = verbose)
-    S_diff <- cpp_bweat(S, A, B, w)
-    T <- .clean(T, w_lab, verbose = verbose)
-    T_diff <- cpp_bweat(T, A, B, w)
-    res <- list(S_diff = S_diff, T_diff = T_diff, S = S, T = T, A = A, B = B)
+    A_cleaned <- .clean(A_words, w_lab, verbose = verbose)
+    B_cleaned <- .clean(B_words, w_lab, verbose = verbose)
+    S_cleaned <- .clean(S_words, w_lab, verbose = verbose)
+    S_diff <- cpp_bweat(S_cleaned, A_cleaned, B_cleaned, w)
+    T_cleaned <- .clean(T_words, w_lab, verbose = verbose)
+    T_diff <- cpp_bweat(T_cleaned, A_cleaned, B_cleaned, w)
+    res <- list(S_diff = S_diff, T_diff = T_diff, S_words = S_cleaned, T_words = T_cleaned, A_words = A_cleaned, B_words = B_cleaned)
     class(res) <- append(class(res), c("weat", "sweater"))
     return(res)
 }
@@ -49,17 +50,19 @@ weat <- function(w, S, T, A, B, verbose = FALSE) {
 #' @param x an object from the \link{weat} function.
 #' @param standardize a boolean to denote whether to correct the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.
 #' @param r a boolean to denote whether convert the effect size to biserial correlation coefficient.
+#' @return the effect size of the query
 #' @author Chung-hong Chan
 #' @references
 #' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
 #' @examples
 #' # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 #' data(glove_math)
-#' S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-#' T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-#' A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-#' B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-#' sw <- weat(glove_math, S, T, A, B)
+#' S1 <- c("math", "algebra", "geometry", "calculus", "equations",
+#' "computation", "numbers", "addition")
+#' T1 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+#' A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+#' B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+#' sw <- weat(glove_math, S1, T1, A1, B1)
 #' weat_es(sw)
 #' @export
 weat_es <- function(x, standardize = TRUE, r = FALSE) {
@@ -121,11 +124,12 @@ weat_exact <- function(x) {
 #' @examples
 #' # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 #' data(glove_math)
-#' S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-#' T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-#' A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-#' B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-#' sw <- weat(glove_math, S, T, A, B)
+#' S1 <- c("math", "algebra", "geometry", "calculus", "equations",
+#' "computation", "numbers", "addition")
+#' T1 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+#' A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+#' B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+#' sw <- weat(glove_math, S1, T1, A1, B1)
 #' weat_resampling(sw)
 #' @export
 weat_resampling <- function(x, n_resampling = 9999) {

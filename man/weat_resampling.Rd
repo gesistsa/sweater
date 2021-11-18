@@ -23,11 +23,12 @@ This function conducts the test of significance for WEAT as described in Caliska
 \examples{
 # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 data(glove_math)
-S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sw <- weat(glove_math, S, T, A, B)
+S1 <- c("math", "algebra", "geometry", "calculus", "equations",
+"computation", "numbers", "addition")
+T1 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+sw <- weat(glove_math, S1, T1, A1, B1)
 weat_resampling(sw)
 }
 \references{

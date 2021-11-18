@@ -20,31 +20,32 @@
 #' \describe{
 #' \item{\code{$P}}{for each of words in S, the score according to SemAxis}
 #' \item{\code{$V}}{the semantic axis vector}
-#' \item{\code{$S}}{the input S}
-#' \item{\code{$A}}{the input A}
-#' \item{\code{$B}}{the input B}
+#' \item{\code{$S_words}}{the input S_words}
+#' \item{\code{$A_words}}{the input A_words}
+#' \item{\code{$B_words}}{the input B_words}
 #' }
 #' @examples
 #' data(glove_math)
-#' S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-#' A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-#' B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-#' semaxis(glove_math, S, A, B, l = 0)$P
+#' S1 <- c("math", "algebra", "geometry", "calculus", "equations",
+#' "computation", "numbers", "addition")
+#' A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+#' B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+#' semaxis(glove_math, S1, A1, B1, l = 0)$P
 #' @author Chung-hong Chan
 #' @references
 #' An, J., Kwak, H., & Ahn, Y. Y. (2018). SemAxis: A lightweight framework to characterize domain-specific word semantics beyond sentiment. arXiv preprint arXiv:1806.05521.
 #' @export
-semaxis <- function(w, S, A, B, l = 0, verbose = FALSE) {
+semaxis <- function(w, S_words, A_words, B_words, l = 0, verbose = FALSE) {
     w_lab <- rownames(w)
-    A <- .clean(A, w_lab, verbose = verbose)
-    B <- .clean(B, w_lab, verbose = verbose)
-    S <- .clean(S, w_lab, verbose = verbose)
-    V_a <- sapply(A, function(x) .soften(x, w, l))
-    V_b <- sapply(B, function(x) .soften(x, w, l))
+    A_cleaned <- .clean(A_words, w_lab, verbose = verbose)
+    B_cleaned <- .clean(B_words, w_lab, verbose = verbose)
+    S_cleaned <- .clean(S_words, w_lab, verbose = verbose)
+    V_a <- sapply(A_cleaned, function(x) .soften(x, w, l))
+    V_b <- sapply(B_cleaned, function(x) .soften(x, w, l))
     axis <- apply(V_a, 1, mean, na.rm = TRUE) - apply(V_b, 1, mean, na.rm = TRUE)
-    score <- purrr::map_dbl(S, ~ raw_cosine(w[.,,drop = FALSE], axis))
-    names(score) <- S
-    res <- list(P = score, S = S, A = A, B = B, V = axis)
+    score <- purrr::map_dbl(S_cleaned, ~ raw_cosine(w[.,,drop = FALSE], axis))
+    names(score) <- S_cleaned
+    res <- list(P = score, S_words = S_cleaned, A_words = A_cleaned, B_words = B_cleaned, V = axis)
     class(res) <- append(class(res), c("semaxis", "sweater"))
     return(res)
 }

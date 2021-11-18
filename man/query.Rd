@@ -4,18 +4,27 @@
 \alias{query}
 \title{A common interface for making query}
 \usage{
-query(w, S, T, A, B, method = "guess", verbose = FALSE, ...)
+query(
+  w,
+  S_words,
+  T_words,
+  A_words,
+  B_words,
+  method = "guess",
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
 
-\item{S}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
+\item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
-\item{T}{a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...}
+\item{T_words}{a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...}
 
-\item{A}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
+\item{A_words}{a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.}
 
-\item{B}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
+\item{B_words}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 
 \item{method}{string, the method to be used to make the query. Available options are: \code{weat}, \code{mac}, \code{nas}, \code{semaxis}, \code{rnsb}, \code{rnd}, \code{nas} and \code{guess}. If \code{guess}, the function selects the best option for you.}
 
@@ -31,7 +40,7 @@ This function makes a query based on the supplied parameters.
 }
 \examples{
 data(googlenews)
-S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
+S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
 "photographer", "geologist", "shoemaker", "athlete", "cashier", "dancer",
 "housekeeper", "accountant", "physicist", "gardener", "dentist", "weaver",
 "blacksmith", "psychologist", "supervisor", "mathematician", "surveyor",
@@ -44,13 +53,13 @@ S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
 "physician", "farmer", "clerk", "manager", "guard", "artist", "smith",
 "official", "police", "doctor", "professor", "student", "judge",
 "teacher", "author", "secretary", "soldier")
-A <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
+A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 "male", "brother", "sons", "fathers", "men", "boys", "males", "brothers",
 "uncle", "uncles", "nephew", "nephews")
-B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
+B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 "herself", "female", "sister", "daughters", "mothers", "women", "girls",
 "females", "sisters", "aunt", "aunts", "niece", "nieces")
-garg_f1 <- query(googlenews, S = S, A = A, B = B)
+garg_f1 <- query(googlenews, S_words = S1, A_words = A1, B_words = B1)
 plot_bias(garg_f1)
 }
 \seealso{

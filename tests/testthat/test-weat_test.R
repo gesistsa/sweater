@@ -1,13 +1,13 @@
 set.seed(11111)
-S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+S1 <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
+T1 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
 
-sw <- weat(glove_math, S, T, A, B)
+sw <- weat(glove_math, S1, T1, A1, B1)
 
 test_that("resampling", {
-    expect_error(weat_resampling(S))
+    expect_error(weat_resampling(S1))
     expect_error(weat_resampling(sw), NA)
     res <- weat_resampling(sw)
     expect_equal(class(res), "htest")
@@ -24,18 +24,18 @@ test_that("Display mistake", {
 
 
 set.seed(11111)
-S <- c("math", "algebra", "geometry")
-T <- c("poetry", "art", "dance")
-A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+S2 <- c("math", "algebra", "geometry")
+T2 <- c("poetry", "art", "dance")
+A2 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+B2 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
 
-sw2 <- weat(glove_math, S, T, A, B)
+sw2 <- weat(glove_math, S2, T2, A2, B2)
 
 test_that("exact", {
     expect_snapshot(weat_exact(sw2))
 })
 
 test_that("exact., reverse", {
-    sw3 <- weat(glove_math, T, S, A, B)
+    sw3 <- weat(glove_math, T2, S2, A2, B2)
     expect_snapshot(weat_exact(sw3))
 })

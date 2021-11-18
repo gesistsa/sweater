@@ -13,17 +13,21 @@ weat_es(x, standardize = TRUE, r = FALSE)
 
 \item{r}{a boolean to denote whether convert the effect size to biserial correlation coefficient.}
 }
+\value{
+the effect size of the query
+}
 \description{
 This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r).
 }
 \examples{
 # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 data(glove_math)
-S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sw <- weat(glove_math, S, T, A, B)
+S1 <- c("math", "algebra", "geometry", "calculus", "equations",
+"computation", "numbers", "addition")
+T1 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+sw <- weat(glove_math, S1, T1, A1, B1)
 weat_es(sw)
 }
 \references{

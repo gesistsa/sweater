@@ -1,11 +1,11 @@
 ## 3 repro cases
 
 test_that("WEAT ES calc", {
-    S <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-    T <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-    A <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-    B <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-    sw <- weat(glove_math, S, T, A, B)
+    S1 <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
+    T1 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
+    A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
+    B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
+    sw <- weat(glove_math, S1, T1, A1, B1)
     expect_true("sweater" %in% class(sw))
     expect_true("weat" %in% class(sw))
     tolerance <- 0.001
@@ -15,7 +15,7 @@ test_that("WEAT ES calc", {
 })
 
 test_that("RND ES calc, garg", {
-    S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
+    S2 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
 "photographer", "geologist", "shoemaker", "athlete", "cashier", 
 "dancer", "housekeeper", "accountant", "physicist", "gardener", 
 "dentist", "weaver", "blacksmith", "psychologist", "supervisor", 
@@ -29,14 +29,14 @@ test_that("RND ES calc, garg", {
 "farmer", "clerk", "manager", "guard", "artist", "smith", "official", 
 "police", "doctor", "professor", "student", "judge", "teacher", 
 "author", "secretary", "soldier")
-    A <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
+    A2 <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
 "male", "brother", "sons", "fathers", "men", "boys", "males", 
 "brothers", "uncle", "uncles", "nephew", "nephews")
-    B <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
+    B2 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
 "herself", "female", "sister", "daughters", "mothers", "women", 
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
-    garg_f1 <- rnd(googlenews, S, A, B)
+    garg_f1 <- rnd(googlenews, S2, A2, B2)
     expect_true("sweater" %in% class(garg_f1))
     expect_true("rnd" %in% class(garg_f1))
     tolerance <- 0.001
@@ -49,10 +49,10 @@ test_that("RNSB ES Calc", {
     load("../testdata/glove_sweeney.rda")
     load("../testdata/bing_pos.rda")
     load("../testdata/bing_neg.rda")
-    S <- c("swedish", "irish", "mexican", "chinese", "filipino",
+    S3 <- c("swedish", "irish", "mexican", "chinese", "filipino",
        "german", "english", "french", "norwegian", "american",
        "indian", "dutch", "russian", "scottish", "italian")
-    sn <- rnsb(glove_sweeney, S, bing_pos, bing_neg)
+    sn <- rnsb(glove_sweeney, S3, bing_pos, bing_neg)
     expect_true("sweater" %in% class(sn))
     expect_true("rnsb" %in% class(sn))
     tolerance <- 0.001
@@ -63,7 +63,7 @@ test_that("RNSB ES Calc", {
 ## Non-repo
 
 test_that("Mac ES calc", {
-    S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
+    S4 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
 "photographer", "geologist", "shoemaker", "athlete", "cashier", 
 "dancer", "housekeeper", "accountant", "physicist", "gardener", 
 "dentist", "weaver", "blacksmith", "psychologist", "supervisor", 
@@ -77,10 +77,10 @@ test_that("Mac ES calc", {
 "farmer", "clerk", "manager", "guard", "artist", "smith", "official", 
 "police", "doctor", "professor", "student", "judge", "teacher", 
 "author", "secretary", "soldier")
-    A <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
+    A4 <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
 "male", "brother", "sons", "fathers", "men", "boys", "males", 
 "brothers", "uncle", "uncles", "nephew", "nephews")
-    res <- mac(googlenews, S, A)
+    res <- mac(googlenews, S4, A4)
     expect_true("sweater" %in% class(res))
     expect_true("mac" %in% class(res))
     tolerance <- 0.001
@@ -90,7 +90,7 @@ test_that("Mac ES calc", {
 ## Reject cases
 
 test_that("reject *_es", {
-    S <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
+    S5 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
 "photographer", "geologist", "shoemaker", "athlete", "cashier", 
 "dancer", "housekeeper", "accountant", "physicist", "gardener", 
 "dentist", "weaver", "blacksmith", "psychologist", "supervisor", 
@@ -104,10 +104,10 @@ test_that("reject *_es", {
 "farmer", "clerk", "manager", "guard", "artist", "smith", "official", 
 "police", "doctor", "professor", "student", "judge", "teacher", 
 "author", "secretary", "soldier")
-    A <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
+    A5 <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
 "male", "brother", "sons", "fathers", "men", "boys", "males", 
 "brothers", "uncle", "uncles", "nephew", "nephews")
-    mac_res <- mac(googlenews, S, A)
+    mac_res <- mac(googlenews, S5, A5)
     expect_error(mac_es())
     expect_error(mac_es(garg_f1))
     expect_error(rnd_es())
