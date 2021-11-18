@@ -40,8 +40,9 @@ semaxis <- function(w, S_words, A_words, B_words, l = 0, verbose = FALSE) {
     A_cleaned <- .clean(A_words, w_lab, verbose = verbose)
     B_cleaned <- .clean(B_words, w_lab, verbose = verbose)
     S_cleaned <- .clean(S_words, w_lab, verbose = verbose)
-    V_a <- sapply(A_cleaned, function(x) .soften(x, w, l))
-    V_b <- sapply(B_cleaned, function(x) .soften(x, w, l))
+    w_dim <- ncol(w)
+    V_a <- vapply(A_cleaned, function(x) .soften(x, w, l), numeric(w_dim))
+    V_b <- vapply(B_cleaned, function(x) .soften(x, w, l), numeric(w_dim))
     axis <- apply(V_a, 1, mean, na.rm = TRUE) - apply(V_b, 1, mean, na.rm = TRUE)
     score <- purrr::map_dbl(S_cleaned, ~ raw_cosine(w[.,,drop = FALSE], axis))
     names(score) <- S_cleaned
