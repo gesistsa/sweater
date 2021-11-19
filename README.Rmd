@@ -51,15 +51,15 @@ It is recommended to use the function `query()` to make a query and `calculate_e
 
 ## Available methods
 
-| Target words     | Attribution words | Method                                                      | functions                                          |
-|------------------|-------------------|-------------------------------------------------------------|----------------------------------------------------|
-| S_words          | A_words           | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac_es()                                    |
-| S_words          | A_words, B_words  | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd_es()                                    |
-| S_words          | A_words, B_words  | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb_es()                                  |
-| S_words          | A_words, B_words  | SemAxis (An et al. 2018)                                    | semaxis()                                          |
-| S_words          | A_words, B_words  | Normalized Association Score (Caliskan et al. 2017)         | nas()                                              |
-| S_words, T_words | A_words, B_words  | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat_es(), weat_resampling(), weat_exact() |
-| S_words, T_words | A_words, B_words  | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                  |
+| Target words     | Attribute words  | Method                                                      | functions                                          |
+|------------------|------------------|-------------------------------------------------------------|----------------------------------------------------|
+| S_words          | A_words          | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac_es()                                    |
+| S_words          | A_words, B_words | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd_es()                                    |
+| S_words          | A_words, B_words | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb_es()                                  |
+| S_words          | A_words, B_words | SemAxis (An et al. 2018)                                    | semaxis()                                          |
+| S_words          | A_words, B_words | Normalized Association Score (Caliskan et al. 2017)         | nas()                                              |
+| S_words, T_words | A_words, B_words | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat_es(), weat_resampling(), weat_exact() |
+| S_words, T_words | A_words, B_words | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                  |
 
 ## Example: Mean Average Cosine Similarity
 
@@ -93,7 +93,7 @@ sort(mac_neg$P)
 
 ## Example: Relative Norm Distance
 
-This analysis reproduces the analysis in Garg et al (2018), namely Figure 1. Please note that `T` is not required.
+This analysis reproduces the analysis in Garg et al (2018), namely Figure 1.
 
 ```{r}
 B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
@@ -110,7 +110,7 @@ The function `plot_bias` can be used to plot the bias of each word in S. Words s
 plot_bias(garg_f1)
 ```
 
-The effect size is simply the sum of all relative norm distance values (Equation 3 in Garg et al. 2018). The more positive value indicates that words in S are more associated with `B`. As the effect size is negative, it indicates that the concept of occupation is more associated with `A`, i.e. male.
+The effect size is simply the sum of all relative norm distance values (Equation 3 in Garg et al. 2018). The more positive value indicates that words in `S_words` are more associated with `B_words`. As the effect size is negative, it indicates that the concept of occupation is more associated with `A_words`, i.e. male.
 
 ```{r}
 calculate_es(garg_f1)
@@ -118,7 +118,7 @@ calculate_es(garg_f1)
 
 ## Example: SemAxis
 
-This analysis attempts to reproduce the analysis in An et al. (2018). Please note that `T` is not required.
+This analysis attempts to reproduce the analysis in An et al. (2018).
 
 You may obtain the word2vec word vectors trained with Trump supporters Reddit from [here](https://github.com/ghdi6758/SemAxis). This package provides a tiny version of the data `small_reddit` for reproducing the analysis.
 
@@ -132,7 +132,7 @@ plot_bias(res)
 
 ## Example: Relative Negative Sentiment Bias
 
-This analysis attempts to reproduce the analysis in Sweeney & Najafian (2019). Please note that `T` is not required.
+This analysis attempts to reproduce the analysis in Sweeney & Najafian (2019).
 
 Please note that the datasets `glove_sweeney`, `bing_pos` and `bing_neg` are not included in the package. If you are interested in reproducing the analysis, the 3 datasets are available from [here](https://github.com/chainsawriot/sweater/tree/master/tests/testdata).
 
@@ -161,7 +161,7 @@ rnsb_es(sn)
 
 ## Support for Quanteda Dictionary
 
-`rnsb` supports quanteda dictionary as `S`. `rnd` and `weat` will support it later.
+`rnsb` supports quanteda dictionary as `S_words`. `rnd` and `weat` will support it later.
 
 This analysis uses the data from [here](https://github.com/chainsawriot/sweater/tree/master/tests/testdata).
 
@@ -198,7 +198,7 @@ calculate_es(region_level)
 
 ## Example: Normalized Association Score
 
-Normalized Association Score (Caliskan et al., 2017) is similar to Relative Norm Distance above. Please note that `T` is not required.
+Normalized Association Score (Caliskan et al., 2017) is similar to Relative Norm Distance above.
 
 ```{r nasplot, fig.height = 12}
 S3 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 

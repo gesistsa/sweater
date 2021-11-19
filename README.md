@@ -73,7 +73,7 @@ functions listed below.
 
 ## Available methods
 
-| Target words       | Attribution words  | Method                                                      | functions                                             |
+| Target words       | Attribute words    | Method                                                      | functions                                             |
 | ------------------ | ------------------ | ----------------------------------------------------------- | ----------------------------------------------------- |
 | S\_words           | A\_words           | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac\_es()                                      |
 | S\_words           | A\_words, B\_words | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd\_es()                                      |
@@ -151,7 +151,7 @@ sort(mac_neg$P)
 ## Example: Relative Norm Distance
 
 This analysis reproduces the analysis in Garg et al (2018), namely
-Figure 1. Please note that `T` is not required.
+Figure 1.
 
 ``` r
 B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
@@ -174,9 +174,9 @@ plot_bias(garg_f1)
 
 The effect size is simply the sum of all relative norm distance values
 (Equation 3 in Garg et al. 2018). The more positive value indicates that
-words in S are more associated with `B`. As the effect size is negative,
-it indicates that the concept of occupation is more associated with `A`,
-i.e. male.
+words in `S_words` are more associated with `B_words`. As the effect
+size is negative, it indicates that the concept of occupation is more
+associated with `A_words`, i.e. male.
 
 ``` r
 calculate_es(garg_f1)
@@ -186,7 +186,6 @@ calculate_es(garg_f1)
 ## Example: SemAxis
 
 This analysis attempts to reproduce the analysis in An et al. (2018).
-Please note that `T` is not required.
 
 You may obtain the word2vec word vectors trained with Trump supporters
 Reddit from [here](https://github.com/ghdi6758/SemAxis). This package
@@ -206,7 +205,7 @@ plot_bias(res)
 ## Example: Relative Negative Sentiment Bias
 
 This analysis attempts to reproduce the analysis in Sweeney & Najafian
-(2019). Please note that `T` is not required.
+(2019).
 
 Please note that the datasets `glove_sweeney`, `bing_pos` and `bing_neg`
 are not included in the package. If you are interested in reproducing
@@ -244,7 +243,7 @@ rnsb_es(sn)
 
 ## Support for Quanteda Dictionary
 
-`rnsb` supports quanteda dictionary as `S`. `rnd` and `weat` will
+`rnsb` supports quanteda dictionary as `S_words`. `rnd` and `weat` will
 support it later.
 
 This analysis uses the data from
@@ -358,7 +357,7 @@ calculate_es(region_level)
 ## Example: Normalized Association Score
 
 Normalized Association Score (Caliskan et al., 2017) is similar to
-Relative Norm Distance above. Please note that `T` is not required.
+Relative Norm Distance above.
 
 ``` r
 S3 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
