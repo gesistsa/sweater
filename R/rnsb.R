@@ -10,7 +10,7 @@
 #' \item{\code{$A_words}}{the input A_words}
 #' \item{\code{$B_words}}{the input B_words}
 #' \item{\code{$S_words}}{the input S_words}
-#' \item{\code{$P_words}}{the predicted negative sentiment probabilities}
+#' \item{\code{$P}}{the predicted negative sentiment probabilities}
 #' }
 #' \code{\link{rnsb_es}} can be used to obtain the effect size of the test.
 #' @examples
