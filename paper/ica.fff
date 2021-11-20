@@ -1,0 +1,35 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{ica_files/figure-latex/acs-1.pdf}
+\caption{\label{fig:acs}Bias of words in the target wordset according to average cosine similarity}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{ica_files/figure-latex/rnd-1.pdf}
+\caption{\label{fig:rnd}Bias of words in the target wordset according to relative norm distance}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{ica_files/figure-latex/semaxis-1.pdf}
+\caption{\label{fig:semaxis}Bias of words in the target wordset according to SemAxis}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{ica_files/figure-latex/nas-1.pdf}
+\caption{\label{fig:nas}Bias of words in the target wordset according to normalized association score}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{ica_files/figure-latex/rnsb-1.pdf}
+\caption{\label{fig:rnsb}Bias of words in the target wordset according to relative negative sentiment bias}
+\end{figure*}
