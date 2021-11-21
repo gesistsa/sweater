@@ -36,10 +36,16 @@ program](https://github.com/TManzini/DebiasMulticlassWordEmbedding/).
 
 ## Installation
 
-You can install the Github version of sweater with:
+Recommended: You can install the Github version of sweater with:
 
 ``` r
 devtools::install_github("chainsawriot/sweater")
+```
+
+Or the slightly outdated version from CRAN
+
+``` r
+install.packages("sweater")
 ```
 
 ## Notation of a query
