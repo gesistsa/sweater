@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.11.20)  21 NOV 2021 16:01
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.11.20)  21 NOV 2021 18:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1187,18 +1187,18 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 330.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 331.
 [1
 
 ]
-Underfull \hbox (badness 3009) in paragraph at lines 331--339
+Underfull \hbox (badness 3009) in paragraph at lines 332--340
 \OMS/cmsy/m/n/10 S \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 math; a
 lgebra; geometry; calculus; equations; computation; numbers; addition\OMS/cmsy/
 m/n/10 g$
  []
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 443.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 444.
 File: /usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/
 JOSS-logo.png Graphic file (type bmp)
 </usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/JOSS-
@@ -1253,7 +1253,7 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [5]
-Underfull \hbox (badness 1377) in paragraph at lines 680--686
+Underfull \hbox (badness 1377) in paragraph at lines 681--687
 \TU/lmr/m/it/10 2020 Conference on Fairness, Accountability, and Transparency \
 TU/lmr/m/n/10 (pp. 359–368).
  []

@@ -48,7 +48,7 @@ The input word embedding $w$ is a dense $m\times n$ matrix, where $m$ is the tot
 
 ## Query
 
-`sweater` uses the concept of *query* [@badilla2020wefe] to study the biases in $w$. A query contains two or more sets of seed words with at least one set of *target words* and one set of *attribute words*. {redacted} uses the $\mathcal{S}\mathcal{T}\mathcal{A}\mathcal{B}$ notation from @brunet2019understanding to form a query.
+`sweater` uses the concept of *query* [@badilla2020wefe] to study the biases in $w$. A query contains two or more sets of seed words with at least one set of *target words* and one set of *attribute words*. `sweater` uses the $\mathcal{S}\mathcal{T}\mathcal{A}\mathcal{B}$ notation from @brunet2019understanding to form a query.
 
 Target words are words that **should** have no bias. They are denoted as wordsets $\mathcal{S}$ and $\mathcal{T}$. All methods require $\mathcal{S}$ while $\mathcal{T}$ is only required for WEAT. For instance, the study of gender stereotypes in academic pursuits by @caliskan:2017:S used $\mathcal{S} = \{math, algebra, geometry, calculus, equations, computation, numbers, addition\}$ and $\mathcal{T}= \{poetry, art, dance, literature, novel, symphony, drama, sculpture\}$.
 
