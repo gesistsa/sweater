@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.11.20)  20 NOV 2021 14:08
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.11.20)  21 NOV 2021 16:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1253,6 +1253,11 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [5]
+Underfull \hbox (badness 1377) in paragraph at lines 680--686
+\TU/lmr/m/it/10 2020 Conference on Fairness, Accountability, and Transparency \
+TU/lmr/m/n/10 (pp. 359–368).
+ []
+
 File: /usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/
 JOSS-logo.png Graphic file (type bmp)
 </usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/JOSS-
@@ -1279,6 +1284,6 @@ Here is how much of TeX's memory you used:
  56276 multiletter control sequences out of 15000+600000
  410326 words of font info for 78 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 87i,13n,91p,1194b,804s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 87i,12n,91p,1194b,804s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on paper.pdf (6 pages).
