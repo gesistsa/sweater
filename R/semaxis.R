@@ -2,7 +2,7 @@
     if (l == 0) {
         return(w[word, , drop = TRUE])
     } 
-    sim_res <- text2vec::sim2(x = w, y = w[word, , drop = FALSE], method = "cosine", norm = "l2")
+    sim_res <- proxy::simil(y = w[word, , drop = FALSE], x = w, method = "cosine")
     goodk <- head(sort(sim_res[,1], decreasing = TRUE), l + 1)
     if (return_k) {
         return(goodk)
