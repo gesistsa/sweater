@@ -23,8 +23,8 @@ A list with class \code{"ect"} containing the following components:
 \item{\code{$A_words}}{the input A_words}
 \item{\code{$B_words}}{the input B_words}
 \item{\code{$S_words}}{the input S_words}
-\item{\code{$u_a}}{Cosine similarity of S_words to average vector of A_words}
-\item{\code{$u_b}}{Cosine similarity of S_words to average vector of b_words}
+\item{\code{$u_a}}{Cosine similarity between each word vector of S_words and average vector of A_words}
+\item{\code{$u_b}}{Cosine similarity between each word vector of S_words and average vector of B_words}
 }
 }
 \description{
