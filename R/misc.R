@@ -1,6 +1,6 @@
 #' @importFrom stats dist predict sd var
 #' @importFrom utils glob2rx head
-#' @importFrom graphics dotchart
+#' @importFrom graphics dotchart abline text
 NULL
 
 #' A subset of the pretrained word2vec word vectors
