@@ -1,23 +1,5 @@
-## Resubmission (18-Nov-2021)
+## Submission (24-Nov-2021)
 
-    Please write TRUE and FALSE instead of T and F. (Please don't use 'T' or
-    'F' as vector names.), e.g.:
-    man/query.Rd:
-     query(w, S, T, A, B, method = "guess", verbose = FALSE, ...)
-    man/weat.Rd:
-     weat(w, S, T, A, B, verbose = FALSE)
+Sorry about the rapid resubmission (only after 2 days). I received an e-mail from Professor Brian Ripley about memory check problem. The problem is now fixed (I have checked with local valgrind and valgrind on rhub).
 
-It has been fixed by changing all S, T, A, B to S_words, T_words, A_words and B_words respectively.
-
-
-    Please add \value to .Rd files regarding exported methods and explain
-    the functions results in the documentation. Please write about the
-    structure of the output (class) and also what the output means. (If a
-    function does not return a value, please document that too, e.g.
-    \value{No return value, called for side effects} or similar)
-    Missing Rd-tags:
-	weat_es.Rd: \value
-
-The missing \value for weat_es.Rd has been added.
-
-
+Once again, sorry about the rapid resubmission. Thank you very much for your work. Vielen Dank für Ihre Mühe!

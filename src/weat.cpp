@@ -91,9 +91,9 @@ double cpp_exact(NumericVector union_diff, double test_stat, int s_length) {
     int union_length = union_diff.size();
     NumericVector union_here = clone(union_diff);
     std::sort(union_here.begin(), union_here.end());
-    double a;
-    double b;
-    double c;
+    double a = 0.0;
+    double b = 0.0;
+    double c = 0.0;
     do {
 	Rcpp::checkUserInterrupt();
 	iter += 1;
