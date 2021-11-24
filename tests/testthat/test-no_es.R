@@ -77,4 +77,6 @@ test_that("ect, garg", {
     garg_f1 <- ect(googlenews, S2, A2, B2)
     expect_true("sweater" %in% class(garg_f1))
     expect_true("ect" %in% class(garg_f1))
+    expect_equal(nrow(garg_f1$P), 2)
+    expect_equal(ncol(garg_f1$P), length(S2))
 })
