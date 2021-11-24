@@ -114,4 +114,5 @@ test_that("reject *_es", {
     expect_error(rnd_es(mac_res))
     expect_error(rnsb_es(mac_res))
     expect_error(weat_es(mac_res))
+    expect_error(ect_es(mac_res))
 })

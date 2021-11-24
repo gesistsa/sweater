@@ -65,12 +65,12 @@ read_word2vec <- function(x) {
 plot_bias <- function(x) {
     if ("ect" %in% class(x)) {
         plot_ect(x)
-    }
-    if (is.null(x$P)) {
+    } else if (is.null(x$P)) {
         stop("No P slot in the input object x.")
+    } else {
+        sortedx <- sort(x$P)
+        graphics::dotchart(sortedx, labels = names(sortedx))
     }
-    sortedx <- sort(x$P)
-    graphics::dotchart(sortedx, labels = names(sortedx))
 }
 
 .purify_class <- function(x) {

@@ -52,7 +52,7 @@ ect <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     names(sim_res_a) <- S_cleaned
     sim_res_b <- as.vector(proxy::simil(y = vec_b, x = w[S_cleaned, , drop = FALSE], method = "cosine"))
     names(sim_res_b) <- S_cleaned
-    res <- list(u_a = sim_res_a, u_b = sim_res_b, S_words = S_cleaned)
+    res <- list(u_a = sim_res_a, u_b = sim_res_b, S_words = S_cleaned, A_words = A_cleaned, B_words = B_cleaned)
     class(res) <- append(class(res), c("ect", "sweater"))
     return(res)
 }
