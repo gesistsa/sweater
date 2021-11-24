@@ -1,6 +1,6 @@
 #' @importFrom stats dist predict sd var
 #' @importFrom utils glob2rx head
-#' @importFrom graphics dotchart
+#' @importFrom graphics dotchart abline text
 NULL
 
 #' A subset of the pretrained word2vec word vectors
@@ -57,17 +57,20 @@ read_word2vec <- function(x) {
 
 #' Visualize the bias of words in S
 #'
-#' This function plots the bias of words in `S` as a Cleveland Dot Plot.
+#' For `ect`, this function calls [plot_ect()]. For `mac`, `rnd`, and `semaxis`, this function plots the bias of words in `S` as a Cleveland Dot Plot.
 #' @param x an S3 object returned from mac, rnd, semaxis, nas or rnsb
 #' @return a plot
 #' @author Chung-hong Chan
 #' @export
 plot_bias <- function(x) {
-    if (is.null(x$P)) {
+    if ("ect" %in% class(x)) {
+        plot_ect(x)
+    } else if (is.null(x$P)) {
         stop("No P slot in the input object x.")
+    } else {
+        sortedx <- sort(x$P)
+        graphics::dotchart(sortedx, labels = names(sortedx))
     }
-    sortedx <- sort(x$P)
-    graphics::dotchart(sortedx, labels = names(sortedx))
 }
 
 .purify_class <- function(x) {
@@ -81,7 +84,7 @@ plot_bias <- function(x) {
 #' @param ... additional parameters for the effect size functions
 #' @return the effect size
 #' @author Chung-hong Chan
-#' @seealso [weat_es()], [mac_es()], [rnd_es()], [rnsb_es()] 
+#' @seealso [weat_es()], [mac_es()], [rnd_es()], [rnsb_es()], [ect_es()]
 #' @export
 calculate_es <- function(x, ...) {
     if (!"sweater" %in% class(x)) {
@@ -93,5 +96,6 @@ calculate_es <- function(x, ...) {
            "mac" = mac_es(x),
            "rnd" = rnd_es(x),
            "rnsb" = rnsb_es(x),
+           "ect" = ect_es(x),
            stop("No effect size can be calculated for this query."))
 }

@@ -71,6 +71,18 @@ test_that("nas add na", {
     expect_output(nas(googlenews, S1, A1, append(B1, garbage), verbose = TRUE))
 })
 
+test_that("ect add na", {
+    expect_length(ect(googlenews, append(S1, garbage), A1, B1)$u_a, length(S1))
+    expect_output(ect(googlenews, append(S1, garbage), A1, B1, verbose = TRUE))
+    expect_length(ect(googlenews, append(S1, garbage), A1, B1)$S_words, length(S1))
+    expect_length(ect(googlenews, S1, append(A1, garbage), B1)$u_a, length(S1))
+    expect_length(ect(googlenews, S1, append(A1, garbage), B1)$A_words, length(A1))
+    expect_output(ect(googlenews, S1, append(A1, garbage), B1, verbose = TRUE))
+    expect_length(ect(googlenews, S1, A1, append(B1, garbage))$u_a, length(S1))
+    expect_length(ect(googlenews, S1, A1, append(B1, garbage))$B_words, length(B1))
+    expect_output(ect(googlenews, S1, A1, append(B1, garbage), verbose = TRUE))
+})
+
 test_that("weat add na", {
     expect_output(weat(googlenews, append(S1, garbage), T1, A1, B1, verbose = TRUE))
     expect_output(weat(googlenews, S1, append(T1, garbage), A1, B1, verbose = TRUE))

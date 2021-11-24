@@ -5,8 +5,8 @@
     if (missing(S_words) | missing(A_words)) {
         stop("S_words and A_words must be provided.")
     }
-    if (!method %in% c("guess", "weat", "mac", "nas", "semaxis", "rnsb", "rnd")) {
-        stop("Unkonwn method. Available methods are: guess, weat, mac, nas, semaxis, rnsb, rnd.")
+    if (!method %in% c("guess", "weat", "mac", "nas", "semaxis", "rnsb", "rnd", "ect")) {
+        stop("Unkonwn method. Available methods are: guess, weat, mac, nas, semaxis, rnsb, rnd, ect.")
     }
     if (method == "guess") {
         if (missing(T_words) & missing(B_words)) {
@@ -27,10 +27,10 @@
 #'
 #' This function makes a query based on the supplied parameters.
 #' @param ... additional parameters for the underlying function
-#' @param method string, the method to be used to make the query. Available options are: `weat`, `mac`, `nas`, `semaxis`, `rnsb`, `rnd`, `nas` and `guess`. If `guess`, the function selects the best option for you. 
+#' @param method string, the method to be used to make the query. Available options are: `weat`, `mac`, `nas`, `semaxis`, `rnsb`, `rnd`, `nas`, `ect` and `guess`. If `guess`, the function selects the best option for you. 
 #' @inheritParams weat
 #' @return a sweater S3 object
-#' @seealso [weat()], [mac()], [nas()], [semaxis()], [rnsb()], [rnd()], [nas()]
+#' @seealso [weat()], [mac()], [nas()], [semaxis()], [rnsb()], [rnd()], [nas()], [ect()]
 #' @author Chung-hong Chan
 #' @examples
 #' data(googlenews)
@@ -66,6 +66,7 @@ query <- function(w, S_words, T_words, A_words, B_words, method = "guess", verbo
            "nas" = nas(w = w, S_words = S_words, A_words = A_words, B_words = B_words, verbose = verbose),
            "semaxis" = semaxis(w = w, S_words = S_words, A_words = A_words, B_words = B_words, verbose = verbose, ...),
            "rnsb" = rnsb(w = w, S_words = S_words, A_words = A_words, B_words = B_words, verbose = verbose, ...),
-           "rnd" = rnd(w = w, S_words = S_words, A_words = A_words, B_words = B_words, verbose = verbose)
+           "rnd" = rnd(w = w, S_words = S_words, A_words = A_words, B_words = B_words, verbose = verbose),
+           "ect" = ect(w = w, S_words = S_words, A_words = A_words, B_words = B_words, verbose = verbose)
            )
 }

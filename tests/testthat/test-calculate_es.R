@@ -9,7 +9,8 @@ test_that(".purify", {
     expect_equal(.purify_class(rnsb(glove_math, S1, A1, B1)), "rnsb")
     expect_equal(.purify_class(rnd(glove_math, S1, A1, B1)), "rnd")
     expect_equal(.purify_class(semaxis(glove_math, S1, A1, B1)), "semaxis")
-    expect_equal(.purify_class(nas(glove_math, S1, A1, B1)), "nas")    
+    expect_equal(.purify_class(nas(glove_math, S1, A1, B1)), "nas")
+    expect_equal(.purify_class(ect(glove_math, S1, A1, B1)), "ect")
 })
 
 test_that("error cases", {
@@ -29,5 +30,7 @@ test_that("calculate effect size", {
     rnd_res <- rnd(glove_math, S1, A1, B1)
     expect_equal(rnd_es(rnd_res), calculate_es(rnd_res))
     rnsb_res <- rnsb(glove_math, S1, A1, B1)
-    expect_equal(rnsb_es(rnsb_res), calculate_es(rnsb_res))    
+    expect_equal(rnsb_es(rnsb_res), calculate_es(rnsb_res))
+    ect_res <- ect(glove_math, S1, A1, B1)
+    expect_equal(ect_es(ect_res), calculate_es(ect_res))
 })

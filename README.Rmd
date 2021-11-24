@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
   )
 set.seed(46709394)
+devtools::load_all()
 ```
 
 # sweater <img src="man/figures/sweater_logo.svg" align="right" height="200" />
@@ -26,7 +27,7 @@ The goal of sweater (**S**peedy **W**ord **E**mbedding **A**ssociation **T**est 
 
 The package provides functions that are speedy. They are either implemented in C++, or are speedy but accurate approximation of the original implementation proposed by Caliskan et al (2017).
 
-This package provides extra methods such as Relative Norm Distance, SemAxis and Relative Negative Sentiment Bias.
+This package provides extra methods such as Relative Norm Distance, Embedding Coherence Test, SemAxis and Relative Negative Sentiment Bias.
 
 If your goal is to reproduce the analysis in Caliskan et al (2017), please consider using the [original Java program](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DX4VWP&version=2.0) or the R package [cbn](https://github.com/conjugateprior/cbn) by Lowe. To reproduce the analysis in Garg et al (2018), please consider using the [original Python program](https://github.com/nikhgarg/EmbeddingDynamicStereotypes). To reproduce the analysis in Mazini et al (2019), please consider using the [original Python program](https://github.com/TManzini/DebiasMulticlassWordEmbedding/).
 
@@ -63,6 +64,7 @@ It is recommended to use the function `query()` to make a query and `calculate_e
 | S_words          | A_words          | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac_es()                                    |
 | S_words          | A_words, B_words | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd_es()                                    |
 | S_words          | A_words, B_words | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb_es()                                  |
+| S_words          | A_words, B_words | Embedding Coherence Test (Dev & Phillips. 2019)             | ect(), ect_es(), plot_ect()                        |
 | S_words          | A_words, B_words | SemAxis (An et al. 2018)                                    | semaxis()                                          |
 | S_words          | A_words, B_words | Normalized Association Score (Caliskan et al. 2017)         | nas()                                              |
 | S_words, T_words | A_words, B_words | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat_es(), weat_resampling(), weat_exact() |
@@ -72,9 +74,11 @@ It is recommended to use the function `query()` to make a query and `calculate_e
 
 The simplest form of bias detection is Mean Average Cosine Similarity (Mazini et al. 2019). The same method is used also in Kroon et al. (2020).
 
-```{r mac_neg}
+```{r, eval = FALSE}
 require(sweater)
+```
 
+```{r mac_neg}
 S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
 "photographer", "geologist", "shoemaker", "athlete", "cashier", 
 "dancer", "housekeeper", "accountant", "physicist", "gardener", 
@@ -136,6 +140,25 @@ B2 <- c("disrespect")
 res <- query(small_reddit, S_words = S2, A_words = A2, B_words = B2, method = "semaxis", l = 1)
 plot_bias(res)
 ```
+
+## Example: Embedding Coherence Test
+
+Embedding Coherence Test (Dev & Phillips, 2019) is similar to SemAxis. The only significant different is that no "SemAxis" is calculated (the difference between the average word vectors of `A_words` and `B_words`). Instead, it calculates two separate axes for `A_words` and `B_words`. Then it calculates the proximity of each word in `S_words` with the two axes. It is like doing two separate `mac`, but `ect` averages the word vectors of `A_words` / `B_words` first.
+
+It is important to note that `P` is a 2-D matrix. Hence, the plot is 2-dimensional. Words above the equality line are more associated with `B_words` and vice versa.
+
+```{r ectplot}
+res <- query(googlenews, S_words = S1, A_words = A1, B_words = B1, method = "ect")
+res$P
+plot_bias(res)
+```
+
+Effect size can also be calculated. It is the Spearman Correlation Coefficient of the two rows in `P`. Higher value indicates more "coherent", i.e. less bias.
+
+```{r}
+calculate_es(res)
+```
+
 
 ## Example: Relative Negative Sentiment Bias
 
@@ -311,11 +334,12 @@ Please note that the sweater project is released with a [Contributor Code of Con
 3. Brunet, M. E., Alkalay-Houlihan, C., Anderson, A., & Zemel, R. (2019, May). Understanding the origins of bias in word embeddings. In International Conference on Machine Learning (pp. 803-811). PMLR.
 4. Caliskan, Aylin, Joanna J. Bryson, and Arvind Narayanan. "Semantics derived automatically from language corpora contain human-like biases." Science 356.6334 (2017): 183-186.
 5. Cohen, J. (1988), Statistical Power Analysis for the Behavioral Sciences, 2nd Edition. Hillsdale: Lawrence Erlbaum.
-6. Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644.
-7. Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). Black is to criminal as caucasian is to police: Detecting and removing multiclass bias in word embeddings. arXiv preprint arXiv:1904.04047.
-8. McGrath, R. E., & Meyer, G. J. (2006). When effect sizes disagree: the case of r and d. Psychological methods, 11(4), 386.
-9. Rosenthal, R. (1991), Meta-Analytic Procedures for Social Research. Newbury Park: Sage
-10. Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
-11. Watanabe, K. (2018). Newsmap: A semi-supervised approach to geographical news classification. Digital Journalism, 6(3), 294-309.
+6. Dev, S., & Phillips, J. (2019, April). Attenuating bias in word vectors. In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
+7. Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644.
+8. Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). Black is to criminal as caucasian is to police: Detecting and removing multiclass bias in word embeddings. arXiv preprint arXiv:1904.04047.
+9. McGrath, R. E., & Meyer, G. J. (2006). When effect sizes disagree: the case of r and d. Psychological methods, 11(4), 386.
+10. Rosenthal, R. (1991), Meta-Analytic Procedures for Social Research. Newbury Park: Sage
+11. Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
+12. Watanabe, K. (2018). Newsmap: A semi-supervised approach to geographical news classification. Digital Journalism, 6(3), 294-309.
 
 ---
