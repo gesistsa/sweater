@@ -55,7 +55,7 @@ rnd <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     norm_diff <- norm_a - norm_b
     names(norm_diff) <- S_cleaned
     res <- list(P = norm_diff, S_words = S_cleaned, A_words = A_cleaned, B_words = B_cleaned)
-    class(res) <- append(class(res), c("sweater", "rnd"))
+    class(res) <- append(c("sweater", "rnd"), class(res))
     return(res)
 }
 

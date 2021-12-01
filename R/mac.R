@@ -40,7 +40,7 @@ mac <- function(w, S_words, A_words, verbose = FALSE) {
     mac_dist <- cpp_mac(S_cleaned, A_cleaned, w)
     names(mac_dist) <- S_cleaned
     res <- list(P = mac_dist, S_words = S_cleaned, A_words = A_cleaned)
-    class(res) <- append(class(res), c("sweater", "mac"))
+    class(res) <- append(c("sweater", "mac"), class(res))
     return(res)
 }
 

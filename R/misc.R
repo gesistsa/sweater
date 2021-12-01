@@ -66,7 +66,7 @@ plot_bias <- function(x) {
     if ("ect" %in% class(x)) {
         plot_ect(x)
     } else if (is.null(x$P)) {
-        stop("No P slot in the input object x.")
+        stop("No P slot in the input object x.", .call. = FALSE)
     } else {
         sortedx <- sort(x$P)
         graphics::dotchart(sortedx, labels = names(sortedx))
@@ -88,7 +88,7 @@ plot_bias <- function(x) {
 #' @export
 calculate_es <- function(x, ...) {
     if (!"sweater" %in% class(x)) {
-        stop("The input object x must be a sweater S3 object.")
+        stop("The input object x must be a sweater S3 object.", call. = FALSE)
     }
     class_x <- .purify_class(x)
     switch(class_x,
@@ -97,5 +97,5 @@ calculate_es <- function(x, ...) {
            "rnd" = rnd_es(x),
            "rnsb" = rnsb_es(x),
            "ect" = ect_es(x),
-           stop("No effect size can be calculated for this query."))
+           stop("No effect size can be calculated for this query.", call. = FALSE))
 }

@@ -16,9 +16,15 @@ test_that("weat is not plottable", {
     expect_error(plot_bias(sw))
     expect_error(plot_ect(sw))
     expect_error(save_png(plot_bias(query(glove_math, S_words = S1, A_words= A1, method = "mac"))), NA)
-    expect_error(save_png(plot_bias(query(glove_math, S_words = S1, A_words = A1, B_words = B1, method = "rnd"))), NA)
-    expect_error(save_png(plot_bias(query(glove_math, S_words = S1, A_words = A1, B_words = B1, method = "semaxis"))), NA)
-    expect_error(save_png(plot_bias(query(glove_math, S_words = S1, A_words = A1, B_words = B1, method = "nas"))), NA)
-    expect_error(save_png(plot_bias(query(glove_math, S_words = S1, A_words = A1, B_words = B1, method = "rnsb"))), NA)
-    expect_error(save_png(plot_bias(query(glove_math, S_words = S1, A_words = A1, B_words = B1, method = "ect"))), NA)
+    for (test_types in c("rnd", "semaxis", "nas", "rnsb", "ect")) {
+        expect_error(save_png(plot_bias(query(glove_math, S_words = S1, A_words = A1, B_words = B1, method = test_types))), NA)
+    }
+})
+
+test_that("S3 plot method", {
+    expect_error(plot(sw))
+    expect_error(save_png(plot(query(glove_math, S_words = S1, A_words= A1, method = "mac"))), NA)
+    for (test_types in c("rnd", "semaxis", "nas", "rnsb", "ect")) {
+        expect_error(save_png(plot(query(glove_math, S_words = S1, A_words = A1, B_words = B1, method = test_types))), NA)
+    }
 })

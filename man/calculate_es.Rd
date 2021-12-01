@@ -18,7 +18,7 @@ the effect size
 This function calculates the effect of a query.
 }
 \seealso{
-\code{\link[=weat_es]{weat_es()}}, \code{\link[=mac_es]{mac_es()}}, \code{\link[=rnd_es]{rnd_es()}}, \code{\link[=rnsb_es]{rnsb_es()}}
+\code{\link[=weat_es]{weat_es()}}, \code{\link[=mac_es]{mac_es()}}, \code{\link[=rnd_es]{rnd_es()}}, \code{\link[=rnsb_es]{rnsb_es()}}, \code{\link[=ect_es]{ect_es()}}
 }
 \author{
 Chung-hong Chan

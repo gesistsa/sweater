@@ -99,6 +99,10 @@ A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 "brothers", "uncle", "uncles", "nephew", "nephews")
 
 mac_neg <- query(googlenews, S_words = S1, A_words = A1)
+mac_neg
+```
+
+```{r mac_neg2}
 sort(mac_neg$P)
 ```
 
@@ -113,15 +117,18 @@ B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 )
 
 garg_f1 <- query(googlenews, S_words = S1, A_words = A1, B_words = B1)
+garg_f1
 ```
 
-The function `plot_bias` can be used to plot the bias of each word in S. Words such as "nurse", "midwife" and "librarian" are more associated with female, as indicated by the positive relative norm distance.
+The object can be plotted by the function `plot` to show the bias of each word in S. Words such as "nurse", "midwife" and "librarian" are more associated with female, as indicated by the positive relative norm distance.
 
 ```{r rndplot, fig.height = 12}
-plot_bias(garg_f1)
+plot(garg_f1)
 ```
 
-The effect size is simply the sum of all relative norm distance values (Equation 3 in Garg et al. 2018). The more positive value indicates that words in `S_words` are more associated with `B_words`. As the effect size is negative, it indicates that the concept of occupation is more associated with `A_words`, i.e. male.
+The effect size is simply the sum of all relative norm distance values (Equation 3 in Garg et al. 2018). It is displayed simply by printing the object. You can also use the function `calculate_es` to obtain the numeric result.
+
+The more positive effect size indicates that words in `S_words` are more associated with `B_words`. As the effect size is negative, it indicates that the concept of occupation is more associated with `A_words`, i.e. male.
 
 ```{r}
 calculate_es(garg_f1)
@@ -138,7 +145,7 @@ S2 <- c("mexicans", "asians", "whites", "blacks", "latinos")
 A2 <- c("respect")
 B2 <- c("disrespect")
 res <- query(small_reddit, S_words = S2, A_words = A2, B_words = B2, method = "semaxis", l = 1)
-plot_bias(res)
+plot(res)
 ```
 
 ## Example: Embedding Coherence Test
@@ -150,13 +157,13 @@ It is important to note that `P` is a 2-D matrix. Hence, the plot is 2-dimension
 ```{r ectplot}
 res <- query(googlenews, S_words = S1, A_words = A1, B_words = B1, method = "ect")
 res$P
-plot_bias(res)
+plot(res)
 ```
 
 Effect size can also be calculated. It is the Spearman Correlation Coefficient of the two rows in `P`. Higher value indicates more "coherent", i.e. less bias.
 
 ```{r}
-calculate_es(res)
+res
 ```
 
 
@@ -180,13 +187,13 @@ sn <- query(glove_sweeney, S_words = S3, A_words = bing_pos, B_words = bing_neg,
 The analysis shows that `indian`, `mexican`, and `russian` are more likely to be associated with negative sentiment.
 
 ```{r rnsbplot}
-plot_bias(sn)
+plot(sn)
 ```
 
 The effect size from the analysis is the Kullback–Leibler divergence of P from the uniform distribution. It is extremely close to the value reported in the original paper (0.6225).
 
 ```{r}
-rnsb_es(sn)
+sn
 ```
 
 ## Support for Quanteda Dictionary
@@ -209,14 +216,14 @@ Country-level analysis
 
 ```{r rnsb2, fig.height = 10}
 country_level <- rnsb(w = dictionary_demo, S_words = newsmap_europe, A_words = bing_pos, B_words = bing_neg, levels = 2)
-plot_bias(country_level)
+plot(country_level)
 ```
 
 Region-level analysis
 
 ```{r rnsb3}
 region_level <- rnsb(w = dictionary_demo, S_words = newsmap_europe, A_words = bing_pos, B_words = bing_neg, levels = 1)
-plot_bias(region_level)
+plot(region_level)
 ```
 
 Comparison of the two effect sizes. Please note the much smaller effect size from region-level analysis. It reflects the evener distribution of P across regions than across countries.
@@ -254,7 +261,7 @@ B3 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 )
 
 nas_f1 <- query(googlenews, S_words= S3, A_words = A3, B_words = B3, method = "nas")
-plot_bias(nas_f1)
+plot(nas_f1)
 ```
 
 There is a very strong correlation between NAS and RND.
@@ -277,7 +284,7 @@ B4 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
 sw <- query(glove_math, S4, T4, A4, B4)
 
 # extraction of effect size
-calculate_es(sw)
+sw
 ```
 
 ## A note about the effect size

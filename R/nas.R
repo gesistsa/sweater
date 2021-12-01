@@ -35,6 +35,6 @@ nas <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     P <- purrr::map_dbl(res, .cal_nas_p)
     names(P) <- S_cleaned
     res <- list(P = P, raw = res, S_words = S_cleaned, A_words = A_cleaned, B_words = B_cleaned)
-    class(res) <- append(class(res), c("sweater", "nas"))
+    class(res) <- append(c("sweater", "nas"), class(res))
     return(res)
 }

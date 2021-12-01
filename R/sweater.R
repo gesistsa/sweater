@@ -40,7 +40,7 @@ weat <- function(w, S_words, T_words, A_words, B_words, verbose = FALSE) {
     T_cleaned <- .clean(T_words, w_lab, verbose = verbose)
     T_diff <- cpp_bweat(T_cleaned, A_cleaned, B_cleaned, w)
     res <- list(S_diff = S_diff, T_diff = T_diff, S_words = S_cleaned, T_words = T_cleaned, A_words = A_cleaned, B_words = B_cleaned)
-    class(res) <- append(class(res), c("weat", "sweater"))
+    class(res) <- append(c("sweater", "weat"), class(res))
     return(res)
 }
 

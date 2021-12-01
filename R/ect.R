@@ -56,7 +56,7 @@ ect <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     colnames(P) <- S_cleaned
     rownames(P) <- c("A_words", "B_words")
     res <- list(P = P, u_a = sim_res_a, u_b = sim_res_b, S_words = S_cleaned, A_words = A_cleaned, B_words = B_cleaned)
-    class(res) <- append(class(res), c("ect", "sweater"))
+    class(res) <- append(c("sweater", "ect"), class(res))
     return(res)
 }
 

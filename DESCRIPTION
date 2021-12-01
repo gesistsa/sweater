@@ -23,7 +23,8 @@ Imports:
     quanteda,
     LiblineaR,
     proxy,
-    data.table
+    data.table,
+    cli
 Suggests: 
     covr,
     testthat (>= 3.0.0)

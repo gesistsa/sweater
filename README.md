@@ -123,6 +123,18 @@ A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 "brothers", "uncle", "uncles", "nephew", "nephews")
 
 mac_neg <- query(googlenews, S_words = S1, A_words = A1)
+mac_neg
+#> 
+#> ── sweater object ──────────────────────────────────────────────────────────────
+#> Test type:  mac 
+#> Effect size:  0.1375856
+#> 
+#> ── Functions ───────────────────────────────────────────────────────────────────
+#> • <calculate_es()>: Calculate effect size
+#> • <plot()>: Plot the bias of each individual word
+```
+
+``` r
 sort(mac_neg$P)
 #>         sales      designer     economist       manager      clerical 
 #>  -0.002892495   0.039197285   0.046155954   0.047322071   0.048912403 
@@ -170,23 +182,37 @@ B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 )
 
 garg_f1 <- query(googlenews, S_words = S1, A_words = A1, B_words = B1)
+garg_f1
+#> 
+#> ── sweater object ──────────────────────────────────────────────────────────────
+#> Test type:  rnd 
+#> Effect size:  -6.341598
+#> 
+#> ── Functions ───────────────────────────────────────────────────────────────────
+#> • <calculate_es()>: Calculate effect size
+#> • <plot()>: Plot the bias of each individual word
 ```
 
-The function `plot_bias` can be used to plot the bias of each word in S.
-Words such as “nurse”, “midwife” and “librarian” are more associated
-with female, as indicated by the positive relative norm distance.
+The object can be plotted by the function `plot` to show the bias of
+each word in S. Words such as “nurse”, “midwife” and “librarian” are
+more associated with female, as indicated by the positive relative norm
+distance.
 
 ``` r
-plot_bias(garg_f1)
+plot(garg_f1)
 ```
 
 <img src="man/figures/README-rndplot-1.png" width="100%" />
 
 The effect size is simply the sum of all relative norm distance values
-(Equation 3 in Garg et al. 2018). The more positive value indicates that
-words in `S_words` are more associated with `B_words`. As the effect
-size is negative, it indicates that the concept of occupation is more
-associated with `A_words`, i.e. male.
+(Equation 3 in Garg et al. 2018). It is displayed simply by printing the
+object. You can also use the function `calculate_es` to obtain the
+numeric result.
+
+The more positive effect size indicates that words in `S_words` are more
+associated with `B_words`. As the effect size is negative, it indicates
+that the concept of occupation is more associated with `A_words`,
+i.e. male.
 
 ``` r
 calculate_es(garg_f1)
@@ -207,7 +233,7 @@ S2 <- c("mexicans", "asians", "whites", "blacks", "latinos")
 A2 <- c("respect")
 B2 <- c("disrespect")
 res <- query(small_reddit, S_words = S2, A_words = A2, B_words = B2, method = "semaxis", l = 1)
-plot_bias(res)
+plot(res)
 ```
 
 <img src="man/figures/README-semxaxisplot-1.png" width="100%" />
@@ -265,7 +291,7 @@ res$P
 #>         professor   student     judge   teacher    author secretary   soldier
 #> A_words 0.1604224 0.2540493 0.2008630 0.2675705 0.0828586 0.1211243 0.3599860
 #> B_words 0.1368013 0.3299938 0.2493299 0.3567416 0.1224295 0.1220939 0.3076572
-plot_bias(res)
+plot(res)
 ```
 
 <img src="man/figures/README-ectplot-1.png" width="100%" />
@@ -275,8 +301,15 @@ Coefficient of the two rows in `P`. Higher value indicates more
 “coherent”, i.e. less bias.
 
 ``` r
-calculate_es(res)
-#> [1] 0.7001504
+res
+#> 
+#> ── sweater object ──────────────────────────────────────────────────────────────
+#> Test type:  ect 
+#> Effect size:  0.7001504
+#> 
+#> ── Functions ───────────────────────────────────────────────────────────────────
+#> • <calculate_es()>: Calculate effect size
+#> • <plot()>: Plot the bias of each individual word
 ```
 
 ## Example: Relative Negative Sentiment Bias
@@ -304,7 +337,7 @@ The analysis shows that `indian`, `mexican`, and `russian` are more
 likely to be associated with negative sentiment.
 
 ``` r
-plot_bias(sn)
+plot(sn)
 ```
 
 <img src="man/figures/README-rnsbplot-1.png" width="100%" />
@@ -314,8 +347,15 @@ P from the uniform distribution. It is extremely close to the value
 reported in the original paper (0.6225).
 
 ``` r
-rnsb_es(sn)
-#> [1] 0.6228853
+sn
+#> 
+#> ── sweater object ──────────────────────────────────────────────────────────────
+#> Test type:  rnsb 
+#> Effect size:  0.6228853
+#> 
+#> ── Functions ───────────────────────────────────────────────────────────────────
+#> • <calculate_es()>: Calculate effect size
+#> • <plot()>: Plot the bias of each individual word
 ```
 
 ## Support for Quanteda Dictionary
@@ -406,7 +446,7 @@ Country-level analysis
 
 ``` r
 country_level <- rnsb(w = dictionary_demo, S_words = newsmap_europe, A_words = bing_pos, B_words = bing_neg, levels = 2)
-plot_bias(country_level)
+plot(country_level)
 ```
 
 <img src="man/figures/README-rnsb2-1.png" width="100%" />
@@ -415,7 +455,7 @@ Region-level analysis
 
 ``` r
 region_level <- rnsb(w = dictionary_demo, S_words = newsmap_europe, A_words = bing_pos, B_words = bing_neg, levels = 1)
-plot_bias(region_level)
+plot(region_level)
 ```
 
 <img src="man/figures/README-rnsb3-1.png" width="100%" />
@@ -460,7 +500,7 @@ B3 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 )
 
 nas_f1 <- query(googlenews, S_words= S3, A_words = A3, B_words = B3, method = "nas")
-plot_bias(nas_f1)
+plot(nas_f1)
 ```
 
 <img src="man/figures/README-nasplot-1.png" width="100%" />
@@ -497,8 +537,15 @@ B4 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
 sw <- query(glove_math, S4, T4, A4, B4)
 
 # extraction of effect size
-calculate_es(sw)
-#> [1] 1.055015
+sw
+#> 
+#> ── sweater object ──────────────────────────────────────────────────────────────
+#> Test type:  weat 
+#> Effect size:  1.055015
+#> 
+#> ── Functions ───────────────────────────────────────────────────────────────────
+#> • <calculate_es()>: Calculate effect size
+#> • <weat_resampling()>: Conduct statistical test
 ```
 
 ## A note about the effect size

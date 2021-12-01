@@ -25,10 +25,11 @@
 
 #' A common interface for making query
 #'
-#' This function makes a query based on the supplied parameters.
+#' This function makes a query based on the supplied parameters. The object can then be displayed by the S3 method [print.sweater()] and plotted by [plot.sweater()].
 #' @param ... additional parameters for the underlying function
 #' @param method string, the method to be used to make the query. Available options are: `weat`, `mac`, `nas`, `semaxis`, `rnsb`, `rnd`, `nas`, `ect` and `guess`. If `guess`, the function selects the best option for you. 
 #' @inheritParams weat
+#' @param x a sweater S3 object
 #' @return a sweater S3 object
 #' @seealso [weat()], [mac()], [nas()], [semaxis()], [rnsb()], [rnd()], [nas()], [ect()]
 #' @author Chung-hong Chan
@@ -54,7 +55,8 @@
 #' "herself", "female", "sister", "daughters", "mothers", "women", "girls",
 #' "females", "sisters", "aunt", "aunts", "niece", "nieces")
 #' garg_f1 <- query(googlenews, S_words = S1, A_words = A1, B_words = B1)
-#' plot_bias(garg_f1)
+#' garg_f1
+#' plot(garg_f1)
 #' @export
 query <- function(w, S_words, T_words, A_words, B_words, method = "guess", verbose = FALSE, ...) {
     method <- .guess(w = w, S_words= S_words, T_words= T_words,

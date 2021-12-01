@@ -47,7 +47,7 @@ semaxis <- function(w, S_words, A_words, B_words, l = 0, verbose = FALSE) {
     score <- purrr::map_dbl(S_cleaned, ~ raw_cosine(w[.,,drop = FALSE], axis))
     names(score) <- S_cleaned
     res <- list(P = score, S_words = S_cleaned, A_words = A_cleaned, B_words = B_cleaned, V = axis)
-    class(res) <- append(class(res), c("semaxis", "sweater"))
+    class(res) <- append(c("sweater", "semaxis"), class(res))
     return(res)
 }
 
