@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.11.20)  21 NOV 2021 20:41
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.11.20)  6 DEC 2021 12:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1197,8 +1197,6 @@ lgebra; geometry; calculus; equations; computation; numbers; addition\OMS/cmsy/
 m/n/10 g$
  []
 
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 444.
 File: /usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/
 JOSS-logo.png Graphic file (type bmp)
 </usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/JOSS-
@@ -1212,6 +1210,8 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [2]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 451.
 File: paper_files/figure-latex/rnd-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/rnd-1.pdf>
 File: /usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/
@@ -1240,6 +1240,17 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [4]
+Overfull \hbox (48.41139pt too wide) in paragraph at lines 530--530
+[]\TU/lmtt/m/n/10 ## -- sweater object ----------------------------------------
+---------------------- 
+ []
+
+
+Overfull \hbox (48.41139pt too wide) in paragraph at lines 543--543
+[]\TU/lmtt/m/n/10 ## -- Functions ---------------------------------------------
+---------------------- 
+ []
+
 File: /usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/
 JOSS-logo.png Graphic file (type bmp)
 </usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/JOSS-
@@ -1253,7 +1264,7 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [5]
-Underfull \hbox (badness 1377) in paragraph at lines 681--687
+Underfull \hbox (badness 1377) in paragraph at lines 718--724
 \TU/lmr/m/it/10 2020 Conference on Fairness, Accountability, and Transparency \
 TU/lmr/m/n/10 (pp. 359–368).
  []
@@ -1270,7 +1281,20 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
-[6] (./paper.aux)
+[6]
+File: /usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/
+JOSS-logo.png Graphic file (type bmp)
+</usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/JOSS-
+logo.png>
+
+Package fancyhdr Warning: \headheight is too small (62.59596pt): 
+(fancyhdr)                Make it at least 63.55022pt, for example:
+(fancyhdr)                \setlength{\headheight}{63.55022pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
+
+[7] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: AD63426DE355DEE1CF94044123DE5AC4;994.
 Package logreq Info: Writing requests to 'paper.run.xml'.
@@ -1286,4 +1310,4 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  87i,13n,91p,1194b,804s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on paper.pdf (6 pages).
+Output written on paper.pdf (7 pages).

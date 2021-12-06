@@ -65,6 +65,7 @@ Table: All methods supported by sweater
 | Relative Negative Sentiment Bias [@sweeney2020reducing] | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
 | SemAxis [@an2018semaxis]                                | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
 | Normalized Association Score [@caliskan:2017:S]         | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
+| Embedding Coherence Test [@dev2019attenuating]          | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
 | Word Embedding Association Test [@caliskan:2017:S]      | $\mathcal{S}$, $\mathcal{T}$ | $\mathcal{A}$, $\mathcal{B}$ |
 
 ## Example 1
@@ -99,7 +100,7 @@ B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 res_rnd_male <- query(w = googlenews, S_words = S1,
                       A_words = A1, B_words= B1,
                       method = "rnd")
-plot_bias(res_rnd_male)
+plot(res_rnd_male)
 ```
 
 ![Bias of words in the target wordset according to relative norm distance](paper_files/figure-latex/rnd-1.pdf) 
@@ -123,11 +124,36 @@ B2 <- c("female", "woman", "girl", "sister", "she", "her", "hers",
 sw <- query(w = glove_math,
             S_words = S2, T_words = T2,
             A_words = A2, B_words = B2)
-calculate_es(sw)
+sw
 ```
 
 ```
-## [1] 1.055015
+## 
+```
+
+```
+## -- sweater object --------------------------------------------------------------
+```
+
+```
+## Test type:  weat 
+## Effect size:  1.055015
+```
+
+```
+## 
+```
+
+```
+## -- Functions -------------------------------------------------------------------
+```
+
+```
+## * <calculate_es()>: Calculate effect size
+```
+
+```
+## * <weat_resampling()>: Conduct statistical test
 ```
 
 The statistical significance of the effect size can be evaluated using the function `weat_resampling`.
