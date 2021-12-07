@@ -18,7 +18,9 @@ embeddings.
 
 The package provides functions that are speedy. They are either
 implemented in C++, or are speedy but accurate approximation of the
-original implementation proposed by Caliskan et al (2017).
+original implementation proposed by Caliskan et al (2017). See the
+benchmark
+[here](https://github.com/chainsawriot/sweater/blob/master/paper/benchmark.md).
 
 This package provides extra methods such as Relative Norm Distance,
 Embedding Coherence Test, SemAxis and Relative Negative Sentiment Bias.
@@ -377,7 +379,7 @@ load("tests/testdata/dictionary_demo.rda")
 
 require(quanteda)
 #> Loading required package: quanteda
-#> Package version: 3.1.0
+#> Package version: 3.2.0
 #> Unicode version: 13.0
 #> ICU version: 66.1
 #> Parallel computing: 8 of 8 threads used.

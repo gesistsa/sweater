@@ -25,7 +25,7 @@ devtools::load_all()
 
 The goal of sweater (**S**peedy **W**ord **E**mbedding **A**ssociation **T**est & **E**xtras using **R**) is to test for biases in word embeddings.
 
-The package provides functions that are speedy. They are either implemented in C++, or are speedy but accurate approximation of the original implementation proposed by Caliskan et al (2017).
+The package provides functions that are speedy. They are either implemented in C++, or are speedy but accurate approximation of the original implementation proposed by Caliskan et al (2017). See the benchmark [here](https://github.com/chainsawriot/sweater/blob/master/paper/benchmark.md).
 
 This package provides extra methods such as Relative Norm Distance, Embedding Coherence Test, SemAxis and Relative Negative Sentiment Bias.
 
