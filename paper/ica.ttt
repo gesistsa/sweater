@@ -1,82 +1,91 @@
 \begin{longtable}[]{@{}llll@{}}
-\caption{\label{tab:t1} All methods supported by \{redacted\}}\tabularnewline
+\caption{\label{tab:t1} All methods supported by \texttt{sweater}}\tabularnewline
 \toprule
-\begin{minipage}[b]{0.30\columnwidth}\raggedright
+\begin{minipage}[b]{0.39\columnwidth}\raggedright
 Method\strut
-\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{0.21\columnwidth}\raggedright
 Target words\strut
-\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{0.21\columnwidth}\raggedright
 Attribute words\strut
-\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright
-Functions\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\raggedright
+shorthand\strut
 \end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-\begin{minipage}[b]{0.30\columnwidth}\raggedright
+\begin{minipage}[b]{0.39\columnwidth}\raggedright
 Method\strut
-\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{0.21\columnwidth}\raggedright
 Target words\strut
-\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{0.21\columnwidth}\raggedright
 Attribute words\strut
-\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright
-Functions\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\raggedright
+shorthand\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.30\columnwidth}\raggedright
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
 Mean Average Cosine Similarity (Manzini et al., 2019)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
 \(\mathcal{S}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
 \(\mathcal{A}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
-\texttt{mac}, \texttt{mac\_es}\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+\texttt{mac}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.30\columnwidth}\raggedright
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
 Relative Norm Distance (Garg, Schiebinger, Jurafsky, \& Zou, 2018)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
 \(\mathcal{S}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
 \(\mathcal{A}\), \(\mathcal{B}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
-\texttt{rnd}, \texttt{rnd\_es}\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+\texttt{rnd}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.30\columnwidth}\raggedright
-Relative Negative Sentiment Bias (Sweeney \& Najafian, 2020)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
-\(\mathcal{S}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
-\(\mathcal{A}\), \(\mathcal{B}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
-\texttt{rnsb}, \texttt{rnsb\_es}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.30\columnwidth}\raggedright
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
 SemAxis (An, Kwak, \& Ahn, 2018)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
 \(\mathcal{S}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
 \(\mathcal{A}\), \(\mathcal{B}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
 \texttt{semaxis}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.30\columnwidth}\raggedright
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
 Normalized Association Score (Caliskan et al., 2017)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
 \(\mathcal{S}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
 \(\mathcal{A}\), \(\mathcal{B}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
 \texttt{nas}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.30\columnwidth}\raggedright
-Word Embedding Association Test (Caliskan et al., 2017)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
-\(\mathcal{S}\), \(\mathcal{T}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+Embedding Coherence Test (Dev \& Phillips, 2019)\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\(\mathcal{S}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
 \(\mathcal{A}\), \(\mathcal{B}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
-\texttt{weat}, \texttt{weat\_es}, \texttt{weat\_resampling}, \texttt{weat\_exact}\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+\texttt{ect}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+Relative Negative Sentiment Bias (Sweeney \& Najafian, 2020)\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\(\mathcal{S}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\(\mathcal{A}\), \(\mathcal{B}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+\texttt{rnsb}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+Word Embedding Association Test (Caliskan et al., 2017)\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\(\mathcal{S}\), \(\mathcal{T}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\raggedright
+\(\mathcal{A}\), \(\mathcal{B}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\raggedright
+\texttt{weat}\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}

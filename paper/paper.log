@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.11.20)  6 DEC 2021 12:49
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021) (preloaded format=xelatex 2021.11.20)  7 DEC 2021 13:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1187,11 +1187,11 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 331.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 325.
 [1
 
 ]
-Underfull \hbox (badness 3009) in paragraph at lines 332--340
+Underfull \hbox (badness 3009) in paragraph at lines 335--343
 \OMS/cmsy/m/n/10 S \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 math; a
 lgebra; geometry; calculus; equations; computation; numbers; addition\OMS/cmsy/
 m/n/10 g$
@@ -1211,7 +1211,7 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 
 [2]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 451.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 454.
 File: paper_files/figure-latex/rnd-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/rnd-1.pdf>
 File: /usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/
@@ -1240,13 +1240,13 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [4]
-Overfull \hbox (48.41139pt too wide) in paragraph at lines 530--530
+Overfull \hbox (48.41139pt too wide) in paragraph at lines 533--533
 []\TU/lmtt/m/n/10 ## -- sweater object ----------------------------------------
 ---------------------- 
  []
 
 
-Overfull \hbox (48.41139pt too wide) in paragraph at lines 543--543
+Overfull \hbox (48.41139pt too wide) in paragraph at lines 546--546
 []\TU/lmtt/m/n/10 ## -- Functions ---------------------------------------------
 ---------------------- 
  []
@@ -1264,11 +1264,6 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [5]
-Underfull \hbox (badness 1377) in paragraph at lines 718--724
-\TU/lmr/m/it/10 2020 Conference on Fairness, Accountability, and Transparency \
-TU/lmr/m/n/10 (pp. 359–368).
- []
-
 File: /usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/
 JOSS-logo.png Graphic file (type bmp)
 </usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/JOSS-
@@ -1282,6 +1277,11 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [6]
+Underfull \hbox (badness 1377) in paragraph at lines 721--727
+\TU/lmr/m/it/10 2020 Conference on Fairness, Accountability, and Transparency \
+TU/lmr/m/n/10 (pp. 359–368).
+ []
+
 File: /usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/
 JOSS-logo.png Graphic file (type bmp)
 </usr/local/lib/R/site-library/rticles/rmarkdown/templates/joss/resources/JOSS-
@@ -1304,7 +1304,7 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 Here is how much of TeX's memory you used:
  36341 strings out of 478274
  744531 string characters out of 5855799
- 1515981 words of memory out of 5000000
+ 1514981 words of memory out of 5000000
  56276 multiletter control sequences out of 15000+600000
  410326 words of font info for 78 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
