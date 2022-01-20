@@ -20,10 +20,10 @@ all_b<- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
 
-S1 <- sample(all_s, sample(2:10))
-T1 <- sample(all_s, sample(2:10))
-A1 <- sample(all_a, sample(2:10))
-B1 <- sample(all_b, sample(2:10))
+S1 <- sample(all_s, sample(2:10, size = 1))
+T1 <- sample(all_s, sample(2:10, size = 1))
+A1 <- sample(all_a, sample(2:10, size = 1))
+B1 <- sample(all_b, sample(2:10, size = 1))
 garbage <- "QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ"
 
 test_that("mac add na", {
