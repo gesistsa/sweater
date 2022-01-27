@@ -98,7 +98,13 @@ functions listed below.
 
 The simplest form of bias detection is Mean Average Cosine Similarity
 (Mazini et al. 2019). The same method is used also in Kroon et
-al. (2020).
+al. (2020). `googlenews` is a subset of [the pretrained word2vec word
+embeddings provided by
+Google](https://code.google.com/archive/p/word2vec/).
+
+By default, the `query()` function guesses the method you want to use
+based on the combination of target words and attribute words provided.
+You can also make this explicit by specifying the `method` argument.
 
 ``` r
 require(sweater)
@@ -124,6 +130,8 @@ A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 "male", "brother", "sons", "fathers", "men", "boys", "males", 
 "brothers", "uncle", "uncles", "nephew", "nephews")
 
+## The same as:
+## mac_neg <- query(googlenews, S_words = S1, A_words = A1, method = "mac")
 mac_neg <- query(googlenews, S_words = S1, A_words = A1)
 mac_neg
 #> 
@@ -135,6 +143,11 @@ mac_neg
 #> • <calculate_es()>: Calculate effect size
 #> • <plot()>: Plot the bias of each individual word
 ```
+
+The returned object is an S3 object. Please refer to the help file of
+the method for the definition of all slots (in this case: `?mac`). For
+example, the magnitude of bias for each word is available in the `P`
+slot.
 
 ``` r
 sort(mac_neg$P)
