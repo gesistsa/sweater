@@ -57,7 +57,7 @@ read_word2vec <- function(x) {
 
 #' Visualize the bias of words in S
 #'
-#' For `ect`, this function calls [plot_ect()]. For `mac`, `rnd`, and `semaxis`, this function plots the bias of words in `S` as a Cleveland Dot Plot.
+#' For `ect`, this function calls [plot_ect()]. For other tests (except `weat`), this function plots the bias of words in `S` as a Cleveland Dot Plot. Plotting the result of `weat` is not supported.
 #' @param x an S3 object returned from mac, rnd, semaxis, nas or rnsb
 #' @return a plot
 #' @author Chung-hong Chan
@@ -66,7 +66,7 @@ plot_bias <- function(x) {
     if ("ect" %in% class(x)) {
         plot_ect(x)
     } else if (is.null(x$P)) {
-        stop("No P slot in the input object x.", .call. = FALSE)
+        stop("Plotting the result of this test type (", .purify_class(x),  ") is not supported.", call. = FALSE)
     } else {
         sortedx <- sort(x$P)
         graphics::dotchart(sortedx, labels = names(sortedx))
