@@ -6,6 +6,11 @@ B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
 
 sw <- weat(glove_math, S1, T1, A1, B1)
 
+test_that("named vector for T_diff and S_diff, #27", {
+    expect_false(is.null(names(sw$S_diff)))
+    expect_false(is.null(names(sw$T_diff)))
+})
+
 test_that("resampling", {
     expect_error(weat_resampling(S1))
     expect_error(weat_resampling(sw), NA)
@@ -39,3 +44,4 @@ test_that("exact., reverse", {
     sw3 <- weat(glove_math, T2, S2, A2, B2)
     expect_snapshot(weat_exact(sw3))
 })
+

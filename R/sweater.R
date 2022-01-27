@@ -37,8 +37,10 @@ weat <- function(w, S_words, T_words, A_words, B_words, verbose = FALSE) {
     B_cleaned <- .clean(B_words, w_lab, verbose = verbose)
     S_cleaned <- .clean(S_words, w_lab, verbose = verbose)
     S_diff <- cpp_bweat(S_cleaned, A_cleaned, B_cleaned, w)
+    names(S_diff) <- S_cleaned
     T_cleaned <- .clean(T_words, w_lab, verbose = verbose)
     T_diff <- cpp_bweat(T_cleaned, A_cleaned, B_cleaned, w)
+    names(T_diff) <- T_cleaned
     res <- list(S_diff = S_diff, T_diff = T_diff, S_words = S_cleaned, T_words = T_cleaned, A_words = A_cleaned, B_words = B_cleaned)
     class(res) <- append(c("sweater", "weat"), class(res))
     return(res)
