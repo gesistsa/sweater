@@ -18,7 +18,7 @@ plot_bias(x)
 a plot
 }
 \description{
-For \code{ect}, this function calls \code{\link[=plot_ect]{plot_ect()}}. For \code{mac}, \code{rnd}, and \code{semaxis}, this function plots the bias of words in \code{S} as a Cleveland Dot Plot.
+For \code{ect}, this function calls \code{\link[=plot_ect]{plot_ect()}}. For other tests (except \code{weat}), this function plots the bias of words in \code{S} as a Cleveland Dot Plot. Plotting the result of \code{weat} is not supported.
 }
 \author{
 Chung-hong Chan

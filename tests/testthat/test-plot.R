@@ -14,6 +14,7 @@ test_that("weat is not plottable", {
     B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
     sw <- weat(glove_math, S1, T1, A1, B1)
     expect_error(plot_bias(sw))
+    expect_error(plot_bias(sw), "Plotting the result of this test type \\(weat\\) is not supported.")
     expect_error(plot_ect(sw))
     expect_error(save_png(plot_bias(query(glove_math, S_words = S1, A_words= A1, method = "mac"))), NA)
     for (test_types in c("rnd", "semaxis", "nas", "rnsb", "ect")) {
@@ -28,6 +29,7 @@ test_that("S3 plot method", {
     B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
     sw <- weat(glove_math, S1, T1, A1, B1)
     expect_error(plot(sw))
+    expect_error(plot(sw), "Plotting the result of this test type \\(weat\\) is not supported.")
     expect_error(save_png(plot(query(glove_math, S_words = S1, A_words= A1, method = "mac"))), NA)
     for (test_types in c("rnd", "semaxis", "nas", "rnsb", "ect")) {
         expect_error(save_png(plot(query(glove_math, S_words = S1, A_words = A1, B_words = B1, method = test_types))), NA)
