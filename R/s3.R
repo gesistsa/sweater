@@ -33,12 +33,12 @@ print.sweater <- function(x, ...) {
     cli::cli_h1("Functions")
     cli::cli_ul()
     if (!test_type %in% c("semaxis", "nas")) {
-        cli::cli_li("{.cls calculate_es()}: Calculate effect size")
+        cli::cli_li("{.fun calculate_es}: Calculate effect size")
     }
     if (test_type != "weat") {
-        cli::cli_li("{.cls plot()}: Plot the bias of each individual word")
+        cli::cli_li("{.fun plot}: Plot the bias of each individual word")
     } else {
-        cli::cli_li("{.cls weat_resampling()}: Conduct statistical test")        
+        cli::cli_li("{.fun weat_resampling}: Conduct statistical test")        
     }
 }
 
