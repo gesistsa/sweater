@@ -111,3 +111,36 @@ r_bench <- function(stab_n) {
 res <- map(stab_length, r_bench)
 res %>% map_dfr(~.[1,3]) %>% dplyr::mutate(stab_length = stab_length)
 ```
+
+### versus WEFE
+
+The hidden gem of this package is the function `read_word2vec`. It is so flexible and yet speedy. In the following example, we are going to compare the typical task of the bias detection pipeline:
+
+1. read a pretrained word embedding file (In this case GloVE, 5.3 GB)
+2. do WEAT
+
+`read_word2vec` is based on the C++ based function `data.table::fread` and it can read almost all formats (word2vec, glove, fastText, etc). The entire workflow can be finished in less than a minute.
+
+```{bash}
+time Rscript bench.R
+```
+
+The Python workflow, however, needs to use `gensim` to read the pretained word embedding file and it can't read GLoVE format directly and the file needs to first convert to word2vec [^1]. The `KeyedVectors.load_word2vec_format` is not written in a low-level language and thus is many times slower than `read_word2vec`. And the result reported is not the same as the numbers reported in Caliskan et al.
+
+```{bash}
+time python3 bench.py
+```
+
+## Testing environment
+
+```{r}
+sessionInfo()
+```
+
+```{bash}
+neofetch --stdout
+```
+
+---
+
+[^1]: Actually the only difference between the two format is the GLoVE format doesn't record the dimensionality of the matrix in the first line.
