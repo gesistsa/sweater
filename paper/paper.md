@@ -44,7 +44,7 @@ In this section, I demonstrate how the package can be used to detect biases and 
 
 The input word embedding $w$ is a dense $m\times n$ matrix, where $m$ is the total size of the vocabulary in the training corpus and $n$ is the vector dimension size.
 
-`sweater` supports two types of $w$. For locally trained word embeddings, word embedding outputs from the R packages `word2vec` [@wijffelsword2vec], `rsparse` [@rsparse] and `text2vec` [@selivanov2020tex2vec] are directly supported [^TRAIN]. For pretrained word embeddings obtained online [^SOURCE], they are usually provided in the so-called "word2vec" file format and the function `read_word2vec` reads those files into the supported matrix format.
+`sweater` supports input word embeddings, $w$, in several formats. For locally trained word embeddings, output from the R packages `word2vec` [@wijffelsword2vec], `rsparse` [@rsparse] and `text2vec` [@selivanov2020tex2vec] can be used directly with the packages primary functions, such as `query` [^TRAIN]. Pretrained word embeddings in the so-called "word2vec" file format, such as those obtained online [^SOURCE], can be converted to the dense numeric matrix format required with the `read_word2vec` function.
 
 [^TRAIN]: The vignette of `text2vec` provides a guide on how to locally train word embeddings using the GLoVE algorithm [@pennington:2014:G]. https://cran.r-project.org/web/packages/text2vec/vignettes/glove.html
 
