@@ -145,8 +145,8 @@ mac_neg
 #> Effect size:  0.1375856
 #> 
 #> ── Functions ───────────────────────────────────────────────────────────────────
-#> • <calculate_es()>: Calculate effect size
-#> • <plot()>: Plot the bias of each individual word
+#> • `calculate_es()`: Calculate effect size
+#> • `plot()`: Plot the bias of each individual word
 ```
 
 The returned object is an S3 object. Please refer to the help file of
@@ -209,8 +209,8 @@ garg_f1
 #> Effect size:  -6.341598
 #> 
 #> ── Functions ───────────────────────────────────────────────────────────────────
-#> • <calculate_es()>: Calculate effect size
-#> • <plot()>: Plot the bias of each individual word
+#> • `calculate_es()`: Calculate effect size
+#> • `plot()`: Plot the bias of each individual word
 ```
 
 The object can be plotted by the function `plot` to show the bias of
@@ -328,8 +328,8 @@ res
 #> Effect size:  0.7001504
 #> 
 #> ── Functions ───────────────────────────────────────────────────────────────────
-#> • <calculate_es()>: Calculate effect size
-#> • <plot()>: Plot the bias of each individual word
+#> • `calculate_es()`: Calculate effect size
+#> • `plot()`: Plot the bias of each individual word
 ```
 
 ## Example: Relative Negative Sentiment Bias
@@ -374,8 +374,8 @@ sn
 #> Effect size:  0.6228853
 #> 
 #> ── Functions ───────────────────────────────────────────────────────────────────
-#> • <calculate_es()>: Calculate effect size
-#> • <plot()>: Plot the bias of each individual word
+#> • `calculate_es()`: Calculate effect size
+#> • `plot()`: Plot the bias of each individual word
 ```
 
 ## Support for Quanteda Dictionary
@@ -564,8 +564,8 @@ sw
 #> Effect size:  1.055015
 #> 
 #> ── Functions ───────────────────────────────────────────────────────────────────
-#> • <calculate_es()>: Calculate effect size
-#> • <weat_resampling()>: Conduct statistical test
+#> • `calculate_es()`: Calculate effect size
+#> • `weat_resampling()`: Conduct statistical test
 ```
 
 ## A note about the effect size
