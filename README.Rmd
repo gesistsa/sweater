@@ -74,7 +74,7 @@ It is recommended to use the function `query()` to make a query and `calculate_e
 
 The simplest form of bias detection is Mean Average Cosine Similarity (Mazini et al. 2019). The same method is used also in Kroon et al. (2020). `googlenews` is a subset of [the pretrained word2vec word embeddings provided by Google](https://code.google.com/archive/p/word2vec/).
 
-By default, the `query()` function guesses the method you want to use based on the combination of target words and attribute words provided (see the "Suggested?" column in the above table). You can also make this explicit by specifying the `method` argument. Printing the returned object shows the effect size (if available) as well as the functions that can further process the object: `calculate_es` and `plot`. Please read the help file of the "method_es" function on what is the meaning of the effect size for a specific test. In this case: `?mac_es` and it says: "Mean of all cosine similarity values". 
+By default, the `query()` function guesses the method you want to use based on the combination of target words and attribute words provided (see the "Suggested?" column in the above table). You can also make this explicit by specifying the `method` argument. Printing the returned object shows the effect size (if available) as well as the functions that can further process the object: `calculate_es` and `plot`. Please read the help file of `calculate_es` (`?calculate_es`) on what is the meaning of the effect size for a specific test.
 
 ```{r, eval = FALSE}
 require(sweater)

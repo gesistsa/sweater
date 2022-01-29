@@ -107,9 +107,8 @@ based on the combination of target words and attribute words provided
 explicit by specifying the `method` argument. Printing the returned
 object shows the effect size (if available) as well as the functions
 that can further process the object: `calculate_es` and `plot`. Please
-read the help file of the “method\_es” function on what is the meaning
-of the effect size for a specific test. In this case: `?mac_es` and it
-says: “Mean of all cosine similarity values”.
+read the help file of `calculate_es` (`?calculate_es`) on what is the
+meaning of the effect size for a specific test.
 
 ``` r
 require(sweater)
