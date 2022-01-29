@@ -27,7 +27,12 @@
 #'
 #' This function makes a query based on the supplied parameters. The object can then be displayed by the S3 method [print.sweater()] and plotted by [plot.sweater()].
 #' @param ... additional parameters for the underlying function
-#' @param method string, the method to be used to make the query. Available options are: `weat`, `mac`, `nas`, `semaxis`, `rnsb`, `rnd`, `nas`, `ect` and `guess`. If `guess`, the function selects the best option for you. 
+#' @param method string, the method to be used to make the query. Available options are: `weat`, `mac`, `nas`, `semaxis`, `rnsb`, `rnd`, `nas`, `ect` and `guess`. If "guess", the function selects one of the following methods based on your provided wordsets.
+#' \itemize{
+#' \item{S_words & A_words - }{"mac"}
+#' \item{S_words, A_words & B_words - }{"rnd"}
+#' \item{S_words, T_words, A_words & B_words - }{"weat"}
+#' }
 #' @inheritParams weat
 #' @param x a sweater S3 object
 #' @return a sweater S3 object

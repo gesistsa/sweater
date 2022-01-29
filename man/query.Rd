@@ -29,7 +29,12 @@ query(
 
 \item{B_words}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 
-\item{method}{string, the method to be used to make the query. Available options are: \code{weat}, \code{mac}, \code{nas}, \code{semaxis}, \code{rnsb}, \code{rnd}, \code{nas}, \code{ect} and \code{guess}. If \code{guess}, the function selects the best option for you.}
+\item{method}{string, the method to be used to make the query. Available options are: \code{weat}, \code{mac}, \code{nas}, \code{semaxis}, \code{rnsb}, \code{rnd}, \code{nas}, \code{ect} and \code{guess}. If "guess", the function selects one of the following methods based on your provided wordsets.
+\itemize{
+\item{S_words & A_words - }{"mac"}
+\item{S_words, A_words & B_words - }{"rnd"}
+\item{S_words, T_words, A_words & B_words - }{"weat"}
+}}
 
 \item{verbose}{logical, whether to display information}
 
