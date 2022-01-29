@@ -133,9 +133,9 @@ benchmark_res
     ## # A tibble: 3 × 6
     ##   expression                             min median `itr/sec` mem_alloc `gc/sec`
     ##   <bch:expr>                           <dbl>  <dbl>     <dbl>     <dbl>    <dbl>
-    ## 1 r_weat(glove_math, S2, T2, A2, B2)    1.31   1.35      1         2.35     7.66
-    ## 2 r_weat_c(glove_math, S2, T2, A2, B2)  1.31   1.32      1.00      2.35     9.04
-    ## 3 cpp_weat(glove_math, S2, T2, A2, B2)  1      1         1.22      1        1
+    ## 1 r_weat(glove_math, S2, T2, A2, B2)    12.0   11.4      1.04      2.35     1   
+    ## 2 r_weat_c(glove_math, S2, T2, A2, B2)  12.2   11.7      1         2.35     1.02
+    ## 3 cpp_weat(glove_math, S2, T2, A2, B2)   1      1       10.6       1        1.89
 
 ### Random benchmark
 
@@ -181,13 +181,13 @@ res %>% map_dfr(~.[1,3]) %>% dplyr::mutate(stab_length = stab_length)
     ## # A tibble: 10 × 2
     ##    median stab_length
     ##     <dbl>       <dbl>
-    ##  1   1.08          10
-    ##  2   1             20
-    ##  3   1.06          30
-    ##  4   1             40
-    ##  5   1             50
-    ##  6   1.36          60
-    ##  7   1             70
-    ##  8   1             80
-    ##  9   1.01          90
-    ## 10   1.07         100
+    ##  1  10.7           10
+    ##  2  10.7           20
+    ##  3  10.0           30
+    ##  4  12.9           40
+    ##  5  10.6           50
+    ##  6   8.77          60
+    ##  7   8.89          70
+    ##  8   9.03          80
+    ##  9   9.21          90
+    ## 10   8.64         100
