@@ -75,8 +75,14 @@ Table: All methods supported by sweater
 Relative Norm Distance (RND) [@garg:2018:W] is calculated with two sets of attribute words. The following analysis reproduces the calculation of "women bias" values in @garg:2018:W. The publicly available word2vec word embeddings trained on the Google News corpus is used [@mikolov2013distributed]. Words such as "nurse", "midwife" and "librarian" are more associated with female, as indicated by the positive relative norm distance (Figure 1).
 
 
+
+
 ```r
 library(sweater)
+```
+
+
+```r
 data(googlenews)
 S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
        "photographer", "geologist", "shoemaker", "athlete", "cashier",
@@ -151,11 +157,11 @@ sw
 ```
 
 ```
-## * <calculate_es()>: Calculate effect size
+## * `calculate_es()`: Calculate effect size
 ```
 
 ```
-## * <weat_resampling()>: Conduct statistical test
+## * `weat_resampling()`: Conduct statistical test
 ```
 
 The statistical significance of the effect size can be evaluated using the function `weat_resampling`.
