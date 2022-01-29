@@ -15,6 +15,9 @@ Sum of all relative norm distances
 \description{
 This function calculates the sum of all relative norm distances from the relative norm distance test.
 }
+\references{
+Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644. \doi{10.1073/pnas.1720347115}
+}
 \author{
 Chung-hong Chan
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mac.R
 \name{mac_es}
 \alias{mac_es}
-\title{Calculation of MAC}
+\title{Calculation of MAC Effect Size}
 \usage{
 mac_es(x)
 }
@@ -14,6 +14,9 @@ Mean of all cosine similarity values
 }
 \description{
 This function calculates the mean of cosine distance values
+}
+\references{
+Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). \href{https://arxiv.org/abs/1904.04047}{Black is to criminal as caucasian is to police: Detecting and removing multiclass bias in word embeddings.} arXiv preprint arXiv:1904.04047.
 }
 \author{
 Chung-hong Chan

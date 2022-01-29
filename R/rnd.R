@@ -42,6 +42,8 @@
 #' garg_f1 <- rnd(googlenews, S1, A1, B1)
 #' plot_bias(garg_f1)
 #' @export
+#' @references
+#' Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644. \doi{10.1073/pnas.1720347115}
 rnd <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     ## Cleaning
     w_lab <- rownames(w)
@@ -66,6 +68,8 @@ rnd <- function(w, S_words, A_words, B_words, verbose = FALSE) {
 #' @return Sum of all relative norm distances
 #' @author Chung-hong Chan
 #' @export
+#' @references
+#' Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644. \doi{10.1073/pnas.1720347115}
 rnd_es <- function(x) {
     if (!"rnd" %in% class(x)) {
         stop("x is not created with rnd().", call. = FALSE)

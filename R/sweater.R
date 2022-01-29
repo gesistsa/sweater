@@ -29,7 +29,7 @@
 #' weat_es(sw)
 #' @author Chung-hong Chan
 #' @references
-#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 #' @export 
 weat <- function(w, S_words, T_words, A_words, B_words, verbose = FALSE) {
     w_lab <- rownames(w)
@@ -55,7 +55,7 @@ weat <- function(w, S_words, T_words, A_words, B_words, verbose = FALSE) {
 #' @return the effect size of the query
 #' @author Chung-hong Chan
 #' @references
-#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 #' @examples
 #' # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 #' data(glove_math)
@@ -122,7 +122,7 @@ weat_exact <- function(x) {
 #' @return A list with class \code{"htest"}
 #' @author Chung-hong Chan
 #' @references
-#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 #' @examples
 #' # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 #' data(glove_math)
@@ -164,6 +164,6 @@ weat_resampling <- function(x, n_resampling = 9999) {
 #'
 #' This is a subset of the original pretrained GLoVE word vectors provided by Pennington et al (2017). The same word vectors were used in Caliskan et al. (2017) to study biases.
 #' @references
-#' Pennington, J., Socher, R., & Manning, C. D. (2014, October). Glove: Global vectors for word representation. In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP) (pp. 1532-1543).
-#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+#' Pennington, J., Socher, R., & Manning, C. D. (2014, October). [Glove: Global vectors for word representation.](https://aclanthology.org/D14-1162/) In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP) (pp. 1532-1543).
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 "glove_math"

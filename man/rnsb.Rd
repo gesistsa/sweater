@@ -58,7 +58,7 @@ garg_f1 <- rnsb(googlenews, S1, A1, B1)
 plot_bias(garg_f1)
 }
 \references{
-Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
+Sweeney, C., & Najafian, M. (2019, July). \href{https://aclanthology.org/P19-1162/}{A transparent framework for evaluating unintended demographic bias in word embeddings.} In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 }
 \author{
 Chung-hong Chan

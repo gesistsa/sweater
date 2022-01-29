@@ -26,6 +26,8 @@
 #' \item{\code{$B_words}}{the input B_words}
 #' }
 #' @export
+#' @references
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 nas <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     w_lab <- rownames(w)
     A_cleaned <- .clean(A_words, w_lab, verbose = verbose)

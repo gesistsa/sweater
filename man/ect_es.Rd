@@ -16,7 +16,7 @@ Spearman Coefficient
 This functions calculates the Spearman Coefficient of an Embedding Coherence Test. The value ranges from -1 to +1 and a larger value indicates less bias.
 }
 \references{
-Dev, S., & Phillips, J. (2019, April). Attenuating bias in word vectors. In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
+Dev, S., & Phillips, J. (2019, April). \href{https://proceedings.mlr.press/v89/dev19a.html}{Attenuating bias in word vectors.} In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
 }
 \author{
 Chung-hong Chan

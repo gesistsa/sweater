@@ -31,7 +31,7 @@ sw <- weat(glove_math, S1, T1, A1, B1)
 weat_es(sw)
 }
 \references{
-Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 }
 \author{
 Chung-hong Chan

@@ -48,6 +48,9 @@ A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 x <- mac(googlenews, S1, A1)
 x$P
 }
+\references{
+Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). \href{https://arxiv.org/abs/1904.04047}{Black is to criminal as caucasian is to police: Detecting and removing multiclass bias in word embeddings.} arXiv preprint arXiv:1904.04047.
+}
 \author{
 Chung-hong Chan
 }

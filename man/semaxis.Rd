@@ -41,7 +41,7 @@ B1 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
 semaxis(glove_math, S1, A1, B1, l = 0)$P
 }
 \references{
-An, J., Kwak, H., & Ahn, Y. Y. (2018). SemAxis: A lightweight framework to characterize domain-specific word semantics beyond sentiment. arXiv preprint arXiv:1806.05521.
+An, J., Kwak, H., & Ahn, Y. Y. (2018). \href{https://arxiv.org/abs/1806.05521}{SemAxis: A lightweight framework to characterize domain-specific word semantics beyond sentiment.} arXiv preprint arXiv:1806.05521.
 }
 \author{
 Chung-hong Chan

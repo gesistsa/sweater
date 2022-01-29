@@ -30,6 +30,9 @@ A list with class \code{"nas"} containing the following components:
 \description{
 This functions quantifies the bias in a set of word embeddings by Caliskan et al (2017). In comparison to WEAT introduced in the same paper, this method is more suitable for continuous ground truth data. See Figure 1 and Figure 2 of the original paper.
 }
+\references{
+Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
+}
 \author{
 Chung-hong Chan
 }

@@ -54,6 +54,9 @@ B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 garg_f1 <- rnd(googlenews, S1, A1, B1)
 plot_bias(garg_f1)
 }
+\references{
+Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644. \doi{10.1073/pnas.1720347115}
+}
 \author{
 Chung-hong Chan
 }

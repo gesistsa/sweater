@@ -33,7 +33,7 @@
 #' semaxis(glove_math, S1, A1, B1, l = 0)$P
 #' @author Chung-hong Chan
 #' @references
-#' An, J., Kwak, H., & Ahn, Y. Y. (2018). SemAxis: A lightweight framework to characterize domain-specific word semantics beyond sentiment. arXiv preprint arXiv:1806.05521.
+#' An, J., Kwak, H., & Ahn, Y. Y. (2018). [SemAxis: A lightweight framework to characterize domain-specific word semantics beyond sentiment.](https://arxiv.org/abs/1806.05521) arXiv preprint arXiv:1806.05521.
 #' @export
 semaxis <- function(w, S_words, A_words, B_words, l = 0, verbose = FALSE) {
     w_lab <- rownames(w)
@@ -57,5 +57,5 @@ semaxis <- function(w, S_words, A_words, B_words, l = 0, verbose = FALSE) {
 #' This is a subset of the pretrained word2vec word vectors on Reddit provided by An et al. (2018). With this dataset, you can try with the "l" parameter of [semaxis()] up to 10.
 #' 
 #' @references
-#' An, J., Kwak, H., & Ahn, Y. Y. (2018). SemAxis: A lightweight framework to characterize domain-specific word semantics beyond sentiment. arXiv preprint arXiv:1806.05521.
+#' An, J., Kwak, H., & Ahn, Y. Y. (2018). [SemAxis: A lightweight framework to characterize domain-specific word semantics beyond sentiment.](https://arxiv.org/abs/1806.05521) arXiv preprint arXiv:1806.05521.
 "small_reddit"

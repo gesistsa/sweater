@@ -32,6 +32,8 @@
 #' x <- mac(googlenews, S1, A1)
 #' x$P
 #' @export
+#' @references
+#' Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). [Black is to criminal as caucasian is to police: Detecting and removing multiclass bias in word embeddings.](https://arxiv.org/abs/1904.04047) arXiv preprint arXiv:1904.04047.
 mac <- function(w, S_words, A_words, verbose = FALSE) {
     ## Cleaning
     w_lab <- rownames(w)
@@ -44,7 +46,7 @@ mac <- function(w, S_words, A_words, verbose = FALSE) {
     return(res)
 }
 
-#' Calculation of MAC
+#' Calculation of MAC Effect Size
 #'
 #' This function calculates the mean of cosine distance values
 #' 
@@ -52,6 +54,8 @@ mac <- function(w, S_words, A_words, verbose = FALSE) {
 #' @return Mean of all cosine similarity values
 #' @author Chung-hong Chan
 #' @export
+#' @references
+#' Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). [Black is to criminal as caucasian is to police: Detecting and removing multiclass bias in word embeddings.](https://arxiv.org/abs/1904.04047) arXiv preprint arXiv:1904.04047.
 mac_es <- function(x) {
     if (!"mac" %in% class(x)) {
         stop("x is not created with mac().", call. = FALSE)

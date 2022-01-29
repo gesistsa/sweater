@@ -55,7 +55,7 @@ garg_f1 <- ect(googlenews, S1, A1, B1)
 plot_ect(garg_f1)
 }
 \references{
-Dev, S., & Phillips, J. (2019, April). Attenuating bias in word vectors. In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
+Dev, S., & Phillips, J. (2019, April). \href{https://proceedings.mlr.press/v89/dev19a.html}{Attenuating bias in word vectors.} In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
 }
 \seealso{
 \code{\link[=ect_es]{ect_es()}} can be used to obtain the effect size of the test.
