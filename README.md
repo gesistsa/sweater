@@ -78,27 +78,38 @@ qualify as attribute words because we know they are related to a certain
 gender.
 
 It is recommended to use the function `query()` to make a query and
-`calculate_es()` to calculate the effect size. You can also use the
-functions listed below.
+`calculate_es()` to calculate the effect size.
 
 ## Available methods
 
-| Target words       | Attribute words    | Method                                                      | functions                                             |
-| ------------------ | ------------------ | ----------------------------------------------------------- | ----------------------------------------------------- |
-| S\_words           | A\_words           | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac\_es()                                      |
-| S\_words           | A\_words, B\_words | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd\_es()                                      |
-| S\_words           | A\_words, B\_words | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb\_es()                                    |
-| S\_words           | A\_words, B\_words | Embedding Coherence Test (Dev & Phillips. 2019)             | ect(), ect\_es(), plot\_ect()                         |
-| S\_words           | A\_words, B\_words | SemAxis (An et al. 2018)                                    | semaxis()                                             |
-| S\_words           | A\_words, B\_words | Normalized Association Score (Caliskan et al. 2017)         | nas()                                                 |
-| S\_words, T\_words | A\_words, B\_words | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat\_es(), weat\_resampling(), weat\_exact() |
-| S\_words, T\_words | A\_words, B\_words | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                     |
+| Target words       | Attribute words    | Method                                                      | `method` argument | Suggested by `query`? | legacy functions \[2\]                                |
+| ------------------ | ------------------ | ----------------------------------------------------------- | ----------------- | --------------------- | ----------------------------------------------------- |
+| S\_words           | A\_words           | Mean Average Cosine Similarity (Mazini et al. 2019)         | “mac”             | yes                   | mac(), mac\_es()                                      |
+| S\_words           | A\_words, B\_words | Relative Norm Distance (Garg et al. 2018)                   | “rnd”             | yes                   | rnd(), rnd\_es()                                      |
+| S\_words           | A\_words, B\_words | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | “rnsb”            | no                    | rnsb(), rnsb\_es()                                    |
+| S\_words           | A\_words, B\_words | Embedding Coherence Test (Dev & Phillips. 2019)             | “ect”             | no                    | ect(), ect\_es(), plot\_ect()                         |
+| S\_words           | A\_words, B\_words | SemAxis (An et al. 2018)                                    | “semaxis”         | no                    | semaxis()                                             |
+| S\_words           | A\_words, B\_words | Normalized Association Score (Caliskan et al. 2017)         | “nas”             | no                    | nas()                                                 |
+| S\_words, T\_words | A\_words, B\_words | Word Embedding Association Test (Caliskan et al. 2017)      | “weat”            | yes                   | weat(), weat\_es(), weat\_resampling(), weat\_exact() |
+| S\_words, T\_words | A\_words, B\_words | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented |                       |                                                       |
 
 ## Example: Mean Average Cosine Similarity
 
 The simplest form of bias detection is Mean Average Cosine Similarity
 (Mazini et al. 2019). The same method is used also in Kroon et
-al. (2020).
+al. (2020). `googlenews` is a subset of [the pretrained word2vec word
+embeddings provided by
+Google](https://code.google.com/archive/p/word2vec/).
+
+By default, the `query()` function guesses the method you want to use
+based on the combination of target words and attribute words provided
+(see the “Suggested?” column in the above table). You can also make this
+explicit by specifying the `method` argument. Printing the returned
+object shows the effect size (if available) as well as the functions
+that can further process the object: `calculate_es` and `plot`. Please
+read the help file of the “method\_es” function on what is the meaning
+of the effect size for a specific test. In this case: `?mac_es` and it
+says: “Mean of all cosine similarity values”.
 
 ``` r
 require(sweater)
@@ -124,6 +135,8 @@ A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 "male", "brother", "sons", "fathers", "men", "boys", "males", 
 "brothers", "uncle", "uncles", "nephew", "nephews")
 
+## The same as:
+## mac_neg <- query(googlenews, S_words = S1, A_words = A1, method = "mac")
 mac_neg <- query(googlenews, S_words = S1, A_words = A1)
 mac_neg
 #> 
@@ -135,6 +148,11 @@ mac_neg
 #> • <calculate_es()>: Calculate effect size
 #> • <plot()>: Plot the bias of each individual word
 ```
+
+The returned object is an S3 object. Please refer to the help file of
+the method for the definition of all slots (in this case: `?mac`). For
+example, the magnitude of bias for each word in `S1` is available in the
+`P` slot.
 
 ``` r
 sort(mac_neg$P)
@@ -674,3 +692,6 @@ By contributing to this project, you agree to abide by its terms.
     `T`. Accordingly, they were renamed to `S_words`, `T_words`,
     `A_words`, and `B_words` respectively. But in general, please stop
     using the symbol `T` to represent `TRUE`\!
+
+2.  Please use the `query` function. These functions are kept for
+    backward compatibility.

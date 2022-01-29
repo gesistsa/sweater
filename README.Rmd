@@ -55,24 +55,26 @@ All tests depend on two types of words. The first type, namely, `S_words` and `T
 
 The second type, namely `A_words` and `B_words`, is *attribute words* (or *group words* in Garg et al). These are words with known properties in relation to the bias that one is studying. For example, Caliskan et al. (2017) used gender-related words such as "male", "man", "boy", "brother", "he", "him", "his", "son" to study gender bias. These words qualify as attribute words because we know they are related to a certain gender.
 
-It is recommended to use the function `query()` to make a query and `calculate_es()` to calculate the effect size. You can also use the functions listed below.
+It is recommended to use the function `query()` to make a query and `calculate_es()` to calculate the effect size.
 
 ## Available methods
 
-| Target words     | Attribute words  | Method                                                      | functions                                          |
-|------------------|------------------|-------------------------------------------------------------|----------------------------------------------------|
-| S_words          | A_words          | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac_es()                                    |
-| S_words          | A_words, B_words | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd_es()                                    |
-| S_words          | A_words, B_words | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb_es()                                  |
-| S_words          | A_words, B_words | Embedding Coherence Test (Dev & Phillips. 2019)             | ect(), ect_es(), plot_ect()                        |
-| S_words          | A_words, B_words | SemAxis (An et al. 2018)                                    | semaxis()                                          |
-| S_words          | A_words, B_words | Normalized Association Score (Caliskan et al. 2017)         | nas()                                              |
-| S_words, T_words | A_words, B_words | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat_es(), weat_resampling(), weat_exact() |
-| S_words, T_words | A_words, B_words | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                  |
+| Target words     | Attribute words  | Method                                                      | `method` argument | Suggested by `query`? | legacy functions [^legacy]                         |
+|------------------|------------------|-------------------------------------------------------------|-------------------|-----------------------|----------------------------------------------------|
+| S_words          | A_words          | Mean Average Cosine Similarity (Mazini et al. 2019)         | "mac"             | yes                   | mac(), mac_es()                                    |
+| S_words          | A_words, B_words | Relative Norm Distance (Garg et al. 2018)                   | "rnd"             | yes                   | rnd(), rnd_es()                                    |
+| S_words          | A_words, B_words | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | "rnsb"            | no                    | rnsb(), rnsb_es()                                  |
+| S_words          | A_words, B_words | Embedding Coherence Test (Dev & Phillips. 2019)             | "ect"             | no                    | ect(), ect_es(), plot_ect()                        |
+| S_words          | A_words, B_words | SemAxis (An et al. 2018)                                    | "semaxis"         | no                    | semaxis()                                          |
+| S_words          | A_words, B_words | Normalized Association Score (Caliskan et al. 2017)         | "nas"             | no                    | nas()                                              |
+| S_words, T_words | A_words, B_words | Word Embedding Association Test (Caliskan et al. 2017)      | "weat"            | yes                   | weat(), weat_es(), weat_resampling(), weat_exact() |
+| S_words, T_words | A_words, B_words | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented |                       |                                                    |
 
 ## Example: Mean Average Cosine Similarity
 
-The simplest form of bias detection is Mean Average Cosine Similarity (Mazini et al. 2019). The same method is used also in Kroon et al. (2020).
+The simplest form of bias detection is Mean Average Cosine Similarity (Mazini et al. 2019). The same method is used also in Kroon et al. (2020). `googlenews` is a subset of [the pretrained word2vec word embeddings provided by Google](https://code.google.com/archive/p/word2vec/).
+
+By default, the `query()` function guesses the method you want to use based on the combination of target words and attribute words provided (see the "Suggested?" column in the above table). You can also make this explicit by specifying the `method` argument. Printing the returned object shows the effect size (if available) as well as the functions that can further process the object: `calculate_es` and `plot`. Please read the help file of the "method_es" function on what is the meaning of the effect size for a specific test. In this case: `?mac_es` and it says: "Mean of all cosine similarity values". 
 
 ```{r, eval = FALSE}
 require(sweater)
@@ -98,9 +100,13 @@ A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 "male", "brother", "sons", "fathers", "men", "boys", "males", 
 "brothers", "uncle", "uncles", "nephew", "nephews")
 
+## The same as:
+## mac_neg <- query(googlenews, S_words = S1, A_words = A1, method = "mac")
 mac_neg <- query(googlenews, S_words = S1, A_words = A1)
 mac_neg
 ```
+
+The returned object is an S3 object. Please refer to the help file of the method for the definition of all slots (in this case: `?mac`). For example, the magnitude of bias for each word in `S1` is available in the `P` slot. 
 
 ```{r mac_neg2}
 sort(mac_neg$P)
@@ -350,3 +356,5 @@ Please note that the sweater project is released with a [Contributor Code of Con
 12. Watanabe, K. (2018). Newsmap: A semi-supervised approach to geographical news classification. Digital Journalism, 6(3), 294-309.
 
 ---
+
+[^legacy]: Please use the `query` function. These functions are kept for backward compatibility.
