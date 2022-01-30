@@ -622,6 +622,15 @@ weat_resampling(sw)
 #> 0.02486533
 ```
 
+## How to get help
+
+  - Read the
+    [documentation](https://rdrr.io/github/chainsawriot/sweater/man/)
+  - Search for [issues](https://github.com/chainsawriot/sweater/issues)
+  - If you have further questions about the package, please contact
+    Chung-hong Chan by e-mail, post, or other methods listed on this
+    [page](https://www.mzes.uni-mannheim.de/d7/en/profiles/chung-hong-chan).
+
 ## Contributing
 
 Contributions in the form of feedback, comments, code, and bug report
@@ -630,10 +639,7 @@ are welcome.
   - Fork the source code, modify, and issue a [pull
     request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
   - Issues, bug reports: [File a Github
-    issue](https://github.com/chainsawriot/sweater).
-  - Github is not your thing? Contact Chung-hong Chan by e-mail, post,
-    or other methods listed on this
-    [page](https://www.mzes.uni-mannheim.de/d7/en/profiles/chung-hong-chan).
+    issue](https://github.com/chainsawriot/sweater/issues).
 
 ## Code of Conduct
 
