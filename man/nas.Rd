@@ -7,7 +7,7 @@
 nas(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
+\item{w}{a numeric matrix of word embeddings (e.g. from \code{\link[rsparse:GloVe]{rsparse::GloVe()}})}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -28,7 +28,7 @@ A list with class \code{"nas"} containing the following components:
 }
 }
 \description{
-This functions quantifies the bias in a set of word embeddings by Caliskan et al (2017). In comparison to WEAT introduced in the same paper, this method is more suitable for continuous ground truth data. See Figure 1 and Figure 2 of the original paper.
+This functions quantifies the bias in a set of word embeddings by Caliskan et al (2017). In comparison to WEAT introduced in the same paper, this method is more suitable for continuous ground truth data. See Figure 1 and Figure 2 of the original paper. If possible, please use \code{\link[=query]{query()}} instead.
 }
 \references{
 Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}

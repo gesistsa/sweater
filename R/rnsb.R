@@ -1,9 +1,9 @@
 #' Relative Negative Sentiment Bias
 #'
-#' This function estimate the Relative Negative Sentiment Bias (RNSB) of word embeddings (Sweeney & Najafian, 2019).
+#' This function estimate the Relative Negative Sentiment Bias (RNSB) of word embeddings (Sweeney & Najafian, 2 019). If possible, please use [query()] instead.
 #'
 #' @inheritParams weat
-#' @param levels levels of entries in a hierarchical dictionary that will be applied (see quanteda::dfm_lookup)
+#' @param levels levels of entries in a hierarchical dictionary that will be applied (see [quanteda::dfm_lookup()])
 #' @return A list with class \code{"rnsb"} containing the following components:
 #' \describe{
 #' \item{\code{$classifer}}{ a logistic regression model with L2 regularization trained with LiblineaR}
@@ -72,7 +72,7 @@ rnsb <- function(w, S_words, A_words, B_words, levels = 1, verbose = FALSE) {
 
 #' Calculation the Kullback-Leibler divergence
 #'
-#' This function calculates the Kullback-Leibler divergence of the predicted negative probabilities, P, from the uniform distribution.
+#' This function calculates the Kullback-Leibler divergence of the predicted negative probabilities, P, from the uniform distribution. If possible, please use [calculate_es()] instead.
 #' @param x an rnsb object from the \link{rnsb} function.
 #' @return the Kullback-Leibler divergence.
 #' @author Chung-hong Chan

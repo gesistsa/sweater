@@ -12,7 +12,7 @@
 
 #' Characterise word semantics using the SemAxis framework
 #'
-#' This function calculates the axis and the score using the SemAxis framework proposed in An et al (2018).
+#' This function calculates the axis and the score using the SemAxis framework proposed in An et al (2018). If possible, please use [query()] instead.
 #'
 #' @inheritParams weat
 #' @param l an integer indicates the number of words to augment each word in A and B based on cosine , see An et al (2018). Default to 0 (no augmentation).

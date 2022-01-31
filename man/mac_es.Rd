@@ -13,7 +13,7 @@ mac_es(x)
 Mean of all cosine similarity values
 }
 \description{
-This function calculates the mean of cosine distance values
+This function calculates the mean of cosine distance values. If possible, please use \code{\link[=calculate_es]{calculate_es()}} instead.
 }
 \references{
 Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). \href{https://arxiv.org/abs/1904.04047}{Black is to criminal as caucasian is to police: Detecting and removing multiclass bias in word embeddings.} arXiv preprint arXiv:1904.04047.

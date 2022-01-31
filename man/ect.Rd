@@ -7,7 +7,7 @@
 ect(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
+\item{w}{a numeric matrix of word embeddings (e.g. from \code{\link[rsparse:GloVe]{rsparse::GloVe()}})}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -28,7 +28,7 @@ A list with class \code{"ect"} containing the following components:
 }
 }
 \description{
-This function estimate the Embedding Coherence Test (ECT) of word embeddings (Dev & Philips, 2019).
+This function estimate the Embedding Coherence Test (ECT) of word embeddings (Dev & Philips, 2019). If possible, please use \code{\link[=query]{query()}} instead.
 }
 \examples{
 data(googlenews)

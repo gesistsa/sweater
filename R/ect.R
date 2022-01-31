@@ -1,6 +1,6 @@
 #' Embedding Coherence Test
 #'
-#' This function estimate the Embedding Coherence Test (ECT) of word embeddings (Dev & Philips, 2019).
+#' This function estimate the Embedding Coherence Test (ECT) of word embeddings (Dev & Philips, 2019). If possible, please use [query()] instead.
 #'
 #' @inheritParams weat
 #' @return A list with class \code{"ect"} containing the following components:
@@ -62,7 +62,7 @@ ect <- function(w, S_words, A_words, B_words, verbose = FALSE) {
 
 #' Calculate the Spearman Coefficient of an ECT result
 #'
-#' This functions calculates the Spearman Coefficient of an Embedding Coherence Test. The value ranges from -1 to +1 and a larger value indicates less bias.
+#' This functions calculates the Spearman Coefficient of an Embedding Coherence Test. The value ranges from -1 to +1 and a larger value indicates less bias. If possible, please use [calculate_es()] instead.
 #' @param x an ect object from the [ect()] function.
 #' @return Spearman Coefficient
 #' @author Chung-hong Chan

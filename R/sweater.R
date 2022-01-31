@@ -1,7 +1,7 @@
 #' Speedy Word Embedding Association Test
 #'
-#' This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017).
-#' @param w a numeric matrix of word embeddings (e.g. from rsparse::GloVe)
+#' This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017). If possible, please use [query()] instead.
+#' @param w a numeric matrix of word embeddings (e.g. from [rsparse::GloVe()])
 #' @param S_words a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...
 #' @param T_words a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...
 #' @param A_words a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.
@@ -48,7 +48,7 @@ weat <- function(w, S_words, T_words, A_words, B_words, verbose = FALSE) {
 
 #' Calculation of WEAT effect size
 #'
-#' This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r).
+#' This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r). If possible, please use [calculate_es()] instead.
 #' @param x an object from the \link{weat} function.
 #' @param standardize a boolean to denote whether to correct the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.
 #' @param r a boolean to denote whether convert the effect size to biserial correlation coefficient.

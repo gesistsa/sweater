@@ -7,7 +7,7 @@
 rnd(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
+\item{w}{a numeric matrix of word embeddings (e.g. from \code{\link[rsparse:GloVe]{rsparse::GloVe()}})}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -28,7 +28,7 @@ A list with class \code{"rnd"} containing the following components:
 \code{\link{rnd_es}} can be used to obtain the effect size of the test.
 }
 \description{
-This function calculate the relative norm distance (RND) of word embeddings.
+This function calculate the relative norm distance (RND) of word embeddings. If possible, please use \code{\link[=query]{query()}} instead.
 }
 \examples{
 data(googlenews)

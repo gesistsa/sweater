@@ -6,7 +6,7 @@
 
 #' Relative Norm Distance
 #'
-#' This function calculate the relative norm distance (RND) of word embeddings.
+#' This function calculate the relative norm distance (RND) of word embeddings. If possible, please use [query()] instead.
 #' 
 #' @inheritParams weat
 #' @return A list with class \code{"rnd"} containing the following components:
@@ -63,7 +63,7 @@ rnd <- function(w, S_words, A_words, B_words, verbose = FALSE) {
 
 #' Calculation of sum of all relative norm distances
 #'
-#' This function calculates the sum of all relative norm distances from the relative norm distance test.
+#' This function calculates the sum of all relative norm distances from the relative norm distance test. If possible, please use [calculate_es()] instead.
 #' @param x an object from the function \link{rnd}
 #' @return Sum of all relative norm distances
 #' @author Chung-hong Chan

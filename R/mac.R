@@ -1,9 +1,9 @@
 #' Mean average cosine similarity
 #'
-#' This function calculates the mean average cosine similarity (MAC) score proposed in Manzini et al (2019).
+#' This function calculates the mean average cosine similarity (MAC) score proposed in Manzini et al (2019). If possible, please use [query()] instead.
 #'
 #' @inheritParams weat
-#' @return A list with class \code{"rnd"} containing the following components:
+#' @return A list with class \code{"mac"} containing the following components:
 #' \describe{
 #' \item{\code{$P}}{a vector of cosine similarity values for every word in S_words}
 #' \item{\code{$S_words}}{the input S_words}
@@ -48,7 +48,7 @@ mac <- function(w, S_words, A_words, verbose = FALSE) {
 
 #' Calculation of MAC Effect Size
 #'
-#' This function calculates the mean of cosine distance values
+#' This function calculates the mean of cosine distance values. If possible, please use [calculate_es()] instead.
 #' 
 #' @param x an object from the function \link{mac}
 #' @return Mean of all cosine similarity values

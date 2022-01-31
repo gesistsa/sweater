@@ -7,7 +7,7 @@
 semaxis(w, S_words, A_words, B_words, l = 0, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
+\item{w}{a numeric matrix of word embeddings (e.g. from \code{\link[rsparse:GloVe]{rsparse::GloVe()}})}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -30,7 +30,7 @@ A list with class \code{"semaxis"} containing the following components:
 }
 }
 \description{
-This function calculates the axis and the score using the SemAxis framework proposed in An et al (2018).
+This function calculates the axis and the score using the SemAxis framework proposed in An et al (2018). If possible, please use \code{\link[=query]{query()}} instead.
 }
 \examples{
 data(glove_math)
