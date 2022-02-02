@@ -7,7 +7,7 @@ NULL
 #'
 #' This is a subset of the original pretrained word2vec word vectors trained on Google News. The same word vectors were used in Garg et al. (2018) to study biases.
 #' @references
-#' Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644.
+#' Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644. \doi{10.1073/pnas.1720347115}
 "googlenews"
 
 #' A helper function for reading word2vec format
@@ -80,11 +80,30 @@ plot_bias <- function(x) {
 #' Calculate the effect size of a query
 #'
 #' This function calculates the effect of a query.
-#' @param x an S3 object return from a query, either by the function [query()] or underlying functions such as [mac()]
+#' @param x an S3 object returned from a query, either by the function [query()] or underlying functions such as [mac()]
 #' @param ... additional parameters for the effect size functions
-#' @return the effect size
+#' \describe{
+#' \item{\code{r}}{for `weat`: a boolean to denote whether convert the effect size to biserial correlation coefficient.}
+#' \item{\code{standardize}}{for `weat`: a boolean to denote whether to correct the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d. }
+#' }
+#' @return effect size
 #' @author Chung-hong Chan
+#' @details
+#' The following methods are supported.
+#' \describe{
+#' \item{\code{mac}}{mean cosine distance value. The value makes sense only for comparison (e.g. before and after debiasing). But a lower value indicates greater association between the target words and the attribute words.}
+#' \item{\code{rnd}}{sum of all relative norm distances. It equals to zero when there is no bias.}
+#' \item{\code{rnsb}}{Kullback-Leibler divergence of the predicted negative probabilities, P, from the uniform distribution. A lower value indicates less bias.}
+#' \item{\code{ect}}{Spearman Coefficient of an Embedding Coherence Test. The value ranges from -1 to +1 and a larger value indicates less bias.}
+#' \item{\code{weat}}{The standardized effect size (default) can be interpreted the same way as Cohen's D.}
+#' }
 #' @seealso [weat_es()], [mac_es()], [rnd_es()], [rnsb_es()], [ect_es()]
+#' @references
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
+#' Dev, S., & Phillips, J. (2019, April). [Attenuating bias in word vectors.](https://proceedings.mlr.press/v89/dev19a.html) In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
+#' Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644. \doi{10.1073/pnas.1720347115}
+#' Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). [Black is to criminal as caucasian is to police: Detecting and removing multiclass bias in word embeddings.](https://arxiv.org/abs/1904.04047) arXiv preprint arXiv:1904.04047.
+#' Sweeney, C., & Najafian, M. (2019, July). [A transparent framework for evaluating unintended demographic bias in word embeddings.](https://aclanthology.org/P19-1162/) In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 #' @export
 calculate_es <- function(x, ...) {
     if (!"sweater" %in% class(x)) {

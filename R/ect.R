@@ -1,6 +1,6 @@
 #' Embedding Coherence Test
 #'
-#' This function estimate the Embedding Coherence Test (ECT) of word embeddings (Dev & Philips, 2019).
+#' This function estimate the Embedding Coherence Test (ECT) of word embeddings (Dev & Philips, 2019). If possible, please use [query()] instead.
 #'
 #' @inheritParams weat
 #' @return A list with class \code{"ect"} containing the following components:
@@ -39,7 +39,7 @@
 #' plot_ect(garg_f1)
 #' @author Chung-hong Chan
 #' @references
-#' Dev, S., & Phillips, J. (2019, April). Attenuating bias in word vectors. In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
+#' Dev, S., & Phillips, J. (2019, April). [Attenuating bias in word vectors.](https://proceedings.mlr.press/v89/dev19a.html) In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR. 
 #' @export
 ect <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     w_lab <- rownames(w)
@@ -62,12 +62,12 @@ ect <- function(w, S_words, A_words, B_words, verbose = FALSE) {
 
 #' Calculate the Spearman Coefficient of an ECT result
 #'
-#' This functions calculates the Spearman Coefficient of an Embedding Coherence Test. The value ranges from -1 to +1 and a larger value indicates less bias.
+#' This functions calculates the Spearman Coefficient of an Embedding Coherence Test. The value ranges from -1 to +1 and a larger value indicates less bias. If possible, please use [calculate_es()] instead.
 #' @param x an ect object from the [ect()] function.
 #' @return Spearman Coefficient
 #' @author Chung-hong Chan
 #' @references
-#' Dev, S., & Phillips, J. (2019, April). Attenuating bias in word vectors. In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
+#' Dev, S., & Phillips, J. (2019, April). [Attenuating bias in word vectors.](https://proceedings.mlr.press/v89/dev19a.html) In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
 #' @export
 ect_es <- function(x) {
     if (!"ect" %in% class(x)) {

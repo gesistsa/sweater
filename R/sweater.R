@@ -1,7 +1,7 @@
 #' Speedy Word Embedding Association Test
 #'
-#' This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017).
-#' @param w a numeric matrix of word embeddings (e.g. from rsparse::GloVe)
+#' This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017). If possible, please use [query()] instead.
+#' @param w a numeric matrix of word embeddings (e.g. from [rsparse::GloVe()])
 #' @param S_words a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...
 #' @param T_words a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...
 #' @param A_words a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.
@@ -29,7 +29,7 @@
 #' weat_es(sw)
 #' @author Chung-hong Chan
 #' @references
-#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 #' @export 
 weat <- function(w, S_words, T_words, A_words, B_words, verbose = FALSE) {
     w_lab <- rownames(w)
@@ -48,14 +48,14 @@ weat <- function(w, S_words, T_words, A_words, B_words, verbose = FALSE) {
 
 #' Calculation of WEAT effect size
 #'
-#' This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r).
+#' This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r). If possible, please use [calculate_es()] instead.
 #' @param x an object from the \link{weat} function.
 #' @param standardize a boolean to denote whether to correct the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.
 #' @param r a boolean to denote whether convert the effect size to biserial correlation coefficient.
 #' @return the effect size of the query
 #' @author Chung-hong Chan
 #' @references
-#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 #' @examples
 #' # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 #' data(glove_math)
@@ -122,7 +122,7 @@ weat_exact <- function(x) {
 #' @return A list with class \code{"htest"}
 #' @author Chung-hong Chan
 #' @references
-#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 #' @examples
 #' # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
 #' data(glove_math)
@@ -164,6 +164,6 @@ weat_resampling <- function(x, n_resampling = 9999) {
 #'
 #' This is a subset of the original pretrained GLoVE word vectors provided by Pennington et al (2017). The same word vectors were used in Caliskan et al. (2017) to study biases.
 #' @references
-#' Pennington, J., Socher, R., & Manning, C. D. (2014, October). Glove: Global vectors for word representation. In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP) (pp. 1532-1543).
-#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+#' Pennington, J., Socher, R., & Manning, C. D. (2014, October). [Glove: Global vectors for word representation.](https://aclanthology.org/D14-1162/) In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP) (pp. 1532-1543).
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 "glove_math"

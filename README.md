@@ -38,13 +38,13 @@ program](https://github.com/TManzini/DebiasMulticlassWordEmbedding/).
 
 ## Installation
 
-Recommended: You can install the Github version of sweater with:
+Recommended: install the latest development version
 
 ``` r
-devtools::install_github("chainsawriot/sweater")
+remotes::install_github("chainsawriot/sweater")
 ```
 
-Or the slightly outdated version from CRAN
+or the “stable” release
 
 ``` r
 install.packages("sweater")
@@ -78,21 +78,20 @@ qualify as attribute words because we know they are related to a certain
 gender.
 
 It is recommended to use the function `query()` to make a query and
-`calculate_es()` to calculate the effect size. You can also use the
-functions listed below.
+`calculate_es()` to calculate the effect size.
 
 ## Available methods
 
-| Target words       | Attribute words    | Method                                                      | functions                                             |
-| ------------------ | ------------------ | ----------------------------------------------------------- | ----------------------------------------------------- |
-| S\_words           | A\_words           | Mean Average Cosine Similarity (Mazini et al. 2019)         | mac(), mac\_es()                                      |
-| S\_words           | A\_words, B\_words | Relative Norm Distance (Garg et al. 2018)                   | rnd(), rnd\_es()                                      |
-| S\_words           | A\_words, B\_words | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | rnsb(), rnsb\_es()                                    |
-| S\_words           | A\_words, B\_words | Embedding Coherence Test (Dev & Phillips. 2019)             | ect(), ect\_es(), plot\_ect()                         |
-| S\_words           | A\_words, B\_words | SemAxis (An et al. 2018)                                    | semaxis()                                             |
-| S\_words           | A\_words, B\_words | Normalized Association Score (Caliskan et al. 2017)         | nas()                                                 |
-| S\_words, T\_words | A\_words, B\_words | Word Embedding Association Test (Caliskan et al. 2017)      | weat(), weat\_es(), weat\_resampling(), weat\_exact() |
-| S\_words, T\_words | A\_words, B\_words | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented                                     |
+| Target words       | Attribute words    | Method                                                      | `method` argument | Suggested by `query`? | legacy functions \[2\]                                |
+| ------------------ | ------------------ | ----------------------------------------------------------- | ----------------- | --------------------- | ----------------------------------------------------- |
+| S\_words           | A\_words           | Mean Average Cosine Similarity (Mazini et al. 2019)         | “mac”             | yes                   | mac(), mac\_es()                                      |
+| S\_words           | A\_words, B\_words | Relative Norm Distance (Garg et al. 2018)                   | “rnd”             | yes                   | rnd(), rnd\_es()                                      |
+| S\_words           | A\_words, B\_words | Relative Negative Sentiment Bias (Sweeney & Najafian. 2019) | “rnsb”            | no                    | rnsb(), rnsb\_es()                                    |
+| S\_words           | A\_words, B\_words | Embedding Coherence Test (Dev & Phillips. 2019)             | “ect”             | no                    | ect(), ect\_es(), plot\_ect()                         |
+| S\_words           | A\_words, B\_words | SemAxis (An et al. 2018)                                    | “semaxis”         | no                    | semaxis()                                             |
+| S\_words           | A\_words, B\_words | Normalized Association Score (Caliskan et al. 2017)         | “nas”             | no                    | nas()                                                 |
+| S\_words, T\_words | A\_words, B\_words | Word Embedding Association Test (Caliskan et al. 2017)      | “weat”            | yes                   | weat(), weat\_es(), weat\_resampling(), weat\_exact() |
+| S\_words, T\_words | A\_words, B\_words | Word Embeddings Fairness Evaluation (Badilla et al. 2020)   | To be implemented |                       |                                                       |
 
 ## Example: Mean Average Cosine Similarity
 
@@ -103,8 +102,13 @@ embeddings provided by
 Google](https://code.google.com/archive/p/word2vec/).
 
 By default, the `query()` function guesses the method you want to use
-based on the combination of target words and attribute words provided.
-You can also make this explicit by specifying the `method` argument.
+based on the combination of target words and attribute words provided
+(see the “Suggested?” column in the above table). You can also make this
+explicit by specifying the `method` argument. Printing the returned
+object shows the effect size (if available) as well as the functions
+that can further process the object: `calculate_es` and `plot`. Please
+read the help file of `calculate_es` (`?calculate_es`) on what is the
+meaning of the effect size for a specific test.
 
 ``` r
 require(sweater)
@@ -140,14 +144,14 @@ mac_neg
 #> Effect size:  0.1375856
 #> 
 #> ── Functions ───────────────────────────────────────────────────────────────────
-#> • <calculate_es()>: Calculate effect size
-#> • <plot()>: Plot the bias of each individual word
+#> • `calculate_es()`: Calculate effect size
+#> • `plot()`: Plot the bias of each individual word
 ```
 
 The returned object is an S3 object. Please refer to the help file of
 the method for the definition of all slots (in this case: `?mac`). For
-example, the magnitude of bias for each word is available in the `P`
-slot.
+example, the magnitude of bias for each word in `S1` is available in the
+`P` slot.
 
 ``` r
 sort(mac_neg$P)
@@ -204,8 +208,8 @@ garg_f1
 #> Effect size:  -6.341598
 #> 
 #> ── Functions ───────────────────────────────────────────────────────────────────
-#> • <calculate_es()>: Calculate effect size
-#> • <plot()>: Plot the bias of each individual word
+#> • `calculate_es()`: Calculate effect size
+#> • `plot()`: Plot the bias of each individual word
 ```
 
 The object can be plotted by the function `plot` to show the bias of
@@ -323,8 +327,8 @@ res
 #> Effect size:  0.7001504
 #> 
 #> ── Functions ───────────────────────────────────────────────────────────────────
-#> • <calculate_es()>: Calculate effect size
-#> • <plot()>: Plot the bias of each individual word
+#> • `calculate_es()`: Calculate effect size
+#> • `plot()`: Plot the bias of each individual word
 ```
 
 ## Example: Relative Negative Sentiment Bias
@@ -369,8 +373,8 @@ sn
 #> Effect size:  0.6228853
 #> 
 #> ── Functions ───────────────────────────────────────────────────────────────────
-#> • <calculate_es()>: Calculate effect size
-#> • <plot()>: Plot the bias of each individual word
+#> • `calculate_es()`: Calculate effect size
+#> • `plot()`: Plot the bias of each individual word
 ```
 
 ## Support for Quanteda Dictionary
@@ -559,8 +563,8 @@ sw
 #> Effect size:  1.055015
 #> 
 #> ── Functions ───────────────────────────────────────────────────────────────────
-#> • <calculate_es()>: Calculate effect size
-#> • <weat_resampling()>: Conduct statistical test
+#> • `calculate_es()`: Calculate effect size
+#> • `weat_resampling()`: Conduct statistical test
 ```
 
 ## A note about the effect size
@@ -618,6 +622,15 @@ weat_resampling(sw)
 #> 0.02486533
 ```
 
+## How to get help
+
+  - Read the
+    [documentation](https://rdrr.io/github/chainsawriot/sweater/man/)
+  - Search for [issues](https://github.com/chainsawriot/sweater/issues)
+  - If you have further questions about the package, please contact
+    Chung-hong Chan by e-mail, post, or other methods listed on this
+    [page](https://www.mzes.uni-mannheim.de/d7/en/profiles/chung-hong-chan).
+
 ## Contributing
 
 Contributions in the form of feedback, comments, code, and bug report
@@ -626,10 +639,7 @@ are welcome.
   - Fork the source code, modify, and issue a [pull
     request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
   - Issues, bug reports: [File a Github
-    issue](https://github.com/chainsawriot/sweater).
-  - Github is not your thing? Contact Chung-hong Chan by e-mail, post,
-    or other methods listed on this
-    [page](https://www.mzes.uni-mannheim.de/d7/en/profiles/chung-hong-chan).
+    issue](https://github.com/chainsawriot/sweater/issues).
 
 ## Code of Conduct
 
@@ -687,3 +697,6 @@ By contributing to this project, you agree to abide by its terms.
     `T`. Accordingly, they were renamed to `S_words`, `T_words`,
     `A_words`, and `B_words` respectively. But in general, please stop
     using the symbol `T` to represent `TRUE`\!
+
+2.  Please use the `query` function. These functions are kept for
+    backward compatibility.

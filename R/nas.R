@@ -14,7 +14,7 @@
 
 #' Calculate Normalized Association Score
 #'
-#' This functions quantifies the bias in a set of word embeddings by Caliskan et al (2017). In comparison to WEAT introduced in the same paper, this method is more suitable for continuous ground truth data. See Figure 1 and Figure 2 of the original paper.
+#' This functions quantifies the bias in a set of word embeddings by Caliskan et al (2017). In comparison to WEAT introduced in the same paper, this method is more suitable for continuous ground truth data. See Figure 1 and Figure 2 of the original paper. If possible, please use [query()] instead.
 #' @inheritParams weat
 #' @author Chung-hong Chan
 #' @return A list with class \code{"nas"} containing the following components:
@@ -26,6 +26,8 @@
 #' \item{\code{$B_words}}{the input B_words}
 #' }
 #' @export
+#' @references
+#' Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 nas <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     w_lab <- rownames(w)
     A_cleaned <- .clean(A_words, w_lab, verbose = verbose)

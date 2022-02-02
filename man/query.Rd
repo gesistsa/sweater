@@ -19,7 +19,7 @@ query(
 \method{print}{sweater}(x, ...)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
+\item{w}{a numeric matrix of word embeddings (e.g. from \code{\link[rsparse:GloVe]{rsparse::GloVe()}})}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -29,11 +29,20 @@ query(
 
 \item{B_words}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 
-\item{method}{string, the method to be used to make the query. Available options are: \code{weat}, \code{mac}, \code{nas}, \code{semaxis}, \code{rnsb}, \code{rnd}, \code{nas}, \code{ect} and \code{guess}. If \code{guess}, the function selects the best option for you.}
+\item{method}{string, the method to be used to make the query. Available options are: \code{weat}, \code{mac}, \code{nas}, \code{semaxis}, \code{rnsb}, \code{rnd}, \code{nas}, \code{ect} and \code{guess}. If "guess", the function selects one of the following methods based on your provided wordsets.
+\itemize{
+\item{S_words & A_words - }{"mac"}
+\item{S_words, A_words & B_words - }{"rnd"}
+\item{S_words, T_words, A_words & B_words - }{"weat"}
+}}
 
 \item{verbose}{logical, whether to display information}
 
-\item{...}{additional parameters for the underlying function}
+\item{...}{additional parameters for the underlying function
+\describe{
+\item{\code{l}}{for "semaxis": an integer indicates the number of words to augment each word in A and B based on cosine , see An et al (2018). Default to 0 (no augmentation).}
+\item{\code{levels}}{for "rnsb": levels of entries in a hierarchical dictionary that will be applied (see \code{\link[quanteda:dfm_lookup]{quanteda::dfm_lookup()}})}
+}}
 
 \item{x}{a sweater S3 object}
 }

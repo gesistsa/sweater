@@ -7,7 +7,7 @@
 weat(w, S_words, T_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
+\item{w}{a numeric matrix of word embeddings (e.g. from \code{\link[rsparse:GloVe]{rsparse::GloVe()}})}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -32,7 +32,7 @@ A list with class \code{"weat"} containing the following components:
 \code{\link{weat_es}} can be used to obtain the effect size of the test; \code{\link{weat_resampling}} for a test of significance.
 }
 \description{
-This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017).
+This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017). If possible, please use \code{\link[=query]{query()}} instead.
 }
 \examples{
 # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
@@ -46,7 +46,7 @@ sw <- weat(glove_math, S1, T1, A1, B1)
 weat_es(sw)
 }
 \references{
-Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186.
+Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
 }
 \author{
 Chung-hong Chan

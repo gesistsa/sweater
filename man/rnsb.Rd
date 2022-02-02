@@ -7,7 +7,7 @@
 rnsb(w, S_words, A_words, B_words, levels = 1, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
+\item{w}{a numeric matrix of word embeddings (e.g. from \code{\link[rsparse:GloVe]{rsparse::GloVe()}})}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -15,7 +15,7 @@ rnsb(w, S_words, A_words, B_words, levels = 1, verbose = FALSE)
 
 \item{B_words}{a character vector of the second set of attribute words. In an example of studying gender stereotype, it can include words such as woman, female, she, her.}
 
-\item{levels}{levels of entries in a hierarchical dictionary that will be applied (see quanteda::dfm_lookup)}
+\item{levels}{levels of entries in a hierarchical dictionary that will be applied (see \code{\link[quanteda:dfm_lookup]{quanteda::dfm_lookup()}})}
 
 \item{verbose}{logical, whether to display information}
 }
@@ -31,7 +31,7 @@ A list with class \code{"rnsb"} containing the following components:
 \code{\link{rnsb_es}} can be used to obtain the effect size of the test.
 }
 \description{
-This function estimate the Relative Negative Sentiment Bias (RNSB) of word embeddings (Sweeney & Najafian, 2019).
+This function estimate the Relative Negative Sentiment Bias (RNSB) of word embeddings (Sweeney & Najafian, 2 019). If possible, please use \code{\link[=query]{query()}} instead.
 }
 \examples{
 data(googlenews)
@@ -58,7 +58,7 @@ garg_f1 <- rnsb(googlenews, S1, A1, B1)
 plot_bias(garg_f1)
 }
 \references{
-Sweeney, C., & Najafian, M. (2019, July). A transparent framework for evaluating unintended demographic bias in word embeddings. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
+Sweeney, C., & Najafian, M. (2019, July). \href{https://aclanthology.org/P19-1162/}{A transparent framework for evaluating unintended demographic bias in word embeddings.} In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 1662-1667).
 }
 \author{
 Chung-hong Chan

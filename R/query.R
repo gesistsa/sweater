@@ -27,7 +27,16 @@
 #'
 #' This function makes a query based on the supplied parameters. The object can then be displayed by the S3 method [print.sweater()] and plotted by [plot.sweater()].
 #' @param ... additional parameters for the underlying function
-#' @param method string, the method to be used to make the query. Available options are: `weat`, `mac`, `nas`, `semaxis`, `rnsb`, `rnd`, `nas`, `ect` and `guess`. If `guess`, the function selects the best option for you. 
+#' \describe{
+#' \item{\code{l}}{for "semaxis": an integer indicates the number of words to augment each word in A and B based on cosine , see An et al (2018). Default to 0 (no augmentation).}
+#' \item{\code{levels}}{for "rnsb": levels of entries in a hierarchical dictionary that will be applied (see [quanteda::dfm_lookup()])}
+#' }
+#' @param method string, the method to be used to make the query. Available options are: `weat`, `mac`, `nas`, `semaxis`, `rnsb`, `rnd`, `nas`, `ect` and `guess`. If "guess", the function selects one of the following methods based on your provided wordsets.
+#' \itemize{
+#' \item{S_words & A_words - }{"mac"}
+#' \item{S_words, A_words & B_words - }{"rnd"}
+#' \item{S_words, T_words, A_words & B_words - }{"weat"}
+#' }
 #' @inheritParams weat
 #' @param x a sweater S3 object
 #' @return a sweater S3 object

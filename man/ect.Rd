@@ -7,7 +7,7 @@
 ect(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
+\item{w}{a numeric matrix of word embeddings (e.g. from \code{\link[rsparse:GloVe]{rsparse::GloVe()}})}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -28,7 +28,7 @@ A list with class \code{"ect"} containing the following components:
 }
 }
 \description{
-This function estimate the Embedding Coherence Test (ECT) of word embeddings (Dev & Philips, 2019).
+This function estimate the Embedding Coherence Test (ECT) of word embeddings (Dev & Philips, 2019). If possible, please use \code{\link[=query]{query()}} instead.
 }
 \examples{
 data(googlenews)
@@ -55,7 +55,7 @@ garg_f1 <- ect(googlenews, S1, A1, B1)
 plot_ect(garg_f1)
 }
 \references{
-Dev, S., & Phillips, J. (2019, April). Attenuating bias in word vectors. In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
+Dev, S., & Phillips, J. (2019, April). \href{https://proceedings.mlr.press/v89/dev19a.html}{Attenuating bias in word vectors.} In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
 }
 \seealso{
 \code{\link[=ect_es]{ect_es()}} can be used to obtain the effect size of the test.

@@ -7,7 +7,7 @@
 rnd(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings (e.g. from rsparse::GloVe)}
+\item{w}{a numeric matrix of word embeddings (e.g. from \code{\link[rsparse:GloVe]{rsparse::GloVe()}})}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -28,7 +28,7 @@ A list with class \code{"rnd"} containing the following components:
 \code{\link{rnd_es}} can be used to obtain the effect size of the test.
 }
 \description{
-This function calculate the relative norm distance (RND) of word embeddings.
+This function calculate the relative norm distance (RND) of word embeddings. If possible, please use \code{\link[=query]{query()}} instead.
 }
 \examples{
 data(googlenews)
@@ -53,6 +53,9 @@ B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 "females", "sisters", "aunt", "aunts", "niece", "nieces")
 garg_f1 <- rnd(googlenews, S1, A1, B1)
 plot_bias(garg_f1)
+}
+\references{
+Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644. \doi{10.1073/pnas.1720347115}
 }
 \author{
 Chung-hong Chan
