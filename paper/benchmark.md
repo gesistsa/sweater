@@ -191,3 +191,119 @@ res %>% map_dfr(~.[1,3]) %>% dplyr::mutate(stab_length = stab_length)
     ##  8   9.03          80
     ##  9   9.21          90
     ## 10   8.64         100
+
+### versus WEFE
+
+The hidden gem of this package is the function `read_word2vec`. It is so
+flexible and yet speedy. In the following example, we are going to
+compare the typical task of the bias detection pipeline:
+
+1.  read a pretrained word embedding file (In this case GloVE, 5.3 GB)
+2.  do WEAT
+
+`read_word2vec` is based on the C++ based function `data.table::fread`
+and it can read almost all formats (word2vec, glove, fastText, etc). The
+entire workflow can be finished in less than a minute.
+
+``` bash
+time Rscript bench.R
+```
+
+    ## Loading required package: sweater
+    ## 
+    ## ── sweater object ──────────────────────────────────────────────────────────────
+    ## Test type:  weat 
+    ## Effect size:  1.055015 
+    ## 
+    ## ── Functions ───────────────────────────────────────────────────────────────────
+    ## • <calculate_es()>: Calculate effect size
+    ## • <weat_resampling()>: Conduct statistical test
+    ## 
+    ## real 0m25.089s
+    ## user 1m0.162s
+    ## sys  0m6.879s
+
+The Python workflow, however, needs to use `gensim` to read the
+pretained word embedding file and it can’t read GLoVE format directly
+and the file needs to first convert to word2vec \[1\]. The
+`KeyedVectors.load_word2vec_format` is not written in a low-level
+language and thus is many times slower than `read_word2vec`. And the
+result reported is not the same as the numbers reported in Caliskan et
+al.
+
+``` bash
+time python3 bench.py
+```
+
+    ## {'query_name': 'S and T wrt A and B', 'result': 0.19892264262307435, 'weat': 0.19892264262307435, 'effect_size': 1.0896144272748516, 'p_value': nan}
+    ## 
+    ## real 12m37.665s
+    ## user 12m18.620s
+    ## sys  0m19.261s
+
+## Testing environment
+
+``` r
+sessionInfo()
+```
+
+    ## R version 4.1.2 (2021-11-01)
+    ## Platform: x86_64-pc-linux-gnu (64-bit)
+    ## Running under: Ubuntu 20.04.3 LTS
+    ## 
+    ## Matrix products: default
+    ## BLAS:   /usr/lib/x86_64-linux-gnu/atlas/libblas.so.3.10.3
+    ## LAPACK: /usr/lib/x86_64-linux-gnu/atlas/liblapack.so.3.10.3
+    ## 
+    ## locale:
+    ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+    ##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+    ##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+    ##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+    ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+    ## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+    ## 
+    ## attached base packages:
+    ## [1] compiler  stats     graphics  grDevices utils     datasets  methods  
+    ## [8] base     
+    ## 
+    ## other attached packages:
+    ## [1] bench_1.1.2     sweater_0.1.4   lsa_0.73.2      SnowballC_0.7.0
+    ## [5] purrr_0.3.4    
+    ## 
+    ## loaded via a namespace (and not attached):
+    ##  [1] Rcpp_1.0.8       knitr_1.37       magrittr_2.0.2   tidyselect_1.1.1
+    ##  [5] R6_2.5.1         rlang_1.0.0      fastmap_1.1.0    fansi_1.0.2     
+    ##  [9] dplyr_1.0.7      stringr_1.4.0    tools_4.1.2      xfun_0.29       
+    ## [13] utf8_1.2.2       DBI_1.1.2        cli_3.1.1        htmltools_0.5.2 
+    ## [17] ellipsis_0.3.2   assertthat_0.2.1 yaml_2.2.2       digest_0.6.29   
+    ## [21] tibble_3.1.6     lifecycle_1.0.1  crayon_1.4.2     vctrs_0.3.8     
+    ## [25] glue_1.6.1       evaluate_0.14    rmarkdown_2.11   stringi_1.7.6   
+    ## [29] pillar_1.6.5     generics_0.1.1   profmem_0.6.0    pkgconfig_2.0.3
+
+``` bash
+neofetch --stdout
+```
+
+    ## chainsawriot@mzes153 
+    ## -------------------- 
+    ## OS: Ubuntu 20.04.3 LTS x86_64 
+    ## Host: LIFEBOOK U749 10601736746 
+    ## Kernel: 5.13.0-27-generic 
+    ## Uptime: 1 day, 56 mins 
+    ## Packages: 2850 (dpkg), 23 (snap) 
+    ## Shell: zsh 5.8 
+    ## Resolution: , 1920x1080 
+    ## WM: stumpwm 
+    ## Theme: Yaru-dark [GTK3] 
+    ## Icons: Yaru [GTK3] 
+    ## Terminal: R 
+    ## CPU: Intel i5-8365U (8) @ 4.100GHz 
+    ## GPU: Intel UHD Graphics 620 
+    ## Memory: 7806MiB / 31780MiB
+
+-----
+
+1.  Actually the only difference between the two format is the GLoVE
+    format doesn’t record the dimensionality of the matrix in the first
+    line.
