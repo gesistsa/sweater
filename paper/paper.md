@@ -46,6 +46,8 @@ The input word embedding $w$ is a dense $m\times n$ matrix, where $m$ is the tot
 
 `sweater` supports input word embeddings, $w$, in several formats. For locally trained word embeddings, output from the R packages `word2vec` [@wijffelsword2vec], `rsparse` [@rsparse] and `text2vec` [@selivanov2020tex2vec] can be used directly with the packages primary functions, such as `query` [^TRAIN]. Pretrained word embeddings in the so-called "word2vec" file format, such as those obtained online [^SOURCE], can be converted to the dense numeric matrix format required with the `read_word2vec` function.
 
+The package also provides three trimmed word embeddings for experimentation: `googlenews` [@mikolov2013distributed], `glove_math` [@pennington:2014:G] , and `small_reddit` [@an2018semaxis].
+
 [^TRAIN]: The vignette of `text2vec` provides a guide on how to locally train word embeddings using the GLoVE algorithm [@pennington:2014:G]. https://cran.r-project.org/web/packages/text2vec/vignettes/glove.html
 
 [^SOURCE]: For example, the [pretrained GLoVE word embeddings](https://nlp.stanford.edu/projects/glove/), [pretrained word2vec word embeddings](https://wikipedia2vec.github.io/wikipedia2vec/pretrained/)  and pretrained [fastText word embeddings](https://fasttext.cc/docs/en/english-vectors.html).
@@ -54,7 +56,7 @@ The input word embedding $w$ is a dense $m\times n$ matrix, where $m$ is the tot
 
 `sweater` uses the concept of a *query* [@badilla2020wefe] to study the biases in $w$ and the $\mathcal{S}\mathcal{T}\mathcal{A}\mathcal{B}$ notation from @brunet2019understanding to form a query. A query contains two or more sets of seed words (wordsets selected by people administering the test, sometimes called "seed lexicons" or "dictionaries"). Among these seed wordsets, there should be at least one set of *target words* and one set of *attribute words*.
 
-Target words are words that **should** have no bias and usually represent the concept one would like to probe for biases. For instance, @garg:2018:W investigated the "women bias" of occupation-related words and their target words contain "nurse", "mathematician", and "blacksmith". These words can be used as target words because in an ideal world with no "women bias", these occupation-related words should have no gender association.
+Target words are words that **should** have no bias and usually represent the concept one would like to probe for biases. For instance, @garg:2018:W investigated the "women bias" of occupation-related words and their target words contain "nurse", "mathematician", and "blacksmith". These words can be used as target words because in an ideal world with no "women bias" associated with occupations, these occupation-related words should have no gender association.
 
 Target words are denoted as wordsets $\mathcal{S}$ and $\mathcal{T}$. All methods require $\mathcal{S}$ while $\mathcal{T}$ is only required for WEAT. For instance, the study of gender stereotypes in academic pursuits by @caliskan:2017:S used $\mathcal{S} = \{math, algebra, geometry, calculus, equations, ...\}$ and $\mathcal{T}= \{poetry, art, dance, literature, novel, ...\}$.
 

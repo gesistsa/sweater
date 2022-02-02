@@ -48,6 +48,8 @@ The input word embedding $w$ is a dense $m\times n$ matrix, where $m$ is the tot
 
 `sweater` supports input word embeddings, $w$, in several formats. For locally trained word embeddings, output from the R packages `word2vec` [@wijffelsword2vec], `rsparse` [@rsparse] and `text2vec` [@selivanov2020tex2vec] can be used directly with the packages primary functions, such as `query` [^TRAIN]. Pretrained word embeddings in the so-called "word2vec" file format, such as those obtained online [^SOURCE], can be converted to the dense numeric matrix format required with the `read_word2vec` function.
 
+The package also provides three trimmed word embeddings for experimentation: `googlenews` [@mikolov2013distributed], `glove_math` [@pennington:2014:G] , and `small_reddit` [@an2018semaxis].
+
 [^TRAIN]: The vignette of `text2vec` provides a guide on how to locally train word embeddings using the GLoVE algorithm [@pennington:2014:G]. https://cran.r-project.org/web/packages/text2vec/vignettes/glove.html
 
 [^SOURCE]: For example, the [pretrained GLoVE word embeddings](https://nlp.stanford.edu/projects/glove/), [pretrained word2vec word embeddings](https://wikipedia2vec.github.io/wikipedia2vec/pretrained/)  and pretrained [fastText word embeddings](https://fasttext.cc/docs/en/english-vectors.html).
