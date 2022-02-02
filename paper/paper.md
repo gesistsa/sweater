@@ -56,7 +56,7 @@ The package also provides three trimmed word embeddings for experimentation: `go
 
 ## Query
 
-`sweater` uses the concept of a *query* [@badilla2020wefe] to study the biases in $w$ and the $\mathcal{S}\mathcal{T}\mathcal{A}\mathcal{B}$ notation from @brunet2019understanding to form a query. A query contains two or more sets of seed words (wordsets selected by people administering the test, sometimes called "seed lexicons" or "dictionaries"). Among these seed wordsets, there should be at least one set of *target words* and one set of *attribute words*.
+`sweater` uses the concept of a *query* [@badilla2020wefe] to study the biases in $w$ and the $\mathcal{S}\mathcal{T}\mathcal{A}\mathcal{B}$ notation from @brunet2019understanding to form a query. A query contains two or more sets of seed words (wordsets selected by the individual administering the test, sometimes called "seed lexicons" or "dictionaries"). Among these seed wordsets, there should be at least one set of *target words* and one set of *attribute words*.
 
 Target words are words that **should** have no bias and usually represent the concept one would like to probe for biases. For instance, @garg:2018:W investigated the "women bias" of occupation-related words and their target words contain "nurse", "mathematician", and "blacksmith". These words can be used as target words because in an ideal world with no "women bias" associated with occupations, these occupation-related words should have no gender association.
 
@@ -150,7 +150,7 @@ sw
 ```
 
 ```
-## -- sweater object -----------------------------------------------------------------------------
+## -- sweater object --------------------------------------------------------------
 ```
 
 ```
@@ -163,7 +163,7 @@ sw
 ```
 
 ```
-## -- Functions ----------------------------------------------------------------------------------
+## -- Functions -------------------------------------------------------------------
 ```
 
 ```
