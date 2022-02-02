@@ -52,9 +52,11 @@ The input word embedding $w$ is a dense $m\times n$ matrix, where $m$ is the tot
 
 ## Query
 
-`sweater` uses the concept of *query* [@badilla2020wefe] to study the biases in $w$. A query contains two or more sets of seed words with at least one set of *target words* and one set of *attribute words*. `sweater` uses the $\mathcal{S}\mathcal{T}\mathcal{A}\mathcal{B}$ notation from @brunet2019understanding to form a query.
+`sweater` uses the concept of a *query* [@badilla2020wefe] to study the biases in $w$ and the $\mathcal{S}\mathcal{T}\mathcal{A}\mathcal{B}$ notation from @brunet2019understanding to form a query. A query contains two or more sets of seed words (wordsets selected by people administering the test, sometimes called "seed lexicons" or "dictionaries"). Among these seed wordsets, there should be at least one set of *target words* and one set of *attribute words*.
 
-Target words are words that **should** have no bias. They are denoted as wordsets $\mathcal{S}$ and $\mathcal{T}$. All methods require $\mathcal{S}$ while $\mathcal{T}$ is only required for WEAT. For instance, the study of gender stereotypes in academic pursuits by @caliskan:2017:S used $\mathcal{S} = \{math, algebra, geometry, calculus, equations, computation, numbers, addition\}$ and $\mathcal{T}= \{poetry, art, dance, literature, novel, symphony, drama, sculpture\}$.
+Target words are words that **should** have no bias and usually represent the concept one would like to probe for biases. For instance, @garg:2018:W investigated the "women bias" of occupation-related words and their target words contain "nurse", "mathematician", and "blacksmith". These words can be used as target words because in an ideal world with no "women bias", these occupation-related words should have no gender association.
+
+Target words are denoted as wordsets $\mathcal{S}$ and $\mathcal{T}$. All methods require $\mathcal{S}$ while $\mathcal{T}$ is only required for WEAT. For instance, the study of gender stereotypes in academic pursuits by @caliskan:2017:S used $\mathcal{S} = \{math, algebra, geometry, calculus, equations, ...\}$ and $\mathcal{T}= \{poetry, art, dance, literature, novel, ...\}$.
 
 Attribute words are words that have known properties in relation to the bias. They are denoted as wordsets $\mathcal{A}$ and $\mathcal{B}$. All methods require both wordsets except Mean Average Cosine Similarity [@manzini2019black]. For instance, the study of gender stereotypes by @caliskan:2017:S used $\mathcal{A} = \{he, son, his, him, ...\}$ and $\mathcal{B} = \{she, daughter, hers, her, ...\}$. In some applications, popular off-the-shelf sentiment dictionaries can also be used as $\mathcal{A}$ and $\mathcal{B}$ [e.g. @sweeney2020reducing]. That being said, it is up to the researchers to select and derive these seed words in a query. However, the selection of seed words has been shown to be the most consequential part of the entire analysis [@antoniak2021bad;@du2021assessing]. Please read @antoniak2021bad for recommendations.
 
@@ -155,11 +157,11 @@ sw
 ```
 
 ```
-## * <calculate_es()>: Calculate effect size
+## * `calculate_es()`: Calculate effect size
 ```
 
 ```
-## * <weat_resampling()>: Conduct statistical test
+## * `weat_resampling()`: Conduct statistical test
 ```
 
 The statistical significance of the effect size can be evaluated using the function `weat_resampling`.
