@@ -93,11 +93,14 @@ weat_es <- function(x, standardize = TRUE, r = FALSE) {
     return(es)
 }
 
-.exact_test <- function(S_diff, T_diff) {
-    s_length <- length(S_diff)
+.exact_test <- function(S_diff, T_diff, test_stat) {
     union_diff <- c(S_diff, T_diff)
+    labels <- c(rep(TRUE, length(S_diff)), rep(FALSE, length(T_diff)))
     test_stat <- (mean(S_diff) - mean(T_diff))
-    return(cpp_exact(union_diff, test_stat, s_length))
+    permutations <- combinat::permn(union_diff)
+    st_diff <- purrr::map_dbl(permutations, ~ mean(.[labels]) - mean(.[!labels]))
+    p <- sum(st_diff > test_stat) / length(permutations)
+    return(p)
 }
 
 #' @rdname weat_resampling
@@ -108,7 +111,7 @@ weat_exact <- function(x) {
     if (length(c(S_diff, T_diff)) > 10) {
         warning("Exact test would take a long time. Use sweater_resampling or sweater_boot (to be implemented) instead.")
     }
-    p_value <- .exact_test(S_diff, T_diff)
+    p_value <- .exact_test(S_diff, T_diff, test_stat)    
     res <- list(null.value = NULL, alternative = "greater", method = "The exact test in Caliskan et al. (2017)", estimate = NULL, data.name = deparse(substitute(x)), statistic = NULL, p.value = p_value)
     class(res) <- "htest"
     return(res)
@@ -152,8 +155,6 @@ weat_resampling <- function(x, n_resampling = 9999) {
     n_alter <- sum(st_diff > test_stat)
     p <- n_alter / n_resampling
     null_value <- mean(st_diff)
-    attr(null_value, "names") <- "bias"
-    para <- null_value
     attr(null_value, "names") <- "bias"
     res <- list(null.value = null_value, alternative = "greater", method = "Resampling approximation of the exact test in Caliskan et al. (2017)", estimate = test_stat, data.name = deparse(substitute(x)), statistic = test_stat, p.value = p)
     class(res) <- "htest"

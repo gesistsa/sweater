@@ -84,30 +84,29 @@ NumericVector cpp_nas(String& c, CharacterVector& A, NumericMatrix& glove_mat) {
 
 // Statistical test
 
-// [[Rcpp::export]]
-double cpp_exact(NumericVector union_diff, double test_stat, int s_length) {
-    long long int iter = 0;
-    long long int pos = 0;
-    int union_length = union_diff.size();
-    NumericVector union_here = clone(union_diff);
-    std::sort(union_here.begin(), union_here.end());
-    double a = 0.0;
-    double b = 0.0;
-    double c = 0.0;
-    do {
-	Rcpp::checkUserInterrupt();
-	iter += 1;
-	for (int j = 0; j < s_length; j ++) {
-	    a += union_here[j];
-	}
-	for (int k = s_length; k < union_length; k++) {
-	    b += union_here[k];
-	}
-	c = (a / s_length) - (b / (union_length - s_length));
-	if (c > test_stat) {
-	    pos += 1;
-	}
-    } while (std::next_permutation(union_here.begin(), union_here.end()));
-    double ans = pos / (iter * 1.0);
-    return ans;
-}
+// double cpp_exact(NumericVector union_diff, double test_stat, int s_length) {
+//     long long int iter = 0;
+//     long long int pos = 0;
+//     int union_length = union_diff.size();
+//     NumericVector union_here = clone(union_diff);
+//     std::sort(union_here.begin(), union_here.end());
+//     double a = 0.0;
+//     double b = 0.0;
+//     double c = 0.0;
+//     do {
+// 	Rcpp::checkUserInterrupt();
+// 	iter += 1;
+// 	for (int j = 0; j < s_length; j ++) {
+// 	    a += union_here[j];
+// 	}
+// 	for (int k = s_length; k < union_length; k++) {
+// 	    b += union_here[k];
+// 	}
+// 	c = (a / s_length) - (b / (union_length - s_length));
+// 	if (c > test_stat) {
+// 	    pos += 1;
+// 	}
+//     } while (std::next_permutation(union_here.begin(), union_here.end()));
+//     double ans = pos / (iter * 1.0);
+//     return ans;
+// }

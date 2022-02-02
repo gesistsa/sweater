@@ -39,7 +39,7 @@
       	The exact test in Caliskan et al. (2017)
       
       data:  sw2
-      p-value < 2.2e-16
+      p-value = 0.15
       alternative hypothesis: greater
       
 
@@ -52,7 +52,7 @@
       	The exact test in Caliskan et al. (2017)
       
       data:  sw3
-      p-value = 0.001389
+      p-value = 0.8
       alternative hypothesis: greater
       
 

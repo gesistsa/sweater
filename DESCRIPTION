@@ -1,6 +1,6 @@
 Package: sweater
 Title: Speedy Word Embedding Association Test and Extras Using R
-Version: 0.1.4
+Version: 0.1.5
 Authors@R: 
     person(given = "Chung-hong",
            family = "Chan",
@@ -24,10 +24,15 @@ Imports:
     LiblineaR,
     proxy,
     data.table,
-    cli
+    cli,
+    combinat
 Suggests: 
+    knitr,
     covr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    rmarkdown,
+    bench
 Config/testthat/edition: 3
 Depends: 
     R (>= 3.5)
+VignetteBuilder: knitr

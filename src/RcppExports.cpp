@@ -76,19 +76,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_exact
-double cpp_exact(NumericVector union_diff, double test_stat, int s_length);
-RcppExport SEXP _sweater_cpp_exact(SEXP union_diffSEXP, SEXP test_statSEXP, SEXP s_lengthSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type union_diff(union_diffSEXP);
-    Rcpp::traits::input_parameter< double >::type test_stat(test_statSEXP);
-    Rcpp::traits::input_parameter< int >::type s_length(s_lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_exact(union_diff, test_stat, s_length));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_sweater_raw_cosine", (DL_FUNC) &_sweater_raw_cosine, 2},
@@ -96,7 +83,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sweater_cpp_bweat", (DL_FUNC) &_sweater_cpp_bweat, 4},
     {"_sweater_cpp_mac", (DL_FUNC) &_sweater_cpp_mac, 3},
     {"_sweater_cpp_nas", (DL_FUNC) &_sweater_cpp_nas, 3},
-    {"_sweater_cpp_exact", (DL_FUNC) &_sweater_cpp_exact, 3},
     {NULL, NULL, 0}
 };
 
