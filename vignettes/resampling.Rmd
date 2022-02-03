@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The original significance test proposed by Caliskan et al. in their paper is based on exact inference using a permutaion approach. This package provides such an exact test. But like any permutation test (such as Fisher's exact test), the number of permuations, as well as the running time, grows exponentially with the number of samples (in the case, the total length of S and T).
+The original significance test proposed by Caliskan et al. in their paper is based on exact inference using a permutaion approach. This package provides such an exact test. But like any permutation test (such as Fisher's exact test), the number of permuations, as well as the running time, grows *factorially* --- O(n!) ---  with the number of samples (in the case, the total length of S and T). In the "math vs poetry" example used extensively in this package, the total length of S and T is 16. The total number of iterations needed is 16! = 20922789888000. The number grows 306x to 18! = 6402373705728000 by just adding one item each to S and T. It is unrealistic to expect an ordinary computer can do such computation within a reasonable time frame.
 
 In the following benchmark, we studied how much time does it take to finish an exact test with the word set with a length of 2 to 4. I actually don't recommend trying anything beyond 6; it would take probably a few hours, days even. And actually, the function `weat_exact` will warn you about that.
 
