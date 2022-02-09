@@ -73,7 +73,7 @@ The same implementation in C++ from `sweater`
 ```{r}
 calculate_es(query(glove_math, S2, T2, A2, B2))
 cpp_weat <- function(w, S, T, A, B) {
-    calculate_es(query(w, S, T, A, B))
+     calculate_es(query(w, S, T, A, B))
 }
 ```
 
@@ -121,14 +121,23 @@ The hidden gem of this package is the function `read_word2vec`. It is so flexibl
 
 `read_word2vec` is based on the C++ based function `data.table::fread` and it can read almost all formats (word2vec, glove, fastText, etc). The entire workflow can be finished in less than a minute.
 
-```{bash}
+```{bash, engine.opts='-l'}
 time Rscript bench.R
 ```
 
 The Python workflow, however, needs to use `gensim` to read the pretained word embedding file and it can't read GLoVE format directly and the file needs to first convert to word2vec [^1]. The `KeyedVectors.load_word2vec_format` is not written in a low-level language and thus is many times slower than `read_word2vec`. And the result reported is not the same as the numbers reported in Caliskan et al.
 
-```{bash}
+```{bash, engine.opts='-l'}
 time python3 bench.py
+```
+
+### versus the original Java code
+
+The original Java code by Caliskan et al. is extremely fast because the code is highly optimized. If all you need to do is WEAT and you know how to write Java, it is recommended using the Java code.
+
+```{bash, engine.opts='-l'}
+## javac -cp ./lib/commons-lang3-3.3.2.jar:./lib/commons-math3-3.6.1.jar WeatBenchmark.java Utils.java
+time java -classpath .:./lib/commons-lang3-3.3.2.jar:./lib/commons-math3-3.6.1.jar WeatBenchmark
 ```
 
 ## Testing environment

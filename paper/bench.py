@@ -8,7 +8,7 @@ from gensim.test.utils import datapath, get_tmpfile
 # load_word2vec_format can't read glove file directly.
 # if you want to do it "directly"
 
-glove_file = datapath('/home/chainsawriot/dev/sweater/raw_data/glove.840B.300d.txt')
+glove_file = datapath('/home/chainsawriot/dev/sweater/paper/glove.840B.300d.txt')
 
 tmp_file = get_tmpfile("test_word2vec.txt")
 

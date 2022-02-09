@@ -1,6 +1,6 @@
 require(sweater)
 
-big_glove <- read_word2vec("../raw_data/glove.840B.300d.txt")
+big_glove <- read_word2vec("glove.840B.300d.txt")
 
 S2 <- c("math", "algebra", "geometry", "calculus", "equations",
         "computation", "numbers", "addition")

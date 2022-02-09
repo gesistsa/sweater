@@ -108,7 +108,7 @@ calculate_es(query(glove_math, S2, T2, A2, B2))
 
 ``` r
 cpp_weat <- function(w, S, T, A, B) {
-    calculate_es(query(w, S, T, A, B))
+     calculate_es(query(w, S, T, A, B))
 }
 ```
 
@@ -133,9 +133,9 @@ benchmark_res
     ## # A tibble: 3 × 6
     ##   expression                             min median `itr/sec` mem_alloc `gc/sec`
     ##   <bch:expr>                           <dbl>  <dbl>     <dbl>     <dbl>    <dbl>
-    ## 1 r_weat(glove_math, S2, T2, A2, B2)    12.0   11.4      1.04      2.35     1   
-    ## 2 r_weat_c(glove_math, S2, T2, A2, B2)  12.2   11.7      1         2.35     1.02
-    ## 3 cpp_weat(glove_math, S2, T2, A2, B2)   1      1       10.6       1        1.89
+    ## 1 r_weat(glove_math, S2, T2, A2, B2)    14.3   13.1      1         2.35     1   
+    ## 2 r_weat_c(glove_math, S2, T2, A2, B2)  13.7   13.1      1.06      2.35     1.15
+    ## 3 cpp_weat(glove_math, S2, T2, A2, B2)   1      1       13.5       1        2.50
 
 ### Random benchmark
 
@@ -181,16 +181,16 @@ res %>% map_dfr(~.[1,3]) %>% dplyr::mutate(stab_length = stab_length)
     ## # A tibble: 10 × 2
     ##    median stab_length
     ##     <dbl>       <dbl>
-    ##  1  10.7           10
-    ##  2  10.7           20
-    ##  3  10.0           30
-    ##  4  12.9           40
-    ##  5  10.6           50
-    ##  6   8.77          60
-    ##  7   8.89          70
-    ##  8   9.03          80
-    ##  9   9.21          90
-    ## 10   8.64         100
+    ##  1  10.8           10
+    ##  2  10.1           20
+    ##  3   9.24          30
+    ##  4  11.4           40
+    ##  5   9.37          50
+    ##  6   9.28          60
+    ##  7   9.37          70
+    ##  8   9.30          80
+    ##  9   8.84          90
+    ## 10   9.07         100
 
 ### versus WEFE
 
@@ -216,12 +216,12 @@ time Rscript bench.R
     ## Effect size:  1.055015 
     ## 
     ## ── Functions ───────────────────────────────────────────────────────────────────
-    ## • <calculate_es()>: Calculate effect size
-    ## • <weat_resampling()>: Conduct statistical test
+    ## • `calculate_es()`: Calculate effect size
+    ## • `weat_resampling()`: Conduct statistical test
     ## 
-    ## real 0m25.089s
-    ## user 1m0.162s
-    ## sys  0m6.879s
+    ## real 0m25.643s
+    ## user 1m0.617s
+    ## sys  0m7.542s
 
 The Python workflow, however, needs to use `gensim` to read the
 pretained word embedding file and it can’t read GLoVE format directly
@@ -237,9 +237,44 @@ time python3 bench.py
 
     ## {'query_name': 'S and T wrt A and B', 'result': 0.19892264262307435, 'weat': 0.19892264262307435, 'effect_size': 1.0896144272748516, 'p_value': nan}
     ## 
-    ## real 12m37.665s
-    ## user 12m18.620s
-    ## sys  0m19.261s
+    ## real 14m7.488s
+    ## user 13m47.748s
+    ## sys  0m20.704s
+
+### versus the original Java code
+
+The original Java code by Caliskan et al. is extremely fast because the
+code is highly optimized. If all you need to do is WEAT and you know how
+to write Java, it is recommended using the Java code.
+
+``` bash
+## javac -cp ./lib/commons-lang3-3.3.2.jar:./lib/commons-math3-3.6.1.jar WeatBenchmark.java Utils.java
+time java -classpath .:./lib/commons-lang3-3.3.2.jar:./lib/commons-math3-3.6.1.jar WeatBenchmark
+```
+
+    ## Array before check is:[math, algebra, geometry, calculus, equations, computation, numbers, addition]
+    ## Array length before check is:8
+    ## Array after check is:[math, algebra, geometry, calculus, equations, computation, numbers, addition]
+    ## Array length after check is:8
+    ## Array before check is:[poetry, art, sculpture, dance, literature, novel, symphony, drama]
+    ## Array length before check is:8
+    ## Array after check is:[poetry, art, sculpture, dance, literature, novel, symphony, drama]
+    ## Array length after check is:8
+    ## Array before check is:[brother, male, man, boy, son, he, his, him]
+    ## Array length before check is:8
+    ## Array after check is:[brother, male, man, boy, son, he, his, him]
+    ## Array length after check is:8
+    ## Array before check is:[sister, female, woman, girl, daughter, she, hers, her]
+    ## Array length before check is:8
+    ## Array after check is:[sister, female, woman, girl, daughter, she, hers, her]
+    ## Array length after check is:8
+    ## The differenceOfMeans is: 0.024865325959943483
+    ## Getting the entire distribution...
+    ## effectSize: 1.0550147873162645
+    ## 
+    ## real 0m15.318s
+    ## user 0m15.141s
+    ## sys  0m1.516s
 
 ## Testing environment
 
@@ -268,7 +303,7 @@ sessionInfo()
     ## [8] base     
     ## 
     ## other attached packages:
-    ## [1] bench_1.1.2     sweater_0.1.4   lsa_0.73.2      SnowballC_0.7.0
+    ## [1] bench_1.1.2     sweater_0.1.5   lsa_0.73.2      SnowballC_0.7.0
     ## [5] purrr_0.3.4    
     ## 
     ## loaded via a namespace (and not attached):
@@ -290,17 +325,18 @@ neofetch --stdout
     ## OS: Ubuntu 20.04.3 LTS x86_64 
     ## Host: LIFEBOOK U749 10601736746 
     ## Kernel: 5.13.0-27-generic 
-    ## Uptime: 1 day, 56 mins 
-    ## Packages: 2850 (dpkg), 23 (snap) 
+    ## Uptime: 9 days, 6 hours, 45 mins 
+    ## Packages: 2985 (dpkg), 22 (snap) 
     ## Shell: zsh 5.8 
     ## Resolution: , 1920x1080 
+    ## DE: GNOME 
     ## WM: stumpwm 
-    ## Theme: Yaru-dark [GTK3] 
-    ## Icons: Yaru [GTK3] 
+    ## Theme: Yaru-dark [GTK2/3] 
+    ## Icons: Yaru [GTK2/3] 
     ## Terminal: R 
     ## CPU: Intel i5-8365U (8) @ 4.100GHz 
     ## GPU: Intel UHD Graphics 620 
-    ## Memory: 7806MiB / 31780MiB
+    ## Memory: 6016MiB / 31780MiB
 
 -----
 
