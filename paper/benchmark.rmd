@@ -133,7 +133,7 @@ time python3 bench.py
 
 ### versus the original Java code
 
-The original Java code by Caliskan et al. is extremely fast because the code is highly optimized. If all you need to do is WEAT and you know how to write Java, it is recommended using the Java code.
+The original Java code by Caliskan et al. is extremely fast because the code is highly optimized. If all you need to do is WEAT and you know how to write Java, it is recommended using the Java code. See this footnote [^2] on how to run the code.
 
 ```{bash, engine.opts='-l'}
 ## javac -cp ./lib/commons-lang3-3.3.2.jar:./lib/commons-math3-3.6.1.jar WeatBenchmark.java Utils.java
@@ -153,3 +153,6 @@ neofetch --stdout
 ---
 
 [^1]: Actually the only difference between the two format is the GLoVE format doesn't record the dimensionality of the matrix in the first line.
+
+[^2]: Please download the [original Java code](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DX4VWP&version=2.0) and keep the `Utils.java` in the same directory. Also, put the 2 jar files provided inside the `lib` directory. The commented-out line of command compiles the `WeatBenchmark.java` to JVM Byecode. It should be finished in 1s.
+

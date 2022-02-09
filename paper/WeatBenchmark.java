@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 public class WeatBenchmark {
 	public static void main(String[] args) throws Exception{
-	    // Create a symlink
     	String semanticModel="glove.840B.300d.txt";
     	int wordDimension =300;
     	String delimiter =" ";	//dimension delimiter in the word embeddings
@@ -29,7 +28,8 @@ public class WeatBenchmark {
 	    attribute2 = Utils.removeCategoryWordsIfNotInDictionary(attribute2, semanticModel, wordDimension, delimiter, caseSensitive);
 	}
 	double ts = Utils.getTestStatistic(target1, target2, attribute1, attribute2,  caseSensitive,  semanticModel,  wordDimension,  delimiter);
-	// Actually this function don't need iterations; but I don't want to modify Utils.java
+	// Actually this function doesn't need the iterations param,
+	// but it is included in the params; but I don't want to modify Utils.java
 	double [] entireDistribution = Utils.getEntireDistribution(target1, target2, attribute1, attribute2,  caseSensitive,  semanticModel,  wordDimension,  delimiter, iterations); 
 	double es = Utils.effectSize(entireDistribution, ts);
 	System.out.println("effectSize: "+ es );
