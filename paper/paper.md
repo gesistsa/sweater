@@ -26,7 +26,7 @@ journal: JOSS
 
 # Statement of need
 
-The goal of this R package is to detect (implicit) biases in word embeddings. Word embeddings can capture how similar or different two words are in terms of implicit and explicit meanings. Using the example in @collobert2011natural, the word vector for "XBox" is close to that of "PlayStation", as measured by a distance measure such as cosine distance. The same technique can also be used to detect biases. In the situation of racial bias detection, for example, @kroon2020guilty measure how close the word vectors for various ethnic group names (e.g. "Dutch", "Belgian" , and "Syrian") to that of various nouns related to threats (e.g. "terrorist", "murderer", and "gangster"). These biases in word embedding can be understood through the implicit social cognition model of media priming [@arendt:2013:DDM]. In this model, implicit stereotypes are defined as the "strength of the automatic association between a group concept (e.g., minority group) and an attribute (e.g., criminal)." [@arendt:2013:DDM, p. 832] All of these bias detection methods are based on the strength of association between a concept (or a target) and an attribute in embedding spaces.
+The goal of this R package is to detect (implicit) biases in word embeddings. Word embeddings can capture how similar or different two words are in terms of implicit and explicit meanings. Using the example in @collobert2011natural, the word vector for "XBox" is close to that for "PlayStation", as measured by a distance measure such as cosine distance. The same technique can also be used to detect biases. For example, @kroon2020guilty measure how close the word vectors for various ethnic group names (e.g. "Dutch", "Belgian" , and "Syrian") are to those for various nouns related to threats (e.g. "terrorist", "murderer", and "gangster"). These biases in word embedding can be understood through the implicit social cognition model of media priming [@arendt:2013:DDM]. In this model, implicit stereotypes are defined as the "strength of the automatic association between a group concept (e.g., minority group) and an attribute (e.g., criminal)." [@arendt:2013:DDM, p. 832] All of these bias detection methods are based on the strength of association between a concept (or a target) and an attribute in embedding spaces.
 
 The importance of detecting biases in word embeddings is twofold. First, pretrained, biased word embeddings deployed in real-life machine learning systems can pose fairness concerns [@packer2018text;@boyarskaya2020overcoming]. Second, biases in word embeddings reflect the biases in the original training material. Social scientists, communication researchers included, have exploited these methods to quantify (implicit) media biases by extracting biases from word embeddings locally trained on large text corpora [e.g. @kroon2020guilty;@knoche2019identifying;@sales2019media].
 
@@ -127,7 +127,7 @@ plot(res_rnd_male)
 
 Word Embedding Association Test (WEAT) [@caliskan:2017:S] requires all four wordsets of $\mathcal{S}$, $\mathcal{T}$, $\mathcal{A}$, and $\mathcal{B}$. The method is modeled after the Implicit Association Test (IAT) [@nosek:2005:UUI] and it measures the relative strength of $\mathcal{S}$'s association with $\mathcal{A}$ to $\mathcal{B}$ against the same of $\mathcal{T}$. The effect sizes calculated from a large corpus, as shown by @caliskan:2017:S, are comparable to the published IAT effect sizes obtained from volunteers.
 
-In this example, the publicly available GLoVE embeddings made available by the original Stanford Team [@pennington:2014:G] were used. In the following example, the calculation of "Math. vs Arts" gender bias in @caliskan:2017:S is reproduced. In this example, the positive effect size indicates the words in the wordset $\mathcal{S}$ are more associated with males than $\mathcal{T}$ associated with males.
+In this example, the publicly available GLoVE embeddings made available by the original Stanford Team [@pennington:2014:G] were used. In the following example, the calculation of "Math vs Arts" gender bias in @caliskan:2017:S is reproduced. In this example, the positive effect size indicates the words in the wordset $\mathcal{S}$ are more associated with males than are the words in wordset $\mathcal{T}$.
 
 
 ```r
@@ -150,7 +150,7 @@ sw
 ```
 
 ```
-## -- sweater object --------------------------------------------------------------
+## -- sweater object ------------------------------------------------------------------------------------------------------------------------------------------
 ```
 
 ```
@@ -163,7 +163,7 @@ sw
 ```
 
 ```
-## -- Functions -------------------------------------------------------------------
+## -- Functions -----------------------------------------------------------------------------------------------------------------------------------------------
 ```
 
 ```
