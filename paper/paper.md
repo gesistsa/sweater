@@ -26,11 +26,13 @@ journal: JOSS
 
 # Statement of need
 
-The goal of this R package is to detect (implicit) biases in word embeddings. Word embeddings can capture how similar or different two words are in terms of implicit and explicit meanings. Using the example in @collobert2011natural, the word vector for "XBox" is close to that for "PlayStation", as measured by a distance measure such as cosine distance. The same technique can also be used to detect biases. For example, @kroon2020guilty measure how close the word vectors for various ethnic group names (e.g. "Dutch", "Belgian" , and "Syrian") are to those for various nouns related to threats (e.g. "terrorist", "murderer", and "gangster"). These biases in word embedding can be understood through the implicit social cognition model of media priming [@arendt:2013:DDM]. In this model, implicit stereotypes are defined as the "strength of the automatic association between a group concept (e.g., minority group) and an attribute (e.g., criminal)." [@arendt:2013:DDM, p. 832] All of these bias detection methods are based on the strength of association between a concept (or a target) and an attribute in embedding spaces.
+The goal of this R package is to detect associations among words in word embedding spaces. Word embeddings can capture how similar or different two words are in terms of implicit and explicit meanings. Using the example in @collobert2011natural, the word vector for "XBox" is close to that for "PlayStation", as measured by a distance measure such as cosine distance. Word embeddings can also be used to study associations among words that are otherwise difficult to detect. For instance, @jing2021characterizing used word embeddings to study how Democrats and Republicans are divided along party lines about COVID-19.
+
+The same technique can also be used to detect unwanted implicit associations, or biases. For example, @kroon2020guilty measure how close the word vectors for various ethnic group names (e.g. "Dutch", "Belgian" , and "Syrian") are to those for various nouns related to threats (e.g. "terrorist", "murderer", and "gangster"). These biases in word embedding can be understood through the implicit social cognition model of media priming [@arendt:2013:DDM]. In this model, implicit stereotypes are defined as the "strength of the automatic association between a group concept (e.g., minority group) and an attribute (e.g., criminal)." [@arendt:2013:DDM, p. 832] All of these bias detection methods are based on the strength of association between a concept (or a target) and an attribute in embedding spaces.
 
 The importance of detecting biases in word embeddings is twofold. First, pretrained, biased word embeddings deployed in real-life machine learning systems can pose fairness concerns [@packer2018text;@boyarskaya2020overcoming]. Second, biases in word embeddings reflect the biases in the original training material. Social scientists, communication researchers included, have exploited these methods to quantify (implicit) media biases by extracting biases from word embeddings locally trained on large text corpora [e.g. @kroon2020guilty;@knoche2019identifying;@sales2019media].
 
-Previously, the software of these methods is only scatteredly available as the addendum of the original papers and was implemented in different languages (Java, Python, etc.). `sweater` provides several of these bias detection methods in one unified package with a consistent R interface [@rcore]. Also, some provided methods are implemented in C++ for speed and interfaced to R using the `Rcpp` package [@eddelbuettel:2013:SRC] [^BENCH].
+Previously, the software of these methods is only available piecemeal as the addendum of the original papers and was implemented in different languages (Java, Python, etc.). `sweater` provides several of these bias detection methods in one unified package with a consistent R interface [@rcore]. Also, `sweater` provides several methods that are implemented in C++ for speed and interfaced to R using the `Rcpp` package [@eddelbuettel:2013:SRC] [^BENCH].
 
 [^BENCH]: Compared with a pure R implementation, the C++ implementation of Word Embedding Association Test in `sweater` is at least 7 times faster. See the benchmark [here](https://github.com/chainsawriot/sweater/blob/master/paper/benchmark.md).
 
@@ -56,13 +58,13 @@ The package also provides three trimmed word embeddings for experimentation: `go
 
 ## Query
 
-`sweater` uses the concept of a *query* [@badilla2020wefe] to study the biases in $w$ and the $\mathcal{S}\mathcal{T}\mathcal{A}\mathcal{B}$ notation from @brunet2019understanding to form a query. A query contains two or more sets of seed words (wordsets selected by the individual administering the test, sometimes called "seed lexicons" or "dictionaries"). Among these seed wordsets, there should be at least one set of *target words* and one set of *attribute words*.
+`sweater` uses the concept of a *query* [@badilla2020wefe] to study associations in $w$ and the $\mathcal{S}\mathcal{T}\mathcal{A}\mathcal{B}$ notation from @brunet2019understanding to form a query. A query contains two or more sets of seed words (wordsets selected by the individual administering the test, sometimes called "seed lexicons" or "dictionaries"). Among these seed wordsets, there should be at least one set of *target words* and one set of *attribute words*.
 
-Target words are words that **should** have no bias and usually represent the concept one would like to probe for biases. For instance, @garg:2018:W investigated the "women bias" of occupation-related words and their target words contain "nurse", "mathematician", and "blacksmith". These words can be used as target words because in an ideal world with no "women bias" associated with occupations, these occupation-related words should have no gender association.
+In the situation of bias detection, target words are words that **should** have no bias and usually represent the concept one would like to probe for biases. For instance, @garg:2018:W investigated the "women bias" of occupation-related words and their target words contain "nurse", "mathematician", and "blacksmith". These words can be used as target words because in an ideal world with no "women bias" associated with occupations, these occupation-related words should have no gender association.
 
 Target words are denoted as wordsets $\mathcal{S}$ and $\mathcal{T}$. All methods require $\mathcal{S}$ while $\mathcal{T}$ is only required for WEAT. For instance, the study of gender stereotypes in academic pursuits by @caliskan:2017:S used $\mathcal{S} = \{math, algebra, geometry, calculus, equations, ...\}$ and $\mathcal{T}= \{poetry, art, dance, literature, novel, ...\}$.
 
-Attribute words are words that have known properties in relation to the bias. They are denoted as wordsets $\mathcal{A}$ and $\mathcal{B}$. All methods require both wordsets except Mean Average Cosine Similarity [@manzini2019black]. For instance, the study of gender stereotypes by @caliskan:2017:S used $\mathcal{A} = \{he, son, his, him, ...\}$ and $\mathcal{B} = \{she, daughter, hers, her, ...\}$. In some applications, popular off-the-shelf sentiment dictionaries can also be used as $\mathcal{A}$ and $\mathcal{B}$ [e.g. @sweeney2020reducing]. That being said, it is up to the researchers to select and derive these seed words in a query. However, the selection of seed words has been shown to be the most consequential part of the entire analysis [@antoniak2021bad;@du2021assessing]. Please read @antoniak2021bad for recommendations.
+In the situation of bias detection, attribute words are words that have known properties in relation to the bias. They are denoted as wordsets $\mathcal{A}$ and $\mathcal{B}$. All methods require both wordsets except Mean Average Cosine Similarity [@manzini2019black]. For instance, the study of gender stereotypes by @caliskan:2017:S used $\mathcal{A} = \{he, son, his, him, ...\}$ and $\mathcal{B} = \{she, daughter, hers, her, ...\}$. In some applications, popular off-the-shelf sentiment dictionaries can also be used as $\mathcal{A}$ and $\mathcal{B}$ [e.g. @sweeney2020reducing]. That being said, it is up to the researchers to select and derive these seed words in a query. However, the selection of seed words has been shown to be the most consequential part of the entire analysis [@antoniak2021bad;@du2021assessing]. Please read @antoniak2021bad for recommendations.
 
 ## Supported methods
 
@@ -70,15 +72,17 @@ Table 1 lists all methods supported by sweater. The function `query` is used to 
 
 Table: All methods supported by sweater
 
-| Method                                                  | Target words                 | Attribute words              |
-|---------------------------------------------------------|------------------------------|------------------------------|
-| Mean Average Cosine Similarity [@manzini2019black]      | $\mathcal{S}$                | $\mathcal{A}$                |
-| Relative Norm Distance [@garg:2018:W]                   | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
-| Relative Negative Sentiment Bias [@sweeney2020reducing] | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
-| SemAxis [@an2018semaxis]                                | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
-| Normalized Association Score [@caliskan:2017:S]         | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
-| Embedding Coherence Test [@dev2019attenuating]          | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
-| Word Embedding Association Test [@caliskan:2017:S]      | $\mathcal{S}$, $\mathcal{T}$ | $\mathcal{A}$, $\mathcal{B}$ |
+| Method                                                          | Target words                 | Attribute words              |
+|-----------------------------------------------------------------|------------------------------|------------------------------|
+| Mean Average Cosine Similarity [@manzini2019black]              | $\mathcal{S}$                | $\mathcal{A}$                |
+| Relative Norm Distance [@garg:2018:W]                           | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
+| Relative Negative Sentiment Bias [@sweeney2020reducing] [^DICT] | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
+| SemAxis [@an2018semaxis]                                        | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
+| Normalized Association Score [@caliskan:2017:S]                 | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
+| Embedding Coherence Test [@dev2019attenuating]                  | $\mathcal{S}$                | $\mathcal{A}$, $\mathcal{B}$ |
+| Word Embedding Association Test [@caliskan:2017:S]              | $\mathcal{S}$, $\mathcal{T}$ | $\mathcal{A}$, $\mathcal{B}$ |
+
+[^DICT]: Experimental support for quanteda dictionaries [@benoit2018quanteda] is current available for this method. The support will be expanded to all methods later.
 
 ## Example 1
 
@@ -93,7 +97,6 @@ library(sweater)
 
 
 ```r
-data(googlenews)
 S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
        "photographer", "geologist", "shoemaker", "athlete", "cashier",
        "dancer", "housekeeper", "accountant", "physicist", "gardener",
@@ -131,7 +134,6 @@ In this example, the publicly available GLoVE embeddings made available by the o
 
 
 ```r
-data(glove_math) # a subset of the original GLoVE word vectors
 S2 <- c("math", "algebra", "geometry", "calculus", "equations",
         "computation", "numbers", "addition")
 T2 <- c("poetry", "art", "dance", "literature", "novel", "symphony",
