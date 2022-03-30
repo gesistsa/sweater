@@ -13,8 +13,9 @@ status](https://www.r-pkg.org/badges/version/sweater)](https://CRAN.R-project.or
 <!-- badges: end -->
 
 The goal of sweater (**S**peedy **W**ord **E**mbedding **A**ssociation
-**T**est & **E**xtras using **R**) is to test for biases in word
-embeddings.
+**T**est & **E**xtras using **R**) is to test for associations among
+words in word embedding spaces. The methods provided by this package can
+also be used to test for unwanted associations, or biases.
 
 The package provides functions that are speedy. They are either
 implemented in C++, or are speedy but accurate approximation of the
@@ -53,21 +54,21 @@ install.packages("sweater")
 ## Notation of a query
 
 All tests in this package use the concept of queries (see Badilla et
-al., 2020) to study the biases in the input word embeddings `w`. This
+al., 2020) to study associations in the input word embeddings `w`. This
 package uses the “STAB” notation from Brunet et al (2019). \[1\]
 
 All tests depend on two types of words. The first type, namely,
 `S_words` and `T_words`, is *target words* (or *neutral words* in Garg
-et al). These are words that **should** have no bias. For instance, the
-words such as “nurse” and “professor” can be used as target words to
-study the gender bias in word embeddings. One can also separate these
-words into two sets, `S_words` and `T_words`, to group words by their
-perceived bias. For example, Caliskan et al. (2017) grouped target words
-into two groups: mathematics (“math”, “algebra”, “geometry”, “calculus”,
-“equations”, “computation”, “numbers”, “addition”) and arts (“poetry”,
-“art”, “dance”, “literature”, “novel”, “symphony”, “drama”,
-“sculpture”). Please note that also `T_words` is not always
-required.
+et al). In the case of studying biases, these are words that **should**
+have no bias. For instance, the words such as “nurse” and “professor”
+can be used as target words to study the gender bias in word embeddings.
+One can also separate these words into two sets, `S_words` and
+`T_words`, to group words by their perceived bias. For example, Caliskan
+et al. (2017) grouped target words into two groups: mathematics (“math”,
+“algebra”, “geometry”, “calculus”, “equations”, “computation”,
+“numbers”, “addition”) and arts (“poetry”, “art”, “dance”,
+“literature”, “novel”, “symphony”, “drama”, “sculpture”). Please note
+that also `T_words` is not always required.
 
 The second type, namely `A_words` and `B_words`, is *attribute words*
 (or *group words* in Garg et al). These are words with known properties
@@ -139,11 +140,11 @@ A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 mac_neg <- query(googlenews, S_words = S1, A_words = A1)
 mac_neg
 #> 
-#> ── sweater object ──────────────────────────────────────────────────────────────
+#> ── sweater object ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Test type:  mac 
 #> Effect size:  0.1375856
 #> 
-#> ── Functions ───────────────────────────────────────────────────────────────────
+#> ── Functions ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #> • `calculate_es()`: Calculate effect size
 #> • `plot()`: Plot the bias of each individual word
 ```
@@ -203,11 +204,11 @@ B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 garg_f1 <- query(googlenews, S_words = S1, A_words = A1, B_words = B1)
 garg_f1
 #> 
-#> ── sweater object ──────────────────────────────────────────────────────────────
+#> ── sweater object ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Test type:  rnd 
 #> Effect size:  -6.341598
 #> 
-#> ── Functions ───────────────────────────────────────────────────────────────────
+#> ── Functions ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #> • `calculate_es()`: Calculate effect size
 #> • `plot()`: Plot the bias of each individual word
 ```
@@ -322,11 +323,11 @@ Coefficient of the two rows in `P`. Higher value indicates more
 ``` r
 res
 #> 
-#> ── sweater object ──────────────────────────────────────────────────────────────
+#> ── sweater object ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Test type:  ect 
 #> Effect size:  0.7001504
 #> 
-#> ── Functions ───────────────────────────────────────────────────────────────────
+#> ── Functions ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #> • `calculate_es()`: Calculate effect size
 #> • `plot()`: Plot the bias of each individual word
 ```
@@ -368,19 +369,20 @@ reported in the original paper (0.6225).
 ``` r
 sn
 #> 
-#> ── sweater object ──────────────────────────────────────────────────────────────
+#> ── sweater object ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Test type:  rnsb 
 #> Effect size:  0.6228853
 #> 
-#> ── Functions ───────────────────────────────────────────────────────────────────
+#> ── Functions ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #> • `calculate_es()`: Calculate effect size
 #> • `plot()`: Plot the bias of each individual word
 ```
 
-## Support for Quanteda Dictionary
+## Support for Quanteda Dictionaries
 
-`rnsb` supports quanteda dictionary as `S_words`. `rnd` and `weat` will
-support it later.
+`rnsb` supports [quanteda](https://github.com/quanteda/quanteda)
+dictionaries as `S_words`. This support will be expanded to other
+methods later.
 
 This analysis uses the data from
 [here](https://github.com/chainsawriot/sweater/tree/master/tests/testdata).
@@ -558,11 +560,11 @@ sw <- query(glove_math, S4, T4, A4, B4)
 # extraction of effect size
 sw
 #> 
-#> ── sweater object ──────────────────────────────────────────────────────────────
+#> ── sweater object ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Test type:  weat 
 #> Effect size:  1.055015
 #> 
-#> ── Functions ───────────────────────────────────────────────────────────────────
+#> ── Functions ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #> • `calculate_es()`: Calculate effect size
 #> • `weat_resampling()`: Conduct statistical test
 ```
