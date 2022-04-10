@@ -21,6 +21,7 @@ devtools::load_all()
 [![R-CMD-check](https://github.com/chainsawriot/sweater/workflows/R-CMD-check/badge.svg)](https://github.com/chainsawriot/sweater/actions)
 [![Codecov test coverage](https://codecov.io/gh/chainsawriot/sweater/branch/master/graph/badge.svg)](https://app.codecov.io/gh/chainsawriot/sweater?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/sweater)](https://CRAN.R-project.org/package=sweater)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.04036/status.svg)](https://doi.org/10.21105/joss.04036)
 <!-- badges: end -->
 
 The goal of sweater (**S**peedy **W**ord **E**mbedding **A**ssociation **T**est & **E**xtras using **R**) is to test for associations among words in word embedding spaces. The methods provided by this package can also be used to test for unwanted associations, or biases.
@@ -30,6 +31,12 @@ The package provides functions that are speedy. They are either implemented in C
 This package provides extra methods such as Relative Norm Distance, Embedding Coherence Test, SemAxis and Relative Negative Sentiment Bias.
 
 If your goal is to reproduce the analysis in Caliskan et al (2017), please consider using the [original Java program](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DX4VWP&version=2.0) or the R package [cbn](https://github.com/conjugateprior/cbn) by Lowe. To reproduce the analysis in Garg et al (2018), please consider using the [original Python program](https://github.com/nikhgarg/EmbeddingDynamicStereotypes). To reproduce the analysis in Mazini et al (2019), please consider using the [original Python program](https://github.com/TManzini/DebiasMulticlassWordEmbedding/).
+
+Please cite this software as:
+
+Chan, C., (2022). sweater: Speedy Word Embedding Association Test and Extras Using R. Journal of Open Source Software, 7(72), 4036, https://doi.org/10.21105/joss.04036
+
+For a BibTeX entry, use the output from `citation(package = "sweater")`.
 
 ## Installation
 

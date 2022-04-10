@@ -10,6 +10,7 @@
 coverage](https://codecov.io/gh/chainsawriot/sweater/branch/master/graph/badge.svg)](https://app.codecov.io/gh/chainsawriot/sweater?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/sweater)](https://CRAN.R-project.org/package=sweater)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.04036/status.svg)](https://doi.org/10.21105/joss.04036)
 <!-- badges: end -->
 
 The goal of sweater (**S**peedy **W**ord **E**mbedding **A**ssociation
@@ -36,6 +37,14 @@ program](https://github.com/nikhgarg/EmbeddingDynamicStereotypes). To
 reproduce the analysis in Mazini et al (2019), please consider using the
 [original Python
 program](https://github.com/TManzini/DebiasMulticlassWordEmbedding/).
+
+Please cite this software as:
+
+Chan, C., (2022). sweater: Speedy Word Embedding Association Test and
+Extras Using R. Journal of Open Source Software, 7(72), 4036,
+<https://doi.org/10.21105/joss.04036>
+
+For a BibTeX entry, use the output from `citation(package = "sweater")`.
 
 ## Installation
 

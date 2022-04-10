@@ -1,0 +1,14 @@
+citHeader("To cite sweater in publications use:")
+
+
+bibentry(bibtype = "article",
+         title = "sweater: Speedy Word Embedding Association Test and Extras Using R",
+         journal = "Journal of Open Source Software",
+         author = c(person("Chung-hong", "Chan")),
+         doi = "10.21105/joss.04036",
+         url = "https://github.com/chainsawriot/sweater",
+         volume = 7,
+         number = 72,
+         pages = 4036,
+         year = 2022
+         )
