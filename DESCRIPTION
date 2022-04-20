@@ -1,6 +1,6 @@
 Package: sweater
 Title: Speedy Word Embedding Association Test and Extras Using R
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: 
     person(given = "Chung-hong",
            family = "Chan",
@@ -31,7 +31,8 @@ Suggests:
     covr,
     testthat (>= 3.0.0),
     rmarkdown,
-    bench
+    bench,
+    rsparse
 Config/testthat/edition: 3
 Depends: 
     R (>= 3.5)
