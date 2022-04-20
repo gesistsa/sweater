@@ -93,7 +93,7 @@ weat_es <- function(x, standardize = TRUE, r = FALSE) {
     return(es)
 }
 
-.exact_test <- function(S_diff, T_diff, test_stat) {
+.exact_test <- function(S_diff, T_diff) {
     union_diff <- c(S_diff, T_diff)
     labels <- c(rep(TRUE, length(S_diff)), rep(FALSE, length(T_diff)))
     test_stat <- (mean(S_diff) - mean(T_diff))
@@ -111,7 +111,7 @@ weat_exact <- function(x) {
     if (length(c(S_diff, T_diff)) > 10) {
         warning("Exact test would take a long time. Use sweater_resampling or sweater_boot (to be implemented) instead.")
     }
-    p_value <- .exact_test(S_diff, T_diff, test_stat)    
+    p_value <- .exact_test(S_diff, T_diff)    
     res <- list(null.value = NULL, alternative = "greater", method = "The exact test in Caliskan et al. (2017)", estimate = NULL, data.name = deparse(substitute(x)), statistic = NULL, p.value = p_value)
     class(res) <- "htest"
     return(res)
