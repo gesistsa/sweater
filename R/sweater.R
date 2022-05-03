@@ -1,7 +1,7 @@
 #' Speedy Word Embedding Association Test
 #'
 #' This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017). If possible, please use [query()] instead.
-#' @param w a numeric matrix of word embeddings (e.g. from [rsparse::GloVe()])
+#' @param w a numeric matrix of word embeddings, e.g. from \code{\link{read_word2vec}}
 #' @param S_words a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...
 #' @param T_words a character vector of the second set of target words. In an example of studying gender stereotype, it can include occupations such as nurse, teacher, librarian...
 #' @param A_words a character vector of the first set of attribute words. In an example of studying gender stereotype, it can include words such as man, male, he, his.

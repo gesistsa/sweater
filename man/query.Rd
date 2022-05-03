@@ -19,7 +19,7 @@ query(
 \method{print}{sweater}(x, ...)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings (e.g. from \code{\link[rsparse:GloVe]{rsparse::GloVe()}})}
+\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link{read_word2vec}}}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
