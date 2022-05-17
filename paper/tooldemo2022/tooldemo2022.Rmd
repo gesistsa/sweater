@@ -60,37 +60,6 @@ query(w, S_words, T_words, A_words, B_words, method = "guess", verbose = FALSE)
 
 Gender biases of occupation words in the pretrained Google News Word Embeddings 
 
-```{r garg, exercise=TRUE, exercise.lines = 30}
-require(sweater)
-S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
-"photographer", "geologist", "shoemaker", "athlete", "cashier", 
-"dancer", "housekeeper", "accountant", "physicist", "gardener", 
-"dentist", "weaver", "blacksmith", "psychologist", "supervisor", 
-"mathematician", "surveyor", "tailor", "designer", "economist", 
-"mechanic", "laborer", "postmaster", "broker", "chemist", "librarian", 
-"attendant", "clerical", "musician", "porter", "scientist", "carpenter", 
-"sailor", "instructor", "sheriff", "pilot", "inspector", "mason", 
-"baker", "administrator", "architect", "collector", "operator", 
-"surgeon", "driver", "painter", "conductor", "nurse", "cook", 
-"engineer", "retired", "sales", "lawyer", "clergy", "physician", 
-"farmer", "clerk", "manager", "guard", "artist", "smith", "official", 
-"police", "doctor", "professor", "student", "judge", "teacher", 
-"author", "secretary", "soldier")
-
-A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
-"male", "brother", "sons", "fathers", "men", "boys", "males", 
-"brothers", "uncle", "uncles", "nephew", "nephews")
-
-B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
-"herself", "female", "sister", "daughters", "mothers", "women", 
-"girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
-)
-garg_f1 <- query(googlenews, S_words = S1, A_words = A1, B_words = B1)
-garg_f1
-```
-
-## Plot
-
 ```{r garg2, exercise=TRUE, exercise.lines = 30}
 require(sweater)
 S1 <- c("janitor", "statistician", "midwife", "nurse",
@@ -104,8 +73,25 @@ B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 "herself", "female", "sister", "daughters", "mothers", "women", 
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
-garg_f1 <- query(googlenews, S_words = S1, A_words = A1, B_words = B1)
+query(googlenews, S_words = S1, A_words = A1, B_words = B1)
+```
 
+## Plot
+
+```{r garg2_plot, exercise=TRUE, exercise.lines = 30}
+require(sweater)
+S1 <- c("janitor", "statistician", "midwife", "nurse",
+"engineer", "teacher", "author", "secretary", "soldier")
+
+A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
+"male", "brother", "sons", "fathers", "men", "boys", "males", 
+"brothers", "uncle", "uncles", "nephew", "nephews")
+
+B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
+"herself", "female", "sister", "daughters", "mothers", "women", 
+"girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
+)
+garg_f1 <- query(googlenews, S_words = S1, A_words = A1, B_words = B1)
 plot(garg_f1)
 ```
 
@@ -123,18 +109,6 @@ sw <- query(glove_math, S4, T4, A4, B4)
 sw
 ```
 
-## Effect size
-
-```{r effectsize, exercise = TRUE, exercise.lines = 30}
-require(sweater)
-S4 <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
-T4 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
-A4 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
-B4 <- c("female", "woman", "girl", "sister", "she", "her", "hers", "daughter")
-sw <- query(glove_math, S4, T4, A4, B4)
-calculate_es(sw)
-```
-
 ## Significance testing
 
 ```{r sig, exercise = TRUE, exercise.lines = 30}
@@ -149,12 +123,16 @@ weat_resampling(sw)
 
 ## Supers
 
-* Super efficient (C++, RCpp)
-* Super easy to use
-* Super nice documentation
-* Super nice interface (Guide you what to do next)
-* Super nice integration with existing R packages (rsparse, word2vec, text2vec,
+<img src = "images/sweater_term.png">
+
+* efficient (C++, RCpp)
+* easy to use
+* nice documentation
+* nice interface (Guide you what to do next)
+* nice integration with existing R packages (rsparse, word2vec, text2vec,
 quanteda)
+
+
 
 ### R
 
@@ -254,7 +232,7 @@ remotes::install_github("chainsawriot/sweater")
 
 ### Citation:
 
-Chan, C.H. (2022) sweater: Speedy Word Embedding Association Test and Extras Using R. Journal Of Open Source Software (Accepted)
+Chan, C., (2022). sweater: Speedy Word Embedding Association Test and Extras Using R. Journal of Open Source Software, 7(72), 4036, https://doi.org/10.21105/joss.04036
 
 ### Funding
 
