@@ -46,8 +46,8 @@ ect <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     A_cleaned <- .clean(A_words, w_lab, verbose = verbose)
     B_cleaned <- .clean(B_words, w_lab, verbose = verbose)
     S_cleaned <- .clean(S_words, w_lab, verbose = verbose)
-    vec_a <- matrix(apply(w[A_cleaned,], 2, mean), 1, byrow = TRUE)
-    vec_b <- matrix(apply(w[B_cleaned,], 2, mean), 1, byrow = TRUE)
+    vec_a <- matrix(apply(w[A_cleaned, , drop = FALSE], 2, mean), 1, byrow = TRUE)
+    vec_b <- matrix(apply(w[B_cleaned, , drop = FALSE], 2, mean), 1, byrow = TRUE)
     sim_res_a <- as.vector(proxy::simil(y = vec_a, x = w[S_cleaned, , drop = FALSE], method = "cosine"))
     names(sim_res_a) <- S_cleaned
     sim_res_b <- as.vector(proxy::simil(y = vec_b, x = w[S_cleaned, , drop = FALSE], method = "cosine"))

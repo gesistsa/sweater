@@ -50,8 +50,8 @@ rnd <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     A_cleaned <- .clean(A_words, w_lab, verbose = verbose)
     B_cleaned <- .clean(B_words, w_lab, verbose = verbose)
     S_cleaned <- .clean(S_words, w_lab, verbose = verbose)
-    v1 <- purrr::map_dbl(purrr::array_branch(w[A_cleaned,], 2), mean)
-    v2 <- purrr::map_dbl(purrr::array_branch(w[B_cleaned,], 2), mean)
+    v1 <- purrr::map_dbl(purrr::array_branch(w[A_cleaned, , drop = FALSE], 2), mean)
+    v2 <- purrr::map_dbl(purrr::array_branch(w[B_cleaned, , drop = FALSE], 2), mean)
     norm_a <- purrr::map_dbl(S_cleaned, .get_dist, v1, w)
     norm_b <- purrr::map_dbl(S_cleaned, .get_dist, v2, w)
     norm_diff <- norm_a - norm_b
