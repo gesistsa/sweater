@@ -97,18 +97,19 @@ plot(garg_f1)
 
 ## Example: ICA abstracts
 
-Are there pro R or Pro Python biases in ICA 2022 abstracts.
+Are these words implicitly associated with R or Python in ICA 2022 abstracts?
 
 ```{r caliskan, exercise = TRUE, exercise.lines = 30}
 require(sweater)
 ica_program_wm <- readRDS("~/dev/sweater/paper/tooldemo2022/data/ica_program_wm.RDS")
-S_words <- c("analysis", "analytic", "computation", "computational", "analyses", "research", 
-"computer", "computers", "vision", "statistics")
-A_words <- c("r", "cran")
-B_words <- c("python", "pip")
+S_words <- c("analysis", "analytic", "computation", "computational", "analyses",
+"computer", "vision", "statistics", "software", "tool")
+A_words <- c("r")
+B_words <- c("python")
 
-x <- query(ica_program_wm, S_words = S_words, A_words = A_words, B_words = B_words, method = "rnsb")
-plot(x, main = "ECT, below the line - pro R")
+x <- query(ica_program_wm, S_words = S_words, A_words = A_words, B_words = B_words,
+           method = "ect")
+plot(x)
 ```
 
 ## Supers
