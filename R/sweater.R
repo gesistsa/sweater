@@ -46,7 +46,7 @@ weat <- function(w, S_words, T_words, A_words, B_words, verbose = FALSE) {
     return(res)
 }
 
-#' forced Force the calculation of pooled SD, despite S_diff and T_diff are of equal length
+## forced Force the calculation of pooled SD, despite S_diff and T_diff are of equal length
 .cal_pooled_sd <- function(S_diff, T_diff, forced = FALSE) {
     n1 <- length(S_diff)
     n2 <- length(T_diff)
