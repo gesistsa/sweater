@@ -46,9 +46,21 @@ weat <- function(w, S_words, T_words, A_words, B_words, verbose = FALSE) {
     return(res)
 }
 
+#' forced Force the calculation of pooled SD, despite S_diff and T_diff are of equal length
+.cal_pooled_sd <- function(S_diff, T_diff, forced = FALSE) {
+    n1 <- length(S_diff)
+    n2 <- length(T_diff)
+    if (n1 == n2 & !forced) {
+        return(sd(c(S_diff, T_diff)))
+    }
+    S_var <- var(S_diff)
+    T_var <- var(T_diff)
+    return(sqrt(((n1 - 1) * S_var + (n2 - 1) * T_var) / (n1 + n2 - 2)))
+}
+
 #' Calculation of WEAT effect size
 #'
-#' This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r). If possible, please use [calculate_es()] instead.
+#' This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. This adjustment works not so great when the length of S and T are short. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r). If possible, please use [calculate_es()] instead.
 #' @param x an object from the \link{weat} function.
 #' @param standardize a boolean to denote whether to correct the difference by the standard division. The standardized version can be interpreted the same way as Cohen's d.
 #' @param r a boolean to denote whether convert the effect size to biserial correlation coefficient.
@@ -79,13 +91,7 @@ weat_es <- function(x, standardize = TRUE, r = FALSE) {
     if (!standardize) {
         return(mean(S_diff) - mean(T_diff))
     }
-    if (n1 == n2) {
-        pooled_sd <- sd(c(S_diff, T_diff))
-    } else {
-        S_var <- var(S_diff)
-        T_var <- var(T_diff)
-        pooled_sd <- sqrt(((n1 -1) * S_var) + ((n2 - 1) * T_var)/(n1 + n2 + 2))
-    }
+    pooled_sd <- .cal_pooled_sd(S_diff, T_diff)
     es <- ((mean(S_diff) - mean(T_diff)) / pooled_sd)
     if (r) {
         es <- es / sqrt(es^2 + ((total^2 - 2 * total)/ (n1 * n2)))

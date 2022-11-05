@@ -17,7 +17,7 @@ weat_es(x, standardize = TRUE, r = FALSE)
 the effect size of the query
 }
 \description{
-This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r). If possible, please use \code{\link[=calculate_es]{calculate_es()}} instead.
+This function calculates the effect size from a sweater object. The original implementation in Caliskan et al. (2017) assumes the numbers of words in S and in T must be equal. The current implementation eases this assumption by adjusting the variance with the difference in sample sizes. This adjustment works not so great when the length of S and T are short. It is also possible to convert the Cohen's d to Pearson's correlation coefficient (r). If possible, please use \code{\link[=calculate_es]{calculate_es()}} instead.
 }
 \examples{
 # Reproduce the number in Caliskan et al. (2017) - Table 1, "Math vs. Arts"
