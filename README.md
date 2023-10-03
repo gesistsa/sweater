@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/chainsawriot/sweater/workflows/R-CMD-check/badge.svg)](https://github.com/chainsawriot/sweater/actions)
+[![R-CMD-check](https://github.com/gesistsa/sweater/workflows/R-CMD-check/badge.svg)](https://github.com/gesistsa/sweater/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/chainsawriot/sweater/branch/master/graph/badge.svg)](https://app.codecov.io/gh/chainsawriot/sweater?branch=master)
+coverage](https://codecov.io/gh/gesistsa/sweater/branch/master/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/sweater?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/sweater)](https://CRAN.R-project.org/package=sweater)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.04036/status.svg)](https://doi.org/10.21105/joss.04036)
@@ -22,7 +22,7 @@ The package provides functions that are speedy. They are either
 implemented in C++, or are speedy but accurate approximation of the
 original implementation proposed by Caliskan et al (2017). See the
 benchmark
-[here](https://github.com/chainsawriot/sweater/blob/master/paper/benchmark.md).
+[here](https://github.com/gesistsa/sweater/blob/master/paper/benchmark.md).
 
 This package provides extra methods such as Relative Norm Distance,
 Embedding Coherence Test, SemAxis and Relative Negative Sentiment Bias.
@@ -51,7 +51,7 @@ For a BibTeX entry, use the output from `citation(package = "sweater")`.
 Recommended: install the latest development version
 
 ``` r
-remotes::install_github("chainsawriot/sweater")
+remotes::install_github("gesistsa/sweater")
 ```
 
 or the “stable” release
@@ -149,11 +149,11 @@ A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
 mac_neg <- query(googlenews, S_words = S1, A_words = A1)
 mac_neg
 #> 
-#> ── sweater object ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── sweater object ──────────────────────────────────────────────────────────────
 #> Test type:  mac 
 #> Effect size:  0.1375856
 #> 
-#> ── Functions ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── Functions ───────────────────────────────────────────────────────────────────
 #> • `calculate_es()`: Calculate effect size
 #> • `plot()`: Plot the bias of each individual word
 ```
@@ -213,11 +213,11 @@ B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
 garg_f1 <- query(googlenews, S_words = S1, A_words = A1, B_words = B1)
 garg_f1
 #> 
-#> ── sweater object ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── sweater object ──────────────────────────────────────────────────────────────
 #> Test type:  rnd 
 #> Effect size:  -6.341598
 #> 
-#> ── Functions ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── Functions ───────────────────────────────────────────────────────────────────
 #> • `calculate_es()`: Calculate effect size
 #> • `plot()`: Plot the bias of each individual word
 ```
@@ -332,11 +332,11 @@ Coefficient of the two rows in `P`. Higher value indicates more
 ``` r
 res
 #> 
-#> ── sweater object ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── sweater object ──────────────────────────────────────────────────────────────
 #> Test type:  ect 
 #> Effect size:  0.7001504
 #> 
-#> ── Functions ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── Functions ───────────────────────────────────────────────────────────────────
 #> • `calculate_es()`: Calculate effect size
 #> • `plot()`: Plot the bias of each individual word
 ```
@@ -349,7 +349,7 @@ This analysis attempts to reproduce the analysis in Sweeney & Najafian
 Please note that the datasets `glove_sweeney`, `bing_pos` and `bing_neg`
 are not included in the package. If you are interested in reproducing
 the analysis, the 3 datasets are available from
-[here](https://github.com/chainsawriot/sweater/tree/master/tests/testdata).
+[here](https://github.com/gesistsa/sweater/tree/master/tests/testdata).
 
 ``` r
 load("tests/testdata/bing_neg.rda")
@@ -378,11 +378,11 @@ reported in the original paper (0.6225).
 ``` r
 sn
 #> 
-#> ── sweater object ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── sweater object ──────────────────────────────────────────────────────────────
 #> Test type:  rnsb 
 #> Effect size:  0.6228853
 #> 
-#> ── Functions ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── Functions ───────────────────────────────────────────────────────────────────
 #> • `calculate_es()`: Calculate effect size
 #> • `plot()`: Plot the bias of each individual word
 ```
@@ -394,7 +394,7 @@ dictionaries as `S_words`. This support will be expanded to other
 methods later.
 
 This analysis uses the data from
-[here](https://github.com/chainsawriot/sweater/tree/master/tests/testdata).
+[here](https://github.com/gesistsa/sweater/tree/master/tests/testdata).
 
 For example, `newsmap_europe` is an abridged dictionary from the package
 newsmap (Watanabe, 2018). The dictionary contains keywords of European
@@ -407,9 +407,9 @@ load("tests/testdata/dictionary_demo.rda")
 
 require(quanteda)
 #> Loading required package: quanteda
-#> Package version: 3.2.0
-#> Unicode version: 13.0
-#> ICU version: 66.1
+#> Package version: 3.3.1
+#> Unicode version: 14.0
+#> ICU version: 70.1
 #> Parallel computing: 8 of 8 threads used.
 #> See https://quanteda.io for tutorials and examples.
 newsmap_europe
@@ -569,11 +569,11 @@ sw <- query(glove_math, S4, T4, A4, B4)
 # extraction of effect size
 sw
 #> 
-#> ── sweater object ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── sweater object ──────────────────────────────────────────────────────────────
 #> Test type:  weat 
 #> Effect size:  1.055015
 #> 
-#> ── Functions ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ── Functions ───────────────────────────────────────────────────────────────────
 #> • `calculate_es()`: Calculate effect size
 #> • `weat_resampling()`: Conduct statistical test
 ```
@@ -636,8 +636,8 @@ weat_resampling(sw)
 ## How to get help
 
   - Read the
-    [documentation](https://rdrr.io/github/chainsawriot/sweater/man/)
-  - Search for [issues](https://github.com/chainsawriot/sweater/issues)
+    [documentation](https://rdrr.io/github/gesistsa/sweater/man/)
+  - Search for [issues](https://github.com/gesistsa/sweater/issues)
   - If you have further questions about the package, please contact
     Chung-hong Chan by e-mail, post, or other methods listed on this
     [page](https://www.mzes.uni-mannheim.de/d7/en/profiles/chung-hong-chan).
@@ -650,7 +650,7 @@ are welcome.
   - Fork the source code, modify, and issue a [pull
     request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
   - Issues, bug reports: [File a Github
-    issue](https://github.com/chainsawriot/sweater/issues).
+    issue](https://github.com/gesistsa/sweater/issues).
 
 ## Code of Conduct
 

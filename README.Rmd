@@ -18,15 +18,15 @@ devtools::load_all()
 # sweater <img src="man/figures/sweater_logo.svg" align="right" height="200" />
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/chainsawriot/sweater/workflows/R-CMD-check/badge.svg)](https://github.com/chainsawriot/sweater/actions)
-[![Codecov test coverage](https://codecov.io/gh/chainsawriot/sweater/branch/master/graph/badge.svg)](https://app.codecov.io/gh/chainsawriot/sweater?branch=master)
+[![R-CMD-check](https://github.com/gesistsa/sweater/workflows/R-CMD-check/badge.svg)](https://github.com/gesistsa/sweater/actions)
+[![Codecov test coverage](https://codecov.io/gh/gesistsa/sweater/branch/master/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/sweater?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/sweater)](https://CRAN.R-project.org/package=sweater)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.04036/status.svg)](https://doi.org/10.21105/joss.04036)
 <!-- badges: end -->
 
 The goal of sweater (**S**peedy **W**ord **E**mbedding **A**ssociation **T**est & **E**xtras using **R**) is to test for associations among words in word embedding spaces. The methods provided by this package can also be used to test for unwanted associations, or biases.
 
-The package provides functions that are speedy. They are either implemented in C++, or are speedy but accurate approximation of the original implementation proposed by Caliskan et al (2017). See the benchmark [here](https://github.com/chainsawriot/sweater/blob/master/paper/benchmark.md).
+The package provides functions that are speedy. They are either implemented in C++, or are speedy but accurate approximation of the original implementation proposed by Caliskan et al (2017). See the benchmark [here](https://github.com/gesistsa/sweater/blob/master/paper/benchmark.md).
 
 This package provides extra methods such as Relative Norm Distance, Embedding Coherence Test, SemAxis and Relative Negative Sentiment Bias.
 
@@ -43,7 +43,7 @@ For a BibTeX entry, use the output from `citation(package = "sweater")`.
 Recommended: install the latest development version
 
 ``` r
-remotes::install_github("chainsawriot/sweater")
+remotes::install_github("gesistsa/sweater")
 ```
 
 or the "stable" release
@@ -184,7 +184,7 @@ res
 
 This analysis attempts to reproduce the analysis in Sweeney & Najafian (2019).
 
-Please note that the datasets `glove_sweeney`, `bing_pos` and `bing_neg` are not included in the package. If you are interested in reproducing the analysis, the 3 datasets are available from [here](https://github.com/chainsawriot/sweater/tree/master/tests/testdata).
+Please note that the datasets `glove_sweeney`, `bing_pos` and `bing_neg` are not included in the package. If you are interested in reproducing the analysis, the 3 datasets are available from [here](https://github.com/gesistsa/sweater/tree/master/tests/testdata).
 
 ```{r}
 load("tests/testdata/bing_neg.rda")
@@ -213,7 +213,7 @@ sn
 
 `rnsb` supports [quanteda](https://github.com/quanteda/quanteda) dictionaries as `S_words`. This support will be expanded to other methods later.
 
-This analysis uses the data from [here](https://github.com/chainsawriot/sweater/tree/master/tests/testdata).
+This analysis uses the data from [here](https://github.com/gesistsa/sweater/tree/master/tests/testdata).
 
 For example, `newsmap_europe` is an abridged dictionary from the package newsmap (Watanabe, 2018). The dictionary contains keywords of European countries and has two levels: regional level (e.g. Eastern Europe) and country level (e.g. Germany).
 
@@ -336,8 +336,8 @@ weat_resampling(sw)
 
 ## How to get help
 
-* Read the [documentation](https://rdrr.io/github/chainsawriot/sweater/man/)
-* Search for [issues](https://github.com/chainsawriot/sweater/issues)
+* Read the [documentation](https://rdrr.io/github/gesistsa/sweater/man/)
+* Search for [issues](https://github.com/gesistsa/sweater/issues)
 * If you have further questions about the package, please contact Chung-hong Chan by e-mail, post, or other methods listed on this [page](https://www.mzes.uni-mannheim.de/d7/en/profiles/chung-hong-chan).
 
 ## Contributing
@@ -345,7 +345,7 @@ weat_resampling(sw)
 Contributions in the form of feedback, comments, code, and bug report are welcome.
 
 * Fork the source code, modify, and issue a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
-* Issues, bug reports: [File a Github issue](https://github.com/chainsawriot/sweater/issues).
+* Issues, bug reports: [File a Github issue](https://github.com/gesistsa/sweater/issues).
 
 ## Code of Conduct
 
