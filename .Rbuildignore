@@ -11,3 +11,4 @@ tests/testdata/glove_sweeney\.rda$
 ^CRAN-RELEASE$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+^.editorconfig$
