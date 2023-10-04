@@ -5,7 +5,6 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/gesistsa/sweater/workflows/R-CMD-check/badge.svg)](https://github.com/gesistsa/sweater/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/gesistsa/sweater/branch/master/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/sweater?branch=master)
 [![CRAN
