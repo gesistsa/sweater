@@ -85,7 +85,7 @@ al. (2017) used gender-related words such as “male”, “man”, “boy”,
 qualify as attribute words because we know they are related to a certain
 gender.
 
-It is recommended to use the function `query()` to make a query and
+It is recommended using the function `query()` to make a query and
 `calculate_es()` to calculate the effect size.
 
 ## Available methods
@@ -104,10 +104,9 @@ It is recommended to use the function `query()` to make a query and
 ## Example: Mean Average Cosine Similarity
 
 The simplest form of bias detection is Mean Average Cosine Similarity
-(Mazini et al. 2019). The same method is used also in Kroon et
-al. (2020). `googlenews` is a subset of [the pretrained word2vec word
-embeddings provided by
-Google](https://code.google.com/archive/p/word2vec/).
+(Mazini et al. 2019). The same method was used in Kroon et al. (2020).
+`googlenews` is a subset of [the pretrained word2vec word embeddings
+provided by Google](https://code.google.com/archive/p/word2vec/).
 
 By default, the `query()` function guesses the method you want to use
 based on the combination of target words and attribute words provided
@@ -123,23 +122,23 @@ require(sweater)
 ```
 
 ``` r
-S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
-"photographer", "geologist", "shoemaker", "athlete", "cashier", 
-"dancer", "housekeeper", "accountant", "physicist", "gardener", 
-"dentist", "weaver", "blacksmith", "psychologist", "supervisor", 
-"mathematician", "surveyor", "tailor", "designer", "economist", 
-"mechanic", "laborer", "postmaster", "broker", "chemist", "librarian", 
-"attendant", "clerical", "musician", "porter", "scientist", "carpenter", 
-"sailor", "instructor", "sheriff", "pilot", "inspector", "mason", 
-"baker", "administrator", "architect", "collector", "operator", 
-"surgeon", "driver", "painter", "conductor", "nurse", "cook", 
-"engineer", "retired", "sales", "lawyer", "clergy", "physician", 
-"farmer", "clerk", "manager", "guard", "artist", "smith", "official", 
-"police", "doctor", "professor", "student", "judge", "teacher", 
+S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
+"photographer", "geologist", "shoemaker", "athlete", "cashier",
+"dancer", "housekeeper", "accountant", "physicist", "gardener",
+"dentist", "weaver", "blacksmith", "psychologist", "supervisor",
+"mathematician", "surveyor", "tailor", "designer", "economist",
+"mechanic", "laborer", "postmaster", "broker", "chemist", "librarian",
+"attendant", "clerical", "musician", "porter", "scientist", "carpenter",
+"sailor", "instructor", "sheriff", "pilot", "inspector", "mason",
+"baker", "administrator", "architect", "collector", "operator",
+"surgeon", "driver", "painter", "conductor", "nurse", "cook",
+"engineer", "retired", "sales", "lawyer", "clergy", "physician",
+"farmer", "clerk", "manager", "guard", "artist", "smith", "official",
+"police", "doctor", "professor", "student", "judge", "teacher",
 "author", "secretary", "soldier")
 
-A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
-"male", "brother", "sons", "fathers", "men", "boys", "males", 
+A1 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
+"male", "brother", "sons", "fathers", "men", "boys", "males",
 "brothers", "uncle", "uncles", "nephew", "nephews")
 
 ## The same as:
@@ -203,8 +202,8 @@ This analysis reproduces the analysis in Garg et al (2018), namely
 Figure 1.
 
 ``` r
-B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
-"herself", "female", "sister", "daughters", "mothers", "women", 
+B1 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
+"herself", "female", "sister", "daughters", "mothers", "women",
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
 
@@ -268,7 +267,7 @@ plot(res)
 ## Example: Embedding Coherence Test
 
 Embedding Coherence Test (Dev & Phillips, 2019) is similar to SemAxis.
-The only significant different is that no “SemAxis” is calculated (the
+The only significant difference is that no “SemAxis” is calculated (the
 difference between the average word vectors of `A_words` and `B_words`).
 Instead, it calculates two separate axes for `A_words` and `B_words`.
 Then it calculates the proximity of each word in `S_words` with the two
@@ -502,28 +501,28 @@ calculate_es(region_level)
 ## Example: Normalized Association Score
 
 Normalized Association Score (Caliskan et al., 2017) is similar to
-Relative Norm Distance above.
+Relative Norm Distance above. It was used in Müller et al. (2023).
 
 ``` r
-S3 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer", 
-"photographer", "geologist", "shoemaker", "athlete", "cashier", 
-"dancer", "housekeeper", "accountant", "physicist", "gardener", 
-"dentist", "weaver", "blacksmith", "psychologist", "supervisor", 
-"mathematician", "surveyor", "tailor", "designer", "economist", 
-"mechanic", "laborer", "postmaster", "broker", "chemist", "librarian", 
-"attendant", "clerical", "musician", "porter", "scientist", "carpenter", 
-"sailor", "instructor", "sheriff", "pilot", "inspector", "mason", 
-"baker", "administrator", "architect", "collector", "operator", 
-"surgeon", "driver", "painter", "conductor", "nurse", "cook", 
-"engineer", "retired", "sales", "lawyer", "clergy", "physician", 
-"farmer", "clerk", "manager", "guard", "artist", "smith", "official", 
-"police", "doctor", "professor", "student", "judge", "teacher", 
+S3 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
+"photographer", "geologist", "shoemaker", "athlete", "cashier",
+"dancer", "housekeeper", "accountant", "physicist", "gardener",
+"dentist", "weaver", "blacksmith", "psychologist", "supervisor",
+"mathematician", "surveyor", "tailor", "designer", "economist",
+"mechanic", "laborer", "postmaster", "broker", "chemist", "librarian",
+"attendant", "clerical", "musician", "porter", "scientist", "carpenter",
+"sailor", "instructor", "sheriff", "pilot", "inspector", "mason",
+"baker", "administrator", "architect", "collector", "operator",
+"surgeon", "driver", "painter", "conductor", "nurse", "cook",
+"engineer", "retired", "sales", "lawyer", "clergy", "physician",
+"farmer", "clerk", "manager", "guard", "artist", "smith", "official",
+"police", "doctor", "professor", "student", "judge", "teacher",
 "author", "secretary", "soldier")
-A3 <- c("he", "son", "his", "him", "father", "man", "boy", "himself", 
-"male", "brother", "sons", "fathers", "men", "boys", "males", 
+A3 <- c("he", "son", "his", "him", "father", "man", "boy", "himself",
+"male", "brother", "sons", "fathers", "men", "boys", "males",
 "brothers", "uncle", "uncles", "nephew", "nephews")
-B3 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl", 
-"herself", "female", "sister", "daughters", "mothers", "women", 
+B3 <- c("she", "daughter", "hers", "her", "mother", "woman", "girl",
+"herself", "female", "sister", "daughters", "mothers", "women",
 "girls", "females", "sisters", "aunt", "aunts", "niece", "nieces"
 )
 
@@ -685,13 +684,18 @@ By contributing to this project, you agree to abide by its terms.
     multiclass bias in word embeddings. arXiv preprint arXiv:1904.04047.
 9.  McGrath, R. E., & Meyer, G. J. (2006). When effect sizes disagree:
     the case of r and d. Psychological methods, 11(4), 386.
-10. Rosenthal, R. (1991), Meta-Analytic Procedures for Social Research.
+10. Müller, P., Chan, C. H., Ludwig, K., Freudenthaler, R., & Wessler,
+    H. (2023). Differential Racism in the News: Using Semi-Supervised
+    Machine Learning to Distinguish Explicit and Implicit Stigmatization
+    of Ethnic and Religious Groups in Journalistic Discourse. Political
+    Communication, 1-19.
+11. Rosenthal, R. (1991), Meta-Analytic Procedures for Social Research.
     Newbury Park: Sage
-11. Sweeney, C., & Najafian, M. (2019, July). A transparent framework
+12. Sweeney, C., & Najafian, M. (2019, July). A transparent framework
     for evaluating unintended demographic bias in word embeddings. In
     Proceedings of the 57th Annual Meeting of the Association for
     Computational Linguistics (pp. 1662-1667).
-12. Watanabe, K. (2018). Newsmap: A semi-supervised approach to
+13. Watanabe, K. (2018). Newsmap: A semi-supervised approach to
     geographical news classification. Digital Journalism, 6(3), 294-309.
 
 -----
