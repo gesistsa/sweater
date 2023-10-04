@@ -11,6 +11,7 @@ coverage](https://codecov.io/gh/gesistsa/sweater/branch/master/graph/badge.svg)]
 [![CRAN
 status](https://www.r-pkg.org/badges/version/sweater)](https://CRAN.R-project.org/package=sweater)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.04036/status.svg)](https://doi.org/10.21105/joss.04036)
+[![R-CMD-check](https://github.com/gesistsa/sweater/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gesistsa/sweater/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of sweater (**S**peedy **W**ord **E**mbedding **A**ssociation
