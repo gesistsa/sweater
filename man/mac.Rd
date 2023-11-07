@@ -7,7 +7,7 @@
 mac(w, S_words, A_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link{read_word2vec}}}
+\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link[=read_word2vec]{read_word2vec()}}}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -17,12 +17,12 @@ mac(w, S_words, A_words, verbose = FALSE)
 }
 \value{
 A list with class \code{"mac"} containing the following components:
-\describe{
-\item{\code{$P}}{a vector of cosine similarity values for every word in S_words}
-\item{\code{$S_words}}{the input S_words}
-\item{\code{$A_words}}{the input A_words}
+\itemize{
+\item \verb{$P} a vector of cosine similarity values for every word in S_words
+\item \verb{$S_words} the input S_words
+\item \verb{$A_words} the input A_words
+\code{\link[=mac_es]{mac_es()}} can be used to obtain the effect size of the test.
 }
-\code{\link{mac_es}} can be used to obtain the effect size of the test.
 }
 \description{
 This function calculates the mean average cosine similarity (MAC) score proposed in Manzini et al (2019). If possible, please use \code{\link[=query]{query()}} instead.
@@ -50,7 +50,4 @@ x$P
 }
 \references{
 Manzini, T., Lim, Y. C., Tsvetkov, Y., & Black, A. W. (2019). \href{https://arxiv.org/abs/1904.04047}{Black is to criminal as caucasian is to police: Detecting and removing multiclass bias in word embeddings.} arXiv preprint arXiv:1904.04047.
-}
-\author{
-Chung-hong Chan
 }

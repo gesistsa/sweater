@@ -7,7 +7,7 @@
 ect(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link{read_word2vec}}}
+\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link[=read_word2vec]{read_word2vec()}}}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -19,12 +19,12 @@ ect(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \value{
 A list with class \code{"ect"} containing the following components:
-\describe{
-\item{\code{$A_words}}{the input A_words}
-\item{\code{$B_words}}{the input B_words}
-\item{\code{$S_words}}{the input S_words}
-\item{\code{$u_a}}{Cosine similarity between each word vector of S_words and average vector of A_words}
-\item{\code{$u_b}}{Cosine similarity between each word vector of S_words and average vector of B_words}
+\itemize{
+\item \verb{$A_words} the input A_words
+\item \verb{$B_words} the input B_words
+\item \verb{$S_words} the input S_words
+\item \verb{$u_a} Cosine similarity between each word vector of S_words and average vector of A_words
+\item \verb{$u_b} Cosine similarity between each word vector of S_words and average vector of B_words
 }
 }
 \description{
@@ -60,7 +60,4 @@ Dev, S., & Phillips, J. (2019, April). \href{https://proceedings.mlr.press/v89/d
 \seealso{
 \code{\link[=ect_es]{ect_es()}} can be used to obtain the effect size of the test.
 \code{\link[=plot_ect]{plot_ect()}} can be used to visualize the result.
-}
-\author{
-Chung-hong Chan
 }

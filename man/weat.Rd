@@ -7,7 +7,7 @@
 weat(w, S_words, T_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link{read_word2vec}}}
+\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link[=read_word2vec]{read_word2vec()}}}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -21,15 +21,15 @@ weat(w, S_words, T_words, A_words, B_words, verbose = FALSE)
 }
 \value{
 A list with class \code{"weat"} containing the following components:
-\describe{
-\item{\code{$S_diff}}{for each of words in S_words, mean of the mean differences in cosine similarity between words in A_words and words in B_words}
-\item{\code{$T_diff}}{for each of words in T_words, mean of the mean differences in cosine similarity between words in A_words and words in B_words}
-\item{\code{$S_words}}{the input S_words}
-\item{\code{$T_words}}{the input T_words}
-\item{\code{$A_words}}{the input A_words}
-\item{\code{$B_words}}{the input B_words}
+\itemize{
+\item \verb{$S_diff} for each of words in S_words, mean of the mean differences in cosine similarity between words in A_words and words in B_words
+\item \verb{$T_diff} for each of words in T_words, mean of the mean differences in cosine similarity between words in A_words and words in B_words
+\item \verb{$S_words} the input S_words
+\item \verb{$T_words} the input T_words
+\item \verb{$A_words} the input A_words
+\item \verb{$B_words} the input B_words
+\code{\link[=weat_es]{weat_es()}} can be used to obtain the effect size of the test; \code{\link[=weat_resampling]{weat_resampling()}} for a test of significance.
 }
-\code{\link{weat_es}} can be used to obtain the effect size of the test; \code{\link{weat_resampling}} for a test of significance.
 }
 \description{
 This functions test the bias in a set of word embeddings using the method by Caliskan et al (2017). If possible, please use \code{\link[=query]{query()}} instead.
@@ -47,7 +47,4 @@ weat_es(sw)
 }
 \references{
 Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
-}
-\author{
-Chung-hong Chan
 }

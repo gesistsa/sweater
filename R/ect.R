@@ -3,14 +3,12 @@
 #' This function estimate the Embedding Coherence Test (ECT) of word embeddings (Dev & Philips, 2019). If possible, please use [query()] instead.
 #'
 #' @inheritParams weat
-#' @return A list with class \code{"ect"} containing the following components:
-#' \describe{
-#' \item{\code{$A_words}}{the input A_words}
-#' \item{\code{$B_words}}{the input B_words}
-#' \item{\code{$S_words}}{the input S_words}
-#' \item{\code{$u_a}}{Cosine similarity between each word vector of S_words and average vector of A_words}
-#' \item{\code{$u_b}}{Cosine similarity between each word vector of S_words and average vector of B_words}
-#' }
+#' @return A list with class `"ect"` containing the following components:
+#' * `$A_words` the input A_words
+#' * `$B_words` the input B_words
+#' * `$S_words` the input S_words
+#' * `$u_a` Cosine similarity between each word vector of S_words and average vector of A_words
+#' * `$u_b` Cosine similarity between each word vector of S_words and average vector of B_words
 #' @seealso
 #' [ect_es()] can be used to obtain the effect size of the test.
 #' [plot_ect()] can be used to visualize the result.
@@ -37,9 +35,8 @@
 #' "females", "sisters", "aunt", "aunts", "niece", "nieces")
 #' garg_f1 <- ect(googlenews, S1, A1, B1)
 #' plot_ect(garg_f1)
-#' @author Chung-hong Chan
 #' @references
-#' Dev, S., & Phillips, J. (2019, April). [Attenuating bias in word vectors.](https://proceedings.mlr.press/v89/dev19a.html) In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR. 
+#' Dev, S., & Phillips, J. (2019, April). [Attenuating bias in word vectors.](https://proceedings.mlr.press/v89/dev19a.html) In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
 #' @export
 ect <- function(w, S_words, A_words, B_words, verbose = FALSE) {
     w_lab <- rownames(w)
@@ -65,7 +62,6 @@ ect <- function(w, S_words, A_words, B_words, verbose = FALSE) {
 #' This functions calculates the Spearman Coefficient of an Embedding Coherence Test. The value ranges from -1 to +1 and a larger value indicates less bias. If possible, please use [calculate_es()] instead.
 #' @param x an ect object from the [ect()] function.
 #' @return Spearman Coefficient
-#' @author Chung-hong Chan
 #' @references
 #' Dev, S., & Phillips, J. (2019, April). [Attenuating bias in word vectors.](https://proceedings.mlr.press/v89/dev19a.html) In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
 #' @export
@@ -80,10 +76,9 @@ ect_es <- function(x) {
 #' Plot an ECT result on a two-dimensional plane
 #'
 #' This functions plot the words in `S_words` on a 2D plane according to their association with the average vectors of `A_words` and `B_words`. A equality line is also added. Words along the equality line have less bias. Words located on the upper side of the equality line have a stronger association with `A_words` and vice versa.
-#' @param x an ect object from the \link{ect} function.
+#' @param x an ect object from the [ect] function.
 #' @param ... additional parameters to the underlying [plot()] function
 #' @return a plot
-#' @author Chung-hong Chan
 #' @export
 plot_ect <- function(x, ...) {
     if (!"ect" %in% class(x)) {

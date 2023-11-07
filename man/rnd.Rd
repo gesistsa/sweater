@@ -7,7 +7,7 @@
 rnd(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link{read_word2vec}}}
+\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link[=read_word2vec]{read_word2vec()}}}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -19,13 +19,13 @@ rnd(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \value{
 A list with class \code{"rnd"} containing the following components:
-\describe{
-\item{\code{$norm_diff}}{a vector of relative norm distances for every word in S_words}
-\item{\code{$S_words}}{the input S_words}
-\item{\code{$A_words}}{the input A_words}
-\item{\code{$B_words}}{the input B_words}
+\itemize{
+\item \verb{$norm_diff} a vector of relative norm distances for every word in S_words
+\item \verb{$S_words} the input S_words
+\item \verb{$A_words} the input A_words
+\item \verb{$B_words} the input B_words
+\code{\link[=rnd_es]{rnd_es()}} can be used to obtain the effect size of the test.
 }
-\code{\link{rnd_es}} can be used to obtain the effect size of the test.
 }
 \description{
 This function calculate the relative norm distance (RND) of word embeddings. If possible, please use \code{\link[=query]{query()}} instead.
@@ -56,7 +56,4 @@ plot_bias(garg_f1)
 }
 \references{
 Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644. \doi{10.1073/pnas.1720347115}
-}
-\author{
-Chung-hong Chan
 }

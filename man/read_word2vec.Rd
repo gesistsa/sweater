@@ -16,6 +16,3 @@ a dense matrix
 This function reads word2vec text format and return a dense matrix that can be used by this package.
 The file can have or have not the "verification line", i.e. the first line contains the dimensionality of the matrix. If the verification line exists, the function will check the returned matrix for correctness.
 }
-\author{
-Chung-hong Chan
-}

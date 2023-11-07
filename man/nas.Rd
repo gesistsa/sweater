@@ -7,7 +7,7 @@
 nas(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link{read_word2vec}}}
+\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link[=read_word2vec]{read_word2vec()}}}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -19,12 +19,12 @@ nas(w, S_words, A_words, B_words, verbose = FALSE)
 }
 \value{
 A list with class \code{"nas"} containing the following components:
-\describe{
-\item{\code{$P}}{a vector of normalized association score for every word in S}
-\item{\code{$raw}}{a list of raw results used for calculating normalized association scores}
-\item{\code{$S_words}}{the input S_words}
-\item{\code{$A_words}}{the input A_words}
-\item{\code{$B_words}}{the input B_words}
+\itemize{
+\item \verb{$P} a vector of normalized association score for every word in S
+\item \verb{$raw} a list of raw results used for calculating normalized association scores
+\item \verb{$S_words} the input S_words
+\item \verb{$A_words} the input A_words
+\item \verb{$B_words} the input B_words
 }
 }
 \description{
@@ -32,7 +32,4 @@ This functions quantifies the bias in a set of word embeddings by Caliskan et al
 }
 \references{
 Caliskan, A., Bryson, J. J., & Narayanan, A. (2017). Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334), 183-186. \doi{10.1126/science.aal4230}
-}
-\author{
-Chung-hong Chan
 }

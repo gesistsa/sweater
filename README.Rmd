@@ -335,7 +335,7 @@ weat_resampling(sw)
 
 ## How to get help
 
-* Read the [documentation](https://cran.r-project.org/web/packages/sweater/sweater.pdf)
+* Read the documentation
 * Search for [issues](https://github.com/gesistsa/sweater/issues)
 
 ## Contributing

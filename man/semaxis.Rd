@@ -7,7 +7,7 @@
 semaxis(w, S_words, A_words, B_words, l = 0, verbose = FALSE)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link{read_word2vec}}}
+\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link[=read_word2vec]{read_word2vec()}}}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -21,12 +21,12 @@ semaxis(w, S_words, A_words, B_words, l = 0, verbose = FALSE)
 }
 \value{
 A list with class \code{"semaxis"} containing the following components:
-\describe{
-\item{\code{$P}}{for each of words in S, the score according to SemAxis}
-\item{\code{$V}}{the semantic axis vector}
-\item{\code{$S_words}}{the input S_words}
-\item{\code{$A_words}}{the input A_words}
-\item{\code{$B_words}}{the input B_words}
+\itemize{
+\item \verb{$P} for each of words in S, the score according to SemAxis
+\item \verb{$V} the semantic axis vector
+\item \verb{$S_words} the input S_words
+\item \verb{$A_words} the input A_words
+\item \verb{$B_words} the input B_words
 }
 }
 \description{
@@ -42,7 +42,4 @@ semaxis(glove_math, S1, A1, B1, l = 0)$P
 }
 \references{
 An, J., Kwak, H., & Ahn, Y. Y. (2018). \href{https://arxiv.org/abs/1806.05521}{SemAxis: A lightweight framework to characterize domain-specific word semantics beyond sentiment.} arXiv preprint arXiv:1806.05521.
-}
-\author{
-Chung-hong Chan
 }

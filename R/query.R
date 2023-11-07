@@ -2,14 +2,14 @@
     if (missing(w)) {
         stop("w must be provided.")
     }
-    if (missing(S_words) | missing(A_words)) {
+    if (missing(S_words) || missing(A_words)) {
         stop("S_words and A_words must be provided.")
     }
     if (!method %in% c("guess", "weat", "mac", "nas", "semaxis", "rnsb", "rnd", "ect")) {
         stop("Unkonwn method. Available methods are: guess, weat, mac, nas, semaxis, rnsb, rnd, ect.")
     }
     if (method == "guess") {
-        if (missing(T_words) & missing(B_words)) {
+        if (missing(T_words) && missing(B_words)) {
             method <- "mac"
         } else if (missing(T_words)) {
             if (verbose) {
@@ -27,21 +27,16 @@
 #'
 #' This function makes a query based on the supplied parameters. The object can then be displayed by the S3 method [print.sweater()] and plotted by [plot.sweater()].
 #' @param ... additional parameters for the underlying function
-#' \describe{
-#' \item{\code{l}}{for "semaxis": an integer indicates the number of words to augment each word in A and B based on cosine , see An et al (2018). Default to 0 (no augmentation).}
-#' \item{\code{levels}}{for "rnsb": levels of entries in a hierarchical dictionary that will be applied (see [quanteda::dfm_lookup()])}
-#' }
+#' * `l` for "semaxis": an integer indicates the number of words to augment each word in A and B based on cosine , see An et al (2018). Default to 0 (no augmentation).
+#' * `levels` for "rnsb": levels of entries in a hierarchical dictionary that will be applied (see [quanteda::dfm_lookup()])
 #' @param method string, the method to be used to make the query. Available options are: `weat`, `mac`, `nas`, `semaxis`, `rnsb`, `rnd`, `nas`, `ect` and `guess`. If "guess", the function selects one of the following methods based on your provided wordsets.
-#' \itemize{
-#' \item{S_words & A_words - }{"mac"}
-#' \item{S_words, A_words & B_words - }{"rnd"}
-#' \item{S_words, T_words, A_words & B_words - }{"weat"}
-#' }
+#' * S_words & A_words -  "mac"
+#' * S_words, A_words & B_words -  "rnd"
+#' * S_words, T_words, A_words & B_words -  "weat"
 #' @inheritParams weat
 #' @param x a sweater S3 object
 #' @return a sweater S3 object
 #' @seealso [weat()], [mac()], [nas()], [semaxis()], [rnsb()], [rnd()], [nas()], [ect()]
-#' @author Chung-hong Chan
 #' @examples
 #' data(googlenews)
 #' S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
@@ -68,11 +63,11 @@
 #' plot(garg_f1)
 #' @export
 query <- function(w, S_words, T_words, A_words, B_words, method = "guess", verbose = FALSE, ...) {
-    method <- .guess(w = w, S_words= S_words, T_words= T_words,
-                     A_words = A_words, B_words= B_words, method = method,
+    method <- .guess(w = w, S_words = S_words, T_words= T_words,
+                     A_words = A_words, B_words = B_words, method = method,
                      verbose = verbose)
     switch(method,
-           "weat" = weat(w = w, S_words= S_words, T_words = T_words, A_words = A_words, B_words = B_words, verbose = verbose),
+           "weat" = weat(w = w, S_words = S_words, T_words = T_words, A_words = A_words, B_words = B_words, verbose = verbose),
            "mac" = mac(w = w, S_words = S_words, A_words = A_words, verbose = verbose),
            "nas" = nas(w = w, S_words = S_words, A_words = A_words, B_words = B_words, verbose = verbose),
            "semaxis" = semaxis(w = w, S_words = S_words, A_words = A_words, B_words = B_words, verbose = verbose, ...),

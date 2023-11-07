@@ -18,6 +18,3 @@ This functions calculates the Spearman Coefficient of an Embedding Coherence Tes
 \references{
 Dev, S., & Phillips, J. (2019, April). \href{https://proceedings.mlr.press/v89/dev19a.html}{Attenuating bias in word vectors.} In The 22nd International Conference on Artificial Intelligence and Statistics (pp. 879-887). PMLR.
 }
-\author{
-Chung-hong Chan
-}

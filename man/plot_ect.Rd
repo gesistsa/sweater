@@ -17,6 +17,3 @@ a plot
 \description{
 This functions plot the words in \code{S_words} on a 2D plane according to their association with the average vectors of \code{A_words} and \code{B_words}. A equality line is also added. Words along the equality line have less bias. Words located on the upper side of the equality line have a stronger association with \code{A_words} and vice versa.
 }
-\author{
-Chung-hong Chan
-}

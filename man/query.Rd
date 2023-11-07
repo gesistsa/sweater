@@ -19,7 +19,7 @@ query(
 \method{print}{sweater}(x, ...)
 }
 \arguments{
-\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link{read_word2vec}}}
+\item{w}{a numeric matrix of word embeddings, e.g. from \code{\link[=read_word2vec]{read_word2vec()}}}
 
 \item{S_words}{a character vector of the first set of target words. In an example of studying gender stereotype, it can include occupations such as programmer, engineer, scientists...}
 
@@ -31,17 +31,17 @@ query(
 
 \item{method}{string, the method to be used to make the query. Available options are: \code{weat}, \code{mac}, \code{nas}, \code{semaxis}, \code{rnsb}, \code{rnd}, \code{nas}, \code{ect} and \code{guess}. If "guess", the function selects one of the following methods based on your provided wordsets.
 \itemize{
-\item{S_words & A_words - }{"mac"}
-\item{S_words, A_words & B_words - }{"rnd"}
-\item{S_words, T_words, A_words & B_words - }{"weat"}
+\item S_words & A_words -  "mac"
+\item S_words, A_words & B_words -  "rnd"
+\item S_words, T_words, A_words & B_words -  "weat"
 }}
 
 \item{verbose}{logical, whether to display information}
 
 \item{...}{additional parameters for the underlying function
-\describe{
-\item{\code{l}}{for "semaxis": an integer indicates the number of words to augment each word in A and B based on cosine , see An et al (2018). Default to 0 (no augmentation).}
-\item{\code{levels}}{for "rnsb": levels of entries in a hierarchical dictionary that will be applied (see \code{\link[quanteda:dfm_lookup]{quanteda::dfm_lookup()}})}
+\itemize{
+\item \code{l} for "semaxis": an integer indicates the number of words to augment each word in A and B based on cosine , see An et al (2018). Default to 0 (no augmentation).
+\item \code{levels} for "rnsb": levels of entries in a hierarchical dictionary that will be applied (see \code{\link[quanteda:dfm_lookup]{quanteda::dfm_lookup()}})
 }}
 
 \item{x}{a sweater S3 object}
@@ -79,7 +79,4 @@ plot(garg_f1)
 }
 \seealso{
 \code{\link[=weat]{weat()}}, \code{\link[=mac]{mac()}}, \code{\link[=nas]{nas()}}, \code{\link[=semaxis]{semaxis()}}, \code{\link[=rnsb]{rnsb()}}, \code{\link[=rnd]{rnd()}}, \code{\link[=nas]{nas()}}, \code{\link[=ect]{ect()}}
-}
-\author{
-Chung-hong Chan
 }

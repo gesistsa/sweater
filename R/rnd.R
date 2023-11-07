@@ -7,17 +7,14 @@
 #' Relative Norm Distance
 #'
 #' This function calculate the relative norm distance (RND) of word embeddings. If possible, please use [query()] instead.
-#' 
+#'
 #' @inheritParams weat
-#' @return A list with class \code{"rnd"} containing the following components:
-#' \describe{
-#' \item{\code{$norm_diff}}{a vector of relative norm distances for every word in S_words}
-#' \item{\code{$S_words}}{the input S_words}
-#' \item{\code{$A_words}}{the input A_words}
-#' \item{\code{$B_words}}{the input B_words}
-#' }
-#' \code{\link{rnd_es}} can be used to obtain the effect size of the test.
-#' @author Chung-hong Chan
+#' @return A list with class `"rnd"` containing the following components:
+#' * `$norm_diff` a vector of relative norm distances for every word in S_words
+#' * `$S_words` the input S_words
+#' * `$A_words` the input A_words
+#' * `$B_words` the input B_words
+#' [rnd_es()] can be used to obtain the effect size of the test.
 #' @examples
 #' data(googlenews)
 #' S1 <- c("janitor", "statistician", "midwife", "bailiff", "auctioneer",
@@ -64,9 +61,8 @@ rnd <- function(w, S_words, A_words, B_words, verbose = FALSE) {
 #' Calculation of sum of all relative norm distances
 #'
 #' This function calculates the sum of all relative norm distances from the relative norm distance test. If possible, please use [calculate_es()] instead.
-#' @param x an object from the function \link{rnd}
+#' @param x an object from the function [rnd]
 #' @return Sum of all relative norm distances
-#' @author Chung-hong Chan
 #' @export
 #' @references
 #' Garg, N., Schiebinger, L., Jurafsky, D., & Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences, 115(16), E3635-E3644. \doi{10.1073/pnas.1720347115}
