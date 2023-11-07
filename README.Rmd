@@ -335,9 +335,8 @@ weat_resampling(sw)
 
 ## How to get help
 
-* Read the [documentation](https://rdrr.io/github/gesistsa/sweater/man/)
+* Read the [documentation](https://cran.r-project.org/web/packages/sweater/sweater.pdf)
 * Search for [issues](https://github.com/gesistsa/sweater/issues)
-* If you have further questions about the package, please contact Chung-hong Chan by e-mail, post, or other methods listed on this [page](https://www.mzes.uni-mannheim.de/d7/en/profiles/chung-hong-chan).
 
 ## Contributing
 
