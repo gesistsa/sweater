@@ -12,3 +12,4 @@ tests/testdata/glove_sweeney\.rda$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^.editorconfig$
+^.gitattributes$
