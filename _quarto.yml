@@ -1,0 +1,5 @@
+project:
+  title: sweater
+  type: default
+  render:
+    - methodshub.qmd
