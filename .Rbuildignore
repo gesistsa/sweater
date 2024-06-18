@@ -13,3 +13,11 @@ tests/testdata/glove_sweeney\.rda$
 ^CRAN-SUBMISSION$
 ^.editorconfig$
 ^.gitattributes$
+^CITATION\.cff$
+^install\.R$
+^postBuild$
+^apt\.txt$
+^runtime\.txt$
+^_quarto\.yml$
+^\.quarto$
+^methodshub

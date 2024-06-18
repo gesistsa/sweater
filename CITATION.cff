@@ -1,0 +1,239 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "sweater" in publications use:'
+type: software
+license: GPL-3.0-or-later
+title: 'sweater: Speedy Word Embedding Association Test and Extras Using R'
+version: 0.1.8
+doi: 10.21105/joss.04036
+abstract: 'Conduct various tests for evaluating implicit biases in word embeddings:
+  Word Embedding Association Test (Caliskan et al., 2017), <https://doi.org/10.1126/science.aal4230>,
+  Relative Norm Distance (Garg et al., 2018), <https://doi.org/10.1073/pnas.1720347115>,
+  Mean Average Cosine Similarity (Mazini et al., 2019) <arXiv:1904.04047>, SemAxis
+  (An et al., 2018) <arXiv:1806.05521>, Relative Negative Sentiment Bias (Sweeney
+  & Najafian, 2019) <https://doi.org/10.18653/v1/P19-1162>, and Embedding Coherence
+  Test (Dev & Phillips, 2019) <arXiv:1901.07656>.'
+authors:
+- family-names: Chan
+  given-names: Chung-hong
+  email: chainsawtiney@gmail.com
+  orcid: https://orcid.org/0000-0002-6232-7530
+preferred-citation:
+  type: article
+  title: 'sweater: Speedy Word Embedding Association Test and Extras Using R'
+  authors:
+  - family-names: Chan
+    given-names: Chung-hong
+    email: chainsawtiney@gmail.com
+    orcid: https://orcid.org/0000-0002-6232-7530
+  journal: Journal of Open Source Software
+  doi: 10.21105/joss.04036
+  url: https://github.com/gesistsa/sweater
+  volume: '7'
+  issue: '72'
+  year: '2022'
+  start: '4036'
+repository: https://CRAN.R-project.org/package=sweater
+repository-code: https://github.com/gesistsa/sweater
+url: https://github.com/gesistsa/sweater
+contact:
+- family-names: Chan
+  given-names: Chung-hong
+  email: chainsawtiney@gmail.com
+  orcid: https://orcid.org/0000-0002-6232-7530
+keywords:
+- bias-detection
+- r
+- textanalysis
+- wordembedding
+references:
+- type: software
+  title: Rcpp
+  abstract: 'Rcpp: Seamless R and C++ Integration'
+  notes: LinkingTo
+  url: https://www.rcpp.org
+  repository: https://CRAN.R-project.org/package=Rcpp
+  authors:
+  - family-names: Eddelbuettel
+    given-names: Dirk
+  - family-names: Francois
+    given-names: Romain
+  - family-names: Allaire
+    given-names: JJ
+  - family-names: Ushey
+    given-names: Kevin
+  - family-names: Kou
+    given-names: Qiang
+  - family-names: Russell
+    given-names: Nathan
+  - family-names: Ucar
+    given-names: Inaki
+  - family-names: Bates
+    given-names: Douglas
+  - family-names: Chambers
+    given-names: John
+  year: '2024'
+- type: software
+  title: purrr
+  abstract: 'purrr: Functional Programming Tools'
+  notes: Imports
+  url: https://purrr.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=purrr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@rstudio.com
+  year: '2024'
+- type: software
+  title: quanteda
+  abstract: 'quanteda: Quantitative Analysis of Textual Data'
+  notes: Imports
+  url: https://quanteda.io
+  repository: https://CRAN.R-project.org/package=quanteda
+  authors:
+  - family-names: Benoit
+    given-names: Kenneth
+    email: kbenoit@lse.ac.uk
+    orcid: https://orcid.org/0000-0002-0797-564X
+  - family-names: Watanabe
+    given-names: Kohei
+    email: watanabe.kohei@gmail.com
+    orcid: https://orcid.org/0000-0001-6519-5265
+  - family-names: Wang
+    given-names: Haiyan
+    email: whyinsa@yahoo.com
+    orcid: https://orcid.org/0000-0003-4992-4311
+  - family-names: Nulty
+    given-names: Paul
+    email: paul.nulty@gmail.com
+    orcid: https://orcid.org/0000-0002-7214-4666
+  - family-names: Obeng
+    given-names: Adam
+    email: quanteda@binaryeagle.com
+    orcid: https://orcid.org/0000-0002-2906-4775
+  - family-names: Müller
+    given-names: Stefan
+    email: stefan.mueller@ucd.ie
+    orcid: https://orcid.org/0000-0002-6315-4125
+  - family-names: Matsuo
+    given-names: Akitaka
+    email: a.matsuo@essex.ac.uk
+    orcid: https://orcid.org/0000-0002-3323-6330
+  - family-names: Lowe
+    given-names: William
+    email: lowe@hertie-school.org
+    orcid: https://orcid.org/0000-0002-1549-6163
+  year: '2024'
+- type: software
+  title: LiblineaR
+  abstract: 'LiblineaR: Linear Predictive Models Based on the LIBLINEAR C/C++ Library'
+  notes: Imports
+  repository: https://CRAN.R-project.org/package=LiblineaR
+  authors:
+  - family-names: Helleputte
+    given-names: Thibault
+    email: thibault.helleputte@dnalytics.com
+  - family-names: Paul
+    given-names: Jérôme
+  - family-names: Gramme
+    given-names: Pierre
+  year: '2024'
+- type: software
+  title: proxy
+  abstract: 'proxy: Distance and Similarity Measures'
+  notes: Imports
+  repository: https://CRAN.R-project.org/package=proxy
+  authors:
+  - family-names: Meyer
+    given-names: David
+    email: David.Meyer@R-project.org
+  - family-names: Buchta
+    given-names: Christian
+  year: '2024'
+- type: software
+  title: data.table
+  abstract: 'data.table: Extension of `data.frame`'
+  notes: Imports
+  url: https://r-datatable.com
+  repository: https://CRAN.R-project.org/package=data.table
+  authors:
+  - family-names: Barrett
+    given-names: Tyson
+    email: t.barrett88@gmail.com
+  - family-names: Dowle
+    given-names: Matt
+    email: mattjdowle@gmail.com
+  - family-names: Srinivasan
+    given-names: Arun
+    email: asrini@pm.me
+  - family-names: Gorecki
+    given-names: Jan
+  - family-names: Chirico
+    given-names: Michael
+  - family-names: Hocking
+    given-names: Toby
+    orcid: https://orcid.org/0000-0002-3146-0865
+  year: '2024'
+- type: software
+  title: cli
+  abstract: 'cli: Helpers for Developing Command Line Interfaces'
+  notes: Imports
+  url: https://cli.r-lib.org
+  repository: https://CRAN.R-project.org/package=cli
+  authors:
+  - family-names: Csárdi
+    given-names: Gábor
+    email: csardi.gabor@gmail.com
+  year: '2024'
+- type: software
+  title: combinat
+  abstract: 'combinat: combinatorics utilities'
+  notes: Imports
+  repository: https://CRAN.R-project.org/package=combinat
+  authors:
+  - family-names: Chasalow
+    given-names: Scott
+  year: '2024'
+- type: software
+  title: covr
+  abstract: 'covr: Test Coverage for Packages'
+  notes: Suggests
+  url: https://covr.r-lib.org
+  repository: https://CRAN.R-project.org/package=covr
+  authors:
+  - family-names: Hester
+    given-names: Jim
+    email: james.f.hester@gmail.com
+  year: '2024'
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+  version: '>= 3.0.0'
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+  version: '>= 3.5'
+
