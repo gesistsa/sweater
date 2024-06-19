@@ -13,8 +13,9 @@ Relative Norm Distance (Garg et al., 2018),
 Mean Average Cosine Similarity (Mazini et al., 2019)
 \<arXiv:1904.04047\>, SemAxis (An et al., 2018) \<arXiv:1806.05521\>,
 Relative Negative Sentiment Bias (Sweeney & Najafian, 2019)
-<doi:10.18653/v1/P19-1162>, and Embedding Coherence Test (Dev &
-Phillips, 2019) \<arXiv:1901.07656\>.
+[\<doi:10.18653/v1/P19-1162\>](https://doi.org/10.18653/v1/P19-1162),
+and Embedding Coherence Test (Dev & Phillips, 2019)
+\<arXiv:1901.07656\>.
 
 ## Keywords
 
