@@ -7,15 +7,16 @@
 
 Conduct various tests for evaluating implicit biases in word embeddings:
 Word Embedding Association Test (Caliskan et al., 2017),
-[\<doi:10.1126/science.aal4230\>](https://doi.org/10.1126/science.aal4230),
+[doi:10.1126/science.aal4230](https://doi.org/10.1126/science.aal4230),
 Relative Norm Distance (Garg et al., 2018),
-[\<doi:10.1073/pnas.1720347115\>](https://doi.org/10.1073/pnas.1720347115),
+[doi:10.1073/pnas.1720347115](https://doi.org/10.1073/pnas.1720347115),
 Mean Average Cosine Similarity (Mazini et al., 2019)
-\<arXiv:1904.04047\>, SemAxis (An et al., 2018) \<arXiv:1806.05521\>,
+[arXiv:1904.04047](https://arxiv.org/abs/1904.04047), SemAxis (An et
+al., 2018) [arXiv:1806.05521](https://arxiv.org/abs/1806.05521),
 Relative Negative Sentiment Bias (Sweeney & Najafian, 2019)
-[\<doi:10.18653/v1/P19-1162\>](https://doi.org/10.18653/v1/P19-1162),
-and Embedding Coherence Test (Dev & Phillips, 2019)
-\<arXiv:1901.07656\>.
+[doi:10.18653/v1/P19-1162](https://doi.org/10.18653/v1/P19-1162), and
+Embedding Coherence Test (Dev & Phillips, 2019)
+[arXiv:1901.07656](https://arxiv.org/abs/1901.07656).
 
 ## Keywords
 
@@ -28,6 +29,7 @@ and Embedding Coherence Test (Dev & Phillips, 2019)
 ## Science Usecase(s)
 
 <!-- - Include usecases from social sciences that would make this method applicable in a certain scenario.  -->
+
 <!-- The use cases or research questions mentioned should arise from the latest social science literature cited in the description. -->
 
 This package was used in the literature to quantify the (unwanted)
@@ -54,12 +56,15 @@ install.packages("sweater")
 ```
 
 <!-- ## Hardware Requirements (Optional) -->
+
 <!-- - The hardware requirements may be needed in specific cases when a method is known to require more memory/compute power.  -->
+
 <!-- - The method need to be executed on a specific architecture (GPUs, Hadoop cluster etc.) -->
 
 ## Input Data
 
 <!-- - The input data has to be a Digital Behavioral Data (DBD) Dataset -->
+
 <!-- - You can provide link to a public DBD dataset. GESIS DBD datasets (https://www.gesis.org/en/institute/digital-behavioral-data) -->
 
 `sweater` accepts pretrained or newly trained word embeddings. In the
@@ -74,6 +79,7 @@ supported.
 ## Sample Input and Output Data
 
 <!-- - Show how the input data looks like through few sample instances -->
+
 <!-- - Providing a sample output on the sample input to help cross check  -->
 
 The word embeddings should be in the form of standard dense R matrix,
@@ -104,6 +110,7 @@ statistical analysis or data visualization.
 ## How to Use
 
 <!-- - Providing HowTos on the method for different types of usages -->
+
 <!-- - Describe how the method should be used, including installation, configuration, and any specific instructions for users. -->
 
 Please refer to the [overview of this
@@ -172,6 +179,9 @@ Issue Tracker: <https://github.com/gesistsa/sweater/issues>
     https://doi.org/10.21105/joss.04036
 
 <!-- ## Acknowledgements -->
+
 <!-- - Acknowledgements if any -->
+
 <!-- ## Disclaimer -->
+
 <!-- - Add any disclaimers, legal notices, or usage restrictions for the method, if necessary. -->
