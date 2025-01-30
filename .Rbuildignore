@@ -21,3 +21,4 @@ tests/testdata/glove_sweeney\.rda$
 ^_quarto\.yml$
 ^\.quarto$
 ^methodshub
+^\.binder$
