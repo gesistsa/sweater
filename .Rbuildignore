@@ -22,3 +22,5 @@ tests/testdata/glove_sweeney\.rda$
 ^\.quarto$
 ^methodshub
 ^\.binder$
+^\.gh-pages
+^\environment.yml$
