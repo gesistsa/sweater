@@ -27,7 +27,7 @@ jobs:
       - name: Build the JupyterLite site
         shell: bash -l {0}
         run: |
-          jupyter lite build --contents gh-pages --output-dir dist
+          jupyter lite build --contents gh-pages --contents tests/testdata --output-dir dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
