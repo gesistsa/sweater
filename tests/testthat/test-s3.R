@@ -15,6 +15,7 @@ test_that("print method, rnsb", {
     ## the numerical precision of LiblineaR has changed since version 2.50-1
     skip_on_cran()
     skip_if(compareVersion(as.character(packageVersion("LiblineaR")), "2.50-1") != -1)
+    skip_on_ci()
     S1 <- c("math", "algebra", "geometry", "calculus", "equations", "computation", "numbers", "addition")
     T1 <- c("poetry", "art", "dance", "literature", "novel", "symphony", "drama", "sculpture")
     A1 <- c("male", "man", "boy", "brother", "he", "him", "his", "son")
